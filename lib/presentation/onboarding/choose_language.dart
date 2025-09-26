@@ -3,6 +3,7 @@ import 'package:usta_book/core/ui_kit/components/button.dart';
 import 'package:usta_book/core/ui_kit/typography.dart';
 
 import '../../core/localization/i18n/strings.g.dart';
+import 'components/language_item.dart';
 
 class SelectLanguage extends StatefulWidget {
   const SelectLanguage({super.key});
@@ -14,26 +15,47 @@ class SelectLanguage extends StatefulWidget {
 }
 
 class _SelectLanguageState extends State<SelectLanguage> {
+  int selectedItem = 0;
+
   @override
   Widget build(BuildContext context) {
     final tr = Translations.of(context);
     return Scaffold(
-      body: Column(
-        children: [
-          SizedBox(height: MediaQuery.of(context).viewPadding.top + 20),
-          Text(tr.on_boarding.choose_language, style: Typographies.boldH1),
-          SizedBox(height: 8),
-          Text(
-            tr.on_boarding.choose_lang_desc,
-            style: Typographies.regularBody,
-          ),
-          SizedBox(height: 36),
-          Spacer(),
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: MainButton.primary(title: tr.buttons.kContinue),
-          ),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        child: Column(
+          children: [
+            SizedBox(height: MediaQuery.of(context).viewPadding.top + 20),
+            Text(tr.on_boarding.choose_language, style: Typographies.boldH1),
+            SizedBox(height: 8),
+            Text(
+              tr.on_boarding.choose_lang_desc,
+              style: Typographies.regularBody,
+            ),
+            SizedBox(height: 36),
+            LanguageItem(
+              title: "O'zbekcha",
+              selected: selectedItem == 0,
+              onTap: () {
+                selectedItem = 0;
+                setState(() {});
+              },
+            ),
+            SizedBox(height: 16),
+            LanguageItem(
+              title: "Русский",
+              selected: selectedItem == 1,
+              onTap: () {
+                selectedItem = 1;
+                setState(() {});
+              },
+            ),
+            SizedBox(height: 16),
+            Spacer(),
+            MainButton.primary(title: tr.buttons.kContinue),
+            SizedBox(height: MediaQuery.of(context).viewPadding.bottom),
+          ],
+        ),
       ),
     );
   }
