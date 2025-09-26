@@ -61,7 +61,7 @@ class TranslationsOnBoardingUz {
 	String get always_be_aware => 'Doimiy xabardor bo\'ling';
 
 	/// uz: 'Mijoz eslatmalari va yangi yozuvlarni o'z vaqtida oling.'
-	String get always_be_aware_desc => 'Mijoz eslatmalari va yangi yozuvlarni o\'z vaqtida oling.';
+	String get always_be_aware_desc => 'Mijoz eslatmalari va yangi yozuvlarni o\'z\n vaqtida oling.';
 
 	/// uz: 'Mijozlarni boshqatish oson'
 	String get manage_costumers => 'Mijozlarni boshqatish oson';
@@ -96,7 +96,7 @@ extension on Translations {
 			case 'on_boarding.choose_language': return 'Tilni tanlang';
 			case 'on_boarding.choose_lang_desc': return 'Qulay tilingizni belgilang';
 			case 'on_boarding.always_be_aware': return 'Doimiy xabardor bo\'ling';
-			case 'on_boarding.always_be_aware_desc': return 'Mijoz eslatmalari va yangi yozuvlarni o\'z vaqtida oling.';
+			case 'on_boarding.always_be_aware_desc': return 'Mijoz eslatmalari va yangi yozuvlarni o\'z\n vaqtida oling.';
 			case 'on_boarding.manage_costumers': return 'Mijozlarni boshqatish oson';
 			case 'on_boarding.manage_costumers_desc': return 'Yozuv qo\'shing,jadvalingizni kuzating va uchrashuvlarni unutib qo\'ymang.';
 			case 'buttons.kContinue': return 'Davom etish';

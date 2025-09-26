@@ -17,14 +17,11 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      routerConfig: AppRoute.router,
+      routerDelegate: AppRoute.router.routerDelegate,
+      routeInformationParser: AppRoute.router.routeInformationParser,
+      routeInformationProvider: AppRoute.router.routeInformationProvider,
       locale: TranslationProvider.of(context).flutterLocale,
       supportedLocales: AppLocaleUtils.supportedLocales,
       localizationsDelegates: GlobalMaterialLocalizations.delegates,

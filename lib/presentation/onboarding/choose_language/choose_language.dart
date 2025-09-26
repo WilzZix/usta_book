@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:usta_book/core/ui_kit/colors.dart';
+import 'package:go_router/go_router.dart';
 import 'package:usta_book/core/ui_kit/components/button.dart';
 import 'package:usta_book/core/ui_kit/typography.dart';
 
-import '../../core/localization/i18n/strings.g.dart';
+import '../../../core/localization/i18n/strings.g.dart';
+import '../allow_notifications/allow_notifications.dart';
+import 'components/dash_item.dart';
 import 'components/language_item.dart';
 
-class SelectLanguage extends StatefulWidget {
-  const SelectLanguage({super.key});
+class ChooseLanguage extends StatefulWidget {
+  const ChooseLanguage({super.key});
 
-  static final String tag = '/select-language';
+  static final String tag = '/';
 
   @override
-  State<SelectLanguage> createState() => _SelectLanguageState();
+  State<ChooseLanguage> createState() => _ChooseLanguageState();
 }
 
-class _SelectLanguageState extends State<SelectLanguage> {
+class _ChooseLanguageState extends State<ChooseLanguage> {
   int selectedItem = 0;
 
   @override
@@ -56,40 +58,21 @@ class _SelectLanguageState extends State<SelectLanguage> {
             Row(
               mainAxisSize: MainAxisSize.max,
               children: [
-                Expanded(
-                  child: Container(
-                    height: 8,
-                    decoration: BoxDecoration(
-                      color: LightAppColors.primary,
-                      borderRadius: BorderRadius.circular(6),
-                    ),
-                  ),
-                ),
+                DashItem(isDone: true),
                 SizedBox(width: 8),
-                Expanded(
-                  child: Container(
-                    height: 8,
-                    decoration: BoxDecoration(
-                      color: LightAppColors.primary,
-                      borderRadius: BorderRadius.circular(6),
-                    ),
-                  ),
-                ),
+                DashItem(isDone: false),
                 SizedBox(width: 8),
-                Expanded(
-                  child: Container(
-                    height: 8,
-                    decoration: BoxDecoration(
-                      color: LightAppColors.primary,
-                      borderRadius: BorderRadius.circular(6),
-                    ),
-                  ),
-                ),
+                DashItem(isDone: false),
               ],
             ),
             SizedBox(height: 32),
-            MainButton.primary(title: tr.buttons.kContinue),
-            SizedBox(height: MediaQuery.of(context).viewPadding.bottom),
+            MainButton.primary(
+              title: tr.buttons.kContinue,
+              onTap: () {
+                context.pushNamed(AllowNotifications.tag);
+              },
+            ),
+            SizedBox(height: MediaQuery.of(context).viewPadding.bottom + 8),
           ],
         ),
       ),

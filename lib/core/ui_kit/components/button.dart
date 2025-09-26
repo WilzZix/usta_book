@@ -20,7 +20,13 @@ class MainButton extends StatefulWidget {
     VoidCallback? onTap,
     Widget? icon,
     Key? key,
-  }) : this._(key: key, icon: icon, title: title, type: ButtonType.primary);
+  }) : this._(
+         key: key,
+         icon: icon,
+         title: title,
+         type: ButtonType.primary,
+         onTap: onTap,
+       );
 
   const MainButton.secondary({
     required String title,
@@ -53,9 +59,9 @@ class _MainButtonState extends State<MainButton> {
     _inkStateController.addListener(() {
       final value = _inkStateController.value;
       if (value.isNotEmpty) {
-        // if (value.first == WidgetState.pressed) {
-        //   _onPressState.value = _ButtonState.pressed;
-        // }
+        if (value.first == WidgetState.pressed) {
+          _onPressState.value = _ButtonState.def;
+        }
       } else {
         _onPressState.value = _ButtonState.def;
       }
