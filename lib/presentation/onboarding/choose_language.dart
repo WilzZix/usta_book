@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:usta_book/core/ui_kit/colors.dart';
 import 'package:usta_book/core/ui_kit/components/button.dart';
 import 'package:usta_book/core/ui_kit/typography.dart';
 
@@ -52,6 +53,41 @@ class _SelectLanguageState extends State<SelectLanguage> {
             ),
             SizedBox(height: 16),
             Spacer(),
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Expanded(
+                  child: Container(
+                    height: 8,
+                    decoration: BoxDecoration(
+                      color: LightAppColors.primary,
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                  ),
+                ),
+                SizedBox(width: 8),
+                Expanded(
+                  child: Container(
+                    height: 8,
+                    decoration: BoxDecoration(
+                      color: LightAppColors.primary,
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                  ),
+                ),
+                SizedBox(width: 8),
+                Expanded(
+                  child: Container(
+                    height: 8,
+                    decoration: BoxDecoration(
+                      color: LightAppColors.primary,
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 32),
             MainButton.primary(title: tr.buttons.kContinue),
             SizedBox(height: MediaQuery.of(context).viewPadding.bottom),
           ],
