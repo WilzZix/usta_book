@@ -30,11 +30,15 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  flutter_localizations: # add this
+    sdk: flutter
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
   flutter_native_splash: ^2.4.6
+  go_router: ^16.2.4
+  slang: ^4.8.1
+  slang_flutter: ^4.8.0
 
 dev_dependencies:
   flutter_test:
@@ -46,6 +50,8 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^5.0.0
+  build_runner: ^2.8.0
+  slang_build_runner: ^4.8.0 # ONLY if you use build_runner (2/2)
 
 
 flutter:
@@ -74,11 +80,11 @@ flutter:
   fonts:
     - family: NunitoSans
       fonts:
-        - asset: assets/fonts/NunitoSans-light.ttf
+        - asset: assets/fonts/NunitoSans-Bold.ttf
           weight: 700
         - asset: assets/fonts/NunitoSans-SemiBold.ttf
           weight: 600
-        - asset: assets/fonts/NunitoSans-Medium.ttf
+        - asset: assets/fonts/nunito-sans-latin-ext-500-normal.ttf
           weight: 500
         - asset: assets/fonts/NunitoSans-Regular.ttf
           weight: 400

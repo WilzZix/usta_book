@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:usta_book/core/components/button.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+
+import 'core/localization/i18n/strings.g.dart';
+import 'presentation/router/app_route.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(TranslationProvider(child: const MyApp()));
 }
 
 class MyApp extends StatefulWidget {
@@ -20,25 +23,11 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: const MyHomePage());
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: MainButton.primary(title: 'Kirish'),
-      )),
+    return MaterialApp.router(
+      routerConfig: AppRoute.router,
+      locale: TranslationProvider.of(context).flutterLocale,
+      supportedLocales: AppLocaleUtils.supportedLocales,
+      localizationsDelegates: GlobalMaterialLocalizations.delegates,
     );
   }
 }

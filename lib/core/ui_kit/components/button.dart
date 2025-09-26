@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:usta_book/core/colors.dart';
-import 'package:usta_book/core/typography.dart';
+import 'package:usta_book/core/ui_kit/colors.dart';
+import 'package:usta_book/core/ui_kit/typography.dart';
 
-enum _ButtonType { primary, secondary, logOut }
+enum ButtonType { primary, secondary, logOut }
 
-enum _ButtonState { def, hover, disabled }
+enum _ButtonState { def, disabled }
 
 class MainButton extends StatefulWidget {
   const MainButton._({
@@ -20,18 +20,18 @@ class MainButton extends StatefulWidget {
     VoidCallback? onTap,
     Widget? icon,
     Key? key,
-  }) : this._(key: key, icon: icon, title: title, type: _ButtonType.primary);
+  }) : this._(key: key, icon: icon, title: title, type: ButtonType.primary);
 
   const MainButton.secondary({
     required String title,
     VoidCallback? onTap,
     Widget? icon,
     Key? key,
-  }) : this._(key: key, icon: icon, title: title, type: _ButtonType.secondary);
+  }) : this._(key: key, icon: icon, title: title, type: ButtonType.secondary);
 
   final String title;
   final Widget? icon;
-  final _ButtonType type;
+  final ButtonType type;
   final VoidCallback? onTap;
 
   @override
@@ -109,17 +109,17 @@ class _MainButtonState extends State<MainButton> {
     );
   }
 
-  BoxDecoration _boxDecoration(_ButtonType type) {
+  BoxDecoration _boxDecoration(ButtonType type) {
     switch (type) {
-      case _ButtonType.primary:
+      case ButtonType.primary:
         return BoxDecoration(
           borderRadius: BorderRadius.circular(8),
           color: LightAppColors.primary,
         );
 
-      case _ButtonType.secondary:
+      case ButtonType.secondary:
         return _secondaryDecoration();
-      case _ButtonType.logOut:
+      case ButtonType.logOut:
         return BoxDecoration(
           borderRadius: BorderRadius.circular(8),
           color: StateColor.error.withValues(alpha: 0.5),
@@ -134,18 +134,18 @@ class _MainButtonState extends State<MainButton> {
     );
   }
 
-  TextStyle _textStyleType(_ButtonType type) {
+  TextStyle _textStyleType(ButtonType type) {
     switch (type) {
-      case _ButtonType.primary:
+      case ButtonType.primary:
         return Typographies.regularButton.copyWith(
           color: LightAppColors.secondaryBg,
         );
 
-      case _ButtonType.secondary:
+      case ButtonType.secondary:
         return Typographies.regularButton.copyWith(
           color: LightAppColors.primary,
         );
-      case _ButtonType.logOut:
+      case ButtonType.logOut:
         return Typographies.regularButton.copyWith(color: StateColor.error);
     }
   }
