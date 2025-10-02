@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "481994759203",
+    "project_id": "ustabook-c00e4",
+    "storage_bucket": "ustabook-c00e4.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:481994759203:android:dbf842562356fc76bbe596",
+        "android_client_info": {
+          "package_name": "com.wilzix.usta_book"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgq8xmIzEkdIHzLlFkqarSDuAdweTnZbQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

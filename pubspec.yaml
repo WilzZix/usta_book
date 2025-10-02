@@ -22,6 +22,7 @@ dependencies:
   slang_flutter: ^4.8.0
   flutter_svg: ^2.2.0
   mask_text_input_formatter: ^2.9.0
+  firebase_core: ^4.1.1
 dev_dependencies:
   flutter_test:
     sdk: flutter

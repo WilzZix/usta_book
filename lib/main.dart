@@ -1,11 +1,14 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'core/localization/i18n/strings.g.dart';
 import 'core/ui_kit/colors.dart';
+import 'firebase_options.dart';
 import 'presentation/router/app_route.dart';
 
-void main() {
+void main() async {
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(TranslationProvider(child: const MyApp()));
 }
 
