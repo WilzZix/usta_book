@@ -1,0 +1,56 @@
+name: usta_book
+description: "A new Flutter project."
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.8.1
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+  cupertino_icons: ^1.0.8
+  flutter_native_splash: ^2.4.6
+  go_router: ^16.2.4
+  slang: ^4.8.1
+  slang_flutter: ^4.8.0
+  flutter_svg: ^2.2.0
+  mask_text_input_formatter: ^2.9.0
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+
+  flutter_lints: ^5.0.0
+  build_runner: ^2.8.0
+  slang_build_runner: ^4.8.0
+
+
+flutter:
+
+
+  uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/fonts/
+
+
+
+  fonts:
+    - family: NunitoSans
+      fonts:
+        - asset: assets/fonts/NunitoSans-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/NunitoSans-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/nunito-sans-latin-ext-500-normal.ttf
+          weight: 500
+        - asset: assets/fonts/NunitoSans-Regular.ttf
+          weight: 400
+

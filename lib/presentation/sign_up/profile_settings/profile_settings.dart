@@ -1,0 +1,320 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:usta_book/core/localization/i18n/strings.g.dart';
+import 'package:usta_book/core/ui_kit/colors.dart';
+import 'package:usta_book/core/ui_kit/components/app_icons.dart';
+import 'package:usta_book/core/ui_kit/components/button.dart';
+import 'package:usta_book/core/ui_kit/components/inputs/inputs.dart';
+import 'package:usta_book/core/ui_kit/typography.dart';
+
+class ProfileSettings extends StatefulWidget {
+  const ProfileSettings({super.key});
+
+  static const String tag = '/profile-settings';
+
+  @override
+  State<ProfileSettings> createState() => _ProfileSettingsState();
+}
+
+class _ProfileSettingsState extends State<ProfileSettings> {
+  TextEditingController nameController = TextEditingController();
+  bool isChecked = true;
+  TextEditingController beginTimeController = TextEditingController();
+  TextEditingController endTimeController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    final tr = Translations.of(context);
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: false,
+        title: Text(tr.sign_up.back, style: Typographies.regularBody),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(height: 24),
+              Text(
+                tr.sign_up.profile_settings_title,
+                style: Typographies.boldH1,
+              ),
+              SizedBox(height: 8),
+              Text(
+                tr.sign_up.profile_settings_title_desc,
+                style: Typographies.regularBody,
+              ),
+              SizedBox(height: 24),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: LightAppColors.secondaryBg,
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Spacer(),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 22.5),
+                      child: Column(
+                        children: [
+                          AppIcons.icProfile,
+                          SizedBox(height: 8),
+                          Text(
+                            tr.sign_up.upload_photo,
+                            style: Typographies.regularBody2,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Spacer(),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10.0, right: 10),
+                      child: AppIcons.icCamera,
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 24),
+              Container(
+                padding: EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: LightAppColors.secondaryBg,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(tr.sign_up.main_desc),
+                    SizedBox(height: 16),
+                    InputField.text(
+                      hintText: tr.sign_up.enter_full_fio,
+                      fieldTitle: tr.sign_up.service_type,
+                      controller: nameController,
+                    ),
+                    SizedBox(height: 16),
+                    InputField.selectableInput(
+                      hintText: tr.sign_up.service_type_hint,
+                      fieldTitle: tr.sign_up.service_type,
+                      controller: nameController,
+                      suffixIcon: Icon(Icons.keyboard_arrow_down_rounded),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 24),
+              Container(
+                padding: EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: LightAppColors.secondaryBg,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      tr.sign_up.work_schedule,
+                      style: Typographies.regularH3,
+                    ),
+                    SizedBox(height: 16),
+                    Row(
+                      children: [
+                        Text(
+                          tr.sign_up.monday,
+                          style: Typographies.regularBody.copyWith(
+                            color: LightTextColor.secondary,
+                          ),
+                        ),
+                        Spacer(),
+                        SizedBox(
+                          height: 28,
+                          width: 28,
+                          child: CupertinoSwitch(
+                            value: isChecked,
+                            onChanged: (value) {
+                              isChecked = !isChecked;
+                              setState(() {});
+                            },
+                            activeTrackColor: LightAppColors.primary,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 16),
+                    Row(
+                      children: [
+                        Text(
+                          tr.sign_up.tuesday,
+                          style: Typographies.regularBody.copyWith(
+                            color: LightTextColor.secondary,
+                          ),
+                        ),
+                        Spacer(),
+                        SizedBox(
+                          height: 28,
+                          width: 28,
+                          child: CupertinoSwitch(
+                            value: isChecked,
+                            onChanged: (value) {
+                              isChecked = !isChecked;
+                              setState(() {});
+                            },
+                            activeTrackColor: LightAppColors.primary,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 16),
+                    Row(
+                      children: [
+                        Text(
+                          tr.sign_up.wednesday,
+                          style: Typographies.regularBody.copyWith(
+                            color: LightTextColor.secondary,
+                          ),
+                        ),
+                        Spacer(),
+                        SizedBox(
+                          height: 28,
+                          width: 28,
+                          child: CupertinoSwitch(
+                            value: isChecked,
+                            onChanged: (value) {
+                              isChecked = !isChecked;
+                              setState(() {});
+                            },
+                            activeTrackColor: LightAppColors.primary,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 16),
+                    Row(
+                      children: [
+                        Text(
+                          tr.sign_up.thursday,
+                          style: Typographies.regularBody.copyWith(
+                            color: LightTextColor.secondary,
+                          ),
+                        ),
+                        Spacer(),
+                        SizedBox(
+                          height: 28,
+                          width: 28,
+                          child: CupertinoSwitch(
+                            value: isChecked,
+                            onChanged: (value) {
+                              isChecked = !isChecked;
+                              setState(() {});
+                            },
+                            activeTrackColor: LightAppColors.primary,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 16),
+                    Row(
+                      children: [
+                        Text(
+                          tr.sign_up.friday,
+                          style: Typographies.regularBody.copyWith(
+                            color: LightTextColor.secondary,
+                          ),
+                        ),
+                        Spacer(),
+                        SizedBox(
+                          height: 28,
+                          width: 28,
+                          child: CupertinoSwitch(
+                            value: isChecked,
+                            onChanged: (value) {
+                              isChecked = !isChecked;
+                              setState(() {});
+                            },
+                            activeTrackColor: LightAppColors.primary,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 16),
+                    Row(
+                      children: [
+                        Text(
+                          tr.sign_up.saturday,
+                          style: Typographies.regularBody.copyWith(
+                            color: LightTextColor.secondary,
+                          ),
+                        ),
+                        Spacer(),
+                        SizedBox(
+                          height: 28,
+                          width: 28,
+                          child: CupertinoSwitch(
+                            value: isChecked,
+                            onChanged: (value) {
+                              isChecked = !isChecked;
+                              setState(() {});
+                            },
+                            activeTrackColor: LightAppColors.primary,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 16),
+                    Row(
+                      children: [
+                        Text(
+                          tr.sign_up.sunday,
+                          style: Typographies.regularBody.copyWith(
+                            color: LightTextColor.secondary,
+                          ),
+                        ),
+                        Spacer(),
+                        SizedBox(
+                          height: 28,
+                          width: 28,
+                          child: CupertinoSwitch(
+                            value: isChecked,
+                            onChanged: (value) {
+                              isChecked = !isChecked;
+                              setState(() {});
+                            },
+                            activeTrackColor: LightAppColors.primary,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 16),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: InputField.time(
+                            fieldTitle: tr.sign_up.begin_time,
+                            suffixIcon: AppIcons.icWatch,
+                            controller: beginTimeController,
+                          ),
+                        ),
+                        SizedBox(width: 16),
+                        Expanded(
+                          child: InputField.time(
+                            fieldTitle: tr.sign_up.end_time,
+                            suffixIcon: AppIcons.icWatch,
+                            controller: endTimeController,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 24),
+              MainButton.primary(title: tr.sign_up.complete_settings),
+              SizedBox(height: MediaQuery.of(context).viewPadding.bottom + 8),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "on_boarding": {
+    "choose_language": "Выберите язык",
+    "choose_lang_desc": "Укажите удобный для вас язык",
+    "always_be_aware": "Будьте всегда в курсе",
+    "always_be_aware_desc": "Получайте напоминания и новые записи от клиентов вовремя.",
+    "manage_costumers": "Управлять клиентами легко",
+    "manage_costumers_desc": "Добавляйте записи, следите за расписанием и не забывайте о встречах."
+  },
+  "buttons": {
+    "continue": "Продолжить",
+    "allow": "Разрешить",
+    "begin": "Начать",
+    "send_code_phone_number": "Отправить код подтверждения",
+    "confirm_and_continue": "Подтвердить и продолжить"
+  },
+  "input_field": {
+    "phone_field": "Номер телефона"
+  },
+  "sign_up": {
+    "welcome": "Добро пожаловать в UstaBook!",
+    "welcome_desc": "Введите свой номер телефона, чтобы начать.",
+    "user_privacy": "Ваши данные в безопасности, и мы никогда не будем ими делиться.",
+    "back": "Назад",
+    "enter_otp_code": "Введите 4-значный код, отправленный на номер $phone.",
+    "timer": "Попробуйте снова через $time секунд",
+    "profile_settings_title": "Введите свои данные",
+    "profile_settings_title_desc": "Настройте свой профиль, чтобы начать управлять клиентами.",
+    "upload_photo": "Загрузите фото",
+    "main_desc": "Основные данные",
+    "enter_full_fio": "Введите полное имя",
+    "service_type": "Тип сервиса",
+    "service_type_hint": "Выберите тип услуги",
+    "work_schedule": "График работы",
+    "monday": "Понедельник",
+    "tuesday": "Вторник",
+    "wednesday": "Среда",
+    "thursday": "Четверг",
+    "friday": "Пятница",
+    "saturday": "Суббота",
+    "sunday": "Воскресенье",
+    "begin_time": "Время начала",
+    "end_time": "Время окончания",
+    "complete_settings": "Завершить настройку"
+  }
+}

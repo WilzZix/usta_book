@@ -1,0 +1,46 @@
+{
+  "on_boarding": {
+    "choose_language": "Tilni tanlang",
+    "choose_lang_desc": "Qulay tilingizni belgilang",
+    "always_be_aware": "Doimiy xabardor bo'ling",
+    "always_be_aware_desc": "Mijoz eslatmalari va yangi yozuvlarni o'z\n vaqtida oling.",
+    "manage_costumers": "Mijozlarni boshqatish oson",
+    "manage_costumers_desc": "Yozuv qo'shing,jadvalingizni kuzating va uchrashuvlarni unutib qo'ymang."
+  },
+  "buttons": {
+    "continue": "Davom etish",
+    "allow": "Ruhsat berish",
+    "begin": "Boshlash",
+    "send_code_phone_number": "Tasdiqlash kodi yuborish",
+    "confirm_and_continue": "Tasdiqlash va davom etish"
+  },
+  "input_field": {
+    "phone_field": "Telefon raqam"
+  },
+  "sign_up": {
+    "welcome": "UstaBookga hush kelibsiz!",
+    "welcome_desc": "Boshlash uchun telefon raqamingizni kiriting.",
+    "user_privacy": "Sizning ma'lumotlaringiz xavfsiz va biz sizning ma'lumotlaringizni hech qachon baham ko'rmaymiz",
+    "back": "Ortga qaytish",
+    "enter_otp_code": "$phone raqamiga yuborilgan 4 xonali kodni kiriting.",
+    "timer": "$time soniyadan keyin qayta urinib ko'ring",
+    "profile_settings_title": "O'zingizning ma'lumotlaringizni kiriting",
+    "profile_settings_title_desc": "Mijozlarni boshqarishni boshlash uchun profilingizni sozlang.",
+    "upload_photo": "Rasm yuklang",
+    "main_desc": "Asosiy ma'lumotlar",
+    "enter_full_fio": "To'liq ism sharifingizni kiriting",
+    "service_type": "Servis turi",
+    "service_type_hint": "Xizmat turini tanlang",
+    "work_schedule": "Ish jadvali",
+    "monday": "Dushanba",
+    "tuesday": "Seshanba",
+    "wednesday": "Chorshanba",
+    "thursday": "Payshanba",
+    "friday": "Juma",
+    "saturday": "Shanba",
+    "sunday": "Yakshanba",
+    "begin_time": "Boshlanish vaqti",
+    "end_time": "Tugash vaqti",
+    "complete_settings": "Sozlashni yakunlash"
+  }
+}
