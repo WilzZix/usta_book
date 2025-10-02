@@ -8,6 +8,7 @@ import 'firebase_options.dart';
 import 'presentation/router/app_route.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(TranslationProvider(child: const MyApp()));
 }
