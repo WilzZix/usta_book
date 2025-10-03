@@ -106,6 +106,12 @@ class TranslationsInputFieldUz {
 
 	/// uz: 'Telefon raqam'
 	String get phone_field => 'Telefon raqam';
+
+	/// uz: 'Elektron pochta'
+	String get email_field => 'Elektron pochta';
+
+	/// uz: 'Parol'
+	String get password_field => 'Parol';
 }
 
 // Path: sign_up
@@ -206,6 +212,8 @@ extension on Translations {
 			case 'buttons.send_code_phone_number': return 'Tasdiqlash kodi yuborish';
 			case 'buttons.confirm_and_continue': return 'Tasdiqlash va davom etish';
 			case 'input_field.phone_field': return 'Telefon raqam';
+			case 'input_field.email_field': return 'Elektron pochta';
+			case 'input_field.password_field': return 'Parol';
 			case 'sign_up.welcome': return 'UstaBookga hush kelibsiz!';
 			case 'sign_up.welcome_desc': return 'Boshlash uchun telefon raqamingizni kiriting.';
 			case 'sign_up.user_privacy': return 'Sizning ma\'lumotlaringiz xavfsiz va biz sizning ma\'lumotlaringizni hech qachon baham ko\'rmaymiz';

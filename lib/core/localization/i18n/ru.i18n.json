@@ -15,7 +15,9 @@
     "confirm_and_continue": "Подтвердить и продолжить"
   },
   "input_field": {
-    "phone_field": "Номер телефона"
+    "phone_field": "Номер телефона",
+    "email_field": "Электронная почта",
+    "password_field": "Пароль"
   },
   "sign_up": {
     "welcome": "Добро пожаловать в UstaBook!",

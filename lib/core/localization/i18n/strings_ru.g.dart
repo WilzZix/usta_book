@@ -81,6 +81,8 @@ class TranslationsInputFieldRu extends TranslationsInputFieldUz {
 
 	// Translations
 	@override String get phone_field => 'Номер телефона';
+	@override String get email_field => 'Электронная почта';
+	@override String get password_field => 'Пароль';
 }
 
 // Path: sign_up
@@ -133,6 +135,8 @@ extension on TranslationsRu {
 			case 'buttons.send_code_phone_number': return 'Отправить код подтверждения';
 			case 'buttons.confirm_and_continue': return 'Подтвердить и продолжить';
 			case 'input_field.phone_field': return 'Номер телефона';
+			case 'input_field.email_field': return 'Электронная почта';
+			case 'input_field.password_field': return 'Пароль';
 			case 'sign_up.welcome': return 'Добро пожаловать в UstaBook!';
 			case 'sign_up.welcome_desc': return 'Введите свой номер телефона, чтобы начать.';
 			case 'sign_up.user_privacy': return 'Ваши данные в безопасности, и мы никогда не будем ими делиться.';

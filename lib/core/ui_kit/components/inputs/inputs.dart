@@ -4,7 +4,15 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:usta_book/core/ui_kit/colors.dart';
 import 'package:usta_book/core/ui_kit/typography.dart';
 
-enum InputFieldType { phone, date, time, text, selectableInput }
+enum InputFieldType {
+  phone,
+  date,
+  time,
+  text,
+  selectableInput,
+  email,
+  password,
+}
 
 class InputField extends StatefulWidget {
   const InputField._({
@@ -19,6 +27,7 @@ class InputField extends StatefulWidget {
     required this.controller,
     required this.textInputType,
     this.onTap,
+    this.obscureText,
   });
 
   InputField.phone({
@@ -35,6 +44,39 @@ class InputField extends StatefulWidget {
          fieldTitle: fieldTitle,
          hintText: '+998 (00) 123 45 67',
          inputFormatter: [phoneMaskFormatter],
+       );
+
+  InputField.email({
+    Key? key,
+    required String fieldTitle,
+    List<TextInputFormatter>? inputFormatter,
+    String? hintText,
+    required TextEditingController controller,
+  }) : this._(
+         controller: controller,
+         fieldType: InputFieldType.email,
+         textInputType: TextInputType.emailAddress,
+         key: key,
+         fieldTitle: fieldTitle,
+         hintText: 'example@email.com',
+         inputFormatter: [emailMaskFormatter],
+       );
+
+  InputField.password({
+    Key? key,
+    required String fieldTitle,
+    List<TextInputFormatter>? inputFormatter,
+    String? hintText,
+    required TextEditingController controller,
+  }) : this._(
+         controller: controller,
+         fieldType: InputFieldType.password,
+         textInputType: TextInputType.visiblePassword,
+         key: key,
+         fieldTitle: fieldTitle,
+         hintText: '************',
+         inputFormatter: [emailMaskFormatter],
+         obscureText: true,
        );
 
   InputField.date({
@@ -112,6 +154,7 @@ class InputField extends StatefulWidget {
   final TextEditingController controller;
   final TextInputType? textInputType;
   final VoidCallback? onTap;
+  final bool? obscureText;
 
   @override
   State<InputField> createState() => _InputFieldState();
@@ -136,6 +179,7 @@ class _InputFieldState extends State<InputField> {
             readOnly: widget.readOnly ?? false,
             inputFormatters: widget.inputFormatter,
             keyboardType: widget.textInputType,
+            obscureText: widget.obscureText ?? false,
             decoration: InputDecoration(
               fillColor: LightAppColors.body,
               suffixIcon: Padding(
@@ -160,7 +204,12 @@ var phoneMaskFormatter = MaskTextInputFormatter(
   filter: {"#": RegExp(r'[0-9]')},
   type: MaskAutoCompletionType.lazy, // or .eager
 );
-
+final emailMaskFormatter = MaskTextInputFormatter(
+  // A very basic example, adjust as needed
+  filter: {"#": RegExp(r'[a-zA-Z0-9.\-_]')},
+  // Allow common email characters
+  type: MaskAutoCompletionType.lazy,
+);
 var dateMaskFormatter = MaskTextInputFormatter(
   mask: '##/##/####',
   filter: {"#": RegExp(r'[0-9]')},

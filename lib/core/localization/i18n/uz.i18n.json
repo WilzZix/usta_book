@@ -15,7 +15,9 @@
     "confirm_and_continue": "Tasdiqlash va davom etish"
   },
   "input_field": {
-    "phone_field": "Telefon raqam"
+    "phone_field": "Telefon raqam",
+    "email_field": "Elektron pochta",
+    "password_field": "Parol"
   },
   "sign_up": {
     "welcome": "UstaBookga hush kelibsiz!",

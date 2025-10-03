@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:usta_book/presentation/onboarding/choose_language/choose_language.dart';
+import 'package:usta_book/presentation/sign_up/email_and_password/email_and_password.dart';
 import 'package:usta_book/presentation/sign_up/otp/otp_page.dart';
 import 'package:usta_book/presentation/sign_up/phone_registration/phone_registration_page.dart';
 import 'package:usta_book/presentation/sign_up/profile_settings/profile_settings.dart';
@@ -28,6 +29,11 @@ class AppRoute {
         path: CompleteOnboardingPage.tag,
         name: CompleteOnboardingPage.tag,
         builder: (_, __) => CompleteOnboardingPage(),
+      ),
+      GoRoute(
+        path: EmailAndPassword.tag,
+        name: EmailAndPassword.tag,
+        builder: (_, __) => EmailAndPassword(),
       ),
       GoRoute(
         path: PhoneRegistrationPage.tag,
