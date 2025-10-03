@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:usta_book/bloc/sign_up/sign_up_bloc.dart';
 import 'package:usta_book/core/localization/i18n/strings.g.dart';
 import 'package:usta_book/core/ui_kit/components/button.dart';
 import 'package:usta_book/core/ui_kit/components/inputs/inputs.dart';
@@ -43,11 +45,31 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
               controller: passwordController,
             ),
             SizedBox(height: 36),
-            MainButton.primary(
-              title: tr.buttons.send_code_phone_number,
-              onTap: () {
-                context.pushNamed(OtpPage.tag);
+            BlocListener<SignUpBloc, SignUpState>(
+              listener: (context, state) {
+                if (state is SignedUpSuccessState) {
+                  context.pushNamed(OtpPage.tag);
+                }
+                if (state is SignedUpFailureState) {
+                  showBottomSheet(
+                    context: context,
+                    builder: (context) {
+                      return Center(child: Text(state.msg));
+                    },
+                  );
+                }
               },
+              child: MainButton.primary(
+                title: tr.buttons.send_code_phone_number,
+                onTap: () {
+                  BlocProvider.of<SignUpBloc>(context).add(
+                    SignUpWithEmailAndPasswordEvent(
+                      email: emailController.text,
+                      password: passwordController.text,
+                    ),
+                  );
+                },
+              ),
             ),
           ],
         ),
