@@ -116,6 +116,7 @@ class TranslationsSignUpRu extends TranslationsSignUpUz {
 	@override String get begin_time => 'Время начала';
 	@override String get end_time => 'Время окончания';
 	@override String get complete_settings => 'Завершить настройку';
+	@override String get name => 'Имя';
 }
 
 /// Flat map(s) containing all translations.
@@ -161,6 +162,7 @@ extension on TranslationsRu {
 			case 'sign_up.begin_time': return 'Время начала';
 			case 'sign_up.end_time': return 'Время окончания';
 			case 'sign_up.complete_settings': return 'Завершить настройку';
+			case 'sign_up.name': return 'Имя';
 			default: return null;
 		}
 	}

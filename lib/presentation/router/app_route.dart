@@ -11,7 +11,7 @@ import '../onboarding/complete_onboarding/complete_onboarding_page.dart';
 
 class AppRoute {
   static final router = GoRouter(
-    initialLocation: ChooseLanguage.tag,
+    initialLocation: ProfileSettings.tag,
     debugLogDiagnostics: kDebugMode,
     overridePlatformDefaultLocation: true,
     routes: [
@@ -45,12 +45,20 @@ class AppRoute {
             name: OtpPage.tag,
             builder: (_, __) => OtpPage(),
           ),
-          GoRoute(
-            path: ProfileSettings.tag,
-            name: ProfileSettings.tag,
-            builder: (_, __) => ProfileSettings(),
-          ),
+          //TODO Set back
+          // GoRoute(
+          //   path: ProfileSettings.tag,
+          //   name: ProfileSettings.tag,
+          //   builder: (_, __) => ProfileSettings(),
+          // ),
         ],
+      ),
+
+      ///Need remove
+      GoRoute(
+        path: ProfileSettings.tag,
+        name: ProfileSettings.tag,
+        builder: (_, __) => ProfileSettings(),
       ),
     ],
   );

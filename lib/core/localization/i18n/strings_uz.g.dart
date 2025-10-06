@@ -193,6 +193,9 @@ class TranslationsSignUpUz {
 
 	/// uz: 'Sozlashni yakunlash'
 	String get complete_settings => 'Sozlashni yakunlash';
+
+	/// uz: 'Ism'
+	String get name => 'Ism';
 }
 
 /// Flat map(s) containing all translations.
@@ -238,6 +241,7 @@ extension on Translations {
 			case 'sign_up.begin_time': return 'Boshlanish vaqti';
 			case 'sign_up.end_time': return 'Tugash vaqti';
 			case 'sign_up.complete_settings': return 'Sozlashni yakunlash';
+			case 'sign_up.name': return 'Ism';
 			default: return null;
 		}
 	}

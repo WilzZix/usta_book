@@ -90,7 +90,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                     SizedBox(height: 16),
                     InputField.text(
                       hintText: tr.sign_up.enter_full_fio,
-                      fieldTitle: tr.sign_up.service_type,
+                      fieldTitle: tr.sign_up.name,
                       controller: nameController,
                     ),
                     SizedBox(height: 16),

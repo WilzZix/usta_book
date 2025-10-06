@@ -43,6 +43,7 @@
     "sunday": "Yakshanba",
     "begin_time": "Boshlanish vaqti",
     "end_time": "Tugash vaqti",
-    "complete_settings": "Sozlashni yakunlash"
+    "complete_settings": "Sozlashni yakunlash",
+    "name": "Ism"
   }
 }

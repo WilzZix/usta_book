@@ -43,6 +43,7 @@
     "sunday": "Воскресенье",
     "begin_time": "Время начала",
     "end_time": "Время окончания",
-    "complete_settings": "Завершить настройку"
+    "complete_settings": "Завершить настройку",
+    "name": "Имя"
   }
 }
