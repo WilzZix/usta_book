@@ -6,9 +6,7 @@ sealed class SignUpState {}
 final class SignUpInitial extends SignUpState {}
 
 class SignedUpSuccessState extends SignUpState {
-  final UserCredential? userCredential;
-
-  SignedUpSuccessState({required this.userCredential});
+  SignedUpSuccessState();
 }
 
 class SignedUpFailureState extends SignUpState {

@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 import 'package:usta_book/domain/repositories/sign_up/i_sign_up.dart';
 
@@ -8,7 +7,7 @@ class SignUpUseCase {
 
   SignUpUseCase({required this.iSignUp});
 
-  Future<UserCredential?> signUpWithEmailAndPassword({
+  Future<void> signUpWithEmailAndPassword({
     required String email,
     required String password,
   }) async {

@@ -52,9 +52,14 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
                 }
                 if (state is SignedUpFailureState) {
                   showBottomSheet(
+                    showDragHandle: true,
+                    enableDrag: true,
                     context: context,
                     builder: (context) {
-                      return Center(child: Text(state.msg));
+                      return SizedBox(
+                        height: 100,
+                        child: Center(child: Text(state.msg)),
+                      );
                     },
                   );
                 }

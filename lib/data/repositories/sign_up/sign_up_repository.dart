@@ -5,17 +5,13 @@ import 'package:usta_book/domain/repositories/sign_up/i_sign_up.dart';
 @Singleton(as: ISignUp)
 class SignUpRepository extends ISignUp {
   @override
-  Future<UserCredential?> signInWithEmailAndPassword({
+  Future<void> signInWithEmailAndPassword({
     required String email,
     required String password,
   }) async {
-    late UserCredential credential;
     try {
-      credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      return credential;
+      final credential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: email, password: password);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
@@ -25,6 +21,5 @@ class SignUpRepository extends ISignUp {
     } catch (e) {
       print(e);
     }
-    return credential;
   }
 }

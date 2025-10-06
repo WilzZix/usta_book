@@ -19,12 +19,11 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     Emitter<SignUpState> emit,
   ) async {
     try {
-      UserCredential? userCredential = await signUpUseCase
-          .signUpWithEmailAndPassword(
-            email: event.email,
-            password: event.password,
-          );
-      emit(SignedUpSuccessState(userCredential: userCredential));
+      await signUpUseCase.signUpWithEmailAndPassword(
+        email: event.email,
+        password: event.password,
+      );
+      emit(SignedUpSuccessState());
     } catch (e) {
       emit(SignedUpFailureState(msg: e.toString()));
     }
