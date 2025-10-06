@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:usta_book/core/ui_kit/components/app_icons.dart';
 import 'package:usta_book/presentation/sign_up/email_and_password/email_and_password.dart';
-import 'package:usta_book/presentation/sign_up/otp/otp_page.dart';
 
 import '../../../core/localization/i18n/strings.g.dart';
 import '../../../core/ui_kit/components/button.dart';
@@ -53,7 +52,7 @@ class _CompleteOnboardingPageState extends State<CompleteOnboardingPage> {
             MainButton.primary(
               title: tr.buttons.allow,
               onTap: () {
-                context.pushNamed(OtpPage.tag);
+                context.pushNamed(EmailAndPassword.tag);
               },
             ),
             SizedBox(height: MediaQuery.of(context).viewPadding.bottom + 8),

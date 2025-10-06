@@ -101,6 +101,7 @@ class _OtpTimerWidgetState extends State<OtpTimerWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final tr = Translations.of(context);
     return StreamBuilder<int>(
       stream: _countdownStream,
       initialData: widget.seconds,
@@ -117,9 +118,11 @@ class _OtpTimerWidgetState extends State<OtpTimerWidget> {
         final minutes = (remaining ~/ 60).toString().padLeft(2, '0');
         final seconds = (remaining % 60).toString().padLeft(2, '0');
 
-        return Text(
-          'Осталось: $minutes:$seconds',
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+        return Center(
+          child: Text(
+            tr.sign_up.timer(time: '$minutes:$seconds'),
+            style: Typographies.regularBody2,
+          ),
         );
       },
     );
