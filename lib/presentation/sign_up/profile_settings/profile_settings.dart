@@ -27,7 +27,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
   bool isChecked = true;
   TextEditingController beginTimeController = TextEditingController();
   TextEditingController endTimeController = TextEditingController();
-  Map<String, String> workingHours = {'mon': '09:00 - 18:00'};
+  Map<String, String> workingHours = {'mon': '${DateTime.now()} - 18:00'};
 
   @override
   Widget build(BuildContext context) {

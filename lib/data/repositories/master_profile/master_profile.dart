@@ -23,7 +23,7 @@ class MasterProfileImpl extends IMasterProfile {
 
       // 3. Используем set() с merge: true, чтобы обновить только переданные поля,
       // не перезаписывая весь документ.
-      await masterDocRef.set(data, SetOptions(merge: true));
+      await masterDocRef.update(data,);
 
       print('Профиль мастера $masterUID успешно обновлен.');
     } on FirebaseException catch (e) {
