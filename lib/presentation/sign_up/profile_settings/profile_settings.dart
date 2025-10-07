@@ -1,11 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:usta_book/bloc/auth/auth_cubit.dart';
+import 'package:usta_book/bloc/master/master_bloc.dart';
 import 'package:usta_book/core/localization/i18n/strings.g.dart';
 import 'package:usta_book/core/ui_kit/colors.dart';
 import 'package:usta_book/core/ui_kit/components/app_icons.dart';
 import 'package:usta_book/core/ui_kit/components/button.dart';
 import 'package:usta_book/core/ui_kit/components/inputs/inputs.dart';
 import 'package:usta_book/core/ui_kit/typography.dart';
+import 'package:usta_book/data/models/master_profile.dart';
+import 'package:usta_book/data/sources/firebase/firebase_service.dart';
 
 class ProfileSettings extends StatefulWidget {
   const ProfileSettings({super.key});
@@ -18,9 +23,11 @@ class ProfileSettings extends StatefulWidget {
 
 class _ProfileSettingsState extends State<ProfileSettings> {
   TextEditingController nameController = TextEditingController();
+  TextEditingController serviceTypeController = TextEditingController();
   bool isChecked = true;
   TextEditingController beginTimeController = TextEditingController();
   TextEditingController endTimeController = TextEditingController();
+  Map<String, String> workingHours = {'mon': '09:00 - 18:00'};
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +104,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                     InputField.selectableInput(
                       hintText: tr.sign_up.service_type_hint,
                       fieldTitle: tr.sign_up.service_type,
-                      controller: nameController,
+                      controller: serviceTypeController,
                       suffixIcon: Icon(Icons.keyboard_arrow_down_rounded),
                     ),
                   ],
@@ -309,7 +316,20 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                 ),
               ),
               SizedBox(height: 24),
-              MainButton.primary(title: tr.sign_up.complete_settings),
+              MainButton.primary(
+                title: tr.sign_up.complete_settings,
+                onTap: () {
+                  BlocProvider.of<MasterBloc>(context).add(
+                    UpdateMasterProfile(
+                      masterProfile: MasterProfile(
+                        name: nameController.text,
+                        serviceType: serviceTypeController.text,
+                        workingHours: workingHours,
+                      ),
+                    ),
+                  );
+                },
+              ),
               SizedBox(height: MediaQuery.of(context).viewPadding.bottom + 8),
             ],
           ),

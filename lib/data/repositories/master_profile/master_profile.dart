@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:injectable/injectable.dart';
 import 'package:usta_book/data/models/master_profile.dart';
 import 'package:usta_book/domain/repositories/master_profile/i_master_profile.dart';
 
+@LazySingleton(as: IMasterProfile)
 class MasterProfileImpl extends IMasterProfile {
   @override
   Future<void> updateMasterProfile(

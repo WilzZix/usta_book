@@ -175,6 +175,7 @@ class _InputFieldState extends State<InputField> {
           ),
           SizedBox(height: 8),
           TextField(
+            controller: widget.controller,
             onTap: widget.onTap,
             readOnly: widget.readOnly ?? false,
             inputFormatters: widget.inputFormatter,

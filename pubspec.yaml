@@ -28,6 +28,7 @@ dependencies:
   cloud_firestore: ^6.0.2
   injectable: ^2.5.2
   get_it: ^8.2.0
+  shared_preferences: ^2.5.3
 dev_dependencies:
   flutter_test:
     sdk: flutter
