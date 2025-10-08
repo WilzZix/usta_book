@@ -64,6 +64,7 @@ class _MyAppState extends State<MyApp> {
             scaffoldBackgroundColor: LightAppColors.body,
             appBarTheme: AppBarTheme(color: LightAppColors.body),
             inputDecorationTheme: InputDecorationTheme(
+              errorStyle: TextStyle(color: StateColor.error),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
                 borderSide: BorderSide(color: LightAppColors.primary),

@@ -28,6 +28,7 @@ class InputField extends StatefulWidget {
     required this.textInputType,
     this.onTap,
     this.obscureText,
+    this.validator,
   });
 
   InputField.phone({
@@ -36,7 +37,9 @@ class InputField extends StatefulWidget {
     List<TextInputFormatter>? inputFormatter,
     String? hintText,
     required TextEditingController controller,
+    String? Function(String?)? validator,
   }) : this._(
+         validator: validator,
          controller: controller,
          fieldType: InputFieldType.phone,
          textInputType: TextInputType.phone,
@@ -52,7 +55,9 @@ class InputField extends StatefulWidget {
     List<TextInputFormatter>? inputFormatter,
     String? hintText,
     required TextEditingController controller,
+    String? Function(String?)? validator,
   }) : this._(
+         validator: validator,
          controller: controller,
          fieldType: InputFieldType.email,
          textInputType: TextInputType.emailAddress,
@@ -68,7 +73,9 @@ class InputField extends StatefulWidget {
     List<TextInputFormatter>? inputFormatter,
     String? hintText,
     required TextEditingController controller,
+    String? Function(String?)? validator,
   }) : this._(
+         validator: validator,
          controller: controller,
          fieldType: InputFieldType.password,
          textInputType: TextInputType.visiblePassword,
@@ -85,7 +92,9 @@ class InputField extends StatefulWidget {
     List<TextInputFormatter>? inputFormatter,
     required Widget suffixIcon,
     required TextEditingController controller,
+    String? Function(String?)? validator,
   }) : this._(
+         validator: validator,
          controller: controller,
          fieldType: InputFieldType.date,
          textInputType: TextInputType.datetime,
@@ -102,9 +111,11 @@ class InputField extends StatefulWidget {
     List<TextInputFormatter>? inputFormatter,
     required Widget suffixIcon,
     required TextEditingController controller,
+    String? Function(String?)? validator,
   }) : this._(
+         validator: validator,
          controller: controller,
-         fieldType: InputFieldType.date,
+         fieldType: InputFieldType.time,
          hintText: '13:30 PM',
          key: key,
          fieldTitle: fieldTitle,
@@ -118,7 +129,9 @@ class InputField extends StatefulWidget {
     required String fieldTitle,
     String? hintText,
     required TextEditingController controller,
+    String? Function(String?)? validator,
   }) : this._(
+         validator: validator,
          controller: controller,
          key: key,
          fieldTitle: fieldTitle,
@@ -134,7 +147,9 @@ class InputField extends StatefulWidget {
     required Widget suffixIcon,
     required TextEditingController controller,
     VoidCallback? onTap,
+    String? Function(String?)? validator,
   }) : this._(
+         validator: validator,
          controller: controller,
          key: key,
          fieldTitle: fieldTitle,
@@ -155,6 +170,7 @@ class InputField extends StatefulWidget {
   final TextInputType? textInputType;
   final VoidCallback? onTap;
   final bool? obscureText;
+  final String? Function(String?)? validator;
 
   @override
   State<InputField> createState() => _InputFieldState();
@@ -163,39 +179,35 @@ class InputField extends StatefulWidget {
 class _InputFieldState extends State<InputField> {
   @override
   Widget build(BuildContext context) {
-    return Form(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            widget.fieldTitle,
-            style: Typographies.regularBody.copyWith(
-              color: LightTextColor.secondary,
-            ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          widget.fieldTitle,
+          style: Typographies.regularBody.copyWith(
+            color: LightTextColor.secondary,
           ),
-          SizedBox(height: 8),
-          TextField(
-            controller: widget.controller,
-            onTap: widget.onTap,
-            readOnly: widget.readOnly ?? false,
-            inputFormatters: widget.inputFormatter,
-            keyboardType: widget.textInputType,
-            obscureText: widget.obscureText ?? false,
-            decoration: InputDecoration(
-              fillColor: LightAppColors.body,
-              suffixIcon: Padding(
-                padding: const EdgeInsets.only(
-                  top: 16.0,
-                  bottom: 16,
-                  right: 16,
-                ),
-                child: widget.suffixIcon,
-              ),
-              hintText: widget.hintText,
+        ),
+        SizedBox(height: 8),
+        TextFormField(
+          autovalidateMode: AutovalidateMode.onUnfocus,
+          validator: widget.validator,
+          controller: widget.controller,
+          onTap: widget.onTap,
+          readOnly: widget.readOnly ?? false,
+          inputFormatters: widget.inputFormatter,
+          keyboardType: widget.textInputType,
+          obscureText: widget.obscureText ?? false,
+          decoration: InputDecoration(
+            fillColor: LightAppColors.body,
+            suffixIcon: Padding(
+              padding: const EdgeInsets.only(top: 16.0, bottom: 16, right: 16),
+              child: widget.suffixIcon,
             ),
+            hintText: widget.hintText,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

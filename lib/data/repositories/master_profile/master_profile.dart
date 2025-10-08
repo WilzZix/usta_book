@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
 import 'package:usta_book/data/models/master_profile.dart';
+import 'package:usta_book/data/models/service_model.dart';
 import 'package:usta_book/domain/repositories/master_profile/i_master_profile.dart';
 
 @LazySingleton(as: IMasterProfile)
@@ -23,7 +24,7 @@ class MasterProfileImpl extends IMasterProfile {
 
       // 3. Используем set() с merge: true, чтобы обновить только переданные поля,
       // не перезаписывая весь документ.
-      await masterDocRef.update(data,);
+      await masterDocRef.update(data);
 
       print('Профиль мастера $masterUID успешно обновлен.');
     } on FirebaseException catch (e) {
@@ -32,6 +33,30 @@ class MasterProfileImpl extends IMasterProfile {
     } catch (e) {
       print('Непредвиденная ошибка: $e');
       rethrow;
+    }
+  }
+
+  @override
+  Future<List<ServiceModel>> getAvailableServices() async {
+    try {
+      final FirebaseFirestore db = FirebaseFirestore.instance;
+      // 1. Execute the Query
+      final QuerySnapshot snapshot = await db.collection('services').get();
+
+      // 2. Map the Documents to the Model Class
+      final List<ServiceModel> services = snapshot.docs.map((doc) {
+        final String documentId = doc.id;
+        final Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+
+        // Use the existing factory method
+        return ServiceModel.fromFirestore(data, documentId);
+      }).toList();
+
+      return services;
+    } catch (e) {
+      print("Error fetching services list: $e");
+      // Return an empty list on failure
+      return [];
     }
   }
 }
