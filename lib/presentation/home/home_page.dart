@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:usta_book/bloc/auth/auth_cubit.dart';
 import 'package:usta_book/core/ui_kit/colors.dart';
 import 'package:usta_book/core/ui_kit/typography.dart';
 
@@ -27,6 +29,7 @@ class _HomePageState extends State<HomePage> {
               children: [
                 GestureDetector(
                   onTap: () {
+                    BlocProvider.of<AuthCubit>(context).logOut();
                     setState(() {
                       dayIsSelected = true;
                     });
