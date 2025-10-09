@@ -46,7 +46,7 @@ class AppRoute {
       }
       // 2. Статус известен. Если мы на Splash, перенаправляем.
       if (targetPath == SplashScreen.tag) {
-        return isAuthenticated ? HomePage.tag : ChooseLanguage.tag;
+        return isAuthenticated ? ProfileSettings.tag : ChooseLanguage.tag;
       }
 
       if (!isAuthenticated) {
@@ -60,7 +60,8 @@ class AppRoute {
       else {
         // Если пытается попасть на публичный путь (Вход, Регистрация, Онбординг)
         if (isPublicPath) {
-          return HomePage.tag; // Перенаправляем на Главный экран (Расписание)
+          return ProfileSettings
+              .tag; // Перенаправляем на Главный экран (Расписание)
         }
         return null; // Остаемся на защищенном пути
       }
@@ -106,12 +107,17 @@ class AppRoute {
             name: OtpPage.tag,
             builder: (_, __) => OtpPage(),
           ),
-          GoRoute(
-            path: ProfileSettings.tag,
-            name: ProfileSettings.tag,
-            builder: (_, __) => ProfileSettings(),
-          ),
+          // GoRoute(
+          //   path: ProfileSettings.tag,
+          //   name: ProfileSettings.tag,
+          //   builder: (_, __) => ProfileSettings(),
+          // ),
         ],
+      ),
+      GoRoute(
+        path: ProfileSettings.tag,
+        name: ProfileSettings.tag,
+        builder: (_, __) => ProfileSettings(),
       ),
     ],
   );

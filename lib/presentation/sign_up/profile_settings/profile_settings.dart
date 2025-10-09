@@ -42,7 +42,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
     'sun': '09:00 - 18:00',
     'thurs': '09:00 - 18:00',
     'tue': '09:00 - 18:00',
-    'wed': '09:00 - 17:00',
+    'wed': '09:00 - 18:00',
   };
   TimeOfDay _selectedTimeBegin = TimeOfDay.now();
   TimeOfDay _selectedTimeEnd = TimeOfDay.now();
@@ -69,6 +69,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
           // especially for adding leading zeros (e.g., 09:05).
           endTimeController.text =
               '${_selectedTimeEnd.hour}:${_selectedTimeEnd.minute.toString().padLeft(2, '0')}';
+          _updateWorkingHours();
         });
       } else {
         // 3. Optional: Show an error message to the user
@@ -103,8 +104,30 @@ class _ProfileSettingsState extends State<ProfileSettings> {
         _selectedTimeBegin = picked;
         beginTimeController.text =
             '${_selectedTimeBegin.hour}:${_selectedTimeBegin.minute.toString().padLeft(2, '0')}';
+        _updateWorkingHours();
       });
     }
+  }
+
+  // Добавьте эту функцию внутрь _ProfileSettingsState
+  void _updateWorkingHours() {
+    // Получаем новый диапазон времени
+    final newBeginTime = beginTimeController.text;
+    final newEndTime = endTimeController.text;
+
+    // Формируем новую строку времени, проверяя, что оба поля заполнены
+    final newTimeRange = (newBeginTime.isNotEmpty && newEndTime.isNotEmpty)
+        ? '$newBeginTime - $newEndTime'
+        : '09:00 - 18:00'; // Запасной вариант
+
+    // Определяем, какие дни сейчас активны, и обновляем их
+    if (isMondayChecked) workingHours['mon'] = newTimeRange;
+    if (isTuesdayChecked) workingHours['tue'] = newTimeRange;
+    if (isWednesdayChecked) workingHours['wed'] = newTimeRange;
+    if (isThursdayChecked) workingHours['thurs'] = newTimeRange;
+    if (isFridayChecked) workingHours['fri'] = newTimeRange;
+    if (isSaturdayChecked) workingHours['sat'] = newTimeRange;
+    if (isSundayChecked) workingHours['sun'] = newTimeRange;
   }
 
   @override
@@ -264,12 +287,22 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                             child: CupertinoSwitch(
                               value: isMondayChecked,
                               onChanged: (value) {
-                                isMondayChecked = !isMondayChecked;
-                                if (isMondayChecked) {
-                                  workingHours['mon'] =
-                                      '${beginTimeController.text} - ${endTimeController.text}';
-                                }
-                                setState(() {});
+                                setState(() {
+                                  isMondayChecked =
+                                      !isMondayChecked; // Обновляем состояние
+                                  const dayKey = 'mon';
+                                  if (value) {
+                                    // ЕСЛИ ВКЛЮЧИЛИ: Добавляем или обновляем время
+                                    final timeRange =
+                                        '${beginTimeController.text} - ${endTimeController.text}';
+                                    workingHours[dayKey] = timeRange.isEmpty
+                                        ? '09:00 - 18:00'
+                                        : timeRange; // Убедитесь, что время не пустое
+                                  } else {
+                                    // ЕСЛИ ВЫКЛЮЧИЛИ: Удаляем день из списка
+                                    workingHours.remove(dayKey);
+                                  }
+                                });
                               },
                               activeTrackColor: LightAppColors.primary,
                             ),
@@ -292,12 +325,22 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                             child: CupertinoSwitch(
                               value: isTuesdayChecked,
                               onChanged: (value) {
-                                isTuesdayChecked = !isTuesdayChecked;
-                                if (isMondayChecked) {
-                                  workingHours['tue'] =
-                                      '${beginTimeController.text} - ${endTimeController.text}';
-                                }
-                                setState(() {});
+                                setState(() {
+                                  isTuesdayChecked =
+                                      !isTuesdayChecked; // Обновляем состояние
+                                  const dayKey = 'tue';
+                                  if (value) {
+                                    // ЕСЛИ ВКЛЮЧИЛИ: Добавляем или обновляем время
+                                    final timeRange =
+                                        '${beginTimeController.text} - ${endTimeController.text}';
+                                    workingHours[dayKey] = timeRange.isEmpty
+                                        ? '09:00 - 18:00'
+                                        : timeRange; // Убедитесь, что время не пустое
+                                  } else {
+                                    // ЕСЛИ ВЫКЛЮЧИЛИ: Удаляем день из списка
+                                    workingHours.remove(dayKey);
+                                  }
+                                });
                               },
                               activeTrackColor: LightAppColors.primary,
                             ),
@@ -320,12 +363,22 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                             child: CupertinoSwitch(
                               value: isWednesdayChecked,
                               onChanged: (value) {
-                                isWednesdayChecked = !isWednesdayChecked;
-                                if (isMondayChecked) {
-                                  workingHours['wed'] =
-                                      '${beginTimeController.text} - ${endTimeController.text}';
-                                }
-                                setState(() {});
+                                setState(() {
+                                  isWednesdayChecked =
+                                      !isWednesdayChecked; // Обновляем состояние
+                                  const dayKey = 'wed';
+                                  if (value) {
+                                    // ЕСЛИ ВКЛЮЧИЛИ: Добавляем или обновляем время
+                                    final timeRange =
+                                        '${beginTimeController.text} - ${endTimeController.text}';
+                                    workingHours[dayKey] = timeRange.isEmpty
+                                        ? '09:00 - 18:00'
+                                        : timeRange; // Убедитесь, что время не пустое
+                                  } else {
+                                    // ЕСЛИ ВЫКЛЮЧИЛИ: Удаляем день из списка
+                                    workingHours.remove(dayKey);
+                                  }
+                                });
                               },
                               activeTrackColor: LightAppColors.primary,
                             ),
@@ -348,12 +401,22 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                             child: CupertinoSwitch(
                               value: isThursdayChecked,
                               onChanged: (value) {
-                                isThursdayChecked = !isThursdayChecked;
-                                if (isMondayChecked) {
-                                  workingHours['thurs'] =
-                                      '${beginTimeController.text} - ${endTimeController.text}';
-                                }
-                                setState(() {});
+                                setState(() {
+                                  isThursdayChecked =
+                                      !isThursdayChecked; // Обновляем состояние
+                                  const dayKey = 'thurs';
+                                  if (value) {
+                                    // ЕСЛИ ВКЛЮЧИЛИ: Добавляем или обновляем время
+                                    final timeRange =
+                                        '${beginTimeController.text} - ${endTimeController.text}';
+                                    workingHours[dayKey] = timeRange.isEmpty
+                                        ? '09:00 - 18:00'
+                                        : timeRange; // Убедитесь, что время не пустое
+                                  } else {
+                                    // ЕСЛИ ВЫКЛЮЧИЛИ: Удаляем день из списка
+                                    workingHours.remove(dayKey);
+                                  }
+                                });
                               },
                               activeTrackColor: LightAppColors.primary,
                             ),
@@ -376,12 +439,22 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                             child: CupertinoSwitch(
                               value: isFridayChecked,
                               onChanged: (value) {
-                                isFridayChecked = !isFridayChecked;
-                                if (isMondayChecked) {
-                                  workingHours['fri'] =
-                                      '${beginTimeController.text} - ${endTimeController.text}';
-                                }
-                                setState(() {});
+                                setState(() {
+                                  isFridayChecked =
+                                      !isFridayChecked; // Обновляем состояние
+                                  const dayKey = 'fri';
+                                  if (value) {
+                                    // ЕСЛИ ВКЛЮЧИЛИ: Добавляем или обновляем время
+                                    final timeRange =
+                                        '${beginTimeController.text} - ${endTimeController.text}';
+                                    workingHours[dayKey] = timeRange.isEmpty
+                                        ? '09:00 - 18:00'
+                                        : timeRange; // Убедитесь, что время не пустое
+                                  } else {
+                                    // ЕСЛИ ВЫКЛЮЧИЛИ: Удаляем день из списка
+                                    workingHours.remove(dayKey);
+                                  }
+                                });
                               },
                               activeTrackColor: LightAppColors.primary,
                             ),
@@ -404,12 +477,22 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                             child: CupertinoSwitch(
                               value: isSaturdayChecked,
                               onChanged: (value) {
-                                isSaturdayChecked = !isSaturdayChecked;
-                                if (isMondayChecked) {
-                                  workingHours['sat'] =
-                                      '${beginTimeController.text} - ${endTimeController.text}';
-                                }
-                                setState(() {});
+                                setState(() {
+                                  isSaturdayChecked =
+                                      !isSaturdayChecked; // Обновляем состояние
+                                  const dayKey = 'sat';
+                                  if (value) {
+                                    // ЕСЛИ ВКЛЮЧИЛИ: Добавляем или обновляем время
+                                    final timeRange =
+                                        '${beginTimeController.text} - ${endTimeController.text}';
+                                    workingHours[dayKey] = timeRange.isEmpty
+                                        ? '09:00 - 18:00'
+                                        : timeRange; // Убедитесь, что время не пустое
+                                  } else {
+                                    // ЕСЛИ ВЫКЛЮЧИЛИ: Удаляем день из списка
+                                    workingHours.remove(dayKey);
+                                  }
+                                });
                               },
                               activeTrackColor: LightAppColors.primary,
                             ),
@@ -432,12 +515,22 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                             child: CupertinoSwitch(
                               value: isSundayChecked,
                               onChanged: (value) {
-                                isSundayChecked = !isSundayChecked;
-                                if (isMondayChecked) {
-                                  workingHours['sun'] =
-                                      '${beginTimeController.text} - ${endTimeController.text}';
-                                }
-                                setState(() {});
+                                setState(() {
+                                  isSundayChecked =
+                                      !isSundayChecked; // Обновляем состояние
+                                  const dayKey = 'sun';
+                                  if (value) {
+                                    // ЕСЛИ ВКЛЮЧИЛИ: Добавляем или обновляем время
+                                    final timeRange =
+                                        '${beginTimeController.text} - ${endTimeController.text}';
+                                    workingHours[dayKey] = timeRange.isEmpty
+                                        ? '09:00 - 18:00'
+                                        : timeRange; // Убедитесь, что время не пустое
+                                  } else {
+                                    // ЕСЛИ ВЫКЛЮЧИЛИ: Удаляем день из списка
+                                    workingHours.remove(dayKey);
+                                  }
+                                });
                               },
                               activeTrackColor: LightAppColors.primary,
                             ),
