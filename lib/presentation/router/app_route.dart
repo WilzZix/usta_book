@@ -19,52 +19,89 @@ class AppRoute {
     initialLocation: SplashScreen.tag,
     debugLogDiagnostics: kDebugMode,
     overridePlatformDefaultLocation: true,
+
+    // --- ОБНОВЛЕННАЯ ЛОГИКА REDIRECT ---
     redirect: (BuildContext context, GoRouterState state) {
       // 1. Читаем текущий статус Auth из BLoC/Cubit
-      final authStatus = context.read<AuthCubit>().state;
+      final authState = context
+          .read<AuthCubit>()
+          .state; // Получаем объект состояния
 
-      final bool isAuthenticated = authStatus == AuthStatus.authenticated;
-      final String targetPath =
-          state.matchedLocation; // Используем matchedLocation для точного пути
+      // 2. Определяем статус через проверку типов
+      final bool isAuthenticated = authState is AuthAuthenticated;
+      final bool isAuthIncomplete = authState is AuthProfileIncomplete;
 
-      // Пути, не требующие авторизации (онбординг, регистрация, вход)
-      final bool isPublicPath =
-          targetPath.startsWith(ChooseLanguage.tag) ||
+      final String targetPath = state.matchedLocation;
+
+      // Публичные пути, доступные всем
+      final publicPaths = [
+        ChooseLanguage.tag,
+        EmailAndPassword.tag,
+        PhoneRegistrationPage.tag,
+        '/${PhoneRegistrationPage.tag.replaceAll('/', '')}/${OtpPage.tag.replaceAll('/', '')}',
+        AllowNotifications.tag,
+        CompleteOnboardingPage.tag,
+      ];
+
+      final bool isPublicPath = publicPaths.any(
+        (path) => targetPath.startsWith(path),
+      );
+
+      // Пути, необходимые для завершения регистрации
+      final bool isRegistrationStep =
           targetPath.startsWith(PhoneRegistrationPage.tag) ||
-          targetPath.startsWith(EmailAndPassword.tag);
+          targetPath.startsWith(ProfileSettings.tag) ||
+          targetPath.startsWith(
+            '/${PhoneRegistrationPage.tag.replaceAll('/', '')}/${OtpPage.tag.replaceAll('/', '')}',
+          );
 
       // Вывод для отладки
       if (kDebugMode) {
         print(
-          'Redirect: Status=$authStatus, Target=$targetPath, Auth=$isAuthenticated',
+          'Redirect: Status=$authState, Target=$targetPath, Auth=$isAuthenticated, Incomplete=$isAuthIncomplete',
         );
       }
 
       // 1. Состояние неизвестно (ждем загрузки)
-      if (authStatus == AuthStatus.unknown) {
+      if (authState is AuthUnknown) {
         return targetPath == SplashScreen.tag ? null : SplashScreen.tag;
       }
+
       // 2. Статус известен. Если мы на Splash, перенаправляем.
       if (targetPath == SplashScreen.tag) {
-        return isAuthenticated ? HomePage.tag : ChooseLanguage.tag;
+        if (isAuthenticated) return HomePage.tag;
+        if (isAuthIncomplete) return ProfileSettings.tag;
+        return ChooseLanguage.tag;
       }
 
-      if (!isAuthenticated) {
-        // Если пытается попасть на защищенный путь, перенаправляем на Вход/Регистрацию
+      // 3. ОБРАБОТКА НЕЗАВЕРШЕННОЙ АВТОРИЗАЦИИ (AuthProfileIncomplete)
+      if (isAuthIncomplete) {
+        if (isRegistrationStep) {
+          return null;
+        }
+        return ProfileSettings.tag;
+      }
+
+      // 4. ОБРАБОТКА НЕАВТОРИЗОВАННОГО ПОЛЬЗОВАТЕЛЯ (AuthUnauthenticated)
+      if (authState is AuthUnauthenticated) {
         if (!isPublicPath) {
-          return ChooseLanguage.tag; // Начинаем с онбординга/выбора языка
+          return ChooseLanguage.tag;
         }
-        return null; // Остаемся на публичном пути
+        return null;
       }
-      // 3. Если пользователь ЗАЛОГИНЕН (Авторизован)
-      else {
-        // Если пытается попасть на публичный путь (Вход, Регистрация, Онбординг)
-        if (isPublicPath) {
-          return HomePage.tag; // Перенаправляем на Главный экран (Расписание)
+
+      // 5. ОБРАБОТКА ПОЛНОСТЬЮ АВТОРИЗОВАННОГО ПОЛЬЗОВАТЕЛЯ (AuthAuthenticated)
+      if (isAuthenticated) {
+        if (isPublicPath || isRegistrationStep) {
+          return HomePage.tag;
         }
-        return null; // Остаемся на защищенном пути
+        return null;
       }
+
+      return null;
     },
+
+    // --- МАРШРУТЫ (Routes) ---
     routes: [
       GoRoute(
         path: HomePage.tag,
@@ -76,6 +113,7 @@ class AppRoute {
         name: SplashScreen.tag,
         builder: (_, __) => const SplashScreen(),
       ),
+      // ... (Все остальные маршруты, которые являются 'public' или 'registration steps')
       GoRoute(
         path: ChooseLanguage.tag,
         name: ChooseLanguage.tag,
@@ -96,27 +134,25 @@ class AppRoute {
         name: EmailAndPassword.tag,
         builder: (_, __) => EmailAndPassword(),
       ),
+      // Убедитесь, что ProfileSettings находится на верхнем уровне, если он нужен для завершения регистрации
+      GoRoute(
+        path: ProfileSettings.tag,
+        name: ProfileSettings.tag,
+        builder: (_, __) => ProfileSettings(),
+      ),
+      // Правильная вложенность для OTP (дочерний маршрут)
       GoRoute(
         path: PhoneRegistrationPage.tag,
         name: PhoneRegistrationPage.tag,
         builder: (_, __) => PhoneRegistrationPage(),
         routes: [
           GoRoute(
-            path: OtpPage.tag,
+            // Путь здесь - это только 'otp-page', так как он вложен в /phone-registration-page
+            path: OtpPage.tag.replaceAll('/', ''),
             name: OtpPage.tag,
             builder: (_, __) => OtpPage(),
           ),
-          // GoRoute(
-          //   path: ProfileSettings.tag,
-          //   name: ProfileSettings.tag,
-          //   builder: (_, __) => ProfileSettings(),
-          // ),
         ],
-      ),
-      GoRoute(
-        path: ProfileSettings.tag,
-        name: ProfileSettings.tag,
-        builder: (_, __) => ProfileSettings(),
       ),
     ],
   );

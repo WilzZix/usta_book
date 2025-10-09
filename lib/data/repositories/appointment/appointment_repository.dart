@@ -28,13 +28,10 @@ class AppointmentRepo extends IAppointment {
       // 3. Записываем данные в Firestore и получаем ссылку на новый документ
       final DocumentReference docRef = await appointmentsRef.add(data);
 
-      print('Запись успешно добавлена с ID: ${docRef.id}');
       return docRef.id;
     } on FirebaseException catch (e) {
-      print('Ошибка Firebase при добавлении записи: ${e.code}');
       rethrow; // Перебрасываем ошибку для обработки в UI
     } catch (e) {
-      print('Непредвиденная ошибка: $e');
       rethrow;
     }
   }

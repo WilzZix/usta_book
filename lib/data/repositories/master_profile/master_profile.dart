@@ -59,4 +59,18 @@ class MasterProfileImpl extends IMasterProfile {
       return [];
     }
   }
+
+  @override
+  Future<MasterProfile?> getMasterProfile(String masterUID) async {
+    try {
+      final FirebaseFirestore _db = FirebaseFirestore.instance;
+      DocumentSnapshot doc = await _db
+          .collection('masters')
+          .doc(masterUID)
+          .get();
+
+      return MasterProfile.fromFirestore(doc);
+    } catch (e) {}
+    return null;
+  }
 }

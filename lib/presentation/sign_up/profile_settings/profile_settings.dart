@@ -12,6 +12,7 @@ import 'package:usta_book/core/ui_kit/components/inputs/inputs.dart';
 import 'package:usta_book/core/ui_kit/typography.dart';
 import 'package:usta_book/data/models/master_profile.dart';
 import 'package:usta_book/data/sources/firebase/firebase_service.dart';
+import 'package:usta_book/presentation/home/home_page.dart';
 
 class ProfileSettings extends StatefulWidget {
   const ProfileSettings({super.key});
@@ -577,21 +578,30 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                   ),
                 ),
                 SizedBox(height: 24),
-                MainButton.primary(
-                  title: tr.sign_up.complete_settings,
-                  onTap: () {
-                    if (_formKey.currentState!.validate()) {
-                      BlocProvider.of<MasterBloc>(context).add(
-                        UpdateMasterProfile(
-                          masterProfile: MasterProfile(
-                            name: nameController.text,
-                            serviceType: serviceTypeController.text,
-                            workingHours: workingHours,
-                          ),
-                        ),
-                      );
+                BlocListener<MasterBloc, MasterState>(
+                  listener: (context, state) {
+                    if (state is MasterProfileUpdated) {
+                      BlocProvider.of<AuthCubit>(context).setProfileComplete();
                     }
                   },
+                  child: MainButton.primary(
+                    title: tr.sign_up.complete_settings,
+                    onTap: () {
+                      if (_formKey.currentState!.validate()) {
+                        BlocProvider.of<MasterBloc>(context).add(
+                          UpdateMasterProfile(
+                            masterProfile: MasterProfile(
+                              name: nameController.text,
+                              serviceType: serviceTypeController.text,
+                              workingHours: workingHours,
+                              profileCompleted: true,
+                              uid: '', //TODO add UID to this request
+                            ),
+                          ),
+                        );
+                      }
+                    },
+                  ),
                 ),
                 SizedBox(height: MediaQuery.of(context).viewPadding.bottom + 8),
               ],

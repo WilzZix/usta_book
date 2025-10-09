@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+// ignore: depend_on_referenced_packages
 import 'package:meta/meta.dart';
 import 'package:usta_book/data/models/master_profile.dart';
 import 'package:usta_book/data/models/service_model.dart';

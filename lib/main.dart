@@ -49,7 +49,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AuthCubit, AuthStatus>(
+    return BlocListener<AuthCubit, AuthState>(
       listener: (context, state) {
         // Вызываем обновление роутера при каждом изменении AuthStatus
         _router.refresh();
