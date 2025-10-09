@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:usta_book/bloc/auth/auth_cubit.dart';
+import 'package:usta_book/presentation/home/home_page.dart';
 import 'package:usta_book/presentation/onboarding/choose_language/choose_language.dart';
 import 'package:usta_book/presentation/sign_up/email_and_password/email_and_password.dart';
 import 'package:usta_book/presentation/sign_up/otp/otp_page.dart';
@@ -45,7 +46,7 @@ class AppRoute {
       }
       // 2. Статус известен. Если мы на Splash, перенаправляем.
       if (targetPath == SplashScreen.tag) {
-        return isAuthenticated ? ProfileSettings.tag : ChooseLanguage.tag;
+        return isAuthenticated ? HomePage.tag : ChooseLanguage.tag;
       }
 
       if (!isAuthenticated) {
@@ -59,13 +60,17 @@ class AppRoute {
       else {
         // Если пытается попасть на публичный путь (Вход, Регистрация, Онбординг)
         if (isPublicPath) {
-          return ProfileSettings
-              .tag; // Перенаправляем на Главный экран (Расписание)
+          return HomePage.tag; // Перенаправляем на Главный экран (Расписание)
         }
         return null; // Остаемся на защищенном пути
       }
     },
     routes: [
+      GoRoute(
+        path: HomePage.tag,
+        name: HomePage.tag,
+        builder: (_, __) => HomePage(),
+      ),
       GoRoute(
         path: SplashScreen.tag,
         name: SplashScreen.tag,
@@ -101,17 +106,12 @@ class AppRoute {
             name: OtpPage.tag,
             builder: (_, __) => OtpPage(),
           ),
-          // GoRoute(
-          //   path: ProfileSettings.tag,
-          //   name: ProfileSettings.tag,
-          //   builder: (_, __) => ProfileSettings(),
-          // ),
+          GoRoute(
+            path: ProfileSettings.tag,
+            name: ProfileSettings.tag,
+            builder: (_, __) => ProfileSettings(),
+          ),
         ],
-      ),
-      GoRoute(
-        path: ProfileSettings.tag,
-        name: ProfileSettings.tag,
-        builder: (_, __) => ProfileSettings(),
       ),
     ],
   );

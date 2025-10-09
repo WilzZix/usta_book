@@ -44,6 +44,68 @@ class _ProfileSettingsState extends State<ProfileSettings> {
     'tue': '09:00 - 18:00',
     'wed': '09:00 - 17:00',
   };
+  TimeOfDay _selectedTimeBegin = TimeOfDay.now();
+  TimeOfDay _selectedTimeEnd = TimeOfDay.now();
+
+  Future<void> _selectTimeEnd(BuildContext context) async {
+    final tr = Translations.of(context);
+    final TimeOfDay? picked = await showTimePicker(
+      context: context,
+      initialTime: _selectedTimeEnd,
+    );
+
+    if (picked != null && picked != _selectedTimeEnd) {
+      // 1. Convert TimeOfDay to a comparable value (e.g., minutes since midnight)
+      int beginMinutes =
+          _selectedTimeBegin.hour * 60 + _selectedTimeBegin.minute;
+      int pickedMinutes = picked.hour * 60 + picked.minute;
+
+      // 2. Check if the picked time is strictly *after* the begin time
+      if (pickedMinutes > beginMinutes) {
+        setState(() {
+          _selectedTimeEnd = picked;
+          // Format the time for the controller
+          // Note: You might want to use a package like `intl` for better formatting,
+          // especially for adding leading zeros (e.g., 09:05).
+          endTimeController.text =
+              '${_selectedTimeEnd.hour}:${_selectedTimeEnd.minute.toString().padLeft(2, '0')}';
+        });
+      } else {
+        // 3. Optional: Show an error message to the user
+        // You'll need to implement this `_showTimeError` function.
+        _showTimeError(context, tr.sign_up.choose_time);
+      }
+    }
+  }
+
+  // ---
+
+  // You'll need to add a helper function to show an error, like this:
+  void _showTimeError(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        duration: const Duration(seconds: 3),
+        backgroundColor: Colors.red,
+      ),
+    );
+  }
+
+  // Note: You should also update your _selectTimeBegin to use a proper formatting
+  // for minutes (e.g., with a leading zero).
+  Future<void> _selectTimeBegin(BuildContext context) async {
+    final TimeOfDay? picked = await showTimePicker(
+      context: context,
+      initialTime: _selectedTimeBegin,
+    );
+    if (picked != null && picked != _selectedTimeBegin) {
+      setState(() {
+        _selectedTimeBegin = picked;
+        beginTimeController.text =
+            '${_selectedTimeBegin.hour}:${_selectedTimeBegin.minute.toString().padLeft(2, '0')}';
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -116,7 +178,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                       InputField.text(
                         validator: (value) {
                           if (value == null || value.trim().isEmpty) {
-                            return 'This field is required.';
+                            return tr.sign_up.required_field;
                           }
                           return null;
                         },
@@ -154,7 +216,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                         child: InputField.selectableInput(
                           validator: (value) {
                             if (value == null || value.trim().isEmpty) {
-                              return 'This field is required.';
+                              return tr.sign_up.required_field;
                             }
                             return null;
                           },
@@ -386,24 +448,28 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                       Row(
                         children: [
                           Expanded(
-                            child: InputField.time(
+                            child: InputField.selectableInput(
+                              onTap: () async => _selectTimeBegin(context),
                               validator: (value) {
                                 if (value == null || value.trim().isEmpty) {
-                                  return 'This field is required.';
+                                  return tr.sign_up.required_field;
                                 }
                                 return null;
                               },
                               fieldTitle: tr.sign_up.begin_time,
                               suffixIcon: AppIcons.icWatch,
                               controller: beginTimeController,
+                              hintText: '09:00',
                             ),
                           ),
                           SizedBox(width: 16),
                           Expanded(
-                            child: InputField.time(
+                            child: InputField.selectableInput(
+                              onTap: () async => _selectTimeEnd(context),
+                              hintText: '18:00',
                               validator: (value) {
                                 if (value == null || value.trim().isEmpty) {
-                                  return 'This field is required.';
+                                  return tr.sign_up.required_field;
                                 }
                                 return null;
                               },

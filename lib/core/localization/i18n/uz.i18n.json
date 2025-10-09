@@ -44,6 +44,8 @@
     "begin_time": "Boshlanish vaqti",
     "end_time": "Tugash vaqti",
     "complete_settings": "Sozlashni yakunlash",
-    "name": "Ism"
+    "name": "Ism",
+    "choose_time": "Tugash vaqti boshlanish vaqtidan keyin bo'lishi kerak",
+    "required_field": "Bu sohani to'ldirish shart"
   }
 }

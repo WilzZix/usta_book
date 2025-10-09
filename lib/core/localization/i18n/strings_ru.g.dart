@@ -117,6 +117,8 @@ class TranslationsSignUpRu extends TranslationsSignUpUz {
 	@override String get end_time => 'Время окончания';
 	@override String get complete_settings => 'Завершить настройку';
 	@override String get name => 'Имя';
+	@override String get choose_time => 'Время окончания должно быть позже времени начала';
+	@override String get required_field => 'Это поле обязательно для заполнения';
 }
 
 /// Flat map(s) containing all translations.
@@ -163,6 +165,8 @@ extension on TranslationsRu {
 			case 'sign_up.end_time': return 'Время окончания';
 			case 'sign_up.complete_settings': return 'Завершить настройку';
 			case 'sign_up.name': return 'Имя';
+			case 'sign_up.choose_time': return 'Время окончания должно быть позже времени начала';
+			case 'sign_up.required_field': return 'Это поле обязательно для заполнения';
 			default: return null;
 		}
 	}

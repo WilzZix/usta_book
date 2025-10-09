@@ -196,6 +196,12 @@ class TranslationsSignUpUz {
 
 	/// uz: 'Ism'
 	String get name => 'Ism';
+
+	/// uz: 'Tugash vaqti boshlanish vaqtidan keyin bo'lishi kerak'
+	String get choose_time => 'Tugash vaqti boshlanish vaqtidan keyin bo\'lishi kerak';
+
+	/// uz: 'Bu sohani to'ldirish shart'
+	String get required_field => 'Bu sohani to\'ldirish shart';
 }
 
 /// Flat map(s) containing all translations.
@@ -242,6 +248,8 @@ extension on Translations {
 			case 'sign_up.end_time': return 'Tugash vaqti';
 			case 'sign_up.complete_settings': return 'Sozlashni yakunlash';
 			case 'sign_up.name': return 'Ism';
+			case 'sign_up.choose_time': return 'Tugash vaqti boshlanish vaqtidan keyin bo\'lishi kerak';
+			case 'sign_up.required_field': return 'Bu sohani to\'ldirish shart';
 			default: return null;
 		}
 	}

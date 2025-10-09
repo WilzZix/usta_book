@@ -116,7 +116,7 @@ class InputField extends StatefulWidget {
          validator: validator,
          controller: controller,
          fieldType: InputFieldType.time,
-         hintText: '13:30 PM',
+         hintText: '13:30',
          key: key,
          fieldTitle: fieldTitle,
          suffixIcon: suffixIcon,
@@ -228,7 +228,7 @@ var dateMaskFormatter = MaskTextInputFormatter(
   filter: {"#": RegExp(r'[0-9]')},
 );
 var timeMaskFormatter = MaskTextInputFormatter(
-  mask: '##:## ##',
-  filter: {"#": RegExp(r'[0-9]'), "A": RegExp(r'[APapMm]')},
+  mask: '##:##',
+  filter: {"#": RegExp(r'[0-9]')},
   type: MaskAutoCompletionType.lazy,
 );
