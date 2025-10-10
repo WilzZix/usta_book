@@ -35,6 +35,13 @@ class MainButton extends StatefulWidget {
     Key? key,
   }) : this._(key: key, icon: icon, title: title, type: ButtonType.secondary);
 
+  const MainButton.logout({
+    required String title,
+    VoidCallback? onTap,
+    Widget? icon,
+    Key? key,
+  }) : this._(key: key, icon: icon, title: title, type: ButtonType.logOut);
+
   final String title;
   final Widget? icon;
   final ButtonType type;
@@ -127,8 +134,9 @@ class _MainButtonState extends State<MainButton> {
         return _secondaryDecoration();
       case ButtonType.logOut:
         return BoxDecoration(
+          border: Border.all(color: StateColor.error.withValues(alpha: 0.1)),
           borderRadius: BorderRadius.circular(8),
-          color: StateColor.error.withValues(alpha: 0.5),
+          color: StateColor.error.withValues(alpha: 0.05),
         );
     }
   }

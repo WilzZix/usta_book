@@ -10,6 +10,7 @@ import 'package:usta_book/presentation/sign_up/otp/otp_page.dart';
 import 'package:usta_book/presentation/sign_up/phone_registration/phone_registration_page.dart';
 import 'package:usta_book/presentation/sign_up/profile_settings/profile_settings.dart';
 
+import '../bottom_nav_bar/bottom_nav_bar.dart';
 import '../onboarding/allow_notifications/allow_notifications.dart';
 import '../onboarding/complete_onboarding/complete_onboarding_page.dart';
 import '../splash/splash_page.dart';
@@ -70,7 +71,7 @@ class AppRoute {
 
       // 2. Статус известен. Если мы на Splash, перенаправляем.
       if (targetPath == SplashScreen.tag) {
-        if (isAuthenticated) return HomePage.tag;
+        if (isAuthenticated) return MainHomeScreen.tag;
         if (isAuthIncomplete) return ProfileSettings.tag;
         return ChooseLanguage.tag;
       }
@@ -94,7 +95,7 @@ class AppRoute {
       // 5. ОБРАБОТКА ПОЛНОСТЬЮ АВТОРИЗОВАННОГО ПОЛЬЗОВАТЕЛЯ (AuthAuthenticated)
       if (isAuthenticated) {
         if (isPublicPath || isRegistrationStep) {
-          return HomePage.tag;
+          return MainHomeScreen.tag;
         }
         return null;
       }
@@ -104,6 +105,11 @@ class AppRoute {
 
     // --- МАРШРУТЫ (Routes) ---
     routes: [
+      GoRoute(
+        path: MainHomeScreen.tag,
+        name: MainHomeScreen.tag,
+        builder: (_, __) => MainHomeScreen(),
+      ),
       GoRoute(
         path: HomePage.tag,
         name: HomePage.tag,

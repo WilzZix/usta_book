@@ -26,4 +26,27 @@ class AppIcons {
   static final icCalendar = _pngAsset("calendar.png");
   static final icArrowLeft = _svgAsset("ic_arrow_left.svg");
   static final icArrowRight = _svgAsset("ic_arrow_right.svg");
+  static final icPerson = _svgAsset("ic_person.svg");
+  static final icAddCustomer = _svgAsset("ic_add_customer.svg");
+  static final icLogout = _svgAsset("ic_logout.svg");
+  static final icCustomersUnselected = _svgAsset("ic_customers_unselected.svg");
+  static final icCustomersSelected = _svgAsset("ic_customers_selected.svg");
+  static final icMasterSettingsUnselected = _svgAsset(
+    "ic_master_settings_unselected.svg",
+  );
+  static final icMasterSettingsSelected = _svgAsset(
+    "ic_master_settings_selected.svg",
+  );
+  static final icMasterStatisticsUnselected = _svgAsset(
+    "ic_master_statistics_unselected.svg",
+  );
+  static final icMasterStatisticsSelected = _svgAsset(
+    "ic_master_statistics_selected.svg",
+  );
+  static final icBottomNavCalendarUnselected = _svgAsset(
+    "ic_bottom_nav_calendar_unselected.svg",
+  );
+  static final icBottomNavCalendarSelected = _svgAsset(
+    "ic_bottom_nav_calendar_selected.svg",
+  );
 }
