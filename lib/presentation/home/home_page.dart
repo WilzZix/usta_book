@@ -1,6 +1,7 @@
 import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:usta_book/core/localization/i18n/strings.g.dart';
 import 'package:usta_book/core/ui_kit/colors.dart';
 import 'package:usta_book/core/ui_kit/typography.dart';
 
@@ -28,9 +29,10 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final tr = Translations.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Jadval', style: Typographies.boldH1),
+        title: Text(tr.home.table, style: Typographies.boldH1),
         centerTitle: false,
         actions: [
           Container(
@@ -52,7 +54,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     child: Center(
                       child: Text(
-                        'Kun',
+                        tr.home.day,
                         style: Typographies.regularBody2.copyWith(
                           color: dayIsSelected
                               ? LightAppColors.secondaryBg
@@ -79,7 +81,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     child: Center(
                       child: Text(
-                        'Hafta',
+                        tr.home.week,
                         style: Typographies.regularBody2.copyWith(
                           color: dayIsSelected
                               ? LightTextColor.secondary
@@ -109,7 +111,10 @@ class _HomePageState extends State<HomePage> {
                         AppIcons.icArrowLeft,
                         Spacer(),
                         Text(
-                          DateFormat('d MMMM y', 'uz').format(date),
+                          DateFormat(
+                            'd MMMM y',
+                            LocaleSettings.currentLocale.languageCode,
+                          ).format(date),
                           style: Typographies.regularH3,
                         ),
                         Spacer(),
@@ -173,14 +178,20 @@ class _HomePageState extends State<HomePage> {
                         child: Column(
                           children: [
                             Text(
-                              DateFormat('E', 'uz').format(date),
+                              DateFormat(
+                                'E',
+                                LocaleSettings.currentLocale.languageCode,
+                              ).format(date),
                               style: Typographies.regularBody2.copyWith(
                                 color: dayTextColor,
                               ),
                             ),
                             SizedBox(height: 6),
                             Text(
-                              DateFormat('d', 'uz').format(date),
+                              DateFormat(
+                                'd',
+                                LocaleSettings.currentLocale.languageCode,
+                              ).format(date),
                               style: Typographies.regularBody.copyWith(
                                 color: dateTextColor,
                               ),

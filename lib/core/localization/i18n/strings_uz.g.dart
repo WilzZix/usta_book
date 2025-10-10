@@ -4,27 +4,25 @@
 // coverage:ignore-file
 // ignore_for_file: type=lint, unused_import
 
-part of 'strings.g.dart';
+import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart';
+import 'package:slang/generated.dart';
+import 'strings.g.dart';
 
 // Path: <root>
-typedef TranslationsUz = Translations; // ignore: unused_element
-class Translations implements BaseTranslations<AppLocale, Translations> {
-	/// Returns the current translations of the given [context].
-	///
-	/// Usage:
-	/// final tr = Translations.of(context);
-	static Translations of(BuildContext context) => InheritedLocaleData.of<AppLocale, Translations>(context).translations;
-
+class TranslationsUz extends Translations {
 	/// You can call this constructor and build your own translation instance of this locale.
 	/// Constructing via the enum [AppLocale.build] is preferred.
-	Translations({Map<String, Node>? overrides, PluralResolver? cardinalResolver, PluralResolver? ordinalResolver, TranslationMetadata<AppLocale, Translations>? meta})
+	TranslationsUz({Map<String, Node>? overrides, PluralResolver? cardinalResolver, PluralResolver? ordinalResolver, TranslationMetadata<AppLocale, Translations>? meta})
 		: assert(overrides == null, 'Set "translation_overrides: true" in order to enable this feature.'),
 		  $meta = meta ?? TranslationMetadata(
 		    locale: AppLocale.uz,
 		    overrides: overrides ?? {},
 		    cardinalResolver: cardinalResolver,
 		    ordinalResolver: ordinalResolver,
-		  ) {
+		  ),
+		  super(cardinalResolver: cardinalResolver, ordinalResolver: ordinalResolver) {
+		super.$meta.setFlatMapFunction($meta.getTranslation); // copy base translations to super.$meta
 		$meta.setFlatMapFunction(_flatMapFunction);
 	}
 
@@ -32,181 +30,113 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	@override final TranslationMetadata<AppLocale, Translations> $meta;
 
 	/// Access flat map
-	dynamic operator[](String key) => $meta.getTranslation(key);
+	@override dynamic operator[](String key) => $meta.getTranslation(key) ?? super.$meta.getTranslation(key);
 
-	late final Translations _root = this; // ignore: unused_field
+	late final TranslationsUz _root = this; // ignore: unused_field
 
-	Translations $copyWith({TranslationMetadata<AppLocale, Translations>? meta}) => Translations(meta: meta ?? this.$meta);
+	@override 
+	TranslationsUz $copyWith({TranslationMetadata<AppLocale, Translations>? meta}) => TranslationsUz(meta: meta ?? this.$meta);
 
 	// Translations
-	late final TranslationsOnBoardingUz on_boarding = TranslationsOnBoardingUz.internal(_root);
-	late final TranslationsButtonsUz buttons = TranslationsButtonsUz.internal(_root);
-	late final TranslationsInputFieldUz input_field = TranslationsInputFieldUz.internal(_root);
-	late final TranslationsSignUpUz sign_up = TranslationsSignUpUz.internal(_root);
+	@override late final TranslationsOnBoardingUz on_boarding = TranslationsOnBoardingUz._(_root);
+	@override late final TranslationsButtonsUz buttons = TranslationsButtonsUz._(_root);
+	@override late final TranslationsInputFieldUz input_field = TranslationsInputFieldUz._(_root);
+	@override late final TranslationsSignUpUz sign_up = TranslationsSignUpUz._(_root);
+	@override late final TranslationsHomeUz home = TranslationsHomeUz._(_root);
 }
 
 // Path: on_boarding
-class TranslationsOnBoardingUz {
-	TranslationsOnBoardingUz.internal(this._root);
+class TranslationsOnBoardingUz extends TranslationsOnBoardingRu {
+	TranslationsOnBoardingUz._(TranslationsUz root) : this._root = root, super.internal(root);
 
-	final Translations _root; // ignore: unused_field
+	final TranslationsUz _root; // ignore: unused_field
 
 	// Translations
-
-	/// uz: 'Tilni tanlang'
-	String get choose_language => 'Tilni tanlang';
-
-	/// uz: 'Qulay tilingizni belgilang'
-	String get choose_lang_desc => 'Qulay tilingizni belgilang';
-
-	/// uz: 'Doimiy xabardor bo'ling'
-	String get always_be_aware => 'Doimiy xabardor bo\'ling';
-
-	/// uz: 'Mijoz eslatmalari va yangi yozuvlarni o'z vaqtida oling.'
-	String get always_be_aware_desc => 'Mijoz eslatmalari va yangi yozuvlarni o\'z\n vaqtida oling.';
-
-	/// uz: 'Mijozlarni boshqatish oson'
-	String get manage_costumers => 'Mijozlarni boshqatish oson';
-
-	/// uz: 'Yozuv qo'shing,jadvalingizni kuzating va uchrashuvlarni unutib qo'ymang.'
-	String get manage_costumers_desc => 'Yozuv qo\'shing,jadvalingizni kuzating va uchrashuvlarni unutib qo\'ymang.';
+	@override String get choose_language => 'Tilni tanlang';
+	@override String get choose_lang_desc => 'Qulay tilingizni belgilang';
+	@override String get always_be_aware => 'Doimiy xabardor bo\'ling';
+	@override String get always_be_aware_desc => 'Mijoz eslatmalari va yangi yozuvlarni o\'z\n vaqtida oling.';
+	@override String get manage_costumers => 'Mijozlarni boshqatish oson';
+	@override String get manage_costumers_desc => 'Yozuv qo\'shing,jadvalingizni kuzating va uchrashuvlarni unutib qo\'ymang.';
 }
 
 // Path: buttons
-class TranslationsButtonsUz {
-	TranslationsButtonsUz.internal(this._root);
+class TranslationsButtonsUz extends TranslationsButtonsRu {
+	TranslationsButtonsUz._(TranslationsUz root) : this._root = root, super.internal(root);
 
-	final Translations _root; // ignore: unused_field
+	final TranslationsUz _root; // ignore: unused_field
 
 	// Translations
-
-	/// uz: 'Davom etish'
-	String get kContinue => 'Davom etish';
-
-	/// uz: 'Ruhsat berish'
-	String get allow => 'Ruhsat berish';
-
-	/// uz: 'Boshlash'
-	String get begin => 'Boshlash';
-
-	/// uz: 'Tasdiqlash kodi yuborish'
-	String get send_code_phone_number => 'Tasdiqlash kodi yuborish';
-
-	/// uz: 'Tasdiqlash va davom etish'
-	String get confirm_and_continue => 'Tasdiqlash va davom etish';
+	@override String get kContinue => 'Davom etish';
+	@override String get allow => 'Ruhsat berish';
+	@override String get begin => 'Boshlash';
+	@override String get send_code_phone_number => 'Tasdiqlash kodi yuborish';
+	@override String get confirm_and_continue => 'Tasdiqlash va davom etish';
 }
 
 // Path: input_field
-class TranslationsInputFieldUz {
-	TranslationsInputFieldUz.internal(this._root);
+class TranslationsInputFieldUz extends TranslationsInputFieldRu {
+	TranslationsInputFieldUz._(TranslationsUz root) : this._root = root, super.internal(root);
 
-	final Translations _root; // ignore: unused_field
+	final TranslationsUz _root; // ignore: unused_field
 
 	// Translations
-
-	/// uz: 'Telefon raqam'
-	String get phone_field => 'Telefon raqam';
-
-	/// uz: 'Elektron pochta'
-	String get email_field => 'Elektron pochta';
-
-	/// uz: 'Parol'
-	String get password_field => 'Parol';
+	@override String get phone_field => 'Telefon raqam';
+	@override String get email_field => 'Elektron pochta';
+	@override String get password_field => 'Parol';
 }
 
 // Path: sign_up
-class TranslationsSignUpUz {
-	TranslationsSignUpUz.internal(this._root);
+class TranslationsSignUpUz extends TranslationsSignUpRu {
+	TranslationsSignUpUz._(TranslationsUz root) : this._root = root, super.internal(root);
 
-	final Translations _root; // ignore: unused_field
+	final TranslationsUz _root; // ignore: unused_field
 
 	// Translations
+	@override String get welcome => 'UstaBookga hush kelibsiz!';
+	@override String get welcome_desc => 'Boshlash uchun telefon raqamingizni kiriting.';
+	@override String get user_privacy => 'Sizning ma\'lumotlaringiz xavfsiz va biz sizning ma\'lumotlaringizni hech qachon baham ko\'rmaymiz';
+	@override String get back => 'Ortga qaytish';
+	@override String enter_otp_code({required Object phone}) => '${phone} raqamiga yuborilgan 4 xonali kodni kiriting.';
+	@override String timer({required Object time}) => '${time} soniyadan keyin qayta urinib ko\'ring';
+	@override String get profile_settings_title => 'O\'zingizning ma\'lumotlaringizni kiriting';
+	@override String get profile_settings_title_desc => 'Mijozlarni boshqarishni boshlash uchun profilingizni sozlang.';
+	@override String get upload_photo => 'Rasm yuklang';
+	@override String get main_desc => 'Asosiy ma\'lumotlar';
+	@override String get enter_full_fio => 'To\'liq ism sharifingizni kiriting';
+	@override String get service_type => 'Servis turi';
+	@override String get service_type_hint => 'Xizmat turini tanlang';
+	@override String get work_schedule => 'Ish jadvali';
+	@override String get monday => 'Dushanba';
+	@override String get tuesday => 'Seshanba';
+	@override String get wednesday => 'Chorshanba';
+	@override String get thursday => 'Payshanba';
+	@override String get friday => 'Juma';
+	@override String get saturday => 'Shanba';
+	@override String get sunday => 'Yakshanba';
+	@override String get begin_time => 'Boshlanish vaqti';
+	@override String get end_time => 'Tugash vaqti';
+	@override String get complete_settings => 'Sozlashni yakunlash';
+	@override String get name => 'Ism';
+	@override String get choose_time => 'Tugash vaqti boshlanish vaqtidan keyin bo\'lishi kerak';
+	@override String get required_field => 'Bu sohani to\'ldirish shart';
+}
 
-	/// uz: 'UstaBookga hush kelibsiz!'
-	String get welcome => 'UstaBookga hush kelibsiz!';
+// Path: home
+class TranslationsHomeUz extends TranslationsHomeRu {
+	TranslationsHomeUz._(TranslationsUz root) : this._root = root, super.internal(root);
 
-	/// uz: 'Boshlash uchun telefon raqamingizni kiriting.'
-	String get welcome_desc => 'Boshlash uchun telefon raqamingizni kiriting.';
+	final TranslationsUz _root; // ignore: unused_field
 
-	/// uz: 'Sizning ma'lumotlaringiz xavfsiz va biz sizning ma'lumotlaringizni hech qachon baham ko'rmaymiz'
-	String get user_privacy => 'Sizning ma\'lumotlaringiz xavfsiz va biz sizning ma\'lumotlaringizni hech qachon baham ko\'rmaymiz';
-
-	/// uz: 'Ortga qaytish'
-	String get back => 'Ortga qaytish';
-
-	/// uz: '$phone raqamiga yuborilgan 4 xonali kodni kiriting.'
-	String enter_otp_code({required Object phone}) => '${phone} raqamiga yuborilgan 4 xonali kodni kiriting.';
-
-	/// uz: '$time soniyadan keyin qayta urinib ko'ring'
-	String timer({required Object time}) => '${time} soniyadan keyin qayta urinib ko\'ring';
-
-	/// uz: 'O'zingizning ma'lumotlaringizni kiriting'
-	String get profile_settings_title => 'O\'zingizning ma\'lumotlaringizni kiriting';
-
-	/// uz: 'Mijozlarni boshqarishni boshlash uchun profilingizni sozlang.'
-	String get profile_settings_title_desc => 'Mijozlarni boshqarishni boshlash uchun profilingizni sozlang.';
-
-	/// uz: 'Rasm yuklang'
-	String get upload_photo => 'Rasm yuklang';
-
-	/// uz: 'Asosiy ma'lumotlar'
-	String get main_desc => 'Asosiy ma\'lumotlar';
-
-	/// uz: 'To'liq ism sharifingizni kiriting'
-	String get enter_full_fio => 'To\'liq ism sharifingizni kiriting';
-
-	/// uz: 'Servis turi'
-	String get service_type => 'Servis turi';
-
-	/// uz: 'Xizmat turini tanlang'
-	String get service_type_hint => 'Xizmat turini tanlang';
-
-	/// uz: 'Ish jadvali'
-	String get work_schedule => 'Ish jadvali';
-
-	/// uz: 'Dushanba'
-	String get monday => 'Dushanba';
-
-	/// uz: 'Seshanba'
-	String get tuesday => 'Seshanba';
-
-	/// uz: 'Chorshanba'
-	String get wednesday => 'Chorshanba';
-
-	/// uz: 'Payshanba'
-	String get thursday => 'Payshanba';
-
-	/// uz: 'Juma'
-	String get friday => 'Juma';
-
-	/// uz: 'Shanba'
-	String get saturday => 'Shanba';
-
-	/// uz: 'Yakshanba'
-	String get sunday => 'Yakshanba';
-
-	/// uz: 'Boshlanish vaqti'
-	String get begin_time => 'Boshlanish vaqti';
-
-	/// uz: 'Tugash vaqti'
-	String get end_time => 'Tugash vaqti';
-
-	/// uz: 'Sozlashni yakunlash'
-	String get complete_settings => 'Sozlashni yakunlash';
-
-	/// uz: 'Ism'
-	String get name => 'Ism';
-
-	/// uz: 'Tugash vaqti boshlanish vaqtidan keyin bo'lishi kerak'
-	String get choose_time => 'Tugash vaqti boshlanish vaqtidan keyin bo\'lishi kerak';
-
-	/// uz: 'Bu sohani to'ldirish shart'
-	String get required_field => 'Bu sohani to\'ldirish shart';
+	// Translations
+	@override String get table => 'Jadval';
+	@override String get day => 'Kun';
+	@override String get week => 'Hafta';
 }
 
 /// Flat map(s) containing all translations.
 /// Only for edge cases! For simple maps, use the map function of this library.
-extension on Translations {
+extension on TranslationsUz {
 	dynamic _flatMapFunction(String path) {
 		switch (path) {
 			case 'on_boarding.choose_language': return 'Tilni tanlang';
@@ -250,6 +180,9 @@ extension on Translations {
 			case 'sign_up.name': return 'Ism';
 			case 'sign_up.choose_time': return 'Tugash vaqti boshlanish vaqtidan keyin bo\'lishi kerak';
 			case 'sign_up.required_field': return 'Bu sohani to\'ldirish shart';
+			case 'home.table': return 'Jadval';
+			case 'home.day': return 'Kun';
+			case 'home.week': return 'Hafta';
 			default: return null;
 		}
 	}

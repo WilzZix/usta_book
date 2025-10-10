@@ -4,25 +4,27 @@
 // coverage:ignore-file
 // ignore_for_file: type=lint, unused_import
 
-import 'package:flutter/widgets.dart';
-import 'package:intl/intl.dart';
-import 'package:slang/generated.dart';
-import 'strings.g.dart';
+part of 'strings.g.dart';
 
 // Path: <root>
-class TranslationsRu extends Translations {
+typedef TranslationsRu = Translations; // ignore: unused_element
+class Translations implements BaseTranslations<AppLocale, Translations> {
+	/// Returns the current translations of the given [context].
+	///
+	/// Usage:
+	/// final tr = Translations.of(context);
+	static Translations of(BuildContext context) => InheritedLocaleData.of<AppLocale, Translations>(context).translations;
+
 	/// You can call this constructor and build your own translation instance of this locale.
 	/// Constructing via the enum [AppLocale.build] is preferred.
-	TranslationsRu({Map<String, Node>? overrides, PluralResolver? cardinalResolver, PluralResolver? ordinalResolver, TranslationMetadata<AppLocale, Translations>? meta})
+	Translations({Map<String, Node>? overrides, PluralResolver? cardinalResolver, PluralResolver? ordinalResolver, TranslationMetadata<AppLocale, Translations>? meta})
 		: assert(overrides == null, 'Set "translation_overrides: true" in order to enable this feature.'),
 		  $meta = meta ?? TranslationMetadata(
 		    locale: AppLocale.ru,
 		    overrides: overrides ?? {},
 		    cardinalResolver: cardinalResolver,
 		    ordinalResolver: ordinalResolver,
-		  ),
-		  super(cardinalResolver: cardinalResolver, ordinalResolver: ordinalResolver) {
-		super.$meta.setFlatMapFunction($meta.getTranslation); // copy base translations to super.$meta
+		  ) {
 		$meta.setFlatMapFunction(_flatMapFunction);
 	}
 
@@ -30,100 +32,200 @@ class TranslationsRu extends Translations {
 	@override final TranslationMetadata<AppLocale, Translations> $meta;
 
 	/// Access flat map
-	@override dynamic operator[](String key) => $meta.getTranslation(key) ?? super.$meta.getTranslation(key);
+	dynamic operator[](String key) => $meta.getTranslation(key);
 
-	late final TranslationsRu _root = this; // ignore: unused_field
+	late final Translations _root = this; // ignore: unused_field
 
-	@override 
-	TranslationsRu $copyWith({TranslationMetadata<AppLocale, Translations>? meta}) => TranslationsRu(meta: meta ?? this.$meta);
+	Translations $copyWith({TranslationMetadata<AppLocale, Translations>? meta}) => Translations(meta: meta ?? this.$meta);
 
 	// Translations
-	@override late final TranslationsOnBoardingRu on_boarding = TranslationsOnBoardingRu._(_root);
-	@override late final TranslationsButtonsRu buttons = TranslationsButtonsRu._(_root);
-	@override late final TranslationsInputFieldRu input_field = TranslationsInputFieldRu._(_root);
-	@override late final TranslationsSignUpRu sign_up = TranslationsSignUpRu._(_root);
+	late final TranslationsOnBoardingRu on_boarding = TranslationsOnBoardingRu.internal(_root);
+	late final TranslationsButtonsRu buttons = TranslationsButtonsRu.internal(_root);
+	late final TranslationsInputFieldRu input_field = TranslationsInputFieldRu.internal(_root);
+	late final TranslationsSignUpRu sign_up = TranslationsSignUpRu.internal(_root);
+	late final TranslationsHomeRu home = TranslationsHomeRu.internal(_root);
 }
 
 // Path: on_boarding
-class TranslationsOnBoardingRu extends TranslationsOnBoardingUz {
-	TranslationsOnBoardingRu._(TranslationsRu root) : this._root = root, super.internal(root);
+class TranslationsOnBoardingRu {
+	TranslationsOnBoardingRu.internal(this._root);
 
-	final TranslationsRu _root; // ignore: unused_field
+	final Translations _root; // ignore: unused_field
 
 	// Translations
-	@override String get choose_language => 'Выберите язык';
-	@override String get choose_lang_desc => 'Укажите удобный для вас язык';
-	@override String get always_be_aware => 'Будьте всегда в курсе';
-	@override String get always_be_aware_desc => 'Получайте напоминания и новые записи от клиентов вовремя.';
-	@override String get manage_costumers => 'Управлять клиентами легко';
-	@override String get manage_costumers_desc => 'Добавляйте записи, следите за расписанием и не забывайте о встречах.';
+
+	/// ru: 'Выберите язык'
+	String get choose_language => 'Выберите язык';
+
+	/// ru: 'Укажите удобный для вас язык'
+	String get choose_lang_desc => 'Укажите удобный для вас язык';
+
+	/// ru: 'Будьте всегда в курсе'
+	String get always_be_aware => 'Будьте всегда в курсе';
+
+	/// ru: 'Получайте напоминания и новые записи от клиентов вовремя.'
+	String get always_be_aware_desc => 'Получайте напоминания и новые записи от клиентов вовремя.';
+
+	/// ru: 'Управлять клиентами легко'
+	String get manage_costumers => 'Управлять клиентами легко';
+
+	/// ru: 'Добавляйте записи, следите за расписанием и не забывайте о встречах.'
+	String get manage_costumers_desc => 'Добавляйте записи, следите за расписанием и не забывайте о встречах.';
 }
 
 // Path: buttons
-class TranslationsButtonsRu extends TranslationsButtonsUz {
-	TranslationsButtonsRu._(TranslationsRu root) : this._root = root, super.internal(root);
+class TranslationsButtonsRu {
+	TranslationsButtonsRu.internal(this._root);
 
-	final TranslationsRu _root; // ignore: unused_field
+	final Translations _root; // ignore: unused_field
 
 	// Translations
-	@override String get kContinue => 'Продолжить';
-	@override String get allow => 'Разрешить';
-	@override String get begin => 'Начать';
-	@override String get send_code_phone_number => 'Отправить код подтверждения';
-	@override String get confirm_and_continue => 'Подтвердить и продолжить';
+
+	/// ru: 'Продолжить'
+	String get kContinue => 'Продолжить';
+
+	/// ru: 'Разрешить'
+	String get allow => 'Разрешить';
+
+	/// ru: 'Начать'
+	String get begin => 'Начать';
+
+	/// ru: 'Отправить код подтверждения'
+	String get send_code_phone_number => 'Отправить код подтверждения';
+
+	/// ru: 'Подтвердить и продолжить'
+	String get confirm_and_continue => 'Подтвердить и продолжить';
 }
 
 // Path: input_field
-class TranslationsInputFieldRu extends TranslationsInputFieldUz {
-	TranslationsInputFieldRu._(TranslationsRu root) : this._root = root, super.internal(root);
+class TranslationsInputFieldRu {
+	TranslationsInputFieldRu.internal(this._root);
 
-	final TranslationsRu _root; // ignore: unused_field
+	final Translations _root; // ignore: unused_field
 
 	// Translations
-	@override String get phone_field => 'Номер телефона';
-	@override String get email_field => 'Электронная почта';
-	@override String get password_field => 'Пароль';
+
+	/// ru: 'Номер телефона'
+	String get phone_field => 'Номер телефона';
+
+	/// ru: 'Электронная почта'
+	String get email_field => 'Электронная почта';
+
+	/// ru: 'Пароль'
+	String get password_field => 'Пароль';
 }
 
 // Path: sign_up
-class TranslationsSignUpRu extends TranslationsSignUpUz {
-	TranslationsSignUpRu._(TranslationsRu root) : this._root = root, super.internal(root);
+class TranslationsSignUpRu {
+	TranslationsSignUpRu.internal(this._root);
 
-	final TranslationsRu _root; // ignore: unused_field
+	final Translations _root; // ignore: unused_field
 
 	// Translations
-	@override String get welcome => 'Добро пожаловать в UstaBook!';
-	@override String get welcome_desc => 'Введите свой номер телефона, чтобы начать.';
-	@override String get user_privacy => 'Ваши данные в безопасности, и мы никогда не будем ими делиться.';
-	@override String get back => 'Назад';
-	@override String enter_otp_code({required Object phone}) => 'Введите 4-значный код, отправленный на номер ${phone}.';
-	@override String timer({required Object time}) => 'Попробуйте снова через ${time} секунд';
-	@override String get profile_settings_title => 'Введите свои данные';
-	@override String get profile_settings_title_desc => 'Настройте свой профиль, чтобы начать управлять клиентами.';
-	@override String get upload_photo => 'Загрузите фото';
-	@override String get main_desc => 'Основные данные';
-	@override String get enter_full_fio => 'Введите полное имя';
-	@override String get service_type => 'Тип сервиса';
-	@override String get service_type_hint => 'Выберите тип услуги';
-	@override String get work_schedule => 'График работы';
-	@override String get monday => 'Понедельник';
-	@override String get tuesday => 'Вторник';
-	@override String get wednesday => 'Среда';
-	@override String get thursday => 'Четверг';
-	@override String get friday => 'Пятница';
-	@override String get saturday => 'Суббота';
-	@override String get sunday => 'Воскресенье';
-	@override String get begin_time => 'Время начала';
-	@override String get end_time => 'Время окончания';
-	@override String get complete_settings => 'Завершить настройку';
-	@override String get name => 'Имя';
-	@override String get choose_time => 'Время окончания должно быть позже времени начала';
-	@override String get required_field => 'Это поле обязательно для заполнения';
+
+	/// ru: 'Добро пожаловать в UstaBook!'
+	String get welcome => 'Добро пожаловать в UstaBook!';
+
+	/// ru: 'Введите свой номер телефона, чтобы начать.'
+	String get welcome_desc => 'Введите свой номер телефона, чтобы начать.';
+
+	/// ru: 'Ваши данные в безопасности, и мы никогда не будем ими делиться.'
+	String get user_privacy => 'Ваши данные в безопасности, и мы никогда не будем ими делиться.';
+
+	/// ru: 'Назад'
+	String get back => 'Назад';
+
+	/// ru: 'Введите 4-значный код, отправленный на номер $phone.'
+	String enter_otp_code({required Object phone}) => 'Введите 4-значный код, отправленный на номер ${phone}.';
+
+	/// ru: 'Попробуйте снова через $time секунд'
+	String timer({required Object time}) => 'Попробуйте снова через ${time} секунд';
+
+	/// ru: 'Введите свои данные'
+	String get profile_settings_title => 'Введите свои данные';
+
+	/// ru: 'Настройте свой профиль, чтобы начать управлять клиентами.'
+	String get profile_settings_title_desc => 'Настройте свой профиль, чтобы начать управлять клиентами.';
+
+	/// ru: 'Загрузите фото'
+	String get upload_photo => 'Загрузите фото';
+
+	/// ru: 'Основные данные'
+	String get main_desc => 'Основные данные';
+
+	/// ru: 'Введите полное имя'
+	String get enter_full_fio => 'Введите полное имя';
+
+	/// ru: 'Тип сервиса'
+	String get service_type => 'Тип сервиса';
+
+	/// ru: 'Выберите тип услуги'
+	String get service_type_hint => 'Выберите тип услуги';
+
+	/// ru: 'График работы'
+	String get work_schedule => 'График работы';
+
+	/// ru: 'Понедельник'
+	String get monday => 'Понедельник';
+
+	/// ru: 'Вторник'
+	String get tuesday => 'Вторник';
+
+	/// ru: 'Среда'
+	String get wednesday => 'Среда';
+
+	/// ru: 'Четверг'
+	String get thursday => 'Четверг';
+
+	/// ru: 'Пятница'
+	String get friday => 'Пятница';
+
+	/// ru: 'Суббота'
+	String get saturday => 'Суббота';
+
+	/// ru: 'Воскресенье'
+	String get sunday => 'Воскресенье';
+
+	/// ru: 'Время начала'
+	String get begin_time => 'Время начала';
+
+	/// ru: 'Время окончания'
+	String get end_time => 'Время окончания';
+
+	/// ru: 'Завершить настройку'
+	String get complete_settings => 'Завершить настройку';
+
+	/// ru: 'Имя'
+	String get name => 'Имя';
+
+	/// ru: 'Время окончания должно быть позже времени начала'
+	String get choose_time => 'Время окончания должно быть позже времени начала';
+
+	/// ru: 'Это поле обязательно для заполнения'
+	String get required_field => 'Это поле обязательно для заполнения';
+}
+
+// Path: home
+class TranslationsHomeRu {
+	TranslationsHomeRu.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// ru: 'Расписание'
+	String get table => 'Расписание';
+
+	/// ru: 'День'
+	String get day => 'День';
+
+	/// ru: 'Неделя'
+	String get week => 'Неделя';
 }
 
 /// Flat map(s) containing all translations.
 /// Only for edge cases! For simple maps, use the map function of this library.
-extension on TranslationsRu {
+extension on Translations {
 	dynamic _flatMapFunction(String path) {
 		switch (path) {
 			case 'on_boarding.choose_language': return 'Выберите язык';
@@ -167,6 +269,9 @@ extension on TranslationsRu {
 			case 'sign_up.name': return 'Имя';
 			case 'sign_up.choose_time': return 'Время окончания должно быть позже времени начала';
 			case 'sign_up.required_field': return 'Это поле обязательно для заполнения';
+			case 'home.table': return 'Расписание';
+			case 'home.day': return 'День';
+			case 'home.week': return 'Неделя';
 			default: return null;
 		}
 	}

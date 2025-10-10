@@ -47,5 +47,10 @@
     "name": "Ism",
     "choose_time": "Tugash vaqti boshlanish vaqtidan keyin bo'lishi kerak",
     "required_field": "Bu sohani to'ldirish shart"
+  },
+  "home": {
+    "table": "Jadval",
+    "day": "Kun",
+    "week": "Hafta"
   }
 }

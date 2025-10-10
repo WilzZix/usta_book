@@ -3,7 +3,7 @@ targets:
     builders:
       slang_build_runner:
         options:
-          base_locale: uz
+          base_locale: ru
           fallback_strategy: base_locale
           input_directory: lib
           input_file_pattern: .i18n.json
