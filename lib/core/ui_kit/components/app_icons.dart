@@ -24,4 +24,6 @@ class AppIcons {
   static final icRus = _pngAsset("ic_rus.png");
   static final icNotification = _pngAsset("ic_notification.png");
   static final icCalendar = _pngAsset("calendar.png");
+  static final icArrowLeft = _svgAsset("ic_arrow_left.svg");
+  static final icArrowRight = _svgAsset("ic_arrow_right.svg");
 }
