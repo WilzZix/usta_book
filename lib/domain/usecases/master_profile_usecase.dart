@@ -17,6 +17,10 @@ class MasterProfileUseCase {
     masterProfile.updateMasterProfile(masterUID, profile);
   }
 
+  Future<MasterProfile?> getMasterProfile(String? masterUID) async {
+    return masterProfile.getMasterProfile(masterUID!);
+  }
+
   Future<List<ServiceModel>> getAvailableServices() async {
     return masterProfile.getAvailableServices();
   }

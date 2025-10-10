@@ -190,7 +190,7 @@ class _InputFieldState extends State<InputField> {
         ),
         SizedBox(height: 8),
         TextFormField(
-          autovalidateMode: AutovalidateMode.onUnfocus,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           validator: widget.validator,
           controller: widget.controller,
           onTap: widget.onTap,

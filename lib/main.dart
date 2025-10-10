@@ -61,6 +61,29 @@ class _MyAppState extends State<MyApp> {
         ],
         child: MaterialApp.router(
           theme: ThemeData(
+            timePickerTheme: TimePickerThemeData(
+              dialHandColor: LightAppColors.primary,
+
+              // The background color of the selected hour/minute circle
+              hourMinuteColor: LightAppColors.primary,
+
+              // The text color of the selected hour/minute number
+              hourMinuteTextColor: Colors.white,
+
+              // The color of the AM/PM selector's background when selected
+              dayPeriodColor: MaterialStateColor.resolveWith(
+                (states) => states.contains(MaterialState.selected)
+                    ? LightAppColors.primary
+                    : Colors.transparent,
+              ),
+
+              // The color of the AM/PM text when selected
+              dayPeriodTextColor: MaterialStateColor.resolveWith(
+                (states) => states.contains(MaterialState.selected)
+                    ? Colors.white
+                    : Colors.black,
+              ),
+            ),
             scaffoldBackgroundColor: LightAppColors.body,
             appBarTheme: AppBarTheme(color: LightAppColors.body),
             inputDecorationTheme: InputDecorationTheme(

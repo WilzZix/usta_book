@@ -595,7 +595,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                               serviceType: serviceTypeController.text,
                               workingHours: workingHours,
                               profileCompleted: true,
-                              uid: '', //TODO add UID to this request
+                              uid: '',
                             ),
                           ),
                         );

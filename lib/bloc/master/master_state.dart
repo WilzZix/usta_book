@@ -7,6 +7,18 @@ final class MasterInitial extends MasterState {}
 
 class MasterProfileUpdated extends MasterState {}
 
+class MasterProfileLoaded extends MasterState {
+  final MasterProfile? profile;
+
+  MasterProfileLoaded({required this.profile});
+}
+
+class MasterProfileLoadError extends MasterState {
+  final String msg;
+
+  MasterProfileLoadError({required this.msg});
+}
+
 ///Service type
 class ServiceTypeLoaded extends MasterState {
   final List<ServiceModel> data;

@@ -53,7 +53,8 @@ class AppRoute {
           targetPath.startsWith(ProfileSettings.tag) ||
           targetPath.startsWith(
             '/${PhoneRegistrationPage.tag.replaceAll('/', '')}/${OtpPage.tag.replaceAll('/', '')}',
-          );
+          ) ||
+          targetPath.startsWith(OtpPage.tag);
 
       // Вывод для отладки
       if (kDebugMode) {

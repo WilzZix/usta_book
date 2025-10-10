@@ -3,12 +3,16 @@ import 'package:meta/meta.dart';
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:usta_book/data/models/master_profile.dart';
+
+import '../../data/repositories/master_profile/master_profile.dart';
 
 part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   final FirebaseAuth _firebaseAuth;
   late final StreamSubscription<User?> _userSubscription;
+  MasterProfileImpl profileImpl = MasterProfileImpl();
 
   // Изменяем конструктор
   AuthCubit(this._firebaseAuth) : super(AuthUnknown()) {
@@ -35,8 +39,22 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   Future<bool> _isProfileComplete(String uid) async {
-    //TODO check if register is completed
-    return true;
+    try {
+      MasterProfile? profile = await profileImpl.getMasterProfile(uid);
+
+      // Если профиль НЕ найден (null), он НЕ завершен.
+      if (profile == null) {
+        return false;
+      }
+
+      // Если профиль найден, возвращаем статус завершенности.
+      return profile.profileCompleted;
+    } catch (e) {
+      // В случае ошибки (например, сбоя сети или проблем с Firestore)
+      print("Error during profile completion check: $e");
+      // Лучше вернуть false или обработать ошибку в зависимости от логики приложения
+      return false;
+    }
   }
 
   void setProfileComplete() {

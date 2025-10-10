@@ -18,6 +18,27 @@ class MasterProfile {
     required this.profileCompleted,
   });
 
+  MasterProfile copyWith({
+    String? uid,
+    String? name,
+    String? photoURL,
+    String? serviceType,
+    Map<String, String>? workingHours,
+    String? language,
+    bool? profileCompleted,
+  }) {
+    return MasterProfile(
+      uid: uid ?? this.uid,
+      name: name ?? this.name,
+      // Use photoURL != null ? photoURL : this.photoURL for nullable fields
+      photoURL: photoURL ?? this.photoURL,
+      serviceType: serviceType ?? this.serviceType,
+      workingHours: workingHours ?? this.workingHours,
+      language: language ?? this.language,
+      profileCompleted: profileCompleted ?? this.profileCompleted,
+    );
+  }
+
   factory MasterProfile.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>?;
     if (data == null) {

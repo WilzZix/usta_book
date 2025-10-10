@@ -9,4 +9,6 @@ class UpdateMasterProfile extends MasterEvent {
   UpdateMasterProfile({required this.masterProfile});
 }
 
+class GetMasterProfile extends MasterEvent {}
+
 class GetServiceTypes extends MasterEvent {}

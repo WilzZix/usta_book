@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+
 // ignore: depend_on_referenced_packages
 import 'package:meta/meta.dart';
 import 'package:usta_book/data/models/master_profile.dart';
@@ -17,6 +18,7 @@ class MasterBloc extends Bloc<MasterEvent, MasterState> {
   MasterBloc(this.masterProfileUseCase, this.shredPrefService)
     : super(MasterInitial()) {
     on<UpdateMasterProfile>(_masterProfileUpdate);
+    on<GetMasterProfile>(_getMasterProfile);
     on<GetServiceTypes>(_getServiceTypes);
   }
 
@@ -26,9 +28,23 @@ class MasterBloc extends Bloc<MasterEvent, MasterState> {
   ) async {
     await masterProfileUseCase.updateMasterProfile(
       shredPrefService.getMasterUID()!,
-      event.masterProfile,
+      event.masterProfile.copyWith(uid: shredPrefService.getMasterUID()),
     );
     emit(MasterProfileUpdated());
+  }
+
+  Future<void> _getMasterProfile(
+    GetMasterProfile event,
+    Emitter<MasterState> emit,
+  ) async {
+    try {
+      MasterProfile? profile = await masterProfileUseCase.getMasterProfile(
+        shredPrefService.getMasterUID(),
+      );
+      emit(MasterProfileLoaded(profile: profile));
+    } catch (e) {
+      emit(MasterProfileLoadError(msg: e.toString()));
+    }
   }
 
   Future<void> _getServiceTypes(
