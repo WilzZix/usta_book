@@ -103,6 +103,7 @@ class _TimeLinePickerState extends State<TimeLinePicker> {
                 ),
                 child: Column(
                   children: [
+                    SizedBox(height: 4,),
                     Text(
                       DateFormat(
                         'E',
@@ -122,6 +123,7 @@ class _TimeLinePickerState extends State<TimeLinePicker> {
                         color: dateTextColor,
                       ),
                     ),
+                    SizedBox(height: 4),
                   ],
                 ),
               ),

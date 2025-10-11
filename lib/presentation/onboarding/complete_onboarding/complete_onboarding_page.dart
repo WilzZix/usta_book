@@ -50,7 +50,7 @@ class _CompleteOnboardingPageState extends State<CompleteOnboardingPage> {
             ),
             SizedBox(height: 32),
             MainButton.primary(
-              title: tr.buttons.allow,
+              title: tr.buttons.begin,
               onTap: () {
                 context.pushNamed(EmailAndPassword.tag);
               },
