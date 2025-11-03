@@ -74,8 +74,10 @@ class MasterProfileImpl extends IMasterProfile {
       final FirebaseFirestore _db = FirebaseFirestore.instance;
       // 1. Создаем ссылку на документ в коллекции 'records'
       final DocumentReference masterDocRef = _db
+          .collection('masters')
+          .doc(masterUID)
           .collection('records')
-          .doc(masterUID);
+          .doc('ptcgfVPKv9P3Px5htuXX');
 
       // 2. Формируем данные для записи и добавляем метку времени обновления
       final Map<String, dynamic> data = record.toJson();
