@@ -3,6 +3,8 @@ import 'package:usta_book/core/ui_kit/components/app_icons.dart';
 import 'package:usta_book/presentation/home/home_page.dart';
 import 'package:usta_book/presentation/profile/profile_page.dart';
 
+import '../add_new_record/add_new_record_page.dart';
+
 class MainHomeScreen extends StatefulWidget {
   const MainHomeScreen({super.key});
 
@@ -15,12 +17,12 @@ class MainHomeScreen extends StatefulWidget {
 class _MainHomeScreenState extends State<MainHomeScreen> {
   int _selectedIndex = 0;
 
-  final List<Widget> widgetOptions = const [
-    HomePage(),
-    HomePage(),
-    HomePage(),
-    HomePage(),
-    ProfilePage(),
+  final List<Widget> widgetOptions = [
+    const HomePage(),
+    const HomePage(),
+    AddNewRecordPage(),
+    const HomePage(),
+    const ProfilePage(),
   ];
 
   void _onItemTapped(int index) {

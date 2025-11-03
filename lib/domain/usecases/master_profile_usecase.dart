@@ -1,5 +1,6 @@
 import 'package:injectable/injectable.dart';
 import 'package:usta_book/data/models/master_profile.dart';
+import 'package:usta_book/data/models/record_model.dart';
 import 'package:usta_book/data/models/service_model.dart';
 
 import '../repositories/master_profile/i_master_profile.dart';
@@ -23,5 +24,9 @@ class MasterProfileUseCase {
 
   Future<List<ServiceModel>> getAvailableServices() async {
     return masterProfile.getAvailableServices();
+  }
+
+  Future<void> addRecord(String masterUID, RecordModel record) async {
+    masterProfile.addRecord(masterUID, record);
   }
 }

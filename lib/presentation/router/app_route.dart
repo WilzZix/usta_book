@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:usta_book/bloc/auth/auth_cubit.dart';
+import 'package:usta_book/presentation/add_new_record/add_new_record_page.dart';
 import 'package:usta_book/presentation/home/home_page.dart';
 import 'package:usta_book/presentation/onboarding/choose_language/choose_language.dart';
 import 'package:usta_book/presentation/sign_up/email_and_password/email_and_password.dart';
@@ -109,6 +110,11 @@ class AppRoute {
         path: MainHomeScreen.tag,
         name: MainHomeScreen.tag,
         builder: (_, __) => MainHomeScreen(),
+      ),
+      GoRoute(
+        path: AddNewRecordPage.tag,
+        name: AddNewRecordPage.tag,
+        builder: (_, __) => AddNewRecordPage(),
       ),
       GoRoute(
         path: HomePage.tag,

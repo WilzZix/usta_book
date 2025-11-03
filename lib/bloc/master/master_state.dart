@@ -31,3 +31,14 @@ class ServiceTypeLoadFailure extends MasterState {
 
   ServiceTypeLoadFailure({required this.msg});
 }
+
+//adding record for client
+class AddingRecordState extends MasterState {}
+
+class RecordAddedState extends MasterState {}
+
+class AddingRecordFailureState extends MasterState {
+  final String msg;
+
+  AddingRecordFailureState({required this.msg});
+}

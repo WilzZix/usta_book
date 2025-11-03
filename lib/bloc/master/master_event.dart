@@ -12,3 +12,10 @@ class UpdateMasterProfile extends MasterEvent {
 class GetMasterProfile extends MasterEvent {}
 
 class GetServiceTypes extends MasterEvent {}
+
+//Add record for client
+class AddRecordEvent extends MasterEvent {
+  final RecordModel record;
+
+  AddRecordEvent({required this.record});
+}

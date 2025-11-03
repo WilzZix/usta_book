@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 
-// ignore: depend_on_referenced_packages
 import 'package:meta/meta.dart';
 import 'package:usta_book/data/models/master_profile.dart';
+import 'package:usta_book/data/models/record_model.dart';
 import 'package:usta_book/data/models/service_model.dart';
 import 'package:usta_book/data/sources/local/shared_pref.dart';
 import 'package:usta_book/domain/usecases/master_profile_usecase.dart';
@@ -20,6 +20,7 @@ class MasterBloc extends Bloc<MasterEvent, MasterState> {
     on<UpdateMasterProfile>(_masterProfileUpdate);
     on<GetMasterProfile>(_getMasterProfile);
     on<GetServiceTypes>(_getServiceTypes);
+    on<AddRecordEvent>(_addRecord);
   }
 
   Future<void> _masterProfileUpdate(
@@ -58,5 +59,19 @@ class MasterBloc extends Bloc<MasterEvent, MasterState> {
     } catch (e) {
       emit(ServiceTypeLoadFailure(msg: e.toString()));
     }
+  }
+
+  Future<void> _addRecord(
+    AddRecordEvent event,
+    Emitter<MasterState> emit,
+  ) async {
+    try {
+      emit(AddingRecordState());
+      await masterProfileUseCase.addRecord(
+        shredPrefService.getMasterUID()!,
+        event.record,
+      );
+      emit(RecordAddedState());
+    } catch (e) {}
   }
 }
