@@ -19,14 +19,27 @@ class _ClientsListPageState extends State<ClientsListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Mijozlar', style: Typographies.boldH1),
+        title: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Text('Mijozlar', style: Typographies.boldH1),
+        ),
         centerTitle: false,
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(50),
           child: SearchBarWidget(controller: searchController),
         ),
       ),
-      body: SingleChildScrollView(child: Column(children: [])),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 24),
+          child: Column(
+            children: [
+              Text("Mijozlar ro'yhati", style: Typographies.semiBoldH2),
+
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

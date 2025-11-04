@@ -34,6 +34,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
           suffixIcon: Padding(
             padding: const EdgeInsets.only(top: 16.0, bottom: 16, right: 16),
             child: Row(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 AppIcons.icVerticalDivider,
                 SizedBox(width: 20),
