@@ -69,8 +69,9 @@ class AuthCubit extends Cubit<AuthState> {
 
   // Метод для выхода
   Future<void> logOut() async {
-    await _firebaseAuth.signOut();
-    // Состояние автоматически обновится через _userSubscription
+    try {
+      await _firebaseAuth.signOut();
+    } catch (e) {}
   }
 
   // Обязательный метод для закрытия потока

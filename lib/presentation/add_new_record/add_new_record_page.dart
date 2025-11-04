@@ -75,19 +75,17 @@ class _AddNewRecordPageState extends State<AddNewRecordPage> {
                 MainButton.primary(
                   title: 'Saqlash',
                   onTap: () {
-                    if (_formKey.currentState!.validate()) {
-                      context.read<MasterBloc>().add(
-                        AddRecordEvent(
-                          record: RecordModel(
-                            clientName: nameController.text,
-                            date: dateController.text,
-                            price: priceController.text,
-                            serviceType: serviceTypeController.text,
-                            clientNumber: phoneController.text,
-                          ),
+                    context.read<MasterBloc>().add(
+                      AddRecordEvent(
+                        record: RecordModel(
+                          clientName: nameController.text,
+                          date: dateController.text,
+                          price: priceController.text,
+                          serviceType: 'serviceTypeController.text',
+                          clientNumber: phoneController.text,
                         ),
-                      );
-                    }
+                      ),
+                    );
                   },
                 ),
               ],

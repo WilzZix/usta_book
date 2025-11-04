@@ -72,6 +72,9 @@ class MasterBloc extends Bloc<MasterEvent, MasterState> {
         event.record,
       );
       emit(RecordAddedState());
-    } catch (e) {}
+    } catch (e) {
+      print(e.toString());
+      emit(AddingRecordFailureState(msg: e.toString()));
+    }
   }
 }

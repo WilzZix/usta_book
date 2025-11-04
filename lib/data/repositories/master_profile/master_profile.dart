@@ -14,18 +14,19 @@ class MasterProfileImpl extends IMasterProfile {
   ) async {
     try {
       final FirebaseFirestore _db = FirebaseFirestore.instance;
-      // 1. Создаем ссылку на документ в коллекции 'masters'
-      final DocumentReference masterDocRef = _db
-          .collection('masters')
-          .doc(masterUID);
 
+      final DocumentReference newRecordRef = _db
+          .collection('masters')
+          .doc(masterUID)
+          .collection('records')
+          .doc();
       // 2. Формируем данные для записи и добавляем метку времени обновления
       final Map<String, dynamic> data = profile.toFirestore();
       data['updatedAt'] = FieldValue.serverTimestamp();
 
       // 3. Используем set() с merge: true, чтобы обновить только переданные поля,
       // не перезаписывая весь документ.
-      await masterDocRef.update(data);
+      await newRecordRef.update(data);
 
       print('Профиль мастера $masterUID успешно обновлен.');
     } on FirebaseException catch (e) {
@@ -72,12 +73,11 @@ class MasterProfileImpl extends IMasterProfile {
   Future<void> addRecord(String masterUID, RecordModel record) async {
     try {
       final FirebaseFirestore _db = FirebaseFirestore.instance;
-      // 1. Создаем ссылку на документ в коллекции 'records'
-      final DocumentReference masterDocRef = _db
+      // 1. Get the reference to the specific 'records' subcollection
+      final CollectionReference recordsCollection = _db
           .collection('masters')
           .doc(masterUID)
-          .collection('records')
-          .doc('ptcgfVPKv9P3Px5htuXX');
+          .collection('records');
 
       // 2. Формируем данные для записи и добавляем метку времени обновления
       final Map<String, dynamic> data = record.toJson();
@@ -85,7 +85,7 @@ class MasterProfileImpl extends IMasterProfile {
 
       // 3. Используем set() с merge: true, чтобы обновить только переданные поля,
       // не перезаписывая весь документ.
-      await masterDocRef.update(data);
+      await recordsCollection.add(data);
     } on FirebaseException catch (e) {
       print('Ошибка Firebase при обновлении профиля: ${e.code}');
       rethrow;
