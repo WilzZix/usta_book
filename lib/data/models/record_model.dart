@@ -4,6 +4,7 @@ class RecordModel {
   final String price;
   final String serviceType;
   final String clientNumber;
+  final String time;
 
   RecordModel({
     required this.clientName,
@@ -11,6 +12,7 @@ class RecordModel {
     required this.price,
     required this.serviceType,
     required this.clientNumber,
+    required this.time,
   });
 
   factory RecordModel.fromJson(Map<String, dynamic> json) {
@@ -20,6 +22,7 @@ class RecordModel {
       price: json['price'],
       serviceType: json['service_type'],
       clientNumber: json['client_number'],
+      time: json['time'],
     );
   }
 
@@ -30,6 +33,7 @@ class RecordModel {
       'price': price,
       'service_type': serviceType,
       'client_number': clientNumber,
+      'time': time,
     };
   }
 }

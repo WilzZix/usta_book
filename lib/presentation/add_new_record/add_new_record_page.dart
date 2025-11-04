@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:usta_book/bloc/master/master_bloc.dart';
+import 'package:usta_book/core/ui_kit/colors.dart';
 import 'package:usta_book/core/ui_kit/components/button.dart';
 import 'package:usta_book/core/ui_kit/components/inputs/inputs.dart';
 import 'package:usta_book/core/ui_kit/typography.dart';
 import 'package:usta_book/data/models/record_model.dart';
 
 import '../../core/ui_kit/components/app_icons.dart';
+import 'components/select_service_type_bottom_sheet.dart';
 
 class AddNewRecordPage extends StatefulWidget {
   const AddNewRecordPage({super.key});
@@ -32,63 +35,211 @@ class _AddNewRecordPageState extends State<AddNewRecordPage> {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                SizedBox(height: MediaQuery.of(context).padding.top + 20),
-                Text("Yangi mijoz qoshish", style: Typographies.boldH1),
-                SizedBox(height: 24),
-                InputField.text(
-                  fieldTitle: 'Mijoz ismi',
-                  controller: nameController,
-                  hintText: 'Ism Familiya',
-                ),
-                SizedBox(height: 16),
-                InputField.phone(
-                  fieldTitle: 'Mijoz raqami',
-                  controller: phoneController,
-                ),
-                InputField.date(
-                  fieldTitle: 'Sana',
-                  suffixIcon: AppIcons.icFieldCalendar,
-                  controller: dateController,
-                ),
-                SizedBox(height: 16),
-                InputField.time(
-                  fieldTitle: 'Vaqt',
-                  suffixIcon: AppIcons.icWatch,
-                  controller: timeController,
-                ),
-                SizedBox(height: 16),
-                InputField.selectableInput(
-                  fieldTitle: 'Xizmat turi',
-                  controller: serviceTypeController,
-                  suffixIcon: AppIcons.icArrowRight,
-                ),
-                SizedBox(height: 16),
-                InputField.text(
-                  fieldTitle: 'Narx',
-                  controller: priceController,
-                ),
-                SizedBox(height: 16),
-                MainButton.primary(
-                  title: 'Saqlash',
-                  onTap: () {
-                    context.read<MasterBloc>().add(
-                      AddRecordEvent(
-                        record: RecordModel(
-                          clientName: nameController.text,
-                          date: dateController.text,
-                          price: priceController.text,
-                          serviceType: 'serviceTypeController.text',
-                          clientNumber: phoneController.text,
+          child: BlocListener<MasterBloc, MasterState>(
+            listener: (context, state) {
+              if (state is RecordAddedState) {
+                showGeneralDialog(
+                  context: context,
+                  pageBuilder: (context, animation, secondaryAnimation) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Align(
+                        alignment: Alignment.topCenter,
+                        child: Material(
+                          type: MaterialType.transparency,
+                          child: Container(
+                            margin: EdgeInsets.only(
+                              top: MediaQuery.of(context).padding.top,
+                            ),
+                            padding: const EdgeInsets.all(20.0),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: StateColor.success,
+                                width: 2,
+                              ),
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10.0),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Colors.black26,
+                                  blurRadius: 10.0,
+                                  offset: Offset(0, 5),
+                                ),
+                              ],
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  "Yangi mijoz ro'yhatga qo'shildi",
+                                  style: Typographies.semiBoldH2,
+                                ),
+                                const SizedBox(height: 10),
+                                Text(
+                                  "Siz ${nameController.text} ismli yangi mijozni ro'yhatga qo'shdingiz",
+                                  style: Typographies.regularBody2,
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                       ),
                     );
                   },
-                ),
-              ],
+                  barrierDismissible: true,
+                  barrierLabel: MaterialLocalizations.of(
+                    context,
+                  ).modalBarrierDismissLabel,
+                  transitionDuration: const Duration(milliseconds: 200),
+                );
+              }
+            },
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: MediaQuery.of(context).padding.top),
+                  Text("Yangi mijoz qoshish", style: Typographies.boldH1),
+                  SizedBox(height: 24),
+                  InputField.text(
+                    fieldTitle: 'Mijoz ismi',
+                    controller: nameController,
+                    hintText: 'Ism Familiya',
+                    validator: (value) {
+                      if (value != null && value.isEmpty) {
+                        return "Bu maydon bo'sh bo'lmasligi kerak";
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(height: 16),
+                  InputField.phone(
+                    fieldTitle: 'Mijoz raqami',
+                    controller: phoneController,
+                    validator: (value) {
+                      if (value != null && value.isEmpty) {
+                        return "Bu maydon bo'sh bo'lmasligi kerak";
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(height: 16),
+                  InputField.selectableInput(
+                    hintText: '01/01/2025',
+                    fieldTitle: 'Sana',
+                    suffixIcon: AppIcons.icFieldCalendar,
+                    controller: dateController,
+                    onTap: () async {
+                      final result = await showDatePicker(
+                        context: context,
+                        firstDate: DateTime.now(),
+                        lastDate: DateTime(2026),
+                      );
+                      if (result != null) {
+                        dateController.text = DateFormat(
+                          'dd/MM/yyyy',
+                        ).format(result);
+                      }
+                    },
+                    validator: (value) {
+                      if (value != null && value.isEmpty) {
+                        return "Bu maydon bo'sh bo'lmasligi kerak";
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(height: 16),
+                  InputField.selectableInput(
+                    onTap: () async {
+                      final TimeOfDay? result = await showTimePicker(
+                        context: context,
+                        initialTime: TimeOfDay.now(),
+                      );
+                      if (result != null) {
+                        final now = DateTime.now();
+                        final dateTime = DateTime(
+                          now.year,
+                          now.month,
+                          now.day,
+                          result.hour,
+                          result.minute,
+                        );
+                        final formattedTime24Hour = DateFormat(
+                          'HH:mm',
+                        ).format(dateTime);
+
+                        timeController.text = formattedTime24Hour;
+                      }
+                    },
+                    fieldTitle: 'Vaqt',
+                    hintText: '12:00',
+                    suffixIcon: AppIcons.icWatch,
+                    controller: timeController,
+                    validator: (value) {
+                      if (value != null && value.isEmpty) {
+                        return "Bu maydon bo'sh bo'lmasligi kerak";
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(height: 16),
+                  InputField.selectableInput(
+                    onTap: () async {
+                      final result = await SelectServiceTypeBottomSheet.show(
+                        context: context,
+                      );
+                      if (result != null) {
+                        serviceTypeController.text = result;
+                      }
+                    },
+                    fieldTitle: 'Xizmat turi',
+                    hintText: 'Xizmat turini kiriting',
+                    controller: serviceTypeController,
+                    suffixIcon: AppIcons.icArrowRight,
+                    validator: (value) {
+                      if (value != null && value.isEmpty) {
+                        return "Bu maydon bo'sh bo'lmasligi kerak";
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(height: 16),
+                  InputField.text(
+                    fieldTitle: 'Narx',
+                    hintText: 'Xizmat narxini kiriting',
+                    controller: priceController,
+                    validator: (value) {
+                      if (value != null && value.isEmpty) {
+                        return "Bu maydon bo'sh bo'lmasligi kerak";
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(height: 16),
+                  MainButton.primary(
+                    title: 'Saqlash',
+                    onTap: () {
+                      if (_formKey.currentState!.validate()) {
+                        context.read<MasterBloc>().add(
+                          AddRecordEvent(
+                            record: RecordModel(
+                              clientName: nameController.text,
+                              date: dateController.text,
+                              price: priceController.text,
+                              serviceType: serviceTypeController.text,
+                              clientNumber: phoneController.text,
+                              time: timeController.text,
+                            ),
+                          ),
+                        );
+                      }
+                    },
+                  ),
+                  SizedBox(height: MediaQuery.of(context).padding.bottom + 16),
+                ],
+              ),
             ),
           ),
         ),

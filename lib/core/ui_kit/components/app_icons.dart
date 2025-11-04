@@ -31,6 +31,7 @@ class AppIcons {
   static final icLogout = _svgAsset("ic_logout.svg");
   static final icCustomersUnselected = _svgAsset("ic_customers_unselected.svg");
   static final icCustomersSelected = _svgAsset("ic_customers_selected.svg");
+  static final icClose = _svgAsset("ic_close.svg");
   static final icMasterSettingsUnselected = _svgAsset(
     "ic_master_settings_unselected.svg",
   );
