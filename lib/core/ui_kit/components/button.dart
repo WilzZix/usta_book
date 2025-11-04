@@ -40,7 +40,13 @@ class MainButton extends StatefulWidget {
     VoidCallback? onTap,
     Widget? icon,
     Key? key,
-  }) : this._(key: key, icon: icon, title: title, type: ButtonType.logOut);
+  }) : this._(
+         key: key,
+         icon: icon,
+         title: title,
+         type: ButtonType.logOut,
+         onTap: onTap,
+       );
 
   final String title;
   final Widget? icon;
