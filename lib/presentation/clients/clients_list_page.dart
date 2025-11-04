@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:usta_book/core/ui_kit/typography.dart';
+
+import '../../core/ui_kit/components/inputs/search_bar.dart';
 
 class ClientsListPage extends StatefulWidget {
   const ClientsListPage({super.key});
@@ -10,8 +13,20 @@ class ClientsListPage extends StatefulWidget {
 }
 
 class _ClientsListPageState extends State<ClientsListPage> {
+  TextEditingController searchController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Mijozlar', style: Typographies.boldH1),
+        centerTitle: false,
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(50),
+          child: SearchBarWidget(controller: searchController),
+        ),
+      ),
+      body: SingleChildScrollView(child: Column(children: [])),
+    );
   }
 }

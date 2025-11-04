@@ -32,6 +32,9 @@ class AppIcons {
   static final icCustomersUnselected = _svgAsset("ic_customers_unselected.svg");
   static final icCustomersSelected = _svgAsset("ic_customers_selected.svg");
   static final icClose = _svgAsset("ic_close.svg");
+  static final icSearchBar = _svgAsset("ic_search_bar.svg");
+  static final icVerticalDivider = _svgAsset("ic_vertical_divider.svg");
+  static final icSearchLupa = _svgAsset("ic_search_lupa.svg");
   static final icMasterSettingsUnselected = _svgAsset(
     "ic_master_settings_unselected.svg",
   );
