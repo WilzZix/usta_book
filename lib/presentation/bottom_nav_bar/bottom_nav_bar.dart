@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:usta_book/core/ui_kit/components/app_icons.dart';
+import 'package:usta_book/presentation/clients/clients_list_page.dart';
 import 'package:usta_book/presentation/home/home_page.dart';
 import 'package:usta_book/presentation/profile/profile_page.dart';
 
@@ -19,7 +20,7 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
 
   final List<Widget> widgetOptions = [
     const HomePage(),
-    const HomePage(),
+    const ClientsListPage(),
     AddNewRecordPage(),
     const HomePage(),
     const ProfilePage(),

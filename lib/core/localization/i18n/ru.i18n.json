@@ -51,6 +51,27 @@
   "home": {
     "table": "Расписание",
     "day": "День",
-    "week": "Неделя"
+    "week": "Неделя",
+    "theNearestClient": "Ближайший клиент"
+  },
+  "profile": {
+    "profile": "Профиль",
+    "logout": "Выход"
+  },
+  "add_record": {
+    "validation_text": "Это поле не должно быть пустым",
+    "add_new_record": "Добавить нового клиента",
+    "name": "Имя клиента",
+    "name_hint": "Имя Фамилия",
+    "number": "Номер клиента",
+    "date": "Дата",
+    "time": "Время",
+    "service_type": "Тип услуги",
+    "service_hint": "Введите тип услуги",
+    "price": "Цена",
+    "price_hint": "Введите цену услуги",
+    "save": "Сохранить",
+    "record_added_success_txt": "Новый клиент добавлен в список",
+    "recorded_name": "Вы добавили нового клиента по имени ${name} в список"
   }
 }

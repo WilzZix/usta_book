@@ -43,6 +43,8 @@ class TranslationsUz extends Translations {
 	@override late final TranslationsInputFieldUz input_field = TranslationsInputFieldUz._(_root);
 	@override late final TranslationsSignUpUz sign_up = TranslationsSignUpUz._(_root);
 	@override late final TranslationsHomeUz home = TranslationsHomeUz._(_root);
+	@override late final TranslationsProfileUz profile = TranslationsProfileUz._(_root);
+	@override late final TranslationsAddRecordUz add_record = TranslationsAddRecordUz._(_root);
 }
 
 // Path: on_boarding
@@ -132,6 +134,41 @@ class TranslationsHomeUz extends TranslationsHomeRu {
 	@override String get table => 'Jadval';
 	@override String get day => 'Kun';
 	@override String get week => 'Hafta';
+	@override String get theNearestClient => 'Eng yaqin uchrashuv';
+}
+
+// Path: profile
+class TranslationsProfileUz extends TranslationsProfileRu {
+	TranslationsProfileUz._(TranslationsUz root) : this._root = root, super.internal(root);
+
+	final TranslationsUz _root; // ignore: unused_field
+
+	// Translations
+	@override String get profile => 'Profil';
+	@override String get logout => 'Chiqish';
+}
+
+// Path: add_record
+class TranslationsAddRecordUz extends TranslationsAddRecordRu {
+	TranslationsAddRecordUz._(TranslationsUz root) : this._root = root, super.internal(root);
+
+	final TranslationsUz _root; // ignore: unused_field
+
+	// Translations
+	@override String get validation_text => 'Bu maydon bo\'sh bo\'lmasligi kerak';
+	@override String get add_new_record => 'Yangi mijoz qo\'shish';
+	@override String get name => 'Mijoz ismi';
+	@override String get name_hint => 'Ism Familiya';
+	@override String get number => 'Mijoz raqami';
+	@override String get date => 'Sana';
+	@override String get time => 'Vaqt';
+	@override String get service_type => 'Xizmat turi';
+	@override String get service_hint => 'Xizmat turini kiriting';
+	@override String get price => 'Narx';
+	@override String get price_hint => 'Xizmat narxini kiriting';
+	@override String get save => 'Saqlash';
+	@override String get record_added_success_txt => 'Yangi mijoz ro\'yhatga qo\'shildi';
+	@override String recorded_name({required Object name}) => 'Siz ${name} ismli yangi mijozni ro\'yhatga qo\'shdingiz';
 }
 
 /// Flat map(s) containing all translations.
@@ -183,6 +220,23 @@ extension on TranslationsUz {
 			case 'home.table': return 'Jadval';
 			case 'home.day': return 'Kun';
 			case 'home.week': return 'Hafta';
+			case 'home.theNearestClient': return 'Eng yaqin uchrashuv';
+			case 'profile.profile': return 'Profil';
+			case 'profile.logout': return 'Chiqish';
+			case 'add_record.validation_text': return 'Bu maydon bo\'sh bo\'lmasligi kerak';
+			case 'add_record.add_new_record': return 'Yangi mijoz qo\'shish';
+			case 'add_record.name': return 'Mijoz ismi';
+			case 'add_record.name_hint': return 'Ism Familiya';
+			case 'add_record.number': return 'Mijoz raqami';
+			case 'add_record.date': return 'Sana';
+			case 'add_record.time': return 'Vaqt';
+			case 'add_record.service_type': return 'Xizmat turi';
+			case 'add_record.service_hint': return 'Xizmat turini kiriting';
+			case 'add_record.price': return 'Narx';
+			case 'add_record.price_hint': return 'Xizmat narxini kiriting';
+			case 'add_record.save': return 'Saqlash';
+			case 'add_record.record_added_success_txt': return 'Yangi mijoz ro\'yhatga qo\'shildi';
+			case 'add_record.recorded_name': return ({required Object name}) => 'Siz ${name} ismli yangi mijozni ro\'yhatga qo\'shdingiz';
 			default: return null;
 		}
 	}

@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
             children: [
               TimeLinePicker(),
               SizedBox(height: 24),
-              Text('Eng yaqin uchrashuv', style: Typographies.semiBoldH2),
+              Text(tr.home.theNearestClient, style: Typographies.semiBoldH2),
               SizedBox(height: 12),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),

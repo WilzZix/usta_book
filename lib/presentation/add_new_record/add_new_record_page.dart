@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:usta_book/bloc/master/master_bloc.dart';
+import 'package:usta_book/core/localization/i18n/strings.g.dart';
 import 'package:usta_book/core/ui_kit/colors.dart';
 import 'package:usta_book/core/ui_kit/components/button.dart';
 import 'package:usta_book/core/ui_kit/components/inputs/inputs.dart';
@@ -31,6 +32,7 @@ class _AddNewRecordPageState extends State<AddNewRecordPage> {
 
   @override
   Widget build(BuildContext context) {
+    final tr = Translations.of(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -72,12 +74,14 @@ class _AddNewRecordPageState extends State<AddNewRecordPage> {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Text(
-                                  "Yangi mijoz ro'yhatga qo'shildi",
+                                  tr.add_record.record_added_success_txt,
                                   style: Typographies.semiBoldH2,
                                 ),
                                 const SizedBox(height: 10),
                                 Text(
-                                  "Siz ${nameController.text} ismli yangi mijozni ro'yhatga qo'shdingiz",
+                                  tr.add_record.recorded_name(
+                                    name: nameController.text,
+                                  ),
                                   style: Typographies.regularBody2,
                                 ),
                               ],
@@ -101,26 +105,29 @@ class _AddNewRecordPageState extends State<AddNewRecordPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: MediaQuery.of(context).padding.top),
-                  Text("Yangi mijoz qoshish", style: Typographies.boldH1),
+                  Text(
+                    tr.add_record.add_new_record,
+                    style: Typographies.boldH1,
+                  ),
                   SizedBox(height: 24),
                   InputField.text(
-                    fieldTitle: 'Mijoz ismi',
+                    fieldTitle: tr.add_record.name,
                     controller: nameController,
-                    hintText: 'Ism Familiya',
+                    hintText: tr.add_record.name_hint,
                     validator: (value) {
                       if (value != null && value.isEmpty) {
-                        return "Bu maydon bo'sh bo'lmasligi kerak";
+                        return tr.add_record.validation_text;
                       }
                       return null;
                     },
                   ),
                   SizedBox(height: 16),
                   InputField.phone(
-                    fieldTitle: 'Mijoz raqami',
+                    fieldTitle: tr.add_record.number,
                     controller: phoneController,
                     validator: (value) {
                       if (value != null && value.isEmpty) {
-                        return "Bu maydon bo'sh bo'lmasligi kerak";
+                        return tr.add_record.validation_text;
                       }
                       return null;
                     },
@@ -128,7 +135,7 @@ class _AddNewRecordPageState extends State<AddNewRecordPage> {
                   SizedBox(height: 16),
                   InputField.selectableInput(
                     hintText: '01/01/2025',
-                    fieldTitle: 'Sana',
+                    fieldTitle: tr.add_record.date,
                     suffixIcon: AppIcons.icFieldCalendar,
                     controller: dateController,
                     onTap: () async {
@@ -145,7 +152,7 @@ class _AddNewRecordPageState extends State<AddNewRecordPage> {
                     },
                     validator: (value) {
                       if (value != null && value.isEmpty) {
-                        return "Bu maydon bo'sh bo'lmasligi kerak";
+                        return tr.add_record.validation_text;
                       }
                       return null;
                     },
@@ -173,13 +180,13 @@ class _AddNewRecordPageState extends State<AddNewRecordPage> {
                         timeController.text = formattedTime24Hour;
                       }
                     },
-                    fieldTitle: 'Vaqt',
+                    fieldTitle: tr.add_record.time,
                     hintText: '12:00',
                     suffixIcon: AppIcons.icWatch,
                     controller: timeController,
                     validator: (value) {
                       if (value != null && value.isEmpty) {
-                        return "Bu maydon bo'sh bo'lmasligi kerak";
+                        return tr.add_record.validation_text;
                       }
                       return null;
                     },
@@ -194,32 +201,32 @@ class _AddNewRecordPageState extends State<AddNewRecordPage> {
                         serviceTypeController.text = result;
                       }
                     },
-                    fieldTitle: 'Xizmat turi',
-                    hintText: 'Xizmat turini kiriting',
+                    fieldTitle: tr.add_record.service_type,
+                    hintText: tr.add_record.service_hint,
                     controller: serviceTypeController,
                     suffixIcon: AppIcons.icArrowRight,
                     validator: (value) {
                       if (value != null && value.isEmpty) {
-                        return "Bu maydon bo'sh bo'lmasligi kerak";
+                        return tr.add_record.validation_text;
                       }
                       return null;
                     },
                   ),
                   SizedBox(height: 16),
                   InputField.text(
-                    fieldTitle: 'Narx',
-                    hintText: 'Xizmat narxini kiriting',
+                    fieldTitle: tr.add_record.price,
+                    hintText: tr.add_record.price_hint,
                     controller: priceController,
                     validator: (value) {
                       if (value != null && value.isEmpty) {
-                        return "Bu maydon bo'sh bo'lmasligi kerak";
+                        return tr.add_record.validation_text;
                       }
                       return null;
                     },
                   ),
                   SizedBox(height: 16),
                   MainButton.primary(
-                    title: 'Saqlash',
+                    title: tr.add_record.save,
                     onTap: () {
                       if (_formKey.currentState!.validate()) {
                         context.read<MasterBloc>().add(

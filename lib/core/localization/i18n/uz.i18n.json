@@ -51,6 +51,27 @@
   "home": {
     "table": "Jadval",
     "day": "Kun",
-    "week": "Hafta"
+    "week": "Hafta",
+    "theNearestClient": "Eng yaqin uchrashuv"
+  },
+  "profile": {
+    "profile": "Profil",
+    "logout": "Chiqish"
+  },
+  "add_record": {
+    "validation_text": "Bu maydon bo'sh bo'lmasligi kerak",
+    "add_new_record": "Yangi mijoz qo'shish",
+    "name": "Mijoz ismi",
+    "name_hint": "Ism Familiya",
+    "number": "Mijoz raqami",
+    "date": "Sana",
+    "time": "Vaqt",
+    "service_type": "Xizmat turi",
+    "service_hint": "Xizmat turini kiriting",
+    "price": "Narx",
+    "price_hint": "Xizmat narxini kiriting",
+    "save": "Saqlash",
+    "record_added_success_txt": "Yangi mijoz ro'yhatga qo'shildi",
+    "recorded_name": "Siz ${name} ismli yangi mijozni ro'yhatga qo'shdingiz"
   }
 }

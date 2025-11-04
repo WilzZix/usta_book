@@ -4,6 +4,8 @@ import 'package:usta_book/bloc/auth/auth_cubit.dart';
 import 'package:usta_book/core/ui_kit/components/app_icons.dart';
 import 'package:usta_book/core/ui_kit/components/button.dart';
 
+import '../../core/localization/i18n/strings.g.dart';
+
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
@@ -14,15 +16,16 @@ class ProfilePage extends StatefulWidget {
 class _State extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
+    final tr = Translations.of(context);
     return Scaffold(
-      appBar: AppBar(title: Text('Profile'), centerTitle: false),
+      appBar: AppBar(title: Text(tr.profile.profile), centerTitle: false),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Column(
             children: [
               MainButton.logout(
-                title: 'Logout',
+                title: tr.profile.logout,
                 icon: AppIcons.icLogout,
                 onTap: () {
                   BlocProvider.of<AuthCubit>(context).logOut();

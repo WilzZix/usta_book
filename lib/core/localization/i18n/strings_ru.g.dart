@@ -44,6 +44,8 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	late final TranslationsInputFieldRu input_field = TranslationsInputFieldRu.internal(_root);
 	late final TranslationsSignUpRu sign_up = TranslationsSignUpRu.internal(_root);
 	late final TranslationsHomeRu home = TranslationsHomeRu.internal(_root);
+	late final TranslationsProfileRu profile = TranslationsProfileRu.internal(_root);
+	late final TranslationsAddRecordRu add_record = TranslationsAddRecordRu.internal(_root);
 }
 
 // Path: on_boarding
@@ -221,6 +223,75 @@ class TranslationsHomeRu {
 
 	/// ru: 'Неделя'
 	String get week => 'Неделя';
+
+	/// ru: 'Ближайший клиент'
+	String get theNearestClient => 'Ближайший клиент';
+}
+
+// Path: profile
+class TranslationsProfileRu {
+	TranslationsProfileRu.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// ru: 'Профиль'
+	String get profile => 'Профиль';
+
+	/// ru: 'Выход'
+	String get logout => 'Выход';
+}
+
+// Path: add_record
+class TranslationsAddRecordRu {
+	TranslationsAddRecordRu.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// ru: 'Это поле не должно быть пустым'
+	String get validation_text => 'Это поле не должно быть пустым';
+
+	/// ru: 'Добавить нового клиента'
+	String get add_new_record => 'Добавить нового клиента';
+
+	/// ru: 'Имя клиента'
+	String get name => 'Имя клиента';
+
+	/// ru: 'Имя Фамилия'
+	String get name_hint => 'Имя Фамилия';
+
+	/// ru: 'Номер клиента'
+	String get number => 'Номер клиента';
+
+	/// ru: 'Дата'
+	String get date => 'Дата';
+
+	/// ru: 'Время'
+	String get time => 'Время';
+
+	/// ru: 'Тип услуги'
+	String get service_type => 'Тип услуги';
+
+	/// ru: 'Введите тип услуги'
+	String get service_hint => 'Введите тип услуги';
+
+	/// ru: 'Цена'
+	String get price => 'Цена';
+
+	/// ru: 'Введите цену услуги'
+	String get price_hint => 'Введите цену услуги';
+
+	/// ru: 'Сохранить'
+	String get save => 'Сохранить';
+
+	/// ru: 'Новый клиент добавлен в список'
+	String get record_added_success_txt => 'Новый клиент добавлен в список';
+
+	/// ru: 'Вы добавили нового клиента по имени ${name} в список'
+	String recorded_name({required Object name}) => 'Вы добавили нового клиента по имени ${name} в список';
 }
 
 /// Flat map(s) containing all translations.
@@ -272,6 +343,23 @@ extension on Translations {
 			case 'home.table': return 'Расписание';
 			case 'home.day': return 'День';
 			case 'home.week': return 'Неделя';
+			case 'home.theNearestClient': return 'Ближайший клиент';
+			case 'profile.profile': return 'Профиль';
+			case 'profile.logout': return 'Выход';
+			case 'add_record.validation_text': return 'Это поле не должно быть пустым';
+			case 'add_record.add_new_record': return 'Добавить нового клиента';
+			case 'add_record.name': return 'Имя клиента';
+			case 'add_record.name_hint': return 'Имя Фамилия';
+			case 'add_record.number': return 'Номер клиента';
+			case 'add_record.date': return 'Дата';
+			case 'add_record.time': return 'Время';
+			case 'add_record.service_type': return 'Тип услуги';
+			case 'add_record.service_hint': return 'Введите тип услуги';
+			case 'add_record.price': return 'Цена';
+			case 'add_record.price_hint': return 'Введите цену услуги';
+			case 'add_record.save': return 'Сохранить';
+			case 'add_record.record_added_success_txt': return 'Новый клиент добавлен в список';
+			case 'add_record.recorded_name': return ({required Object name}) => 'Вы добавили нового клиента по имени ${name} в список';
 			default: return null;
 		}
 	}
