@@ -98,6 +98,9 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               ),
+              SizedBox(height: 24),
+              Text('Bugungi uchrashuvlar', style: Typographies.semiBoldH2),
+              SizedBox(height: 12),
               BlocBuilder<ScheduleCubit, ScheduleState>(
                 builder: (context, state) {
                   switch (state) {
@@ -108,7 +111,53 @@ class _HomePageState extends State<HomePage> {
                         shrinkWrap: true,
                         itemCount: state.data.length,
                         itemBuilder: (context, index) {
-                          return Text(state.data[index].clientName);
+                          return Container(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 16,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(color: LightAppColors.border),
+                            ),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                AppIcons.icPerson,
+                                SizedBox(width: 8),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      state.data[index].clientName,
+                                      style: Typographies.regularBody.copyWith(
+                                        color: LightTextColor.primary,
+                                      ),
+                                    ),
+                                    SizedBox(height: 8),
+                                    Text(
+                                      '${state.data[index].time} • ${state.data[index].serviceType}',
+                                      style: Typographies.regularBody2.copyWith(
+                                        color: LightTextColor.secondary,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Spacer(),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    Text(
+                                      state.data[index].price,
+                                      style: Typographies.regularH3.copyWith(),
+                                    ),
+                                    SizedBox(height: 8),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          );
                         },
                       );
                     case TodayAppointmentLoadError():
