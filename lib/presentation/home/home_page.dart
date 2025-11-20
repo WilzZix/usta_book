@@ -1,10 +1,12 @@
 import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:usta_book/core/localization/i18n/strings.g.dart';
 import 'package:usta_book/core/ui_kit/colors.dart';
 import 'package:usta_book/core/ui_kit/components/app_icons.dart';
 import 'package:usta_book/core/ui_kit/typography.dart';
 
+import '../../bloc/schedule/schedule_cubit.dart';
 import 'components/app_bar.dart';
 import 'components/time_line_picker.dart';
 
@@ -26,6 +28,12 @@ class _HomePageState extends State<HomePage> {
     selectedDate = date;
     controller.jumpToFocusDate();
     setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<ScheduleCubit>().getTodayAppointments();
   }
 
   @override
@@ -89,6 +97,24 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ],
                 ),
+              ),
+              BlocBuilder<ScheduleCubit, ScheduleState>(
+                builder: (context, state) {
+                  switch (state) {
+                    case TodayAppointmentsLoading():
+                      return CircularProgressIndicator();
+                    case TodayAppointmentLoaded():
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: state.data.length,
+                        itemBuilder: (context, index) {
+                          return Text(state.data[index].clientName);
+                        },
+                      );
+                    case TodayAppointmentLoadError():
+                      return Center(child: Text(state.msg));
+                  }
+                },
               ),
             ],
           ),

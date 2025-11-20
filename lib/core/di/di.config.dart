@@ -11,11 +11,15 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
+import 'package:usta_book/data/repositories/appointment/appointment_repository.dart'
+    as _i623;
 import 'package:usta_book/data/repositories/master_profile/master_profile.dart'
     as _i972;
 import 'package:usta_book/data/repositories/sign_up/sign_up_repository.dart'
     as _i633;
 import 'package:usta_book/data/sources/local/shared_pref.dart' as _i858;
+import 'package:usta_book/domain/repositories/appointment/i_appointment.dart'
+    as _i227;
 import 'package:usta_book/domain/repositories/master_profile/i_master_profile.dart'
     as _i524;
 import 'package:usta_book/domain/repositories/sign_up/i_sign_up.dart' as _i343;
@@ -39,6 +43,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i336.SignUpUseCase>(
       () => _i336.SignUpUseCase(iSignUp: gh<_i343.ISignUp>()),
     );
+    gh.singleton<_i227.IAppointment>(() => _i623.AppointmentRepo());
     return this;
   }
 }

@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,6 +8,7 @@ import 'package:usta_book/core/di/di.dart';
 import 'package:usta_book/core/di/inject.dart';
 
 import 'bloc/master/master_bloc.dart';
+import 'bloc/schedule/schedule_cubit.dart';
 import 'bloc/sign_up/sign_up_bloc.dart';
 import 'core/localization/i18n/strings.g.dart';
 import 'core/ui_kit/colors.dart';
@@ -58,6 +58,7 @@ class _MyAppState extends State<MyApp> {
         providers: [
           BlocProvider(create: (context) => SignUpBloc(inject(), inject())),
           BlocProvider(create: (context) => MasterBloc(inject(), inject())),
+          BlocProvider(create: (context) => ScheduleCubit(inject(), inject())),
         ],
         child: MaterialApp.router(
           theme: ThemeData(

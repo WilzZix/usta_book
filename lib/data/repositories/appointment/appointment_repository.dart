@@ -1,8 +1,10 @@
+import 'package:injectable/injectable.dart';
+import 'package:usta_book/data/models/record_model.dart';
 import 'package:usta_book/domain/repositories/appointment/i_appointment.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../models/appointment.dart';
-
+@Singleton(as: IAppointment)
 class AppointmentRepo extends IAppointment {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
@@ -34,5 +36,29 @@ class AppointmentRepo extends IAppointment {
     } catch (e) {
       rethrow;
     }
+  }
+
+  String formatToday() {
+    final now = DateTime.now();
+    final day = now.day.toString().padLeft(2, '0');
+    final month = now.month.toString().padLeft(2, '0');
+    final year = now.year;
+    return "$day/$month/$year"; // <-- ТОЧНО ТАКОЙ ЖЕ ФОРМАТ
+  }
+
+  @override
+  Future<List<RecordModel>> getTodayAppointment(String? masterUID) async {
+    final String today = formatToday();
+
+    final snapshot = await FirebaseFirestore.instance
+        .collection('masters')
+        .doc(masterUID)
+        .collection('records')
+        .where('date', isEqualTo: today)
+        .get();
+
+    return snapshot.docs
+        .map((doc) => RecordModel.fromJson(doc.data()))
+        .toList();
   }
 }
