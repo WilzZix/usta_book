@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
 import 'package:usta_book/data/sources/local/shared_pref.dart';
 import 'package:usta_book/domain/usecases/sign_up_usecase.dart';

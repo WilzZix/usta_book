@@ -6,7 +6,7 @@ final getIt = GetIt.instance;
 
 @InjectableInit()
 Future<void> initDi() async {
-  await getIt.init();
+  getIt.init();
 
   return getIt.allReady();
 }

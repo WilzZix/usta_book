@@ -72,15 +72,15 @@ class _MyAppState extends State<MyApp> {
               hourMinuteTextColor: Colors.white,
 
               // The color of the AM/PM selector's background when selected
-              dayPeriodColor: MaterialStateColor.resolveWith(
-                (states) => states.contains(MaterialState.selected)
+              dayPeriodColor: WidgetStateColor.resolveWith(
+                (states) => states.contains(WidgetState.selected)
                     ? LightAppColors.primary
                     : Colors.transparent,
               ),
 
               // The color of the AM/PM text when selected
-              dayPeriodTextColor: MaterialStateColor.resolveWith(
-                (states) => states.contains(MaterialState.selected)
+              dayPeriodTextColor: WidgetStateColor.resolveWith(
+                (states) => states.contains(WidgetState.selected)
                     ? Colors.white
                     : Colors.black,
               ),

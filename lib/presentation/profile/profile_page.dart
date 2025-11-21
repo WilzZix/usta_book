@@ -7,6 +7,8 @@ import 'package:usta_book/core/ui_kit/components/button.dart';
 import '../../core/localization/i18n/strings.g.dart';
 
 class ProfilePage extends StatefulWidget {
+  static String tag = '/profile';
+
   const ProfilePage({super.key});
 
   @override

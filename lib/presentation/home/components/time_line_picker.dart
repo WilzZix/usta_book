@@ -1,8 +1,10 @@
 import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:usta_book/core/ui_kit/components/app_icons.dart';
 
+import '../../../bloc/schedule/schedule_cubit.dart';
 import '../../../core/localization/i18n/strings.g.dart';
 import '../../../core/ui_kit/colors.dart';
 import '../../../core/ui_kit/typography.dart';
@@ -21,7 +23,9 @@ class _TimeLinePickerState extends State<TimeLinePicker> {
 
   void _handleDateSelection(DateTime date) {
     selectedDate = date;
+    context.read<ScheduleCubit>().getTodayAppointments(date: selectedDate);
     controller.jumpToFocusDate();
+
     setState(() {});
   }
 
@@ -103,7 +107,7 @@ class _TimeLinePickerState extends State<TimeLinePicker> {
                 ),
                 child: Column(
                   children: [
-                    SizedBox(height: 4,),
+                    SizedBox(height: 4),
                     Text(
                       DateFormat(
                         'E',

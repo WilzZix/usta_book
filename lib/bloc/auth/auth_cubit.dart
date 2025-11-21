@@ -51,7 +51,6 @@ class AuthCubit extends Cubit<AuthState> {
       return profile.profileCompleted;
     } catch (e) {
       // В случае ошибки (например, сбоя сети или проблем с Firestore)
-      print("Error during profile completion check: $e");
       // Лучше вернуть false или обработать ошибку в зависимости от логики приложения
       return false;
     }

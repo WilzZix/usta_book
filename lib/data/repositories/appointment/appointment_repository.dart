@@ -4,6 +4,7 @@ import 'package:usta_book/domain/repositories/appointment/i_appointment.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../models/appointment.dart';
+
 @Singleton(as: IAppointment)
 class AppointmentRepo extends IAppointment {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
@@ -31,15 +32,15 @@ class AppointmentRepo extends IAppointment {
       final DocumentReference docRef = await appointmentsRef.add(data);
 
       return docRef.id;
-    } on FirebaseException catch (e) {
+    } on FirebaseException {
       rethrow; // Перебрасываем ошибку для обработки в UI
     } catch (e) {
       rethrow;
     }
   }
 
-  String formatToday() {
-    final now = DateTime.now();
+  String formatToday(DateTime date) {
+    final now = date;
     final day = now.day.toString().padLeft(2, '0');
     final month = now.month.toString().padLeft(2, '0');
     final year = now.year;
@@ -47,8 +48,11 @@ class AppointmentRepo extends IAppointment {
   }
 
   @override
-  Future<List<RecordModel>> getTodayAppointment(String? masterUID) async {
-    final String today = formatToday();
+  Future<List<RecordModel>> getTodayAppointment(
+    DateTime date,
+    String? masterUID,
+  ) async {
+    final String today = formatToday(date);
 
     final snapshot = await FirebaseFirestore.instance
         .collection('masters')

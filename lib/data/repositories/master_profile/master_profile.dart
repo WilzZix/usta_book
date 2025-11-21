@@ -13,9 +13,9 @@ class MasterProfileImpl extends IMasterProfile {
     MasterProfile profile,
   ) async {
     try {
-      final FirebaseFirestore _db = FirebaseFirestore.instance;
+      final FirebaseFirestore db = FirebaseFirestore.instance;
 
-      final DocumentReference newRecordRef = _db
+      final DocumentReference newRecordRef = db
           .collection('masters')
           .doc(masterUID)
           .collection('records')
@@ -28,12 +28,9 @@ class MasterProfileImpl extends IMasterProfile {
       // не перезаписывая весь документ.
       await newRecordRef.update(data);
 
-      print('Профиль мастера $masterUID успешно обновлен.');
     } on FirebaseException catch (e) {
-      print('Ошибка Firebase при обновлении профиля: ${e.code}');
       rethrow;
     } catch (e) {
-      print('Непредвиденная ошибка: $e');
       rethrow;
     }
   }
@@ -56,7 +53,6 @@ class MasterProfileImpl extends IMasterProfile {
 
       return services;
     } catch (e) {
-      print("Error fetching services list: $e");
       // Return an empty list on failure
       return [];
     }
@@ -64,17 +60,17 @@ class MasterProfileImpl extends IMasterProfile {
 
   @override
   Future<MasterProfile?> getMasterProfile(String masterUID) async {
-    final FirebaseFirestore _db = FirebaseFirestore.instance;
-    DocumentSnapshot doc = await _db.collection('masters').doc(masterUID).get();
+    final FirebaseFirestore db = FirebaseFirestore.instance;
+    DocumentSnapshot doc = await db.collection('masters').doc(masterUID).get();
     return MasterProfile.fromFirestore(doc);
   }
 
   @override
   Future<void> addRecord(String masterUID, RecordModel record) async {
     try {
-      final FirebaseFirestore _db = FirebaseFirestore.instance;
+      final FirebaseFirestore db = FirebaseFirestore.instance;
       // 1. Get the reference to the specific 'records' subcollection
-      final CollectionReference recordsCollection = _db
+      final CollectionReference recordsCollection = db
           .collection('masters')
           .doc(masterUID)
           .collection('records');
@@ -87,10 +83,8 @@ class MasterProfileImpl extends IMasterProfile {
       // не перезаписывая весь документ.
       await recordsCollection.add(data);
     } on FirebaseException catch (e) {
-      print('Ошибка Firebase при обновлении профиля: ${e.code}');
       rethrow;
     } catch (e) {
-      print('Непредвиденная ошибка: $e');
       rethrow;
     }
   }

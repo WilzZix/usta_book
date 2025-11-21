@@ -44,7 +44,6 @@ class _OtpPageState extends State<OtpPage> {
               seconds: 60,
               onExpired: () {
                 // разблокировать кнопку "Отправить повторно"
-                print('OTP истёк — разрешить повтор отправки');
               },
             ),
             SizedBox(height: 36),
@@ -83,8 +82,7 @@ class OtpTimerWidget extends StatefulWidget {
   final int seconds;
   final VoidCallback onExpired;
 
-  const OtpTimerWidget({Key? key, this.seconds = 60, required this.onExpired})
-    : super(key: key);
+  const OtpTimerWidget({super.key, this.seconds = 60, required this.onExpired});
 
   @override
   _OtpTimerWidgetState createState() => _OtpTimerWidgetState();

@@ -13,13 +13,14 @@ class ScheduleCubit extends Cubit<ScheduleState> {
   final IAppointment appointment;
   final ShredPrefService shredPrefService;
 
-  Future<void> getTodayAppointments() async {
+  Future<void> getTodayAppointments({required DateTime date}) async {
     emit(TodayAppointmentsLoading());
     try {
       final data = await appointment.getTodayAppointment(
+        date,
         shredPrefService.getMasterUID(),
       );
-      emit(TodayAppointmentLoaded(data: data));
+      emit(TodayAppointmentLoaded(data: data.reversed.toList()));
     } catch (e) {
       emit(TodayAppointmentLoadError(msg: e.toString()));
     }

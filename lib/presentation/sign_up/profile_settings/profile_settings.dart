@@ -11,8 +11,6 @@ import 'package:usta_book/core/ui_kit/components/button.dart';
 import 'package:usta_book/core/ui_kit/components/inputs/inputs.dart';
 import 'package:usta_book/core/ui_kit/typography.dart';
 import 'package:usta_book/data/models/master_profile.dart';
-import 'package:usta_book/data/sources/firebase/firebase_service.dart';
-import 'package:usta_book/presentation/home/home_page.dart';
 
 class ProfileSettings extends StatefulWidget {
   const ProfileSettings({super.key});

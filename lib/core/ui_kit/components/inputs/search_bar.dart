@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:usta_book/core/ui_kit/colors.dart';
 import 'package:usta_book/core/ui_kit/components/app_icons.dart';
