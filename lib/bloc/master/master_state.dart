@@ -42,3 +42,14 @@ class AddingRecordFailureState extends MasterState {
 
   AddingRecordFailureState({required this.msg});
 }
+
+//updating record
+class UpdatingRecord extends MasterState {}
+
+class RecordUpdated extends MasterState {}
+
+class UpdatingRecordError extends MasterState {
+  final String msg;
+
+  UpdatingRecordError({required this.msg});
+}

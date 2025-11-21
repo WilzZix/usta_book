@@ -3,6 +3,7 @@ import 'package:usta_book/data/models/record_model.dart';
 import 'package:usta_book/domain/repositories/appointment/i_appointment.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../../../domain/enums/enums.dart';
 import '../../models/appointment.dart';
 
 @Singleton(as: IAppointment)
@@ -59,6 +60,10 @@ class AppointmentRepo extends IAppointment {
         .doc(masterUID)
         .collection('records')
         .where('date', isEqualTo: today)
+        .where(
+          'status',
+          whereIn: [ClientStatus.waiting.name, ClientStatus.inProgress.name],
+        )
         .get();
 
     return snapshot.docs

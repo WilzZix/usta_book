@@ -83,10 +83,14 @@ class MasterBloc extends Bloc<MasterEvent, MasterState> {
     Emitter<MasterState> emit,
   ) async {
     try {
-      final result = await masterProfileUseCase.updateRecord(
+      emit(UpdatingRecord());
+      await masterProfileUseCase.updateRecord(
         shredPrefService.getMasterUID()!,
         event.record,
       );
-    } catch (e) {}
+      emit(RecordUpdated());
+    } catch (e) {
+      emit(UpdatingRecordError(msg: e.toString()));
+    }
   }
 }

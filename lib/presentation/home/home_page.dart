@@ -124,7 +124,6 @@ class _HomePageState extends State<HomePage> {
                         return Column(
                           children: [
                             AppIcons.icEmptyList,
-                            SizedBox(height: 12),
                             Text(
                               'Hali mijoz qushilmagan',
                               style: Typographies.semiBoldH2,
@@ -250,127 +249,149 @@ class ClientStatusWidget extends StatefulWidget {
 class _ClientStatusWidgetState extends State<ClientStatusWidget> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: StateColor.success),
-      ),
-      child: Column(
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              AppIcons.icPerson,
-              SizedBox(width: 8),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    widget.recordModel.clientName,
-                    style: Typographies.regularBody.copyWith(
-                      color: LightTextColor.primary,
-                    ),
-                  ),
-                  SizedBox(height: 8),
-                  Text(
-                    '${widget.recordModel.time} • ${widget.recordModel.serviceType}',
-                    style: Typographies.regularBody2.copyWith(
-                      color: LightTextColor.secondary,
-                    ),
-                  ),
-                ],
-              ),
-              Spacer(),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Text(
-                    widget.recordModel.price.strToUzbSum(),
-                    style: Typographies.regularH3.copyWith(),
-                  ),
-                  SizedBox(height: 8),
-                ],
-              ),
-            ],
-          ),
-          SizedBox(height: 12),
-          switch (widget.recordModel.status) {
-            null => SizedBox(),
-            ClientStatus.waiting => Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    return BlocListener<MasterBloc, MasterState>(
+      listener: (context, state) {
+        if(state is RecordUpdated){
+          context.read<ScheduleCubit>().getTodayAppointments(date: DateTime.now());
+        }
+      },
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: StateColor.success),
+        ),
+        child: Column(
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                GestureDetector(
-                  onTap: () {
-                    //TODO
-                  },
-                  child: Container(
-                    padding: EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: StateColor.error),
-                      borderRadius: BorderRadius.circular(8),
-                      color: StateColor.error.withValues(alpha: 0.1),
-                    ),
-                    child: Text(
-                      'Klient kelmadi',
-                      style: Typographies.regularBody2,
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    context.read<MasterBloc>().add(
-                      UpdateRecordEvent(
-                        record: widget.recordModel.copyWith(
-                          status: ClientStatus.inProgress,
-                        ),
+                AppIcons.icPerson,
+                SizedBox(width: 8),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.recordModel.clientName,
+                      style: Typographies.regularBody.copyWith(
+                        color: LightTextColor.primary,
                       ),
-                    );
-                  },
-                  child: Container(
-                    padding: EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: StateColor.success),
-                      borderRadius: BorderRadius.circular(8),
-                      color: StateColor.success.withValues(alpha: 0.1),
                     ),
-                    child: Text('Jarayonda', style: Typographies.regularBody2),
-                  ),
+                    SizedBox(height: 8),
+                    Text(
+                      '${widget.recordModel.time} • ${widget.recordModel.serviceType}',
+                      style: Typographies.regularBody2.copyWith(
+                        color: LightTextColor.secondary,
+                      ),
+                    ),
+                  ],
+                ),
+                Spacer(),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      widget.recordModel.price.strToUzbSum(),
+                      style: Typographies.regularH3.copyWith(),
+                    ),
+                    SizedBox(height: 8),
+                  ],
                 ),
               ],
             ),
-            ClientStatus.inProgress => GestureDetector(
-              onTap: () {
-                //TODO
-              },
-              child: Container(
-                padding: EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  border: Border.all(color: StateColor.success),
-                  borderRadius: BorderRadius.circular(8),
-                  color: StateColor.success.withValues(alpha: 0.1),
-                ),
-                child: Text('Tugadi', style: Typographies.regularBody2),
+            SizedBox(height: 12),
+            switch (widget.recordModel.status) {
+              null => SizedBox(),
+              ClientStatus.waiting => Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      context.read<MasterBloc>().add(
+                        UpdateRecordEvent(
+                          record: widget.recordModel.copyWith(
+                            status: ClientStatus.rejected,
+                          ),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      padding: EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: StateColor.error),
+                        borderRadius: BorderRadius.circular(8),
+                        color: StateColor.error.withValues(alpha: 0.1),
+                      ),
+                      child: Text(
+                        'Klient kelmadi',
+                        style: Typographies.regularBody2,
+                      ),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      context.read<MasterBloc>().add(
+                        UpdateRecordEvent(
+                          record: widget.recordModel.copyWith(
+                            status: ClientStatus.inProgress,
+                          ),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      padding: EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: StateColor.success),
+                        borderRadius: BorderRadius.circular(8),
+                        color: StateColor.success.withValues(alpha: 0.1),
+                      ),
+                      child: Text(
+                        'Jarayonda',
+                        style: Typographies.regularBody2,
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ),
-            ClientStatus.done => SizedBox(),
-            ClientStatus.rejected => GestureDetector(
-              onTap: () {
-                //TODO
-              },
-              child: Container(
-                padding: EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  border: Border.all(color: StateColor.error),
-                  borderRadius: BorderRadius.circular(8),
-                  color: StateColor.error.withValues(alpha: 0.1),
+              ClientStatus.inProgress => GestureDetector(
+                onTap: () {
+                  context.read<MasterBloc>().add(
+                    UpdateRecordEvent(
+                      record: widget.recordModel.copyWith(
+                        status: ClientStatus.done,
+                      ),
+                    ),
+                  );
+                },
+                child: Container(
+                  padding: EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: StateColor.success),
+                    borderRadius: BorderRadius.circular(8),
+                    color: StateColor.success.withValues(alpha: 0.1),
+                  ),
+                  child: Text('Tugadi', style: Typographies.regularBody2),
                 ),
-                child: Text('Tugatish', style: Typographies.regularBody2),
               ),
-            ),
-          },
-        ],
+              ClientStatus.done => SizedBox(),
+              ClientStatus.rejected => GestureDetector(
+                onTap: () {
+                  //TODO
+                },
+                child: Container(
+                  padding: EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: StateColor.error),
+                    borderRadius: BorderRadius.circular(8),
+                    color: StateColor.error.withValues(alpha: 0.1),
+                  ),
+                  child: Text('Tugatish', style: Typographies.regularBody2),
+                ),
+              ),
+            },
+          ],
+        ),
       ),
     );
   }
