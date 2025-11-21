@@ -11,6 +11,7 @@ import 'package:usta_book/core/ui_kit/typography.dart';
 import '../../bloc/schedule/schedule_cubit.dart';
 import '../add_new_record/add_new_record_page.dart';
 import 'components/app_bar.dart';
+import 'components/loading.dart';
 import 'components/time_line_picker.dart';
 
 class HomePage extends StatefulWidget {
@@ -55,7 +56,7 @@ class _HomePageState extends State<HomePage> {
                 builder: (context, state) {
                   switch (state) {
                     case TodayAppointmentsLoading():
-                      return CircularProgressIndicator();
+                      return HomeShimmerLoading();
                     case TodayAppointmentLoaded():
                       if (state.data.isEmpty) {
                         return Column(
