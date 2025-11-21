@@ -10,4 +10,5 @@ abstract class IMasterProfile {
   Future<List<ServiceModel>> getAvailableServices();
 
   Future<void> addRecord(String masterUID, RecordModel record);
+  Future<void> updateRecord(String masterUID, RecordModel record);
 }

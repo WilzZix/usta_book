@@ -19,3 +19,10 @@ class AddRecordEvent extends MasterEvent {
 
   AddRecordEvent({required this.record});
 }
+//Update record
+
+class UpdateRecordEvent extends MasterEvent {
+  final RecordModel record;
+
+  UpdateRecordEvent({required this.record});
+}

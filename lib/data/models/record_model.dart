@@ -1,3 +1,6 @@
+import '../../domain/enums/enums.dart';
+import '../../domain/extension/extensions.dart';
+
 class RecordModel {
   final String clientName;
   final String date;
@@ -5,6 +8,7 @@ class RecordModel {
   final String serviceType;
   final String clientNumber;
   final String time;
+  final ClientStatus? status;
 
   RecordModel({
     required this.clientName,
@@ -13,6 +17,7 @@ class RecordModel {
     required this.serviceType,
     required this.clientNumber,
     required this.time,
+    this.status,
   });
 
   factory RecordModel.fromJson(Map<String, dynamic> json) {
@@ -23,6 +28,7 @@ class RecordModel {
       serviceType: json['service_type'],
       clientNumber: json['client_number'],
       time: json['time'],
+      status: ClientStatusX.fromString(json['status']),
     );
   }
 
@@ -34,6 +40,27 @@ class RecordModel {
       'service_type': serviceType,
       'client_number': clientNumber,
       'time': time,
+      'status': status!.name,
     };
+  }
+
+  RecordModel copyWith({
+    String? clientName,
+    String? date,
+    String? price,
+    String? serviceType,
+    String? clientNumber,
+    String? time,
+    ClientStatus? status,
+  }) {
+    return RecordModel(
+      clientName: clientName ?? this.clientName,
+      date: date ?? this.date,
+      price: price ?? this.price,
+      serviceType: serviceType ?? this.serviceType,
+      clientNumber: clientNumber ?? this.clientNumber,
+      time: time ?? this.time,
+      status: status ?? this.status,
+    );
   }
 }

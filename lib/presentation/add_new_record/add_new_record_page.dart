@@ -8,6 +8,7 @@ import 'package:usta_book/core/ui_kit/components/button.dart';
 import 'package:usta_book/core/ui_kit/components/inputs/inputs.dart';
 import 'package:usta_book/core/ui_kit/typography.dart';
 import 'package:usta_book/data/models/record_model.dart';
+import 'package:usta_book/domain/enums/enums.dart';
 
 import '../../core/ui_kit/components/app_icons.dart';
 import 'components/select_service_type_bottom_sheet.dart';
@@ -238,6 +239,7 @@ class _AddNewRecordPageState extends State<AddNewRecordPage> {
                               serviceType: serviceTypeController.text,
                               clientNumber: phoneController.text,
                               time: timeController.text,
+                              status: ClientStatus.waiting,
                             ),
                           ),
                         );

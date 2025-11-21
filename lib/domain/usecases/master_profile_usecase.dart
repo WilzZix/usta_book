@@ -29,4 +29,7 @@ class MasterProfileUseCase {
   Future<void> addRecord(String masterUID, RecordModel record) async {
     masterProfile.addRecord(masterUID, record);
   }
+  Future<void> updateRecord(String masterUID, RecordModel record) async {
+    masterProfile.updateRecord(masterUID, record);
+  }
 }

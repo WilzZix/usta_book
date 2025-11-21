@@ -21,6 +21,7 @@ class MasterBloc extends Bloc<MasterEvent, MasterState> {
     on<GetMasterProfile>(_getMasterProfile);
     on<GetServiceTypes>(_getServiceTypes);
     on<AddRecordEvent>(_addRecord);
+    on<UpdateRecordEvent>(updateRecord);
   }
 
   Future<void> _masterProfileUpdate(
@@ -75,5 +76,17 @@ class MasterBloc extends Bloc<MasterEvent, MasterState> {
     } catch (e) {
       emit(AddingRecordFailureState(msg: e.toString()));
     }
+  }
+
+  Future<void> updateRecord(
+    UpdateRecordEvent event,
+    Emitter<MasterState> emit,
+  ) async {
+    try {
+      final result = await masterProfileUseCase.updateRecord(
+        shredPrefService.getMasterUID()!,
+        event.record,
+      );
+    } catch (e) {}
   }
 }

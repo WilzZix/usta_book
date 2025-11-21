@@ -27,8 +27,7 @@ class MasterProfileImpl extends IMasterProfile {
       // 3. Используем set() с merge: true, чтобы обновить только переданные поля,
       // не перезаписывая весь документ.
       await newRecordRef.update(data);
-
-    } on FirebaseException catch (e) {
+    } on FirebaseException {
       rethrow;
     } catch (e) {
       rethrow;
@@ -82,6 +81,40 @@ class MasterProfileImpl extends IMasterProfile {
       // 3. Используем set() с merge: true, чтобы обновить только переданные поля,
       // не перезаписывая весь документ.
       await recordsCollection.add(data);
+    } on FirebaseException {
+      rethrow;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> updateRecord(String masterUID, RecordModel record) async {
+    try {
+      final FirebaseFirestore db = FirebaseFirestore.instance;
+      final CollectionReference recordsCollection = db
+          .collection('masters')
+          .doc(masterUID)
+          .collection('records');
+
+      final Map<String, dynamic> data = record.toJson();
+      data['updatedAt'] = FieldValue.serverTimestamp();
+
+      // query orqali record’ni topamiz (unikal maydonlar orqali)
+      final snapshot = await recordsCollection
+          .where('client_name', isEqualTo: record.clientName)
+          .where('date', isEqualTo: record.date)
+          .where('time', isEqualTo: record.time)
+          .get();
+
+      if (snapshot.docs.isEmpty) {
+        throw Exception("Record topilmadi");
+      }
+
+      // Topilgan document’larni yangilash
+      for (var doc in snapshot.docs) {
+        await doc.reference.update(data);
+      }
     } on FirebaseException catch (e) {
       rethrow;
     } catch (e) {

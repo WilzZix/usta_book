@@ -7,8 +7,12 @@ import 'package:usta_book/core/ui_kit/colors.dart';
 import 'package:usta_book/core/ui_kit/components/app_icons.dart';
 import 'package:usta_book/core/ui_kit/components/button.dart';
 import 'package:usta_book/core/ui_kit/typography.dart';
+import 'package:usta_book/domain/enums/enums.dart';
+import 'package:usta_book/domain/extension/extensions.dart';
 
+import '../../bloc/master/master_bloc.dart';
 import '../../bloc/schedule/schedule_cubit.dart';
+import '../../data/models/record_model.dart';
 import '../add_new_record/add_new_record_page.dart';
 import 'components/app_bar.dart';
 import 'components/loading.dart';
@@ -52,6 +56,64 @@ class _HomePageState extends State<HomePage> {
             SliverToBoxAdapter(child: TimeLinePicker()),
             SliverToBoxAdapter(child: SizedBox(height: 24)),
             SliverToBoxAdapter(
+              child: Text('Bugungi statistika', style: Typographies.semiBoldH2),
+            ),
+            SliverToBoxAdapter(child: SizedBox(height: 12)),
+            SliverToBoxAdapter(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: LightAppColors.border),
+                    ),
+                    child: Column(
+                      children: [
+                        Text('3', style: Typographies.regularH3),
+                        SizedBox(height: 8),
+                        Text('Zakazlar', style: Typographies.regularBody2),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: LightAppColors.border),
+                    ),
+                    child: Column(
+                      children: [
+                        Text('120 000', style: Typographies.regularH3),
+                        SizedBox(height: 8),
+                        Text('Daromad', style: Typographies.regularBody2),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: LightAppColors.border),
+                    ),
+                    child: Column(
+                      children: [
+                        Text('3 soat', style: Typographies.regularH3),
+                        SizedBox(height: 8),
+                        Text('Vaqt', style: Typographies.regularBody2),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            SliverToBoxAdapter(child: SizedBox(height: 24)),
+            SliverToBoxAdapter(
               child: BlocBuilder<ScheduleCubit, ScheduleState>(
                 builder: (context, state) {
                   switch (state) {
@@ -92,53 +154,7 @@ class _HomePageState extends State<HomePage> {
                             style: Typographies.semiBoldH2,
                           ),
                           SizedBox(height: 12),
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 12,
-                              vertical: 16,
-                            ),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(8),
-                              border: Border.all(color: LightAppColors.border),
-                            ),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                AppIcons.icPerson,
-                                SizedBox(width: 8),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      state.data[0].clientName,
-                                      style: Typographies.regularBody.copyWith(
-                                        color: LightTextColor.primary,
-                                      ),
-                                    ),
-                                    SizedBox(height: 8),
-                                    Text(
-                                      '${state.data[0].time} • ${state.data[0].serviceType}',
-                                      style: Typographies.regularBody2.copyWith(
-                                        color: LightTextColor.secondary,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Spacer(),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    Text(
-                                      state.data[0].price,
-                                      style: Typographies.regularH3.copyWith(),
-                                    ),
-                                    SizedBox(height: 8),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
+                          ClientStatusWidget(recordModel: state.data[0]),
                           SizedBox(height: 24),
                           Text(
                             'Bugungi uchrashuvlar',
@@ -195,7 +211,7 @@ class _HomePageState extends State<HomePage> {
                                           CrossAxisAlignment.end,
                                       children: [
                                         Text(
-                                          state.data[index].price,
+                                          state.data[index].price.strToUzbSum(),
                                           style: Typographies.regularH3
                                               .copyWith(),
                                         ),
@@ -217,6 +233,144 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class ClientStatusWidget extends StatefulWidget {
+  const ClientStatusWidget({super.key, required this.recordModel});
+
+  final RecordModel recordModel;
+
+  @override
+  State<ClientStatusWidget> createState() => _ClientStatusWidgetState();
+}
+
+class _ClientStatusWidgetState extends State<ClientStatusWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: StateColor.success),
+      ),
+      child: Column(
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              AppIcons.icPerson,
+              SizedBox(width: 8),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    widget.recordModel.clientName,
+                    style: Typographies.regularBody.copyWith(
+                      color: LightTextColor.primary,
+                    ),
+                  ),
+                  SizedBox(height: 8),
+                  Text(
+                    '${widget.recordModel.time} • ${widget.recordModel.serviceType}',
+                    style: Typographies.regularBody2.copyWith(
+                      color: LightTextColor.secondary,
+                    ),
+                  ),
+                ],
+              ),
+              Spacer(),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text(
+                    widget.recordModel.price.strToUzbSum(),
+                    style: Typographies.regularH3.copyWith(),
+                  ),
+                  SizedBox(height: 8),
+                ],
+              ),
+            ],
+          ),
+          SizedBox(height: 12),
+          switch (widget.recordModel.status) {
+            null => SizedBox(),
+            ClientStatus.waiting => Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    //TODO
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: StateColor.error),
+                      borderRadius: BorderRadius.circular(8),
+                      color: StateColor.error.withValues(alpha: 0.1),
+                    ),
+                    child: Text(
+                      'Klient kelmadi',
+                      style: Typographies.regularBody2,
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    context.read<MasterBloc>().add(
+                      UpdateRecordEvent(
+                        record: widget.recordModel.copyWith(
+                          status: ClientStatus.inProgress,
+                        ),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: StateColor.success),
+                      borderRadius: BorderRadius.circular(8),
+                      color: StateColor.success.withValues(alpha: 0.1),
+                    ),
+                    child: Text('Jarayonda', style: Typographies.regularBody2),
+                  ),
+                ),
+              ],
+            ),
+            ClientStatus.inProgress => GestureDetector(
+              onTap: () {
+                //TODO
+              },
+              child: Container(
+                padding: EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  border: Border.all(color: StateColor.success),
+                  borderRadius: BorderRadius.circular(8),
+                  color: StateColor.success.withValues(alpha: 0.1),
+                ),
+                child: Text('Tugadi', style: Typographies.regularBody2),
+              ),
+            ),
+            ClientStatus.done => SizedBox(),
+            ClientStatus.rejected => GestureDetector(
+              onTap: () {
+                //TODO
+              },
+              child: Container(
+                padding: EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  border: Border.all(color: StateColor.error),
+                  borderRadius: BorderRadius.circular(8),
+                  color: StateColor.error.withValues(alpha: 0.1),
+                ),
+                child: Text('Tugatish', style: Typographies.regularBody2),
+              ),
+            ),
+          },
+        ],
       ),
     );
   }
