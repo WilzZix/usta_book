@@ -143,7 +143,7 @@ class _AddNewRecordPageState extends State<AddNewRecordPage> {
                       final result = await showDatePicker(
                         context: context,
                         firstDate: DateTime.now(),
-                        lastDate: DateTime(2026),
+                        lastDate: DateTime(2045),
                       );
                       if (result != null) {
                         dateController.text = DateFormat(

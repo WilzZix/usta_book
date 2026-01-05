@@ -19,6 +19,7 @@ class AppIcons {
   static final icFieldTime = _svgAsset("ic_field_time.svg");
   static final icProfile = _svgAsset("ic_profile.svg");
   static final icCamera = _svgAsset("ic_camera.svg");
+  static final icMenu = _svgAsset("ic_menu.svg");
   static final icWatch = _svgAsset("ic_watch.svg");
   static final icUzb = _pngAsset("ic_uzb.png");
   static final icEmptyList = _pngAsset("ic_3d.png");
@@ -36,22 +37,10 @@ class AppIcons {
   static final icSearchBar = _svgAsset("ic_search_bar.svg");
   static final icVerticalDivider = _svgAsset("ic_vertical_divider.svg");
   static final icSearchLupa = _svgAsset("ic_search_lupa.svg");
-  static final icMasterSettingsUnselected = _svgAsset(
-    "ic_master_settings_unselected.svg",
-  );
-  static final icMasterSettingsSelected = _svgAsset(
-    "ic_master_settings_selected.svg",
-  );
-  static final icMasterStatisticsUnselected = _svgAsset(
-    "ic_master_statistics_unselected.svg",
-  );
-  static final icMasterStatisticsSelected = _svgAsset(
-    "ic_master_statistics_selected.svg",
-  );
-  static final icBottomNavCalendarUnselected = _svgAsset(
-    "ic_bottom_nav_calendar_unselected.svg",
-  );
-  static final icBottomNavCalendarSelected = _svgAsset(
-    "ic_bottom_nav_calendar_selected.svg",
-  );
+  static final icMasterSettingsUnselected = _svgAsset("ic_master_settings_unselected.svg");
+  static final icMasterSettingsSelected = _svgAsset("ic_master_settings_selected.svg");
+  static final icMasterStatisticsUnselected = _svgAsset("ic_master_statistics_unselected.svg");
+  static final icMasterStatisticsSelected = _svgAsset("ic_master_statistics_selected.svg");
+  static final icBottomNavCalendarUnselected = _svgAsset("ic_bottom_nav_calendar_unselected.svg");
+  static final icBottomNavCalendarSelected = _svgAsset("ic_bottom_nav_calendar_selected.svg");
 }

@@ -7,6 +7,7 @@ import 'package:usta_book/bloc/auth/auth_cubit.dart';
 import 'package:usta_book/core/di/di.dart';
 import 'package:usta_book/core/di/inject.dart';
 
+import 'bloc/clients/clients_bloc.dart';
 import 'bloc/master/master_bloc.dart';
 import 'bloc/schedule/schedule_cubit.dart';
 import 'bloc/sign_up/sign_up_bloc.dart';
@@ -59,6 +60,7 @@ class _MyAppState extends State<MyApp> {
           BlocProvider(create: (context) => SignUpBloc(inject(), inject())),
           BlocProvider(create: (context) => MasterBloc(inject(), inject())),
           BlocProvider(create: (context) => ScheduleCubit(inject(), inject())),
+          BlocProvider(create: (context) => ClientsBloc(inject(), inject())..add(GetClientsEvent())),
         ],
         child: MaterialApp.router(
           theme: ThemeData(
@@ -73,16 +75,12 @@ class _MyAppState extends State<MyApp> {
 
               // The color of the AM/PM selector's background when selected
               dayPeriodColor: WidgetStateColor.resolveWith(
-                (states) => states.contains(WidgetState.selected)
-                    ? LightAppColors.primary
-                    : Colors.transparent,
+                (states) => states.contains(WidgetState.selected) ? LightAppColors.primary : Colors.transparent,
               ),
 
               // The color of the AM/PM text when selected
               dayPeriodTextColor: WidgetStateColor.resolveWith(
-                (states) => states.contains(WidgetState.selected)
-                    ? Colors.white
-                    : Colors.black,
+                (states) => states.contains(WidgetState.selected) ? Colors.white : Colors.black,
               ),
             ),
             scaffoldBackgroundColor: LightAppColors.body,

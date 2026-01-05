@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:usta_book/bloc/clients/clients_bloc.dart';
+import 'package:usta_book/core/ui_kit/colors.dart';
 import 'package:usta_book/core/ui_kit/typography.dart';
+import 'package:usta_book/domain/extension/extensions.dart';
 
+import '../../core/ui_kit/components/app_icons.dart';
 import '../../core/ui_kit/components/inputs/search_bar.dart';
+import 'components/client_item.dart';
 
 class ClientsListPage extends StatefulWidget {
   const ClientsListPage({super.key});
@@ -18,6 +24,7 @@ class _ClientsListPageState extends State<ClientsListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: LightAppColors.body,
       appBar: AppBar(
         title: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -29,15 +36,31 @@ class _ClientsListPageState extends State<ClientsListPage> {
           child: SearchBarWidget(controller: searchController),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 24),
-          child: Column(
-            children: [
-              Text("Mijozlar ro'yhati", style: Typographies.semiBoldH2),
-
-            ],
-          ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(child: Text("Mijozlar ro'yhati", style: Typographies.semiBoldH2)),
+            BlocBuilder<ClientsBloc, ClientsState>(
+              builder: (context, state) {
+                switch (state) {
+                  case ClientsInitial():
+                    return SliverToBoxAdapter(child: SizedBox());
+                  case ClientsListLoaded():
+                    return SliverList.builder(
+                      itemBuilder: (context, index) {
+                        return ClientItem(data: state.data[0]);
+                      },
+                      itemCount: state.data.length,
+                    );
+                  case ClientsListLoading():
+                    return SliverToBoxAdapter(child: Center(child: CircularProgressIndicator()));
+                  case ClientsListLoadError():
+                    return SliverToBoxAdapter(child: Center(child: Text(state.msg)));
+                }
+              },
+            ),
+          ],
         ),
       ),
     );
