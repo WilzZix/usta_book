@@ -52,7 +52,35 @@ class _ClientItemState extends State<ClientItem> {
           Spacer(),
           GestureDetector(
             onTap: () {
-              UstaBookBottomSheet.show(context);
+              UstaBookBottomSheet.show(
+                context: context,
+                body: Column(
+                  children: [
+                    Row(
+                      children: [
+                        AppIcons.icPerson,
+                        SizedBox(width: 8),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              widget.data.clientName,
+                              style: Typographies.regularBody.copyWith(color: LightTextColor.primary),
+                            ),
+                            SizedBox(height: 8),
+                            Text(
+                              widget.data.clientNumber,
+                              style: Typographies.regularBody2.copyWith(color: LightTextColor.secondary),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 20),
+                  ],
+                ),
+                header: "Mijoz ma'lumotlari",
+              );
             },
             child: AppIcons.icMenu,
           ),
