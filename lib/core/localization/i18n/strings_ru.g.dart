@@ -46,6 +46,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	late final TranslationsHomeRu home = TranslationsHomeRu.internal(_root);
 	late final TranslationsProfileRu profile = TranslationsProfileRu.internal(_root);
 	late final TranslationsAddRecordRu add_record = TranslationsAddRecordRu.internal(_root);
+	late final TranslationsClientsRu clients = TranslationsClientsRu.internal(_root);
 }
 
 // Path: on_boarding
@@ -294,6 +295,18 @@ class TranslationsAddRecordRu {
 	String recorded_name({required Object name}) => 'Вы добавили нового клиента по имени ${name} в список';
 }
 
+// Path: clients
+class TranslationsClientsRu {
+	TranslationsClientsRu.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// ru: '${count} посещений'
+	String numberOfVisits({required Object count}) => '${count} посещений';
+}
+
 /// Flat map(s) containing all translations.
 /// Only for edge cases! For simple maps, use the map function of this library.
 extension on Translations {
@@ -360,6 +373,7 @@ extension on Translations {
 			case 'add_record.save': return 'Сохранить';
 			case 'add_record.record_added_success_txt': return 'Новый клиент добавлен в список';
 			case 'add_record.recorded_name': return ({required Object name}) => 'Вы добавили нового клиента по имени ${name} в список';
+			case 'clients.numberOfVisits': return ({required Object count}) => '${count} посещений';
 			default: return null;
 		}
 	}

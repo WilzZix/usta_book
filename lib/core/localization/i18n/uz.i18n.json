@@ -73,5 +73,8 @@
     "save": "Saqlash",
     "record_added_success_txt": "Yangi mijoz ro'yhatga qo'shildi",
     "recorded_name": "Siz ${name} ismli yangi mijozni ro'yhatga qo'shdingiz"
+  },
+  "clients": {
+    "numberOfVisits": "${count} ta tashrif"
   }
 }

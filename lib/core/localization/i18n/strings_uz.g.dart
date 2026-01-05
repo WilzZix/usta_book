@@ -45,6 +45,7 @@ class TranslationsUz extends Translations {
 	@override late final TranslationsHomeUz home = TranslationsHomeUz._(_root);
 	@override late final TranslationsProfileUz profile = TranslationsProfileUz._(_root);
 	@override late final TranslationsAddRecordUz add_record = TranslationsAddRecordUz._(_root);
+	@override late final TranslationsClientsUz clients = TranslationsClientsUz._(_root);
 }
 
 // Path: on_boarding
@@ -171,6 +172,16 @@ class TranslationsAddRecordUz extends TranslationsAddRecordRu {
 	@override String recorded_name({required Object name}) => 'Siz ${name} ismli yangi mijozni ro\'yhatga qo\'shdingiz';
 }
 
+// Path: clients
+class TranslationsClientsUz extends TranslationsClientsRu {
+	TranslationsClientsUz._(TranslationsUz root) : this._root = root, super.internal(root);
+
+	final TranslationsUz _root; // ignore: unused_field
+
+	// Translations
+	@override String numberOfVisits({required Object count}) => '${count} ta tashrif';
+}
+
 /// Flat map(s) containing all translations.
 /// Only for edge cases! For simple maps, use the map function of this library.
 extension on TranslationsUz {
@@ -237,6 +248,7 @@ extension on TranslationsUz {
 			case 'add_record.save': return 'Saqlash';
 			case 'add_record.record_added_success_txt': return 'Yangi mijoz ro\'yhatga qo\'shildi';
 			case 'add_record.recorded_name': return ({required Object name}) => 'Siz ${name} ismli yangi mijozni ro\'yhatga qo\'shdingiz';
+			case 'clients.numberOfVisits': return ({required Object count}) => '${count} ta tashrif';
 			default: return null;
 		}
 	}

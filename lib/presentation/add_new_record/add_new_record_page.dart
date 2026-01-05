@@ -51,38 +51,24 @@ class _AddNewRecordPageState extends State<AddNewRecordPage> {
                         child: Material(
                           type: MaterialType.transparency,
                           child: Container(
-                            margin: EdgeInsets.only(
-                              top: MediaQuery.of(context).padding.top,
-                            ),
+                            margin: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
                             padding: const EdgeInsets.all(20.0),
                             decoration: BoxDecoration(
-                              border: Border.all(
-                                color: StateColor.success,
-                                width: 2,
-                              ),
+                              border: Border.all(color: StateColor.success, width: 2),
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(10.0),
                               boxShadow: const [
-                                BoxShadow(
-                                  color: Colors.black26,
-                                  blurRadius: 10.0,
-                                  offset: Offset(0, 5),
-                                ),
+                                BoxShadow(color: Colors.black26, blurRadius: 10.0, offset: Offset(0, 5)),
                               ],
                             ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Text(
-                                  tr.add_record.record_added_success_txt,
-                                  style: Typographies.semiBoldH2,
-                                ),
+                                Text(tr.add_record.record_added_success_txt, style: Typographies.semiBoldH2),
                                 const SizedBox(height: 10),
                                 Text(
-                                  tr.add_record.recorded_name(
-                                    name: nameController.text,
-                                  ),
+                                  tr.add_record.recorded_name(name: nameController.text),
                                   style: Typographies.regularBody2,
                                 ),
                               ],
@@ -93,9 +79,7 @@ class _AddNewRecordPageState extends State<AddNewRecordPage> {
                     );
                   },
                   barrierDismissible: true,
-                  barrierLabel: MaterialLocalizations.of(
-                    context,
-                  ).modalBarrierDismissLabel,
+                  barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
                   transitionDuration: const Duration(milliseconds: 200),
                 );
               }
@@ -106,10 +90,7 @@ class _AddNewRecordPageState extends State<AddNewRecordPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: MediaQuery.of(context).padding.top),
-                  Text(
-                    tr.add_record.add_new_record,
-                    style: Typographies.boldH1,
-                  ),
+                  Text(tr.add_record.add_new_record, style: Typographies.boldH1),
                   SizedBox(height: 24),
                   InputField.text(
                     fieldTitle: tr.add_record.name,
@@ -146,9 +127,7 @@ class _AddNewRecordPageState extends State<AddNewRecordPage> {
                         lastDate: DateTime(2045),
                       );
                       if (result != null) {
-                        dateController.text = DateFormat(
-                          'dd/MM/yyyy',
-                        ).format(result);
+                        dateController.text = DateFormat('dd/MM/yyyy').format(result);
                       }
                     },
                     validator: (value) {
@@ -161,22 +140,11 @@ class _AddNewRecordPageState extends State<AddNewRecordPage> {
                   SizedBox(height: 16),
                   InputField.selectableInput(
                     onTap: () async {
-                      final TimeOfDay? result = await showTimePicker(
-                        context: context,
-                        initialTime: TimeOfDay.now(),
-                      );
+                      final TimeOfDay? result = await showTimePicker(context: context, initialTime: TimeOfDay.now());
                       if (result != null) {
                         final now = DateTime.now();
-                        final dateTime = DateTime(
-                          now.year,
-                          now.month,
-                          now.day,
-                          result.hour,
-                          result.minute,
-                        );
-                        final formattedTime24Hour = DateFormat(
-                          'HH:mm',
-                        ).format(dateTime);
+                        final dateTime = DateTime(now.year, now.month, now.day, result.hour, result.minute);
+                        final formattedTime24Hour = DateFormat('HH:mm').format(dateTime);
 
                         timeController.text = formattedTime24Hour;
                       }
@@ -195,9 +163,7 @@ class _AddNewRecordPageState extends State<AddNewRecordPage> {
                   SizedBox(height: 16),
                   InputField.selectableInput(
                     onTap: () async {
-                      final result = await SelectServiceTypeBottomSheet.show(
-                        context: context,
-                      );
+                      final result = await SelectServiceTypeBottomSheet.show(context: context);
                       if (result != null) {
                         serviceTypeController.text = result;
                       }

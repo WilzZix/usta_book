@@ -9,6 +9,7 @@ class RecordModel {
   final String clientNumber;
   final String time;
   final ClientStatus? status;
+  final int? visitCount;
 
   RecordModel({
     required this.clientName,
@@ -17,6 +18,7 @@ class RecordModel {
     required this.serviceType,
     required this.clientNumber,
     required this.time,
+    this.visitCount,
     this.status,
   });
 
@@ -29,6 +31,7 @@ class RecordModel {
       clientNumber: json['client_number'],
       time: json['time'],
       status: ClientStatusX.fromString(json['status']),
+      visitCount: json['visit_count'],
     );
   }
 
@@ -41,6 +44,7 @@ class RecordModel {
       'client_number': clientNumber,
       'time': time,
       'status': status!.name,
+      'visit_count': visitCount,
     };
   }
 
@@ -52,6 +56,7 @@ class RecordModel {
     String? clientNumber,
     String? time,
     ClientStatus? status,
+    int? visitCount,
   }) {
     return RecordModel(
       clientName: clientName ?? this.clientName,
@@ -61,6 +66,7 @@ class RecordModel {
       clientNumber: clientNumber ?? this.clientNumber,
       time: time ?? this.time,
       status: status ?? this.status,
+      visitCount: visitCount ?? this.visitCount,
     );
   }
 }

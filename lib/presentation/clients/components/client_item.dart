@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/localization/i18n/strings.g.dart';
 import '../../../core/ui_kit/colors.dart';
 import '../../../core/ui_kit/components/app_icons.dart';
+import '../../../core/ui_kit/components/bottom_sheet.dart';
 import '../../../core/ui_kit/typography.dart';
 import '../../../data/models/record_model.dart';
 
@@ -17,6 +19,7 @@ class ClientItem extends StatefulWidget {
 class _ClientItemState extends State<ClientItem> {
   @override
   Widget build(BuildContext context) {
+    final tr = Translations.of(context);
     return Container(
       margin: EdgeInsets.symmetric(vertical: 4),
       padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
@@ -40,11 +43,19 @@ class _ClientItemState extends State<ClientItem> {
                 style: Typographies.regularBody2.copyWith(color: LightTextColor.secondary),
               ),
               SizedBox(height: 8),
-              Text('10 ta tashrif', style: Typographies.regularBody2.copyWith(color: LightTextColor.secondary)),
+              Text(
+                tr.clients.numberOfVisits(count: widget.data.visitCount ?? 0),
+                style: Typographies.regularBody2.copyWith(color: LightTextColor.secondary),
+              ),
             ],
           ),
           Spacer(),
-          AppIcons.icMenu,
+          GestureDetector(
+            onTap: () {
+              UstaBookBottomSheet.show(context);
+            },
+            child: AppIcons.icMenu,
+          ),
         ],
       ),
     );
