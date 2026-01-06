@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:usta_book/core/ui_kit/colors.dart';
 
 import 'app_icons.dart';
 
@@ -11,6 +12,7 @@ class UstaBookBottomSheet extends StatefulWidget {
   static void show({required BuildContext context, required Widget body, required String header}) {
     showModalBottomSheet(
       context: context,
+      backgroundColor: LightAppColors.secondaryBg,
       builder: (context) {
         return UstaBookBottomSheet(body: body, header: header);
       },
@@ -29,10 +31,10 @@ class _UstaBookBottomSheetState extends State<UstaBookBottomSheet> {
         padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 20),
         child: Column(
           children: [
-            Row(children: [Text(widget.header), AppIcons.icClose]),
-            SizedBox(height: 20),
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [Text(widget.header), AppIcons.icClose]),
             Divider(),
             widget.body,
+            SizedBox(height: MediaQuery.of(context).padding.bottom),
           ],
         ),
       ),

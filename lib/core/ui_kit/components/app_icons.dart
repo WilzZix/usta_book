@@ -20,6 +20,7 @@ class AppIcons {
   static final icProfile = _svgAsset("ic_profile.svg");
   static final icCamera = _svgAsset("ic_camera.svg");
   static final icMenu = _svgAsset("ic_menu.svg");
+  static final icPhone = _svgAsset("ic_phone.svg");
   static final icWatch = _svgAsset("ic_watch.svg");
   static final icUzb = _pngAsset("ic_uzb.png");
   static final icEmptyList = _pngAsset("ic_3d.png");

@@ -9,6 +9,7 @@ class Assets {
   static const String fontsNunitoSansSemiBold = 'assets/fonts/NunitoSans-SemiBold.ttf';
   static const String fontsSemiBold = 'assets/fonts/SemiBold.ttf';
   static const String imagesCalendar = 'assets/images/calendar.png';
+  static const String imagesFrame = 'assets/images/ic_phone.svg';
   static const String imagesIc3d = 'assets/images/ic_3d.png';
   static const String imagesIcAddCustomer = 'assets/images/ic_add_customer.svg';
   static const String imagesIcArrowLeft = 'assets/images/ic_arrow_left.svg';
