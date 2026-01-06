@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:usta_book/core/ui_kit/colors.dart';
+import 'package:usta_book/core/ui_kit/typography.dart';
 
 import 'app_icons.dart';
 
@@ -31,7 +32,14 @@ class _UstaBookBottomSheetState extends State<UstaBookBottomSheet> {
         padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 20),
         child: Column(
           children: [
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [Text(widget.header), AppIcons.icClose]),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(widget.header, style: Typographies.semiBoldH2),
+                AppIcons.icClose,
+              ],
+            ),
+            SizedBox(height: 24),
             Divider(),
             widget.body,
             SizedBox(height: MediaQuery.of(context).padding.bottom),

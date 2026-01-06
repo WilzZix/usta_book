@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:usta_book/bloc/clients/clients_bloc.dart';
 import 'package:usta_book/core/ui_kit/components/button.dart';
 
 import '../../../core/localization/i18n/strings.g.dart';
@@ -113,6 +115,7 @@ class _ClientItemState extends State<ClientItem> {
                     MainButton.logout(
                       title: "Mijozni o'chirish",
                       icon: Icon(Icons.delete, color: StateColor.error),
+                      onTap: () => context.read<ClientsBloc>().add(DeleterClientEvent(record: widget.data)),
                     ),
                   ],
                 ),
@@ -159,7 +162,7 @@ class ClientInfoItem extends StatelessWidget {
       padding: EdgeInsets.all(8),
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: LightAppColors.body),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.max,
         children: [
           icon,
