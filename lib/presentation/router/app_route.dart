@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:usta_book/bloc/auth/auth_cubit.dart';
-import 'package:usta_book/data/models/record_model.dart';
+import 'package:usta_book/data/models/client_model.dart';
 import 'package:usta_book/presentation/add_new_record/add_new_record_page.dart';
 import 'package:usta_book/presentation/clients/clients_list_page.dart';
 import 'package:usta_book/presentation/home/home_page.dart';
@@ -110,7 +110,7 @@ class AppRoute {
       GoRoute(
         path: AddNewAppointmentPage.tag,
         name: AddNewAppointmentPage.tag,
-        builder: (_, state) => AddNewAppointmentPage(record: state.extra as RecordModel),
+        builder: (_, state) => AddNewAppointmentPage(record: state.extra as ClientModel),
       ),
       GoRoute(path: MainHomeScreen.tag, name: MainHomeScreen.tag, builder: (_, __) => MainHomeScreen()),
       GoRoute(path: AddNewRecordPage.tag, name: AddNewRecordPage.tag, builder: (_, __) => AddNewRecordPage()),

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 import 'package:usta_book/bloc/clients/clients_bloc.dart';
 import 'package:usta_book/core/ui_kit/components/button.dart';
 
@@ -11,33 +9,21 @@ import '../../../core/ui_kit/colors.dart';
 import '../../../core/ui_kit/components/app_icons.dart';
 import '../../../core/ui_kit/components/bottom_sheet.dart';
 import '../../../core/ui_kit/typography.dart';
+import '../../../data/models/client_model.dart';
 import '../../../data/models/record_model.dart';
+import '../../../shared/mixins/phone_call_mixin.dart';
 import '../add_new_appointment_page.dart';
 
 class ClientItem extends StatefulWidget {
   const ClientItem({super.key, required this.data});
 
-  final RecordModel data;
+  final ClientModel data;
 
   @override
   State<ClientItem> createState() => _ClientItemState();
 }
 
-class _ClientItemState extends State<ClientItem> {
-  Future<void> makePhoneCall(String firebasePhoneNumber) async {
-    // 1. Clean the string: remove spaces, (), and -
-    // This turns "+998 (94) 691-49-77" into "+998946914977"
-    final String cleanNumber = firebasePhoneNumber.replaceAll(RegExp(r'[^\d+]'), '');
-
-    final Uri launchUri = Uri(scheme: 'tel', path: cleanNumber);
-
-    if (await canLaunchUrl(launchUri)) {
-      await launchUrl(launchUri, mode: LaunchMode.externalApplication);
-    } else {
-      print('Could not launch $launchUri');
-    }
-  }
-
+class _ClientItemState extends State<ClientItem> with PhoneCallMixin {
   @override
   Widget build(BuildContext context) {
     final tr = Translations.of(context);
@@ -106,7 +92,7 @@ class _ClientItemState extends State<ClientItem> {
                     SizedBox(height: 12),
                     BottomSheetItem(
                       title: "So'ngi tashrifi",
-                      description: widget.data.date,
+                      description: widget.data.lastVisitDate,
                       style: Typographies.regularBody2.copyWith(color: LightTextColor.secondary),
                     ),
                     SizedBox(height: 12),
@@ -140,7 +126,9 @@ class _ClientItemState extends State<ClientItem> {
                     MainButton.logout(
                       title: "Mijozni o'chirish",
                       icon: Icon(Icons.delete, color: StateColor.error),
-                      onTap: () => context.read<ClientsBloc>().add(DeleterClientEvent(record: widget.data)),
+                      onTap: () {
+                        // context.read<ClientsBloc>().add(DeleterClientEvent(record: widget.data.lastVisitDate)
+                      },
                     ),
                   ],
                 ),

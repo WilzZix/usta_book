@@ -6,6 +6,8 @@ import 'package:usta_book/data/models/record_model.dart';
 import 'package:usta_book/data/sources/local/shared_pref.dart';
 import 'package:usta_book/domain/repositories/clients/i_clients.dart';
 
+import '../../data/models/client_model.dart';
+
 part 'clients_event.dart';
 
 part 'clients_state.dart';

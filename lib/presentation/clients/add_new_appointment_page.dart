@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:usta_book/core/ui_kit/colors.dart';
 import 'package:usta_book/core/ui_kit/typography.dart';
+import 'package:usta_book/data/models/client_model.dart';
 import 'package:usta_book/data/models/record_model.dart';
 
 import '../../bloc/master/master_bloc.dart';
@@ -10,12 +11,13 @@ import '../../core/localization/i18n/strings.g.dart';
 import '../../core/ui_kit/components/app_icons.dart';
 import '../../core/ui_kit/components/button.dart';
 import '../../core/ui_kit/components/inputs/inputs.dart';
+import '../../domain/enums/enums.dart';
 import '../add_new_record/components/select_service_type_bottom_sheet.dart';
 
 class AddNewAppointmentPage extends StatefulWidget {
   const AddNewAppointmentPage({super.key, required this.record});
 
-  final RecordModel record;
+  final ClientModel record;
   static const String tag = '/add-new-appointment';
 
   @override
@@ -140,11 +142,14 @@ class _AddNewAppointmentPageState extends State<AddNewAppointmentPage> {
                           if (_formKey.currentState!.validate()) {
                             context.read<MasterBloc>().add(
                               AddRecordEvent(
-                                record: widget.record.copyWith(
+                                record: RecordModel(
+                                  clientName: widget.record.clientName,
                                   date: dateController.text,
                                   price: priceController.text,
                                   serviceType: serviceTypeController.text,
+                                  clientNumber: widget.record.clientNumber,
                                   time: timeController.text,
+                                  status: ClientStatus.waiting,
                                 ),
                               ),
                             );
