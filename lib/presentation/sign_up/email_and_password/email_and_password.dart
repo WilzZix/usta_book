@@ -18,7 +18,6 @@ class EmailAndPassword extends StatefulWidget {
 class _EmailAndPasswordState extends State<EmailAndPassword> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -40,15 +39,9 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
             SizedBox(height: 36),
             BlocBuilder<SignUpBloc, SignUpState>(
               builder: (context, state) {
-                if (state is SignUpLoadingState) {
-                  isLoading = true;
-                }
-                if (state is SignedUpSuccessState || state is SignedUpFailureState) {
-                  isLoading = false;
-                }
                 return MainButton.primary(
                   title: tr.buttons.send_code_phone_number,
-                  isLoading: isLoading,
+                  isLoading: state is SignUpLoadingState,
                   onTap: () {
                     BlocProvider.of<SignUpBloc>(context).add(
                       SignUpWithEmailAndPasswordEvent(email: emailController.text, password: passwordController.text),

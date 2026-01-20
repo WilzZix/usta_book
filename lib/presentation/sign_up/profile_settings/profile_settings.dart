@@ -48,15 +48,11 @@ class _ProfileSettingsState extends State<ProfileSettings> {
 
   Future<void> _selectTimeEnd(BuildContext context) async {
     final tr = Translations.of(context);
-    final TimeOfDay? picked = await showTimePicker(
-      context: context,
-      initialTime: _selectedTimeEnd,
-    );
+    final TimeOfDay? picked = await showTimePicker(context: context, initialTime: _selectedTimeEnd);
 
     if (picked != null && picked != _selectedTimeEnd) {
       // 1. Convert TimeOfDay to a comparable value (e.g., minutes since midnight)
-      int beginMinutes =
-          _selectedTimeBegin.hour * 60 + _selectedTimeBegin.minute;
+      int beginMinutes = _selectedTimeBegin.hour * 60 + _selectedTimeBegin.minute;
       int pickedMinutes = picked.hour * 60 + picked.minute;
 
       // 2. Check if the picked time is strictly *after* the begin time
@@ -66,8 +62,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
           // Format the time for the controller
           // Note: You might want to use a package like `intl` for better formatting,
           // especially for adding leading zeros (e.g., 09:05).
-          endTimeController.text =
-              '${_selectedTimeEnd.hour}:${_selectedTimeEnd.minute.toString().padLeft(2, '0')}';
+          endTimeController.text = '${_selectedTimeEnd.hour}:${_selectedTimeEnd.minute.toString().padLeft(2, '0')}';
           _updateWorkingHours();
         });
       } else {
@@ -82,27 +77,19 @@ class _ProfileSettingsState extends State<ProfileSettings> {
 
   // You'll need to add a helper function to show an error, like this:
   void _showTimeError(BuildContext context, String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-        duration: const Duration(seconds: 3),
-        backgroundColor: Colors.red,
-      ),
-    );
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(message), duration: const Duration(seconds: 3), backgroundColor: Colors.red));
   }
 
   // Note: You should also update your _selectTimeBegin to use a proper formatting
   // for minutes (e.g., with a leading zero).
   Future<void> _selectTimeBegin(BuildContext context) async {
-    final TimeOfDay? picked = await showTimePicker(
-      context: context,
-      initialTime: _selectedTimeBegin,
-    );
+    final TimeOfDay? picked = await showTimePicker(context: context, initialTime: _selectedTimeBegin);
     if (picked != null && picked != _selectedTimeBegin) {
       setState(() {
         _selectedTimeBegin = picked;
-        beginTimeController.text =
-            '${_selectedTimeBegin.hour}:${_selectedTimeBegin.minute.toString().padLeft(2, '0')}';
+        beginTimeController.text = '${_selectedTimeBegin.hour}:${_selectedTimeBegin.minute.toString().padLeft(2, '0')}';
         _updateWorkingHours();
       });
     }
@@ -133,10 +120,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
   Widget build(BuildContext context) {
     final tr = Translations.of(context);
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: false,
-        title: Text(tr.sign_up.back, style: Typographies.regularBody),
-      ),
+      appBar: AppBar(centerTitle: false, title: Text(tr.sign_up.back, style: Typographies.regularBody)),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: SingleChildScrollView(
@@ -145,21 +129,12 @@ class _ProfileSettingsState extends State<ProfileSettings> {
             child: Column(
               children: [
                 SizedBox(height: 24),
-                Text(
-                  tr.sign_up.profile_settings_title,
-                  style: Typographies.boldH1,
-                ),
+                Text(tr.sign_up.profile_settings_title, style: Typographies.boldH1),
                 SizedBox(height: 8),
-                Text(
-                  tr.sign_up.profile_settings_title_desc,
-                  style: Typographies.regularBody,
-                ),
+                Text(tr.sign_up.profile_settings_title_desc, style: Typographies.regularBody),
                 SizedBox(height: 24),
                 Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: LightAppColors.secondaryBg,
-                  ),
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: LightAppColors.secondaryBg),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -170,28 +145,19 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                           children: [
                             AppIcons.icProfile,
                             SizedBox(height: 8),
-                            Text(
-                              tr.sign_up.upload_photo,
-                              style: Typographies.regularBody2,
-                            ),
+                            Text(tr.sign_up.upload_photo, style: Typographies.regularBody2),
                           ],
                         ),
                       ),
                       Spacer(),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10.0, right: 10),
-                        child: AppIcons.icCamera,
-                      ),
+                      Padding(padding: const EdgeInsets.only(top: 10.0, right: 10), child: AppIcons.icCamera),
                     ],
                   ),
                 ),
                 SizedBox(height: 24),
                 Container(
                   padding: EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: LightAppColors.secondaryBg,
-                  ),
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: LightAppColors.secondaryBg),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -222,8 +188,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                                     itemBuilder: (context, index) {
                                       return GestureDetector(
                                         onTap: () {
-                                          serviceTypeController.text =
-                                              state.data[index].nameRu;
+                                          serviceTypeController.text = state.data[index].nameRu;
                                           context.pop();
                                         },
                                         child: Text(state.data[index].nameRu),
@@ -247,9 +212,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                           controller: serviceTypeController,
                           suffixIcon: Icon(Icons.keyboard_arrow_down_rounded),
                           onTap: () {
-                            BlocProvider.of<MasterBloc>(
-                              context,
-                            ).add(GetServiceTypes());
+                            BlocProvider.of<MasterBloc>(context).add(GetServiceTypes());
                           },
                         ),
                       ),
@@ -259,25 +222,17 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                 SizedBox(height: 24),
                 Container(
                   padding: EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: LightAppColors.secondaryBg,
-                  ),
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: LightAppColors.secondaryBg),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        tr.sign_up.work_schedule,
-                        style: Typographies.regularH3,
-                      ),
+                      Text(tr.sign_up.work_schedule, style: Typographies.regularH3),
                       SizedBox(height: 16),
                       Row(
                         children: [
                           Text(
                             tr.sign_up.monday,
-                            style: Typographies.regularBody.copyWith(
-                              color: LightTextColor.secondary,
-                            ),
+                            style: Typographies.regularBody.copyWith(color: LightTextColor.secondary),
                           ),
                           Spacer(),
                           SizedBox(
@@ -287,13 +242,11 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                               value: isMondayChecked,
                               onChanged: (value) {
                                 setState(() {
-                                  isMondayChecked =
-                                      !isMondayChecked; // Обновляем состояние
+                                  isMondayChecked = !isMondayChecked; // Обновляем состояние
                                   const dayKey = 'mon';
                                   if (value) {
                                     // ЕСЛИ ВКЛЮЧИЛИ: Добавляем или обновляем время
-                                    final timeRange =
-                                        '${beginTimeController.text} - ${endTimeController.text}';
+                                    final timeRange = '${beginTimeController.text} - ${endTimeController.text}';
                                     workingHours[dayKey] = timeRange.isEmpty
                                         ? '09:00 - 18:00'
                                         : timeRange; // Убедитесь, что время не пустое
@@ -313,9 +266,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                         children: [
                           Text(
                             tr.sign_up.tuesday,
-                            style: Typographies.regularBody.copyWith(
-                              color: LightTextColor.secondary,
-                            ),
+                            style: Typographies.regularBody.copyWith(color: LightTextColor.secondary),
                           ),
                           Spacer(),
                           SizedBox(
@@ -325,13 +276,11 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                               value: isTuesdayChecked,
                               onChanged: (value) {
                                 setState(() {
-                                  isTuesdayChecked =
-                                      !isTuesdayChecked; // Обновляем состояние
+                                  isTuesdayChecked = !isTuesdayChecked; // Обновляем состояние
                                   const dayKey = 'tue';
                                   if (value) {
                                     // ЕСЛИ ВКЛЮЧИЛИ: Добавляем или обновляем время
-                                    final timeRange =
-                                        '${beginTimeController.text} - ${endTimeController.text}';
+                                    final timeRange = '${beginTimeController.text} - ${endTimeController.text}';
                                     workingHours[dayKey] = timeRange.isEmpty
                                         ? '09:00 - 18:00'
                                         : timeRange; // Убедитесь, что время не пустое
@@ -351,9 +300,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                         children: [
                           Text(
                             tr.sign_up.wednesday,
-                            style: Typographies.regularBody.copyWith(
-                              color: LightTextColor.secondary,
-                            ),
+                            style: Typographies.regularBody.copyWith(color: LightTextColor.secondary),
                           ),
                           Spacer(),
                           SizedBox(
@@ -363,13 +310,11 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                               value: isWednesdayChecked,
                               onChanged: (value) {
                                 setState(() {
-                                  isWednesdayChecked =
-                                      !isWednesdayChecked; // Обновляем состояние
+                                  isWednesdayChecked = !isWednesdayChecked; // Обновляем состояние
                                   const dayKey = 'wed';
                                   if (value) {
                                     // ЕСЛИ ВКЛЮЧИЛИ: Добавляем или обновляем время
-                                    final timeRange =
-                                        '${beginTimeController.text} - ${endTimeController.text}';
+                                    final timeRange = '${beginTimeController.text} - ${endTimeController.text}';
                                     workingHours[dayKey] = timeRange.isEmpty
                                         ? '09:00 - 18:00'
                                         : timeRange; // Убедитесь, что время не пустое
@@ -389,9 +334,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                         children: [
                           Text(
                             tr.sign_up.thursday,
-                            style: Typographies.regularBody.copyWith(
-                              color: LightTextColor.secondary,
-                            ),
+                            style: Typographies.regularBody.copyWith(color: LightTextColor.secondary),
                           ),
                           Spacer(),
                           SizedBox(
@@ -401,13 +344,11 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                               value: isThursdayChecked,
                               onChanged: (value) {
                                 setState(() {
-                                  isThursdayChecked =
-                                      !isThursdayChecked; // Обновляем состояние
+                                  isThursdayChecked = !isThursdayChecked; // Обновляем состояние
                                   const dayKey = 'thurs';
                                   if (value) {
                                     // ЕСЛИ ВКЛЮЧИЛИ: Добавляем или обновляем время
-                                    final timeRange =
-                                        '${beginTimeController.text} - ${endTimeController.text}';
+                                    final timeRange = '${beginTimeController.text} - ${endTimeController.text}';
                                     workingHours[dayKey] = timeRange.isEmpty
                                         ? '09:00 - 18:00'
                                         : timeRange; // Убедитесь, что время не пустое
@@ -427,9 +368,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                         children: [
                           Text(
                             tr.sign_up.friday,
-                            style: Typographies.regularBody.copyWith(
-                              color: LightTextColor.secondary,
-                            ),
+                            style: Typographies.regularBody.copyWith(color: LightTextColor.secondary),
                           ),
                           Spacer(),
                           SizedBox(
@@ -439,13 +378,11 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                               value: isFridayChecked,
                               onChanged: (value) {
                                 setState(() {
-                                  isFridayChecked =
-                                      !isFridayChecked; // Обновляем состояние
+                                  isFridayChecked = !isFridayChecked; // Обновляем состояние
                                   const dayKey = 'fri';
                                   if (value) {
                                     // ЕСЛИ ВКЛЮЧИЛИ: Добавляем или обновляем время
-                                    final timeRange =
-                                        '${beginTimeController.text} - ${endTimeController.text}';
+                                    final timeRange = '${beginTimeController.text} - ${endTimeController.text}';
                                     workingHours[dayKey] = timeRange.isEmpty
                                         ? '09:00 - 18:00'
                                         : timeRange; // Убедитесь, что время не пустое
@@ -465,9 +402,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                         children: [
                           Text(
                             tr.sign_up.saturday,
-                            style: Typographies.regularBody.copyWith(
-                              color: LightTextColor.secondary,
-                            ),
+                            style: Typographies.regularBody.copyWith(color: LightTextColor.secondary),
                           ),
                           Spacer(),
                           SizedBox(
@@ -477,13 +412,11 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                               value: isSaturdayChecked,
                               onChanged: (value) {
                                 setState(() {
-                                  isSaturdayChecked =
-                                      !isSaturdayChecked; // Обновляем состояние
+                                  isSaturdayChecked = !isSaturdayChecked; // Обновляем состояние
                                   const dayKey = 'sat';
                                   if (value) {
                                     // ЕСЛИ ВКЛЮЧИЛИ: Добавляем или обновляем время
-                                    final timeRange =
-                                        '${beginTimeController.text} - ${endTimeController.text}';
+                                    final timeRange = '${beginTimeController.text} - ${endTimeController.text}';
                                     workingHours[dayKey] = timeRange.isEmpty
                                         ? '09:00 - 18:00'
                                         : timeRange; // Убедитесь, что время не пустое
@@ -503,9 +436,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                         children: [
                           Text(
                             tr.sign_up.sunday,
-                            style: Typographies.regularBody.copyWith(
-                              color: LightTextColor.secondary,
-                            ),
+                            style: Typographies.regularBody.copyWith(color: LightTextColor.secondary),
                           ),
                           Spacer(),
                           SizedBox(
@@ -515,13 +446,11 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                               value: isSundayChecked,
                               onChanged: (value) {
                                 setState(() {
-                                  isSundayChecked =
-                                      !isSundayChecked; // Обновляем состояние
+                                  isSundayChecked = !isSundayChecked; // Обновляем состояние
                                   const dayKey = 'sun';
                                   if (value) {
                                     // ЕСЛИ ВКЛЮЧИЛИ: Добавляем или обновляем время
-                                    final timeRange =
-                                        '${beginTimeController.text} - ${endTimeController.text}';
+                                    final timeRange = '${beginTimeController.text} - ${endTimeController.text}';
                                     workingHours[dayKey] = timeRange.isEmpty
                                         ? '09:00 - 18:00'
                                         : timeRange; // Убедитесь, что время не пустое
@@ -582,22 +511,27 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                       BlocProvider.of<AuthCubit>(context).setProfileComplete();
                     }
                   },
-                  child: MainButton.primary(
-                    title: tr.sign_up.complete_settings,
-                    onTap: () {
-                      if (_formKey.currentState!.validate()) {
-                        BlocProvider.of<MasterBloc>(context).add(
-                          UpdateMasterProfile(
-                            masterProfile: MasterProfile(
-                              name: nameController.text,
-                              serviceType: serviceTypeController.text,
-                              workingHours: workingHours,
-                              profileCompleted: true,
-                              uid: '',
-                            ),
-                          ),
-                        );
-                      }
+                  child: BlocBuilder<MasterBloc, MasterState>(
+                    builder: (context, state) {
+                      return MainButton.primary(
+                        isLoading: state is MasterProfileUpdating,
+                        title: tr.sign_up.complete_settings,
+                        onTap: () {
+                          if (_formKey.currentState!.validate()) {
+                            BlocProvider.of<MasterBloc>(context).add(
+                              UpdateMasterProfile(
+                                masterProfile: MasterProfile(
+                                  name: nameController.text,
+                                  serviceType: serviceTypeController.text,
+                                  workingHours: workingHours,
+                                  profileCompleted: true,
+                                  uid: '',
+                                ),
+                              ),
+                            );
+                          }
+                        },
+                      );
                     },
                   ),
                 ),

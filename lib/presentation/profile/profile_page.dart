@@ -26,11 +26,16 @@ class _State extends State<ProfilePage> {
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Column(
             children: [
-              MainButton.logout(
-                title: tr.profile.logout,
-                icon: AppIcons.icLogout,
-                onTap: () {
-                  BlocProvider.of<AuthCubit>(context).logOut();
+              BlocBuilder<AuthCubit, AuthState>(
+                builder: (context, state) {
+                  return MainButton.logout(
+                    isLoading: state is UserLoggingOutState,
+                    title: tr.profile.logout,
+                    icon: AppIcons.icLogout,
+                    onTap: () {
+                      BlocProvider.of<AuthCubit>(context).logOut();
+                    },
+                  );
                 },
               ),
             ],

@@ -28,6 +28,7 @@ class MasterBloc extends Bloc<MasterEvent, MasterState> {
     UpdateMasterProfile event,
     Emitter<MasterState> emit,
   ) async {
+    emit(MasterProfileUpdating());
     await masterProfileUseCase.updateMasterProfile(
       shredPrefService.getMasterUID()!,
       event.masterProfile.copyWith(uid: shredPrefService.getMasterUID()),

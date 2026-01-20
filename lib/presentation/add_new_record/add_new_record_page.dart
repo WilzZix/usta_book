@@ -192,24 +192,29 @@ class _AddNewRecordPageState extends State<AddNewRecordPage> {
                     },
                   ),
                   SizedBox(height: 16),
-                  MainButton.primary(
-                    title: tr.add_record.save,
-                    onTap: () {
-                      if (_formKey.currentState!.validate()) {
-                        context.read<MasterBloc>().add(
-                          AddRecordEvent(
-                            record: RecordModel(
-                              clientName: nameController.text,
-                              date: dateController.text,
-                              price: priceController.text,
-                              serviceType: serviceTypeController.text,
-                              clientNumber: phoneController.text,
-                              time: timeController.text,
-                              status: ClientStatus.waiting,
-                            ),
-                          ),
-                        );
-                      }
+                  BlocBuilder<MasterBloc, MasterState>(
+                    builder: (context, state) {
+                      return MainButton.primary(
+                        title: tr.add_record.save,
+                        isLoading: state is AddingRecordState,
+                        onTap: () {
+                          if (_formKey.currentState!.validate()) {
+                            context.read<MasterBloc>().add(
+                              AddRecordEvent(
+                                record: RecordModel(
+                                  clientName: nameController.text,
+                                  date: dateController.text,
+                                  price: priceController.text,
+                                  serviceType: serviceTypeController.text,
+                                  clientNumber: phoneController.text,
+                                  time: timeController.text,
+                                  status: ClientStatus.waiting,
+                                ),
+                              ),
+                            );
+                          }
+                        },
+                      );
                     },
                   ),
                   SizedBox(height: MediaQuery.of(context).padding.bottom + 16),

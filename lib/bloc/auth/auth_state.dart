@@ -25,14 +25,20 @@ class AuthUnauthenticated extends AuthState {
 class AuthProfileIncomplete extends AuthState {
   final User firebaseUser;
 
-  const AuthProfileIncomplete({required this.firebaseUser})
-    : super(AuthStatus.authIncomplete);
+  const AuthProfileIncomplete({required this.firebaseUser}) : super(AuthStatus.authIncomplete);
 }
 
 // 4. Пользователь полностью авторизован и профиль завершен (может пользоваться приложением)
 class AuthAuthenticated extends AuthState {
   final User firebaseUser;
 
-  const AuthAuthenticated({required this.firebaseUser})
-    : super(AuthStatus.authenticated);
+  const AuthAuthenticated({required this.firebaseUser}) : super(AuthStatus.authenticated);
+}
+
+class UserLoggingOutState extends AuthState {
+  const UserLoggingOutState(super.status);
+}
+
+class UserLogoutError extends AuthState {
+  UserLogoutError(super.status);
 }

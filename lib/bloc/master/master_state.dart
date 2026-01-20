@@ -6,7 +6,7 @@ sealed class MasterState {}
 final class MasterInitial extends MasterState {}
 
 class MasterProfileUpdated extends MasterState {}
-
+class MasterProfileUpdating extends MasterState {}
 class MasterProfileLoaded extends MasterState {
   final MasterProfile? profile;
 

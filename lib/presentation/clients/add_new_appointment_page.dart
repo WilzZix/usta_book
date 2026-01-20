@@ -131,21 +131,26 @@ class _AddNewAppointmentPageState extends State<AddNewAppointmentPage> {
                     },
                   ),
                   SizedBox(height: 16),
-                  MainButton.primary(
-                    title: tr.add_record.save,
-                    onTap: () {
-                      if (_formKey.currentState!.validate()) {
-                        context.read<MasterBloc>().add(
-                          AddRecordEvent(
-                            record: widget.record.copyWith(
-                              date: dateController.text,
-                              price: priceController.text,
-                              serviceType: serviceTypeController.text,
-                              time: timeController.text,
-                            ),
-                          ),
-                        );
-                      }
+                  BlocBuilder<MasterBloc, MasterState>(
+                    builder: (context, state) {
+                      return MainButton.primary(
+                        isLoading: state is AddingRecordState,
+                        title: tr.add_record.save,
+                        onTap: () {
+                          if (_formKey.currentState!.validate()) {
+                            context.read<MasterBloc>().add(
+                              AddRecordEvent(
+                                record: widget.record.copyWith(
+                                  date: dateController.text,
+                                  price: priceController.text,
+                                  serviceType: serviceTypeController.text,
+                                  time: timeController.text,
+                                ),
+                              ),
+                            );
+                          }
+                        },
+                      );
                     },
                   ),
                 ],
