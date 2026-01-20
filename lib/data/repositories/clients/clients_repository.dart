@@ -30,4 +30,22 @@ class ClientsRepository implements IClients {
       debugPrint(e.toString());
     }
   }
+
+  @override
+  Future<void> editClient(String masterUID, RecordModel record) async {
+    try {
+      var query = await FirebaseFirestore.instance
+          .collection('masters')
+          .doc(masterUID)
+          .collection('records')
+          .where('client_name', isEqualTo: record.clientName)
+          .get();
+
+      for (var doc in query.docs) {
+        await doc.reference.update(record.toJson());
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 }

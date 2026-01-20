@@ -9,6 +9,8 @@ class SignedUpSuccessState extends SignUpState {
   SignedUpSuccessState();
 }
 
+class SignUpLoadingState extends SignUpState {}
+
 class SignedUpFailureState extends SignUpState {
   final String msg;
 

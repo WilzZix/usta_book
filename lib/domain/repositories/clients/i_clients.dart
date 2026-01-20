@@ -4,4 +4,5 @@ abstract class IClients {
   Future<List<RecordModel>> getClients(String masterUID);
 
   Future<void> deleteClient(String masterUID, RecordModel record);
+  Future<void> editClient(String masterUID, RecordModel record);
 }

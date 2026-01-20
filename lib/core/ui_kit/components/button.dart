@@ -12,46 +12,29 @@ class MainButton extends StatefulWidget {
     required this.type,
     this.icon,
     this.onTap,
+    required this.isLoading,
     super.key,
   });
 
-  const MainButton.primary({
-    required String title,
-    VoidCallback? onTap,
-    Widget? icon,
-    Key? key,
-  }) : this._(
-         key: key,
-         icon: icon,
-         title: title,
-         type: ButtonType.primary,
-         onTap: onTap,
-       );
+  const MainButton.primary({required String title, VoidCallback? onTap, Widget? icon, bool isLoading = false, Key? key})
+    : this._(key: key, icon: icon, title: title, type: ButtonType.primary, onTap: onTap, isLoading: isLoading);
 
   const MainButton.secondary({
     required String title,
     VoidCallback? onTap,
     Widget? icon,
+    bool isLoading = false,
     Key? key,
-  }) : this._(key: key, icon: icon, title: title, type: ButtonType.secondary);
+  }) : this._(key: key, icon: icon, title: title, type: ButtonType.secondary, isLoading: isLoading);
 
-  const MainButton.logout({
-    required String title,
-    VoidCallback? onTap,
-    Widget? icon,
-    Key? key,
-  }) : this._(
-         key: key,
-         icon: icon,
-         title: title,
-         type: ButtonType.logOut,
-         onTap: onTap,
-       );
+  const MainButton.logout({required String title, VoidCallback? onTap, Widget? icon, bool isLoading = false, Key? key})
+    : this._(key: key, icon: icon, title: title, type: ButtonType.logOut, onTap: onTap, isLoading: isLoading);
 
   final String title;
   final Widget? icon;
   final ButtonType type;
   final VoidCallback? onTap;
+  final bool isLoading;
 
   @override
   State<MainButton> createState() => _MainButtonState();
@@ -103,26 +86,33 @@ class _MainButtonState extends State<MainButton> {
     return Material(
       child: InkWell(
         statesController: _inkStateController,
-        onTap: widget.onTap,
+        onTap: widget.isLoading ? null : widget.onTap,
         child: Ink(
           padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
           decoration: _boxDecoration(widget.type),
-          child: ValueListenableBuilder(
-            valueListenable: _onPressState,
-            builder: (_, state, __) {
-              return Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  if (widget.icon != null) ...[
-                    widget.icon ?? SizedBox(),
-                    const SizedBox(width: 8),
+          child: widget.isLoading
+              ? Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox.square(
+                      dimension: 24,
+                      child: Center(child: CircularProgressIndicator(color: LightAppColors.body, strokeWidth: 2)),
+                    ),
                   ],
-                  Text(widget.title, style: _textStyleType(widget.type)),
-                ],
-              );
-            },
-          ),
+                )
+              : ValueListenableBuilder(
+                  valueListenable: _onPressState,
+                  builder: (_, state, __) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        if (widget.icon != null) ...[widget.icon ?? SizedBox(), const SizedBox(width: 8)],
+                        Text(widget.title, style: _textStyleType(widget.type)),
+                      ],
+                    );
+                  },
+                ),
         ),
       ),
     );
@@ -131,10 +121,7 @@ class _MainButtonState extends State<MainButton> {
   BoxDecoration _boxDecoration(ButtonType type) {
     switch (type) {
       case ButtonType.primary:
-        return BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          color: LightAppColors.primary,
-        );
+        return BoxDecoration(borderRadius: BorderRadius.circular(8), color: LightAppColors.primary);
 
       case ButtonType.secondary:
         return _secondaryDecoration();
@@ -157,14 +144,10 @@ class _MainButtonState extends State<MainButton> {
   TextStyle _textStyleType(ButtonType type) {
     switch (type) {
       case ButtonType.primary:
-        return Typographies.regularButton.copyWith(
-          color: LightAppColors.secondaryBg,
-        );
+        return Typographies.regularButton.copyWith(color: LightAppColors.secondaryBg);
 
       case ButtonType.secondary:
-        return Typographies.regularButton.copyWith(
-          color: LightAppColors.primary,
-        );
+        return Typographies.regularButton.copyWith(color: LightAppColors.primary);
       case ButtonType.logOut:
         return Typographies.regularButton.copyWith(color: StateColor.error);
     }

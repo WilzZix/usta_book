@@ -8,23 +8,17 @@ part 'sign_up_event.dart';
 part 'sign_up_state.dart';
 
 class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
-  SignUpBloc(this.signUpUseCase, this.shredPrefService)
-    : super(SignUpInitial()) {
+  SignUpBloc(this.signUpUseCase, this.shredPrefService) : super(SignUpInitial()) {
     on<SignUpWithEmailAndPasswordEvent>(_signedUpWithEmailAndPassword);
   }
 
   final SignUpUseCase signUpUseCase;
   final ShredPrefService shredPrefService;
 
-  Future<void> _signedUpWithEmailAndPassword(
-    SignUpWithEmailAndPasswordEvent event,
-    Emitter<SignUpState> emit,
-  ) async {
+  Future<void> _signedUpWithEmailAndPassword(SignUpWithEmailAndPasswordEvent event, Emitter<SignUpState> emit) async {
+    emit(SignUpLoadingState());
     try {
-      final userCred = await signUpUseCase.signUpWithEmailAndPassword(
-        email: event.email,
-        password: event.password,
-      );
+      final userCred = await signUpUseCase.signUpWithEmailAndPassword(email: event.email, password: event.password);
       shredPrefService.setMasterUID(masterUID: userCred!.user!.uid);
       emit(SignedUpSuccessState());
     } catch (e) {

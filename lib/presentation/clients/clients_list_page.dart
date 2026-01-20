@@ -22,6 +22,12 @@ class _ClientsListPageState extends State<ClientsListPage> {
   TextEditingController searchController = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<ClientsBloc>(context).add(GetClientsEvent());
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: LightAppColors.body,

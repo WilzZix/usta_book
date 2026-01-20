@@ -18,6 +18,7 @@ class EmailAndPassword extends StatefulWidget {
 class _EmailAndPasswordState extends State<EmailAndPassword> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -33,24 +34,26 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
             SizedBox(height: 8),
             Text(tr.sign_up.welcome_desc, style: Typographies.regularBody),
             SizedBox(height: 36),
-            InputField.email(
-              fieldTitle: tr.input_field.email_field,
-              controller: emailController,
-            ),
+            InputField.email(fieldTitle: tr.input_field.email_field, controller: emailController),
             SizedBox(height: 8),
-            InputField.password(
-              fieldTitle: tr.input_field.password_field,
-              controller: passwordController,
-            ),
+            InputField.password(fieldTitle: tr.input_field.password_field, controller: passwordController),
             SizedBox(height: 36),
-            MainButton.primary(
-              title: tr.buttons.send_code_phone_number,
-              onTap: () {
-                BlocProvider.of<SignUpBloc>(context).add(
-                  SignUpWithEmailAndPasswordEvent(
-                    email: emailController.text,
-                    password: passwordController.text,
-                  ),
+            BlocBuilder<SignUpBloc, SignUpState>(
+              builder: (context, state) {
+                if (state is SignUpLoadingState) {
+                  isLoading = true;
+                }
+                if (state is SignedUpSuccessState || state is SignedUpFailureState) {
+                  isLoading = false;
+                }
+                return MainButton.primary(
+                  title: tr.buttons.send_code_phone_number,
+                  isLoading: isLoading,
+                  onTap: () {
+                    BlocProvider.of<SignUpBloc>(context).add(
+                      SignUpWithEmailAndPasswordEvent(email: emailController.text, password: passwordController.text),
+                    );
+                  },
                 );
               },
             ),

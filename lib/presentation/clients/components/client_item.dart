@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import 'package:usta_book/bloc/clients/clients_bloc.dart';
 import 'package:usta_book/core/ui_kit/components/button.dart';
 
@@ -9,6 +11,7 @@ import '../../../core/ui_kit/components/app_icons.dart';
 import '../../../core/ui_kit/components/bottom_sheet.dart';
 import '../../../core/ui_kit/typography.dart';
 import '../../../data/models/record_model.dart';
+import '../add_new_appointment_page.dart';
 
 class ClientItem extends StatefulWidget {
   const ClientItem({super.key, required this.data});
@@ -99,6 +102,9 @@ class _ClientItemState extends State<ClientItem> {
                     ),
                     SizedBox(height: 20),
                     MainButton.primary(
+                      onTap: () {
+                        context.push(AddNewAppointmentPage.tag, extra: widget.data);
+                      },
                       title: 'Qabulga yozish',
                       icon: Icon(Icons.add, color: Colors.white),
                     ),
@@ -106,9 +112,15 @@ class _ClientItemState extends State<ClientItem> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        ClientInfoItem(title: "Bog'lanish", icon: AppIcons.icPhone),
-                        ClientInfoItem(title: "Tarix", icon: AppIcons.icPhone),
-                        ClientInfoItem(title: "O'zgartirish", icon: AppIcons.icPhone),
+                        ClientInfoItem(
+                          title: "Bog'lanish",
+                          icon: AppIcons.icPhone,
+                          onTap: () {
+                            launchUrlString("tel://${widget.data.clientNumber}");
+                          },
+                        ),
+                        ClientInfoItem(title: "Tarix", icon: AppIcons.icPhone, onTap: () {}),
+                        ClientInfoItem(title: "O'zgartirish", icon: AppIcons.icPhone, onTap: () {}),
                       ],
                     ),
                     SizedBox(height: 10),
@@ -151,24 +163,28 @@ class BottomSheetItem extends StatelessWidget {
 }
 
 class ClientInfoItem extends StatelessWidget {
-  const ClientInfoItem({super.key, required this.title, required this.icon});
+  const ClientInfoItem({super.key, required this.title, required this.icon, required this.onTap});
 
   final String title;
   final Widget icon;
+  final Function() onTap;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(8),
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: LightAppColors.body),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          icon,
-          SizedBox(width: 8),
-          Text(title, style: Typographies.regularBody2.copyWith(color: LightTextColor.secondary)),
-        ],
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: EdgeInsets.all(8),
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: LightAppColors.body),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            icon,
+            SizedBox(width: 8),
+            Text(title, style: Typographies.regularBody2.copyWith(color: LightTextColor.secondary)),
+          ],
+        ),
       ),
     );
   }

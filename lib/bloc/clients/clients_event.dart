@@ -10,3 +10,9 @@ final class DeleterClientEvent extends ClientsEvent {
 
   DeleterClientEvent({required this.record});
 }
+
+final class EditClientEvent extends ClientsEvent {
+  final RecordModel record;
+
+  EditClientEvent({required this.record});
+}

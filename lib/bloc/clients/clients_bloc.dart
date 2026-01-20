@@ -17,6 +17,7 @@ class ClientsBloc extends Bloc<ClientsEvent, ClientsState> {
   ClientsBloc(this.clientsRepo, this.shredPrefService) : super(ClientsInitial()) {
     on<GetClientsEvent>(_getClientsEvent);
     on<DeleterClientEvent>(_deleteClientEvent);
+    on<EditClientEvent>(_editClientEvent);
   }
 
   FutureOr<void> _getClientsEvent(GetClientsEvent event, Emitter<ClientsState> emit) async {
@@ -32,8 +33,14 @@ class ClientsBloc extends Bloc<ClientsEvent, ClientsState> {
   FutureOr<void> _deleteClientEvent(DeleterClientEvent event, Emitter<ClientsState> emit) async {
     try {
       await clientsRepo.deleteClient(shredPrefService.getMasterUID()!, event.record);
+      add(GetClientsEvent());
     } catch (e) {
       emit(ClientsListLoadError(msg: e.toString()));
     }
+  }
+
+  FutureOr<void> _editClientEvent(EditClientEvent event, Emitter<ClientsState> emit) async {
+    await clientsRepo.editClient(shredPrefService.getMasterUID()!, event.record);
+    add(GetClientsEvent());
   }
 }
