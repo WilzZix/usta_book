@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:usta_book/core/ui_kit/colors.dart';
 import 'package:usta_book/core/ui_kit/typography.dart';
 
@@ -36,7 +37,7 @@ class _UstaBookBottomSheetState extends State<UstaBookBottomSheet> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(widget.header, style: Typographies.semiBoldH2),
-                AppIcons.icClose,
+                GestureDetector(behavior: HitTestBehavior.opaque, child: AppIcons.icClose, onTap: () => context.pop()),
               ],
             ),
             SizedBox(height: 24),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:usta_book/bloc/clients/clients_bloc.dart';
 import 'package:usta_book/core/ui_kit/components/button.dart';
@@ -23,6 +24,20 @@ class ClientItem extends StatefulWidget {
 }
 
 class _ClientItemState extends State<ClientItem> {
+  Future<void> makePhoneCall(String firebasePhoneNumber) async {
+    // 1. Clean the string: remove spaces, (), and -
+    // This turns "+998 (94) 691-49-77" into "+998946914977"
+    final String cleanNumber = firebasePhoneNumber.replaceAll(RegExp(r'[^\d+]'), '');
+
+    final Uri launchUri = Uri(scheme: 'tel', path: cleanNumber);
+
+    if (await canLaunchUrl(launchUri)) {
+      await launchUrl(launchUri, mode: LaunchMode.externalApplication);
+    } else {
+      print('Could not launch $launchUri');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final tr = Translations.of(context);
@@ -115,9 +130,7 @@ class _ClientItemState extends State<ClientItem> {
                         ClientInfoItem(
                           title: "Bog'lanish",
                           icon: AppIcons.icPhone,
-                          onTap: () {
-                            launchUrlString("tel://${widget.data.clientNumber}");
-                          },
+                          onTap: () async => makePhoneCall(widget.data.clientNumber),
                         ),
                         ClientInfoItem(title: "Tarix", icon: AppIcons.icPhone, onTap: () {}),
                         ClientInfoItem(title: "O'zgartirish", icon: AppIcons.icPhone, onTap: () {}),
