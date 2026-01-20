@@ -6,7 +6,7 @@ sealed class ClientsState {}
 final class ClientsInitial extends ClientsState {}
 
 final class ClientsListLoaded extends ClientsState {
-  final List<RecordModel> data;
+  final List<ClientModel> data;
 
   ClientsListLoaded({required this.data});
 }
