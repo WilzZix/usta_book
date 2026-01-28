@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../../../core/ui_kit/app_theme_extension.dart';
+
 class HomeShimmerLoading extends StatelessWidget {
   const HomeShimmerLoading({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final custom = Theme.of(context).extension<AppThemeExtension>()!;
     return SingleChildScrollView(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       // Wrap the entire skeleton in the Shimmer widget
       child: Shimmer.fromColors(
-        baseColor: Colors.grey.shade300,
-        highlightColor: Colors.grey.shade100,
+        baseColor: custom.border,
+        highlightColor: custom.border,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -45,10 +48,7 @@ class HomeShimmerLoading extends StatelessWidget {
     return Container(
       height: 20.0,
       width: 150.0,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(4.0),
-      ),
+      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(4.0)),
     );
   }
 
@@ -56,10 +56,7 @@ class HomeShimmerLoading extends StatelessWidget {
   Widget _buildAppointmentCard() {
     return Container(
       padding: const EdgeInsets.all(16.0),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12.0),
-      ),
+      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12.0)),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -121,10 +118,7 @@ class HomeShimmerLoading extends StatelessWidget {
     return Column(
       children: List.generate(
         3, // Generate a few items to simulate the list
-        (index) => Padding(
-          padding: const EdgeInsets.only(bottom: 12.0),
-          child: _buildAppointmentCard(),
-        ),
+        (index) => Padding(padding: const EdgeInsets.only(bottom: 12.0), child: _buildAppointmentCard()),
       ),
     );
   }
@@ -136,21 +130,15 @@ class _ShimmerBox extends StatelessWidget {
   final double height;
   final double borderRadius;
 
-  const _ShimmerBox({
-    required this.width,
-    required this.height,
-    this.borderRadius = 4.0,
-  });
+  const _ShimmerBox({required this.width, required this.height, this.borderRadius = 4.0});
 
   @override
   Widget build(BuildContext context) {
+    final custom = Theme.of(context).extension<AppThemeExtension>()!;
     return Container(
       width: width,
       height: height,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(borderRadius),
-      ),
+      decoration: BoxDecoration(color: custom.body, borderRadius: BorderRadius.circular(borderRadius)),
     );
   }
 }
@@ -161,13 +149,11 @@ class _StatisticCardSkeleton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final custom = Theme.of(context).extension<AppThemeExtension>()!;
     return Container(
       height: 70, // Approximate height
       padding: const EdgeInsets.all(8.0),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12.0),
-      ),
+      decoration: BoxDecoration(color: custom.body, borderRadius: BorderRadius.circular(12.0)),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: const [
