@@ -14,7 +14,7 @@ class UstaBookBottomSheet extends StatefulWidget {
   static void show({required BuildContext context, required Widget body, required String header}) {
     showModalBottomSheet(
       context: context,
-      backgroundColor: LightAppColors.secondaryBg,
+      backgroundColor: AppColors.secondaryBg,
       builder: (context) {
         return UstaBookBottomSheet(body: body, header: header);
       },

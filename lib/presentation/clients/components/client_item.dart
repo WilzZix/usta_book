@@ -33,7 +33,7 @@ class _ClientItemState extends State<ClientItem> with PhoneCallMixin {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: LightAppColors.border),
+        border: Border.all(color: AppColors.border),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,16 +43,16 @@ class _ClientItemState extends State<ClientItem> with PhoneCallMixin {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(widget.data.clientName, style: Typographies.regularBody.copyWith(color: LightTextColor.primary)),
+              Text(widget.data.clientName, style: Typographies.regularBody.copyWith(color: TextColor.primary)),
               SizedBox(height: 8),
               Text(
                 widget.data.clientNumber,
-                style: Typographies.regularBody2.copyWith(color: LightTextColor.secondary),
+                style: Typographies.regularBody2.copyWith(color: TextColor.secondary),
               ),
               SizedBox(height: 8),
               Text(
                 tr.clients.numberOfVisits(count: widget.data.visitCount ?? 0),
-                style: Typographies.regularBody2.copyWith(color: LightTextColor.secondary),
+                style: Typographies.regularBody2.copyWith(color: TextColor.secondary),
               ),
             ],
           ),
@@ -72,12 +72,12 @@ class _ClientItemState extends State<ClientItem> with PhoneCallMixin {
                           children: [
                             Text(
                               widget.data.clientName,
-                              style: Typographies.regularBody.copyWith(color: LightTextColor.primary),
+                              style: Typographies.regularBody.copyWith(color: TextColor.primary),
                             ),
                             SizedBox(height: 8),
                             Text(
                               widget.data.clientNumber,
-                              style: Typographies.regularBody2.copyWith(color: LightTextColor.secondary),
+                              style: Typographies.regularBody2.copyWith(color: TextColor.secondary),
                             ),
                           ],
                         ),
@@ -87,19 +87,19 @@ class _ClientItemState extends State<ClientItem> with PhoneCallMixin {
                     BottomSheetItem(
                       title: 'Tashriflar soni',
                       description: '${widget.data.visitCount}',
-                      style: Typographies.regularBody2.copyWith(color: LightTextColor.secondary),
+                      style: Typographies.regularBody2.copyWith(color: TextColor.secondary),
                     ),
                     SizedBox(height: 12),
                     BottomSheetItem(
                       title: "So'ngi tashrifi",
                       description: widget.data.lastVisitDate,
-                      style: Typographies.regularBody2.copyWith(color: LightTextColor.secondary),
+                      style: Typographies.regularBody2.copyWith(color: TextColor.secondary),
                     ),
                     SizedBox(height: 12),
                     BottomSheetItem(
                       title: "Umumiy hisob",
                       description: widget.data.price,
-                      style: Typographies.regularBody2.copyWith(color: LightAppColors.primary),
+                      style: Typographies.regularBody2.copyWith(color: AppColors.primary),
                     ),
                     SizedBox(height: 20),
                     MainButton.primary(
@@ -176,14 +176,14 @@ class ClientInfoItem extends StatelessWidget {
       onTap: onTap,
       child: Container(
         padding: EdgeInsets.all(8),
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: LightAppColors.body),
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: AppColors.body),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,
           children: [
             icon,
             SizedBox(width: 8),
-            Text(title, style: Typographies.regularBody2.copyWith(color: LightTextColor.secondary)),
+            Text(title, style: Typographies.regularBody2.copyWith(color: TextColor.secondary)),
           ],
         ),
       ),

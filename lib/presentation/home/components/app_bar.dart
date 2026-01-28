@@ -37,7 +37,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
                   height: 32,
                   width: 88,
                   decoration: BoxDecoration(
-                    color: dayIsSelected ? LightAppColors.primary : null,
+                    color: dayIsSelected ? AppColors.primary : null,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Center(
@@ -45,8 +45,8 @@ class _HomeAppBarState extends State<HomeAppBar> {
                       tr.home.day,
                       style: Typographies.regularBody2.copyWith(
                         color: dayIsSelected
-                            ? LightAppColors.secondaryBg
-                            : LightTextColor.secondary,
+                            ? AppColors.secondaryBg
+                            : TextColor.secondary,
                       ),
                     ),
                   ),
@@ -63,8 +63,8 @@ class _HomeAppBarState extends State<HomeAppBar> {
                   width: 88,
                   decoration: BoxDecoration(
                     color: dayIsSelected
-                        ? LightAppColors.secondaryBg
-                        : LightAppColors.primary,
+                        ? AppColors.secondaryBg
+                        : AppColors.primary,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Center(
@@ -72,8 +72,8 @@ class _HomeAppBarState extends State<HomeAppBar> {
                       tr.home.week,
                       style: Typographies.regularBody2.copyWith(
                         color: dayIsSelected
-                            ? LightTextColor.secondary
-                            : LightAppColors.secondaryBg,
+                            ? TextColor.secondary
+                            : AppColors.secondaryBg,
                       ),
                     ),
                   ),

@@ -4,6 +4,7 @@ import 'package:usta_book/bloc/auth/auth_cubit.dart';
 import 'package:usta_book/core/ui_kit/components/app_icons.dart';
 import 'package:usta_book/core/ui_kit/components/button.dart';
 
+import '../../bloc/theme/theme_cubit.dart';
 import '../../core/localization/i18n/strings.g.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -16,6 +17,8 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _State extends State<ProfilePage> {
+  bool appThemeIsDark = false;
+
   @override
   Widget build(BuildContext context) {
     final tr = Translations.of(context);
@@ -33,7 +36,9 @@ class _State extends State<ProfilePage> {
                     title: tr.profile.logout,
                     icon: AppIcons.icLogout,
                     onTap: () {
-                      BlocProvider.of<AuthCubit>(context).logOut();
+                      BlocProvider.of<ThemeCubit>(context).toggleTheme(appThemeIsDark);
+                      appThemeIsDark = !appThemeIsDark;
+                      //   BlocProvider.of<AuthCubit>(context).logOut();
                     },
                   );
                 },

@@ -12,7 +12,7 @@ class DashItem extends StatelessWidget {
       child: Container(
         height: 8,
         decoration: BoxDecoration(
-          color: isDone ? LightAppColors.primary : LightAppColors.border,
+          color: isDone ? AppColors.primary : AppColors.border,
           borderRadius: BorderRadius.circular(6),
         ),
       ),

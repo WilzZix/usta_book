@@ -63,8 +63,8 @@ class _SelectServiceTypeBottomSheetState
                       decoration: BoxDecoration(
                         border: Border.all(
                           color: selectedIndex == index
-                              ? LightAppColors.primary
-                              : LightAppColors.border,
+                              ? AppColors.primary
+                              : AppColors.border,
                         ),
                         borderRadius: BorderRadius.circular(8),
                       ),

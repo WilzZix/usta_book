@@ -42,7 +42,7 @@ class _AddNewAppointmentPageState extends State<AddNewAppointmentPage> {
   Widget build(BuildContext context) {
     final tr = Translations.of(context);
     return Scaffold(
-      backgroundColor: LightAppColors.body,
+      backgroundColor: AppColors.body,
       appBar: AppBar(title: Text('Qabulga yozish', style: Typographies.regularBody), centerTitle: false),
       body: Padding(
         padding: const EdgeInsets.all(20.0),

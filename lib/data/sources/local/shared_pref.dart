@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPrefString {
   static String masterUID = 'masterUID';
+  static String themeMode = 'theme_mode';
 }
 
 @LazySingleton()
@@ -33,5 +34,13 @@ class ShredPrefService {
 
   String? getMasterUID() {
     return _preferences.getString(SharedPrefString.masterUID);
+  }
+
+  Future<void> setAppMode(String mode) async {
+    await _preferences.setString(SharedPrefString.themeMode, mode);
+  }
+
+  String? getAppThemeMode() {
+    return _preferences.getString(SharedPrefString.themeMode);
   }
 }
