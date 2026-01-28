@@ -35,7 +35,7 @@ class _ClientItemState extends State<ClientItem> with PhoneCallMixin {
       decoration: BoxDecoration(
         color: custom.body,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: AppColors.border),
+        border: Border.all(color: custom.border),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,

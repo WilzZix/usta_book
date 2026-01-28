@@ -36,11 +36,17 @@ class _State extends State<ProfilePage> {
                     title: tr.profile.logout,
                     icon: AppIcons.icLogout,
                     onTap: () {
-                      BlocProvider.of<ThemeCubit>(context).toggleTheme(appThemeIsDark);
-                      appThemeIsDark = !appThemeIsDark;
-                      //   BlocProvider.of<AuthCubit>(context).logOut();
+                      BlocProvider.of<AuthCubit>(context).logOut();
                     },
                   );
+                },
+              ),
+              MainButton.logout(
+                title: 'Change theme',
+                icon: AppIcons.icLogout,
+                onTap: () {
+                  BlocProvider.of<ThemeCubit>(context).toggleTheme(appThemeIsDark);
+                  appThemeIsDark = !appThemeIsDark;
                 },
               ),
             ],

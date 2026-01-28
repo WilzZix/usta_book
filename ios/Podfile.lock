@@ -172,7 +172,7 @@ SPEC CHECKSUMS:
   FirebaseFirestoreGRPCCPPBinary: 6c0134e8d230ee58b9d51dec2a30a48efd6d5dc7
   FirebaseFirestoreInternalBinary: 88e8e266f43981c15bd261f388fb7d8398e135bb
   FirebaseSharedSwift: 52d868d4c269fcb4e4e1310c548435a9c1f46e25
-  Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
+  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_native_splash: df59bb2e1421aa0282cb2e95618af4dcb0c56c29
   GoogleUtilities: 00c88b9a86066ef77f0da2fab05f65d7768ed8e1
   GTMSessionFetcher: 02d6e866e90bc236f48a703a041dfe43e6221a29
