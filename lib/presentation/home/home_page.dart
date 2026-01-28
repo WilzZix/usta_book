@@ -12,6 +12,7 @@ import 'package:usta_book/domain/extension/extensions.dart';
 
 import '../../bloc/master/master_bloc.dart';
 import '../../bloc/schedule/schedule_cubit.dart';
+import '../../core/ui_kit/app_theme_extension.dart';
 import '../../data/models/record_model.dart';
 import '../add_new_record/add_new_record_page.dart';
 import 'components/app_bar.dart';
@@ -47,6 +48,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final tr = Translations.of(context);
+    final custom = Theme.of(context).extension<AppThemeExtension>()!;
     return Scaffold(
       appBar: HomeAppBar(),
       body: Padding(
@@ -66,9 +68,9 @@ class _HomePageState extends State<HomePage> {
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: custom.body,
                       borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: LightAppColors.border),
+                      border: Border.all(color: AppColors.border),
                     ),
                     child: Column(
                       children: [
@@ -81,9 +83,9 @@ class _HomePageState extends State<HomePage> {
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: custom.body,
                       borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: LightAppColors.border),
+                      border: Border.all(color: AppColors.border),
                     ),
                     child: Column(
                       children: [
@@ -96,9 +98,9 @@ class _HomePageState extends State<HomePage> {
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: custom.body,
                       borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: LightAppColors.border),
+                      border: Border.all(color: AppColors.border),
                     ),
                     child: Column(
                       children: [
@@ -172,10 +174,10 @@ class _HomePageState extends State<HomePage> {
                                   vertical: 16,
                                 ),
                                 decoration: BoxDecoration(
-                                  color: Colors.white,
+                                  color: custom.body,
                                   borderRadius: BorderRadius.circular(8),
                                   border: Border.all(
-                                    color: LightAppColors.border,
+                                    color: AppColors.border,
                                   ),
                                 ),
                                 child: Row(
@@ -191,7 +193,7 @@ class _HomePageState extends State<HomePage> {
                                           state.data[index].clientName,
                                           style: Typographies.regularBody
                                               .copyWith(
-                                                color: LightTextColor.primary,
+                                                color: TextColor.primary,
                                               ),
                                         ),
                                         SizedBox(height: 8),
@@ -199,7 +201,7 @@ class _HomePageState extends State<HomePage> {
                                           '${state.data[index].time} • ${state.data[index].serviceType}',
                                           style: Typographies.regularBody2
                                               .copyWith(
-                                                color: LightTextColor.secondary,
+                                                color: TextColor.secondary,
                                               ),
                                         ),
                                       ],
@@ -249,6 +251,7 @@ class ClientStatusWidget extends StatefulWidget {
 class _ClientStatusWidgetState extends State<ClientStatusWidget> {
   @override
   Widget build(BuildContext context) {
+    final custom = Theme.of(context).extension<AppThemeExtension>()!;
     return BlocListener<MasterBloc, MasterState>(
       listener: (context, state) {
         if(state is RecordUpdated){
@@ -258,7 +261,7 @@ class _ClientStatusWidgetState extends State<ClientStatusWidget> {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: custom.body,
           borderRadius: BorderRadius.circular(8),
           border: Border.all(color: StateColor.success),
         ),
@@ -275,14 +278,14 @@ class _ClientStatusWidgetState extends State<ClientStatusWidget> {
                     Text(
                       widget.recordModel.clientName,
                       style: Typographies.regularBody.copyWith(
-                        color: LightTextColor.primary,
+                        color: TextColor.primary,
                       ),
                     ),
                     SizedBox(height: 8),
                     Text(
                       '${widget.recordModel.time} • ${widget.recordModel.serviceType}',
                       style: Typographies.regularBody2.copyWith(
-                        color: LightTextColor.secondary,
+                        color: TextColor.secondary,
                       ),
                     ),
                   ],

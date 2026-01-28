@@ -185,7 +185,7 @@ class _InputFieldState extends State<InputField> {
         Text(
           widget.fieldTitle,
           style: Typographies.regularBody.copyWith(
-            color: LightTextColor.secondary,
+            color: TextColor.secondary,
           ),
         ),
         SizedBox(height: 8),
@@ -199,7 +199,7 @@ class _InputFieldState extends State<InputField> {
           keyboardType: widget.textInputType,
           obscureText: widget.obscureText ?? false,
           decoration: InputDecoration(
-            fillColor: LightAppColors.body,
+            fillColor: AppColors.body,
             suffixIcon: Padding(
               padding: const EdgeInsets.only(top: 16.0, bottom: 16, right: 16),
               child: widget.suffixIcon,

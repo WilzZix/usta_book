@@ -30,7 +30,7 @@ class _ClientsListPageState extends State<ClientsListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: LightAppColors.body,
+      backgroundColor: AppColors.body,
       appBar: AppBar(
         title: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),

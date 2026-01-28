@@ -96,7 +96,7 @@ class _MainButtonState extends State<MainButton> {
                   children: [
                     SizedBox.square(
                       dimension: 24,
-                      child: Center(child: CircularProgressIndicator(color: LightAppColors.body, strokeWidth: 2)),
+                      child: Center(child: CircularProgressIndicator(color: AppColors.body, strokeWidth: 2)),
                     ),
                   ],
                 )
@@ -121,7 +121,7 @@ class _MainButtonState extends State<MainButton> {
   BoxDecoration _boxDecoration(ButtonType type) {
     switch (type) {
       case ButtonType.primary:
-        return BoxDecoration(borderRadius: BorderRadius.circular(8), color: LightAppColors.primary);
+        return BoxDecoration(borderRadius: BorderRadius.circular(8), color: AppColors.primary);
 
       case ButtonType.secondary:
         return _secondaryDecoration();
@@ -136,7 +136,7 @@ class _MainButtonState extends State<MainButton> {
 
   BoxDecoration _secondaryDecoration() {
     return BoxDecoration(
-      border: Border.all(color: LightAppColors.border, width: 1),
+      border: Border.all(color: AppColors.border, width: 1),
       borderRadius: BorderRadius.circular(8),
     );
   }
@@ -144,10 +144,10 @@ class _MainButtonState extends State<MainButton> {
   TextStyle _textStyleType(ButtonType type) {
     switch (type) {
       case ButtonType.primary:
-        return Typographies.regularButton.copyWith(color: LightAppColors.secondaryBg);
+        return Typographies.regularButton.copyWith(color: AppColors.secondaryBg);
 
       case ButtonType.secondary:
-        return Typographies.regularButton.copyWith(color: LightAppColors.primary);
+        return Typographies.regularButton.copyWith(color: AppColors.primary);
       case ButtonType.logOut:
         return Typographies.regularButton.copyWith(color: StateColor.error);
     }

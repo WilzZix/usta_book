@@ -21,7 +21,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
         controller: widget.controller,
         keyboardType: TextInputType.text,
         decoration: InputDecoration(
-          fillColor: LightAppColors.body,
+          fillColor: AppColors.body,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10.0),
             borderSide: BorderSide.none, // Hide the default border line

@@ -11,7 +11,9 @@ import 'bloc/clients/clients_bloc.dart';
 import 'bloc/master/master_bloc.dart';
 import 'bloc/schedule/schedule_cubit.dart';
 import 'bloc/sign_up/sign_up_bloc.dart';
+import 'bloc/theme/theme_cubit.dart';
 import 'core/localization/i18n/strings.g.dart';
+import 'core/ui_kit/app_themes.dart';
 import 'core/ui_kit/colors.dart';
 import 'data/sources/firebase/firebase_service.dart';
 import 'data/sources/local/shared_pref.dart';
@@ -61,64 +63,22 @@ class _MyAppState extends State<MyApp> {
           BlocProvider(create: (context) => MasterBloc(inject(), inject())),
           BlocProvider(create: (context) => ScheduleCubit(inject(), inject())),
           BlocProvider(create: (context) => ClientsBloc(inject(), inject())..add(GetClientsEvent())),
+          BlocProvider<ThemeCubit>(create: (context) => ThemeCubit()),
         ],
-        child: MaterialApp.router(
-          theme: ThemeData(
-            timePickerTheme: TimePickerThemeData(
-              dialHandColor: LightAppColors.primary,
-
-              // The background color of the selected hour/minute circle
-              hourMinuteColor: LightAppColors.primary,
-
-              // The text color of the selected hour/minute number
-              hourMinuteTextColor: Colors.white,
-
-              // The color of the AM/PM selector's background when selected
-              dayPeriodColor: WidgetStateColor.resolveWith(
-                (states) => states.contains(WidgetState.selected) ? LightAppColors.primary : Colors.transparent,
-              ),
-
-              // The color of the AM/PM text when selected
-              dayPeriodTextColor: WidgetStateColor.resolveWith(
-                (states) => states.contains(WidgetState.selected) ? Colors.white : Colors.black,
-              ),
-            ),
-            scaffoldBackgroundColor: LightAppColors.body,
-            appBarTheme: AppBarTheme(color: LightAppColors.body),
-            inputDecorationTheme: InputDecorationTheme(
-              errorStyle: TextStyle(color: StateColor.error),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
-                borderSide: BorderSide(color: LightAppColors.primary),
-              ),
-              focusedErrorBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: StateColor.error),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
-                borderSide: BorderSide(color: LightAppColors.border),
-              ),
-              disabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: LightAppColors.border),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: LightAppColors.border),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              errorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
-                borderSide: BorderSide(color: StateColor.error),
-              ),
-            ),
-          ),
-          routerDelegate: _router.routerDelegate,
-          routeInformationParser: _router.routeInformationParser,
-          routeInformationProvider: _router.routeInformationProvider,
-          locale: TranslationProvider.of(context).flutterLocale,
-          supportedLocales: AppLocaleUtils.supportedLocales,
-          localizationsDelegates: GlobalMaterialLocalizations.delegates,
+        child: BlocBuilder<ThemeCubit, ThemeMode>(
+          builder: (context, themeMode) {
+            return MaterialApp.router(
+              themeMode: themeMode,
+              theme: AppThemes.createTheme(Brightness.light),
+              darkTheme: AppThemes.createTheme(Brightness.dark),
+              routerDelegate: _router.routerDelegate,
+              routeInformationParser: _router.routeInformationParser,
+              routeInformationProvider: _router.routeInformationProvider,
+              locale: TranslationProvider.of(context).flutterLocale,
+              supportedLocales: AppLocaleUtils.supportedLocales,
+              localizationsDelegates: GlobalMaterialLocalizations.delegates,
+            );
+          },
         ),
       ),
     );

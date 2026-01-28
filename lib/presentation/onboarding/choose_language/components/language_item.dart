@@ -28,8 +28,8 @@ class LanguageItem extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
           border: selected
-              ? Border.all(color: LightAppColors.primary)
-              : Border.all(color: LightAppColors.border),
+              ? Border.all(color: AppColors.primary)
+              : Border.all(color: AppColors.border),
         ),
         child: Row(
           children: [

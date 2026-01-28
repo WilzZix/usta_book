@@ -78,20 +78,20 @@ class _TimeLinePickerState extends State<TimeLinePicker> {
             Color dateTextColor;
 
             if (isSelected) {
-              containerColor = LightAppColors.primary;
-              dayTextColor = LightAppColors.body; // or white
-              dateTextColor = LightAppColors.body; // or white
+              containerColor = AppColors.primary;
+              dayTextColor = AppColors.body; // or white
+              dateTextColor = AppColors.body; // or white
             } else if (isToday) {
-              containerColor = LightAppColors.primary.withOpacity(
+              containerColor = AppColors.primary.withOpacity(
                 0.1,
               ); // subtle background for today
-              dayTextColor = LightTextColor.primary;
-              dateTextColor = LightTextColor.primary;
+              dayTextColor = TextColor.primary;
+              dateTextColor = TextColor.primary;
             } else {
               // ⚫ NORMAL DATE STYLE
               containerColor = null; // No background color
-              dayTextColor = LightTextColor.secondary;
-              dateTextColor = LightTextColor.primary;
+              dayTextColor = TextColor.secondary;
+              dateTextColor = TextColor.primary;
             }
 
             return GestureDetector(

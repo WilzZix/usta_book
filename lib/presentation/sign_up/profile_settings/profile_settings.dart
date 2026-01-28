@@ -134,7 +134,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                 Text(tr.sign_up.profile_settings_title_desc, style: Typographies.regularBody),
                 SizedBox(height: 24),
                 Container(
-                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: LightAppColors.secondaryBg),
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: AppColors.secondaryBg),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -157,7 +157,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                 SizedBox(height: 24),
                 Container(
                   padding: EdgeInsets.all(16),
-                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: LightAppColors.secondaryBg),
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: AppColors.secondaryBg),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -222,7 +222,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                 SizedBox(height: 24),
                 Container(
                   padding: EdgeInsets.all(16),
-                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: LightAppColors.secondaryBg),
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: AppColors.secondaryBg),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -232,7 +232,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                         children: [
                           Text(
                             tr.sign_up.monday,
-                            style: Typographies.regularBody.copyWith(color: LightTextColor.secondary),
+                            style: Typographies.regularBody.copyWith(color: TextColor.secondary),
                           ),
                           Spacer(),
                           SizedBox(
@@ -256,7 +256,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                                   }
                                 });
                               },
-                              activeTrackColor: LightAppColors.primary,
+                              activeTrackColor: AppColors.primary,
                             ),
                           ),
                         ],
@@ -266,7 +266,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                         children: [
                           Text(
                             tr.sign_up.tuesday,
-                            style: Typographies.regularBody.copyWith(color: LightTextColor.secondary),
+                            style: Typographies.regularBody.copyWith(color: TextColor.secondary),
                           ),
                           Spacer(),
                           SizedBox(
@@ -290,7 +290,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                                   }
                                 });
                               },
-                              activeTrackColor: LightAppColors.primary,
+                              activeTrackColor: AppColors.primary,
                             ),
                           ),
                         ],
@@ -300,7 +300,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                         children: [
                           Text(
                             tr.sign_up.wednesday,
-                            style: Typographies.regularBody.copyWith(color: LightTextColor.secondary),
+                            style: Typographies.regularBody.copyWith(color: TextColor.secondary),
                           ),
                           Spacer(),
                           SizedBox(
@@ -324,7 +324,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                                   }
                                 });
                               },
-                              activeTrackColor: LightAppColors.primary,
+                              activeTrackColor: AppColors.primary,
                             ),
                           ),
                         ],
@@ -334,7 +334,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                         children: [
                           Text(
                             tr.sign_up.thursday,
-                            style: Typographies.regularBody.copyWith(color: LightTextColor.secondary),
+                            style: Typographies.regularBody.copyWith(color: TextColor.secondary),
                           ),
                           Spacer(),
                           SizedBox(
@@ -358,7 +358,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                                   }
                                 });
                               },
-                              activeTrackColor: LightAppColors.primary,
+                              activeTrackColor: AppColors.primary,
                             ),
                           ),
                         ],
@@ -368,7 +368,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                         children: [
                           Text(
                             tr.sign_up.friday,
-                            style: Typographies.regularBody.copyWith(color: LightTextColor.secondary),
+                            style: Typographies.regularBody.copyWith(color: TextColor.secondary),
                           ),
                           Spacer(),
                           SizedBox(
@@ -392,7 +392,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                                   }
                                 });
                               },
-                              activeTrackColor: LightAppColors.primary,
+                              activeTrackColor: AppColors.primary,
                             ),
                           ),
                         ],
@@ -402,7 +402,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                         children: [
                           Text(
                             tr.sign_up.saturday,
-                            style: Typographies.regularBody.copyWith(color: LightTextColor.secondary),
+                            style: Typographies.regularBody.copyWith(color: TextColor.secondary),
                           ),
                           Spacer(),
                           SizedBox(
@@ -426,7 +426,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                                   }
                                 });
                               },
-                              activeTrackColor: LightAppColors.primary,
+                              activeTrackColor: AppColors.primary,
                             ),
                           ),
                         ],
@@ -436,7 +436,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                         children: [
                           Text(
                             tr.sign_up.sunday,
-                            style: Typographies.regularBody.copyWith(color: LightTextColor.secondary),
+                            style: Typographies.regularBody.copyWith(color: TextColor.secondary),
                           ),
                           Spacer(),
                           SizedBox(
@@ -460,7 +460,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                                   }
                                 });
                               },
-                              activeTrackColor: LightAppColors.primary,
+                              activeTrackColor: AppColors.primary,
                             ),
                           ),
                         ],
