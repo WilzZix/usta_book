@@ -45,7 +45,7 @@ class _ClientItemState extends State<ClientItem> with PhoneCallMixin {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(widget.data.clientName, style: Typographies.regularBody.copyWith(color: TextColor.primary)),
+              Text(widget.data.clientName, style: Typographies.regularBody.copyWith(color: custom.primary)),
               SizedBox(height: 8),
               Text(widget.data.clientNumber, style: Typographies.regularBody2.copyWith(color: TextColor.secondary)),
               SizedBox(height: 8),
