@@ -5,6 +5,7 @@ import 'package:usta_book/bloc/clients/clients_bloc.dart';
 import 'package:usta_book/core/ui_kit/components/button.dart';
 
 import '../../../core/localization/i18n/strings.g.dart';
+import '../../../core/ui_kit/app_theme_extension.dart';
 import '../../../core/ui_kit/colors.dart';
 import '../../../core/ui_kit/components/app_icons.dart';
 import '../../../core/ui_kit/components/bottom_sheet.dart';
@@ -27,13 +28,14 @@ class _ClientItemState extends State<ClientItem> with PhoneCallMixin {
   @override
   Widget build(BuildContext context) {
     final tr = Translations.of(context);
+    final custom = Theme.of(context).extension<AppThemeExtension>()!;
     return Container(
       margin: EdgeInsets.symmetric(vertical: 4),
       padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: custom.body,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: AppColors.border),
+        border: Border.all(color: custom.border),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,12 +45,9 @@ class _ClientItemState extends State<ClientItem> with PhoneCallMixin {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(widget.data.clientName, style: Typographies.regularBody.copyWith(color: TextColor.primary)),
+              Text(widget.data.clientName, style: Typographies.regularBody.copyWith(color: custom.primary)),
               SizedBox(height: 8),
-              Text(
-                widget.data.clientNumber,
-                style: Typographies.regularBody2.copyWith(color: TextColor.secondary),
-              ),
+              Text(widget.data.clientNumber, style: Typographies.regularBody2.copyWith(color: TextColor.secondary)),
               SizedBox(height: 8),
               Text(
                 tr.clients.numberOfVisits(count: widget.data.visitCount ?? 0),
@@ -172,11 +171,12 @@ class ClientInfoItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final custom = Theme.of(context).extension<AppThemeExtension>()!;
     return GestureDetector(
       onTap: onTap,
       child: Container(
         padding: EdgeInsets.all(8),
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: AppColors.body),
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: custom.body),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,

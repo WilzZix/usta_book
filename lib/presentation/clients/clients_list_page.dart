@@ -5,6 +5,7 @@ import 'package:usta_book/core/ui_kit/colors.dart';
 import 'package:usta_book/core/ui_kit/typography.dart';
 import 'package:usta_book/domain/extension/extensions.dart';
 
+import '../../core/ui_kit/app_theme_extension.dart';
 import '../../core/ui_kit/components/app_icons.dart';
 import '../../core/ui_kit/components/inputs/search_bar.dart';
 import 'components/client_item.dart';
@@ -29,8 +30,9 @@ class _ClientsListPageState extends State<ClientsListPage> {
 
   @override
   Widget build(BuildContext context) {
+    final custom = Theme.of(context).extension<AppThemeExtension>()!;
     return Scaffold(
-      backgroundColor: AppColors.body,
+      backgroundColor: custom.body,
       appBar: AppBar(
         title: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
