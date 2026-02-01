@@ -9,7 +9,6 @@ class Assets {
   static const String fontsNunitoSansSemiBold = 'assets/fonts/NunitoSans-SemiBold.ttf';
   static const String fontsSemiBold = 'assets/fonts/SemiBold.ttf';
   static const String imagesCalendar = 'assets/images/calendar.png';
-  static const String imagesFrame = 'assets/images/ic_phone.svg';
   static const String imagesIc3d = 'assets/images/ic_3d.png';
   static const String imagesIcAddCustomer = 'assets/images/ic_add_customer.svg';
   static const String imagesIcArrowLeft = 'assets/images/ic_arrow_left.svg';
@@ -21,6 +20,7 @@ class Assets {
   static const String imagesIcClose = 'assets/images/ic_close.svg';
   static const String imagesIcCustomersSelected = 'assets/images/ic_customers_selected.svg';
   static const String imagesIcCustomersUnselected = 'assets/images/ic_customers_unselected.svg';
+  static const String imagesIcEdit = 'assets/images/ic_edit.svg';
   static const String imagesIcFieldCalendar = 'assets/images/ic_field_calendar.svg';
   static const String imagesIcFieldTime = 'assets/images/ic_field_time.svg';
   static const String imagesIcLogout = 'assets/images/ic_logout.svg';
@@ -31,6 +31,7 @@ class Assets {
   static const String imagesIcMenu = 'assets/images/ic_menu.svg';
   static const String imagesIcNotification = 'assets/images/ic_notification.png';
   static const String imagesIcPerson = 'assets/images/ic_person.svg';
+  static const String imagesIcPhone = 'assets/images/ic_phone.svg';
   static const String imagesIcProfile = 'assets/images/ic_profile.svg';
   static const String imagesIcRus = 'assets/images/ic_rus.png';
   static const String imagesIcSearchBar = 'assets/images/ic_search_bar.svg';

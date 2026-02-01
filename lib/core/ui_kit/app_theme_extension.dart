@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class AppThemeExtension extends ThemeExtension<AppThemeExtension> {
   final Color primary;
   final Color body;
+  final Color secondary;
   final Color border;
   final Color success;
   final Color error;
@@ -13,16 +14,25 @@ class AppThemeExtension extends ThemeExtension<AppThemeExtension> {
     required this.border,
     required this.success,
     required this.error,
+    required this.secondary,
   });
 
   @override
-  AppThemeExtension copyWith({Color? primary, Color? body, Color? border, Color? success, Color? error}) {
+  AppThemeExtension copyWith({
+    Color? primary,
+    Color? body,
+    Color? border,
+    Color? success,
+    Color? error,
+    Color? secondary,
+  }) {
     return AppThemeExtension(
       primary: primary ?? this.primary,
       body: body ?? this.body,
       border: border ?? this.border,
       success: success ?? this.success,
       error: error ?? this.error,
+      secondary: secondary ?? this.secondary,
     );
   }
 
@@ -35,6 +45,7 @@ class AppThemeExtension extends ThemeExtension<AppThemeExtension> {
       border: Color.lerp(border, other.border, t)!,
       success: Color.lerp(success, other.success, t)!,
       error: Color.lerp(error, other.error, t)!,
+      secondary: Color.lerp(secondary, other.secondary, t)!,
     );
   }
 }

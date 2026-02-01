@@ -242,6 +242,9 @@ class TranslationsProfileRu {
 
 	/// ru: 'Выход'
 	String get logout => 'Выход';
+
+	/// ru: 'Изменит язык'
+	String get change_language => 'Изменит язык';
 }
 
 // Path: add_record
@@ -359,6 +362,7 @@ extension on Translations {
 			case 'home.theNearestClient': return 'Ближайший клиент';
 			case 'profile.profile': return 'Профиль';
 			case 'profile.logout': return 'Выход';
+			case 'profile.change_language': return 'Изменит язык';
 			case 'add_record.validation_text': return 'Это поле не должно быть пустым';
 			case 'add_record.add_new_record': return 'Добавить нового клиента';
 			case 'add_record.name': return 'Имя клиента';

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:usta_book/bloc/auth/auth_cubit.dart';
+import 'package:usta_book/bloc/profile/profile_cubit.dart';
 import 'package:usta_book/core/di/di.dart';
 import 'package:usta_book/core/di/inject.dart';
 
@@ -14,7 +15,6 @@ import 'bloc/sign_up/sign_up_bloc.dart';
 import 'bloc/theme/theme_cubit.dart';
 import 'core/localization/i18n/strings.g.dart';
 import 'core/ui_kit/app_themes.dart';
-import 'core/ui_kit/colors.dart';
 import 'data/sources/firebase/firebase_service.dart';
 import 'data/sources/local/shared_pref.dart';
 import 'firebase_options.dart';
@@ -24,7 +24,16 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await initDi();
-  await ShredPrefService().init();
+  final prefService = ShredPrefService();
+  await prefService.init();
+
+  // Load saved language or fallback to device locale
+  final savedLanguage = prefService.getLanguage();
+  if (savedLanguage != null) {
+    LocaleSettings.setLocaleRaw(savedLanguage);
+  } else {
+    LocaleSettings.useDeviceLocale();
+  }
   runApp(
     BlocProvider<AuthCubit>(
       create: (context) => AuthCubit(FirebaseService.auth),
@@ -46,15 +55,14 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    // Инициализируем роутер
-    _router = AppRoute.router;
+
+    _router = AppRoute.router(context.read<AuthCubit>());
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocListener<AuthCubit, AuthState>(
       listener: (context, state) {
-        // Вызываем обновление роутера при каждом изменении AuthStatus
         _router.refresh();
       },
       child: MultiBlocProvider(
@@ -64,6 +72,7 @@ class _MyAppState extends State<MyApp> {
           BlocProvider(create: (context) => ScheduleCubit(inject(), inject())),
           BlocProvider(create: (context) => ClientsBloc(inject(), inject())..add(GetClientsEvent())),
           BlocProvider<ThemeCubit>(create: (context) => ThemeCubit()),
+          BlocProvider<ProfileCubit>(create: (context) => ProfileCubit()),
         ],
         child: BlocBuilder<ThemeCubit, ThemeMode>(
           builder: (context, themeMode) {

@@ -115,7 +115,7 @@ class MasterProfileImpl extends IMasterProfile {
       for (var doc in snapshot.docs) {
         await doc.reference.update(data);
       }
-    } on FirebaseException catch (e) {
+    } on FirebaseException {
       rethrow;
     } catch (e) {
       rethrow;

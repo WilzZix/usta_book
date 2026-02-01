@@ -3,6 +3,8 @@ import 'package:usta_book/core/localization/i18n/strings.g.dart';
 import 'package:usta_book/core/ui_kit/colors.dart';
 import 'package:usta_book/core/ui_kit/typography.dart';
 
+import '../../../core/ui_kit/app_theme_extension.dart';
+
 class HomeAppBar extends StatefulWidget implements PreferredSizeWidget {
   const HomeAppBar({super.key});
 
@@ -19,8 +21,10 @@ class _HomeAppBarState extends State<HomeAppBar> {
 
   @override
   Widget build(BuildContext context) {
+    final custom = Theme.of(context).extension<AppThemeExtension>()!;
     return AppBar(
       title: Text(tr.home.table, style: Typographies.boldH1),
+      backgroundColor: custom.body,
       centerTitle: false,
       actions: [
         Container(
@@ -44,9 +48,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
                     child: Text(
                       tr.home.day,
                       style: Typographies.regularBody2.copyWith(
-                        color: dayIsSelected
-                            ? AppColors.secondaryBg
-                            : TextColor.secondary,
+                        color: dayIsSelected ? AppColors.secondaryBg : TextColor.secondary,
                       ),
                     ),
                   ),
@@ -62,18 +64,14 @@ class _HomeAppBarState extends State<HomeAppBar> {
                   height: 32,
                   width: 88,
                   decoration: BoxDecoration(
-                    color: dayIsSelected
-                        ? AppColors.secondaryBg
-                        : AppColors.primary,
+                    color: dayIsSelected ? AppColors.secondaryBg : AppColors.primary,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Center(
                     child: Text(
                       tr.home.week,
                       style: Typographies.regularBody2.copyWith(
-                        color: dayIsSelected
-                            ? TextColor.secondary
-                            : AppColors.secondaryBg,
+                        color: dayIsSelected ? TextColor.secondary : AppColors.secondaryBg,
                       ),
                     ),
                   ),

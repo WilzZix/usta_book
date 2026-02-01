@@ -56,7 +56,8 @@
   },
   "profile": {
     "profile": "Profil",
-    "logout": "Chiqish"
+    "logout": "Chiqish",
+    "change_language": "Tilni o'zgartirish"
   },
   "add_record": {
     "validation_text": "Bu maydon bo'sh bo'lmasligi kerak",

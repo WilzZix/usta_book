@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class SharedPrefString {
   static String masterUID = 'masterUID';
   static String themeMode = 'theme_mode';
+  static String appLocal = 'app_local';
 }
 
 @LazySingleton()
@@ -42,5 +43,13 @@ class ShredPrefService {
 
   String? getAppThemeMode() {
     return _preferences.getString(SharedPrefString.themeMode);
+  }
+
+  Future<void> setLanguage(String languageCode) async {
+    await _preferences.setString(SharedPrefString.appLocal, languageCode);
+  }
+
+  String? getLanguage() {
+    return _preferences.getString(SharedPrefString.appLocal);
   }
 }

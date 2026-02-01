@@ -40,5 +40,5 @@ class UserLoggingOutState extends AuthState {
 }
 
 class UserLogoutError extends AuthState {
-  UserLogoutError(super.status);
+  const UserLogoutError(super.status);
 }

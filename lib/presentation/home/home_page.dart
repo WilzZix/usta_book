@@ -33,11 +33,11 @@ class _HomePageState extends State<HomePage> {
   EasyDatePickerController controller = EasyDatePickerController();
   DateTime selectedDate = DateTime.now();
 
-  void _handleDateSelection(DateTime date) {
-    selectedDate = date;
-    controller.jumpToFocusDate();
-    setState(() {});
-  }
+  // void _handleDateSelection(DateTime date) {
+  //   selectedDate = date;
+  //   controller.jumpToFocusDate();
+  //   setState(() {});
+  // }
 
   @override
   void initState() {
@@ -57,9 +57,7 @@ class _HomePageState extends State<HomePage> {
           slivers: [
             SliverToBoxAdapter(child: TimeLinePicker()),
             SliverToBoxAdapter(child: SizedBox(height: 24)),
-            SliverToBoxAdapter(
-              child: Text('Bugungi statistika', style: Typographies.semiBoldH2),
-            ),
+            SliverToBoxAdapter(child: Text('Bugungi statistika', style: Typographies.semiBoldH2)),
             SliverToBoxAdapter(child: SizedBox(height: 12)),
             SliverToBoxAdapter(
               child: Row(
@@ -128,14 +126,7 @@ class _HomePageState extends State<HomePage> {
                             AppIcons.icEmptyList,
                             Text(
                               'Hali mijoz qushilmagan',
-                              style: Typographies.semiBoldH2,
-                            ),
-                            SizedBox(height: 8),
-                            Text(
-                              'Yangi mijoz qo‘shib, boshqarishni boshlang.',
-                              style: Typographies.regularBody2.copyWith(
-                                color: Color(0xFF6C757D),
-                              ),
+                              style: Typographies.regularBody2.copyWith(color: Color(0xFF6C757D)),
                             ),
                             SizedBox(height: 12),
                             MainButton.primary(
@@ -150,17 +141,11 @@ class _HomePageState extends State<HomePage> {
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            tr.home.theNearestClient,
-                            style: Typographies.semiBoldH2,
-                          ),
+                          Text(tr.home.theNearestClient, style: Typographies.semiBoldH2),
                           SizedBox(height: 12),
                           ClientStatusWidget(recordModel: state.data[0]),
                           SizedBox(height: 24),
-                          Text(
-                            'Bugungi uchrashuvlar',
-                            style: Typographies.semiBoldH2,
-                          ),
+                          Text('Bugungi uchrashuvlar', style: Typographies.semiBoldH2),
                           SizedBox(height: 12),
                           ListView.builder(
                             shrinkWrap: true,
@@ -169,16 +154,11 @@ class _HomePageState extends State<HomePage> {
                             itemBuilder: (context, index) {
                               return Container(
                                 margin: EdgeInsets.symmetric(vertical: 4),
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 12,
-                                  vertical: 16,
-                                ),
+                                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
                                 decoration: BoxDecoration(
                                   color: custom.body,
                                   borderRadius: BorderRadius.circular(8),
-                                  border: Border.all(
-                                    color: AppColors.border,
-                                  ),
+                                  border: Border.all(color: AppColors.border),
                                 ),
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -186,35 +166,26 @@ class _HomePageState extends State<HomePage> {
                                     AppIcons.icPerson,
                                     SizedBox(width: 8),
                                     Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           state.data[index].clientName,
-                                          style: Typographies.regularBody
-                                              .copyWith(
-                                                color: TextColor.primary,
-                                              ),
+                                          style: Typographies.regularBody.copyWith(color: TextColor.primary),
                                         ),
                                         SizedBox(height: 8),
                                         Text(
                                           '${state.data[index].time} • ${state.data[index].serviceType}',
-                                          style: Typographies.regularBody2
-                                              .copyWith(
-                                                color: TextColor.secondary,
-                                              ),
+                                          style: Typographies.regularBody2.copyWith(color: TextColor.secondary),
                                         ),
                                       ],
                                     ),
                                     Spacer(),
                                     Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.end,
+                                      crossAxisAlignment: CrossAxisAlignment.end,
                                       children: [
                                         Text(
                                           state.data[index].price.strToUzbSum(),
-                                          style: Typographies.regularH3
-                                              .copyWith(),
+                                          style: Typographies.regularH3.copyWith(),
                                         ),
                                         SizedBox(height: 8),
                                       ],
@@ -254,7 +225,7 @@ class _ClientStatusWidgetState extends State<ClientStatusWidget> {
     final custom = Theme.of(context).extension<AppThemeExtension>()!;
     return BlocListener<MasterBloc, MasterState>(
       listener: (context, state) {
-        if(state is RecordUpdated){
+        if (state is RecordUpdated) {
           context.read<ScheduleCubit>().getTodayAppointments(date: DateTime.now());
         }
       },
@@ -277,16 +248,12 @@ class _ClientStatusWidgetState extends State<ClientStatusWidget> {
                   children: [
                     Text(
                       widget.recordModel.clientName,
-                      style: Typographies.regularBody.copyWith(
-                        color: TextColor.primary,
-                      ),
+                      style: Typographies.regularBody.copyWith(color: TextColor.primary),
                     ),
                     SizedBox(height: 8),
                     Text(
                       '${widget.recordModel.time} • ${widget.recordModel.serviceType}',
-                      style: Typographies.regularBody2.copyWith(
-                        color: TextColor.secondary,
-                      ),
+                      style: Typographies.regularBody2.copyWith(color: TextColor.secondary),
                     ),
                   ],
                 ),
@@ -294,10 +261,7 @@ class _ClientStatusWidgetState extends State<ClientStatusWidget> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Text(
-                      widget.recordModel.price.strToUzbSum(),
-                      style: Typographies.regularH3.copyWith(),
-                    ),
+                    Text(widget.recordModel.price.strToUzbSum(), style: Typographies.regularH3.copyWith()),
                     SizedBox(height: 8),
                   ],
                 ),
@@ -312,11 +276,7 @@ class _ClientStatusWidgetState extends State<ClientStatusWidget> {
                   GestureDetector(
                     onTap: () {
                       context.read<MasterBloc>().add(
-                        UpdateRecordEvent(
-                          record: widget.recordModel.copyWith(
-                            status: ClientStatus.rejected,
-                          ),
-                        ),
+                        UpdateRecordEvent(record: widget.recordModel.copyWith(status: ClientStatus.rejected)),
                       );
                     },
                     child: Container(
@@ -326,20 +286,13 @@ class _ClientStatusWidgetState extends State<ClientStatusWidget> {
                         borderRadius: BorderRadius.circular(8),
                         color: StateColor.error.withValues(alpha: 0.1),
                       ),
-                      child: Text(
-                        'Klient kelmadi',
-                        style: Typographies.regularBody2,
-                      ),
+                      child: Text('Klient kelmadi', style: Typographies.regularBody2),
                     ),
                   ),
                   GestureDetector(
                     onTap: () {
                       context.read<MasterBloc>().add(
-                        UpdateRecordEvent(
-                          record: widget.recordModel.copyWith(
-                            status: ClientStatus.inProgress,
-                          ),
-                        ),
+                        UpdateRecordEvent(record: widget.recordModel.copyWith(status: ClientStatus.inProgress)),
                       );
                     },
                     child: Container(
@@ -349,10 +302,7 @@ class _ClientStatusWidgetState extends State<ClientStatusWidget> {
                         borderRadius: BorderRadius.circular(8),
                         color: StateColor.success.withValues(alpha: 0.1),
                       ),
-                      child: Text(
-                        'Jarayonda',
-                        style: Typographies.regularBody2,
-                      ),
+                      child: Text('Jarayonda', style: Typographies.regularBody2),
                     ),
                   ),
                 ],
@@ -360,11 +310,7 @@ class _ClientStatusWidgetState extends State<ClientStatusWidget> {
               ClientStatus.inProgress => GestureDetector(
                 onTap: () {
                   context.read<MasterBloc>().add(
-                    UpdateRecordEvent(
-                      record: widget.recordModel.copyWith(
-                        status: ClientStatus.done,
-                      ),
-                    ),
+                    UpdateRecordEvent(record: widget.recordModel.copyWith(status: ClientStatus.done)),
                   );
                 },
                 child: Container(

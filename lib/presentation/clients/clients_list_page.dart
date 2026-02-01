@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:usta_book/bloc/clients/clients_bloc.dart';
-import 'package:usta_book/core/ui_kit/colors.dart';
+import 'package:usta_book/core/ui_kit/components/button.dart';
 import 'package:usta_book/core/ui_kit/typography.dart';
-import 'package:usta_book/domain/extension/extensions.dart';
 
 import '../../core/ui_kit/app_theme_extension.dart';
-import '../../core/ui_kit/components/app_icons.dart';
 import '../../core/ui_kit/components/inputs/search_bar.dart';
 import 'components/client_item.dart';
 
@@ -34,6 +32,7 @@ class _ClientsListPageState extends State<ClientsListPage> {
     return Scaffold(
       backgroundColor: custom.body,
       appBar: AppBar(
+        backgroundColor: custom.body,
         title: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: Text('Mijozlar', style: Typographies.boldH1),
@@ -48,7 +47,9 @@ class _ClientsListPageState extends State<ClientsListPage> {
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: CustomScrollView(
           slivers: [
+            SliverToBoxAdapter(child: SizedBox(height: 24)),
             SliverToBoxAdapter(child: Text("Mijozlar ro'yhati", style: Typographies.semiBoldH2)),
+            SliverToBoxAdapter(child: SizedBox(height: 12)),
             BlocBuilder<ClientsBloc, ClientsState>(
               builder: (context, state) {
                 switch (state) {
@@ -67,6 +68,10 @@ class _ClientsListPageState extends State<ClientsListPage> {
                     return SliverToBoxAdapter(child: Center(child: Text(state.msg)));
                 }
               },
+            ),
+            SliverToBoxAdapter(child: SizedBox(height: 12)),
+            SliverToBoxAdapter(
+              child: MainButton.primary(title: 'Yangi mijoz qoshish', icon: Icon(Icons.add)),
             ),
           ],
         ),

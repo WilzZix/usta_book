@@ -56,7 +56,8 @@
   },
   "profile": {
     "profile": "Профиль",
-    "logout": "Выход"
+    "logout": "Выход",
+    "change_language": "Изменит язык"
   },
   "add_record": {
     "validation_text": "Это поле не должно быть пустым",

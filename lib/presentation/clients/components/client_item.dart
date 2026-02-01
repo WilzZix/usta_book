@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:usta_book/bloc/clients/clients_bloc.dart';
 import 'package:usta_book/core/ui_kit/components/button.dart';
 
 import '../../../core/localization/i18n/strings.g.dart';
@@ -11,7 +9,6 @@ import '../../../core/ui_kit/components/app_icons.dart';
 import '../../../core/ui_kit/components/bottom_sheet.dart';
 import '../../../core/ui_kit/typography.dart';
 import '../../../data/models/client_model.dart';
-import '../../../data/models/record_model.dart';
 import '../../../shared/mixins/phone_call_mixin.dart';
 import '../add_new_appointment_page.dart';
 
@@ -33,14 +30,18 @@ class _ClientItemState extends State<ClientItem> with PhoneCallMixin {
       margin: EdgeInsets.symmetric(vertical: 4),
       padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
       decoration: BoxDecoration(
-        color: custom.body,
+        color: custom.secondary,
         borderRadius: BorderRadius.circular(8),
         border: Border.all(color: custom.border),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          AppIcons.icPerson,
+          Container(
+            padding: EdgeInsets.all(8),
+            decoration: BoxDecoration(color: custom.body, borderRadius: BorderRadius.circular(8)),
+            child: AppIcons.icPerson,
+          ),
           SizedBox(width: 8),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -134,7 +135,11 @@ class _ClientItemState extends State<ClientItem> with PhoneCallMixin {
                 header: "Mijoz ma'lumotlari",
               );
             },
-            child: AppIcons.icMenu,
+            child: Container(
+              padding: EdgeInsets.all(8),
+              decoration: BoxDecoration(color: custom.body, borderRadius: BorderRadius.circular(8)),
+              child: AppIcons.icMenu,
+            ),
           ),
         ],
       ),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:usta_book/core/ui_kit/colors.dart';
 import 'package:usta_book/core/ui_kit/typography.dart';
 
+import '../app_theme_extension.dart';
 import 'app_icons.dart';
 
 class UstaBookBottomSheet extends StatefulWidget {
@@ -12,9 +12,10 @@ class UstaBookBottomSheet extends StatefulWidget {
   final String header;
 
   static void show({required BuildContext context, required Widget body, required String header}) {
+    final custom = Theme.of(context).extension<AppThemeExtension>()!;
     showModalBottomSheet(
       context: context,
-      backgroundColor: AppColors.secondaryBg,
+      backgroundColor: custom.secondary,
       builder: (context) {
         return UstaBookBottomSheet(body: body, header: header);
       },

@@ -11,9 +11,9 @@ class AppThemes {
 
     // Define colors based on brightness
     final primary = Color(0xFF007A7A);
-    final scaffoldBg = isDark ? Color(0xFF121212) : Color(0xFFF8F9FA);
+    final scaffoldBg = isDark ? Color(0xFF1A1A1A) : Color(0xFFF8F9FA);
     final borderColor = isDark ? Color(0xFF333333) : Color(0xFFE9E9E9);
-
+    final secondary = isDark ? Color(0xFF242424) : Color(0xFFF8F9FA);
     return ThemeData(
       brightness: brightness,
       scaffoldBackgroundColor: scaffoldBg,
@@ -24,6 +24,7 @@ class AppThemes {
           border: borderColor,
           success: Color(0xFF28A745),
           error: Color(0xFFDC3545),
+          secondary: secondary,
         ),
       ],
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
