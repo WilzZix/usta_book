@@ -266,6 +266,9 @@ class TranslationsProfileRu {
 
 	/// ru: 'Изменит язык'
 	String get change_language => 'Изменит язык';
+
+	/// ru: 'Сохранить'
+	String get save => 'Сохранить';
 }
 
 // Path: add_record
@@ -433,6 +436,7 @@ extension on Translations {
 			case 'profile.profile': return 'Профиль';
 			case 'profile.logout': return 'Выход';
 			case 'profile.change_language': return 'Изменит язык';
+			case 'profile.save': return 'Сохранить';
 			case 'add_record.validation_text': return 'Это поле не должно быть пустым';
 			case 'add_record.add_new_record': return 'Добавить нового клиента';
 			case 'add_record.name': return 'Имя клиента';

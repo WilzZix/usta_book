@@ -64,7 +64,8 @@
   "profile": {
     "profile": "Profil",
     "logout": "Chiqish",
-    "change_language": "Tilni o'zgartirish"
+    "change_language": "Tilni o'zgartirish",
+    "save": "Saqlash"
   },
   "add_record": {
     "validation_text": "Bu maydon bo'sh bo'lmasligi kerak",

@@ -155,6 +155,7 @@ class TranslationsProfileUz extends TranslationsProfileRu {
 	@override String get profile => 'Profil';
 	@override String get logout => 'Chiqish';
 	@override String get change_language => 'Tilni o\'zgartirish';
+	@override String get save => 'Saqlash';
 }
 
 // Path: add_record
@@ -264,6 +265,7 @@ extension on TranslationsUz {
 			case 'profile.profile': return 'Profil';
 			case 'profile.logout': return 'Chiqish';
 			case 'profile.change_language': return 'Tilni o\'zgartirish';
+			case 'profile.save': return 'Saqlash';
 			case 'add_record.validation_text': return 'Bu maydon bo\'sh bo\'lmasligi kerak';
 			case 'add_record.add_new_record': return 'Yangi mijoz qo\'shish';
 			case 'add_record.name': return 'Mijoz ismi';

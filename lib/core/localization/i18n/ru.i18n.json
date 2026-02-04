@@ -64,7 +64,8 @@
   "profile": {
     "profile": "Профиль",
     "logout": "Выход",
-    "change_language": "Изменит язык"
+    "change_language": "Изменит язык",
+    "save": "Сохранить"
   },
   "add_record": {
     "validation_text": "Это поле не должно быть пустым",
