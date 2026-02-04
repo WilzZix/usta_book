@@ -65,4 +65,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'ustabook-c00e4.firebasestorage.app',
     iosBundleId: 'com.wilzix.ustaBook',
   );
+
 }

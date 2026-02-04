@@ -57,7 +57,7 @@ class _HomePageState extends State<HomePage> {
           slivers: [
             SliverToBoxAdapter(child: TimeLinePicker()),
             SliverToBoxAdapter(child: SizedBox(height: 24)),
-            SliverToBoxAdapter(child: Text('Bugungi statistika', style: Typographies.semiBoldH2)),
+            SliverToBoxAdapter(child: Text(tr.home.todays_statistics, style: Typographies.semiBoldH2)),
             SliverToBoxAdapter(child: SizedBox(height: 12)),
             SliverToBoxAdapter(
               child: Row(
@@ -125,12 +125,12 @@ class _HomePageState extends State<HomePage> {
                           children: [
                             AppIcons.icEmptyList,
                             Text(
-                              'Hali mijoz qushilmagan',
+                              tr.home.no_customers_added,
                               style: Typographies.regularBody2.copyWith(color: Color(0xFF6C757D)),
                             ),
                             SizedBox(height: 12),
                             MainButton.primary(
-                              title: 'Mijoz qushish',
+                              title:tr.home.add_customer,
                               onTap: () {
                                 context.go(AddNewRecordPage.tag);
                               },
@@ -145,7 +145,7 @@ class _HomePageState extends State<HomePage> {
                           SizedBox(height: 12),
                           ClientStatusWidget(recordModel: state.data[0]),
                           SizedBox(height: 24),
-                          Text('Bugungi uchrashuvlar', style: Typographies.semiBoldH2),
+                          Text(tr.home.todays_statistics, style: Typographies.semiBoldH2),
                           SizedBox(height: 12),
                           ListView.builder(
                             shrinkWrap: true,
@@ -286,7 +286,7 @@ class _ClientStatusWidgetState extends State<ClientStatusWidget> {
                         borderRadius: BorderRadius.circular(8),
                         color: StateColor.error.withValues(alpha: 0.1),
                       ),
-                      child: Text('Klient kelmadi', style: Typographies.regularBody2),
+                      child: Text(tr.home.client_did_not_come, style: Typographies.regularBody2),
                     ),
                   ),
                   GestureDetector(
@@ -302,7 +302,7 @@ class _ClientStatusWidgetState extends State<ClientStatusWidget> {
                         borderRadius: BorderRadius.circular(8),
                         color: StateColor.success.withValues(alpha: 0.1),
                       ),
-                      child: Text('Jarayonda', style: Typographies.regularBody2),
+                      child: Text(tr.home.in_progress, style: Typographies.regularBody2),
                     ),
                   ),
                 ],
@@ -320,7 +320,7 @@ class _ClientStatusWidgetState extends State<ClientStatusWidget> {
                     borderRadius: BorderRadius.circular(8),
                     color: StateColor.success.withValues(alpha: 0.1),
                   ),
-                  child: Text('Tugadi', style: Typographies.regularBody2),
+                  child: Text(tr.home.finished, style: Typographies.regularBody2),
                 ),
               ),
               ClientStatus.done => SizedBox(),
@@ -335,7 +335,7 @@ class _ClientStatusWidgetState extends State<ClientStatusWidget> {
                     borderRadius: BorderRadius.circular(8),
                     color: StateColor.error.withValues(alpha: 0.1),
                   ),
-                  child: Text('Tugatish', style: Typographies.regularBody2),
+                  child: Text(tr.home.finish_action, style: Typographies.regularBody2),
                 ),
               ),
             },

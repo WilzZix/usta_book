@@ -136,6 +136,13 @@ class TranslationsHomeUz extends TranslationsHomeRu {
 	@override String get day => 'Kun';
 	@override String get week => 'Hafta';
 	@override String get theNearestClient => 'Eng yaqin uchrashuv';
+	@override String get todays_statistics => 'Bugungi statistika';
+	@override String get no_customers_added => 'Hali mijoz qoʻshilmagan';
+	@override String get add_customer => 'Mijoz qoʻshish';
+	@override String get client_did_not_come => 'Mijoz kelmadi';
+	@override String get in_progress => 'Jarayonda';
+	@override String get finished => 'Tugadi';
+	@override String get finish_action => 'Tugatish';
 }
 
 // Path: profile
@@ -181,6 +188,20 @@ class TranslationsClientsUz extends TranslationsClientsRu {
 
 	// Translations
 	@override String numberOfVisits({required Object count}) => '${count} ta tashrif';
+	@override String get customers => 'Mijozlar';
+	@override String get customer_list => 'Mijozlar roʻyxati';
+	@override String get add_new_customer => 'Yangi mijoz qoʻshish';
+	@override String get parameters => 'Parametrlar';
+	@override String get visit_count => 'Tashriflar soni';
+	@override String get last_visit => 'Soʻnggi tashrifi';
+	@override String get total_balance => 'Umumiy hisob';
+	@override String get book_appointment => 'Qabulga yozish';
+	@override String get contact => 'Bogʻlanish';
+	@override String get history => 'Tarix';
+	@override String get edit => 'Oʻzgartirish';
+	@override String get delete_customer => 'Mijozni oʻchirish';
+	@override String get customer_details => 'Mijoz maʼlumotlari';
+	@override String get select => 'Tanlash';
 }
 
 /// Flat map(s) containing all translations.
@@ -233,6 +254,13 @@ extension on TranslationsUz {
 			case 'home.day': return 'Kun';
 			case 'home.week': return 'Hafta';
 			case 'home.theNearestClient': return 'Eng yaqin uchrashuv';
+			case 'home.todays_statistics': return 'Bugungi statistika';
+			case 'home.no_customers_added': return 'Hali mijoz qoʻshilmagan';
+			case 'home.add_customer': return 'Mijoz qoʻshish';
+			case 'home.client_did_not_come': return 'Mijoz kelmadi';
+			case 'home.in_progress': return 'Jarayonda';
+			case 'home.finished': return 'Tugadi';
+			case 'home.finish_action': return 'Tugatish';
 			case 'profile.profile': return 'Profil';
 			case 'profile.logout': return 'Chiqish';
 			case 'profile.change_language': return 'Tilni o\'zgartirish';
@@ -251,6 +279,20 @@ extension on TranslationsUz {
 			case 'add_record.record_added_success_txt': return 'Yangi mijoz ro\'yhatga qo\'shildi';
 			case 'add_record.recorded_name': return ({required Object name}) => 'Siz ${name} ismli yangi mijozni ro\'yhatga qo\'shdingiz';
 			case 'clients.numberOfVisits': return ({required Object count}) => '${count} ta tashrif';
+			case 'clients.customers': return 'Mijozlar';
+			case 'clients.customer_list': return 'Mijozlar roʻyxati';
+			case 'clients.add_new_customer': return 'Yangi mijoz qoʻshish';
+			case 'clients.parameters': return 'Parametrlar';
+			case 'clients.visit_count': return 'Tashriflar soni';
+			case 'clients.last_visit': return 'Soʻnggi tashrifi';
+			case 'clients.total_balance': return 'Umumiy hisob';
+			case 'clients.book_appointment': return 'Qabulga yozish';
+			case 'clients.contact': return 'Bogʻlanish';
+			case 'clients.history': return 'Tarix';
+			case 'clients.edit': return 'Oʻzgartirish';
+			case 'clients.delete_customer': return 'Mijozni oʻchirish';
+			case 'clients.customer_details': return 'Mijoz maʼlumotlari';
+			case 'clients.select': return 'Tanlash';
 			default: return null;
 		}
 	}

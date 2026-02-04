@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:usta_book/core/localization/i18n/strings.g.dart';
 import 'package:usta_book/core/ui_kit/colors.dart';
 import 'package:usta_book/core/ui_kit/components/button.dart';
 import 'package:usta_book/core/ui_kit/typography.dart';
@@ -39,7 +40,7 @@ class _SelectServiceTypeBottomSheetState
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Xizmat turini tanlang', style: Typographies.semiBoldH2),
+                Text(tr.sign_up.service_type_hint, style: Typographies.semiBoldH2),
                 GestureDetector(
                   onTap: () => context.pop(),
                   child: AppIcons.icClose,
@@ -75,7 +76,7 @@ class _SelectServiceTypeBottomSheetState
               ),
             ),
             MainButton.primary(
-              title: 'Tanlash',
+              title: tr.clients.select,
               onTap: () {
                 context.pop(serviceTypes[selectedIndex]);
               },

@@ -227,6 +227,27 @@ class TranslationsHomeRu {
 
 	/// ru: 'Ближайший клиент'
 	String get theNearestClient => 'Ближайший клиент';
+
+	/// ru: 'Сегодняшняя статистика'
+	String get todays_statistics => 'Сегодняшняя статистика';
+
+	/// ru: 'Клиенты еще не добавлены'
+	String get no_customers_added => 'Клиенты еще не добавлены';
+
+	/// ru: 'Добавить клиента'
+	String get add_customer => 'Добавить клиента';
+
+	/// ru: 'Клиент не пришел'
+	String get client_did_not_come => 'Клиент не пришел';
+
+	/// ru: 'В процессе'
+	String get in_progress => 'В процессе';
+
+	/// ru: 'Завершено'
+	String get finished => 'Завершено';
+
+	/// ru: 'Завершить'
+	String get finish_action => 'Завершить';
 }
 
 // Path: profile
@@ -308,6 +329,48 @@ class TranslationsClientsRu {
 
 	/// ru: '${count} посещений'
 	String numberOfVisits({required Object count}) => '${count} посещений';
+
+	/// ru: 'Клиенты'
+	String get customers => 'Клиенты';
+
+	/// ru: 'Список клиентов'
+	String get customer_list => 'Список клиентов';
+
+	/// ru: 'Добавить нового клиента'
+	String get add_new_customer => 'Добавить нового клиента';
+
+	/// ru: 'Параметры'
+	String get parameters => 'Параметры';
+
+	/// ru: 'Количество визитов'
+	String get visit_count => 'Количество визитов';
+
+	/// ru: 'Последний визит'
+	String get last_visit => 'Последний визит';
+
+	/// ru: 'Общий счет'
+	String get total_balance => 'Общий счет';
+
+	/// ru: 'Записаться на прием'
+	String get book_appointment => 'Записаться на прием';
+
+	/// ru: 'Связаться'
+	String get contact => 'Связаться';
+
+	/// ru: 'История'
+	String get history => 'История';
+
+	/// ru: 'Изменить'
+	String get edit => 'Изменить';
+
+	/// ru: 'Удалить клиента'
+	String get delete_customer => 'Удалить клиента';
+
+	/// ru: 'Данные клиента'
+	String get customer_details => 'Данные клиента';
+
+	/// ru: 'Выбрать'
+	String get select => 'Выбрать';
 }
 
 /// Flat map(s) containing all translations.
@@ -360,6 +423,13 @@ extension on Translations {
 			case 'home.day': return 'День';
 			case 'home.week': return 'Неделя';
 			case 'home.theNearestClient': return 'Ближайший клиент';
+			case 'home.todays_statistics': return 'Сегодняшняя статистика';
+			case 'home.no_customers_added': return 'Клиенты еще не добавлены';
+			case 'home.add_customer': return 'Добавить клиента';
+			case 'home.client_did_not_come': return 'Клиент не пришел';
+			case 'home.in_progress': return 'В процессе';
+			case 'home.finished': return 'Завершено';
+			case 'home.finish_action': return 'Завершить';
 			case 'profile.profile': return 'Профиль';
 			case 'profile.logout': return 'Выход';
 			case 'profile.change_language': return 'Изменит язык';
@@ -378,6 +448,20 @@ extension on Translations {
 			case 'add_record.record_added_success_txt': return 'Новый клиент добавлен в список';
 			case 'add_record.recorded_name': return ({required Object name}) => 'Вы добавили нового клиента по имени ${name} в список';
 			case 'clients.numberOfVisits': return ({required Object count}) => '${count} посещений';
+			case 'clients.customers': return 'Клиенты';
+			case 'clients.customer_list': return 'Список клиентов';
+			case 'clients.add_new_customer': return 'Добавить нового клиента';
+			case 'clients.parameters': return 'Параметры';
+			case 'clients.visit_count': return 'Количество визитов';
+			case 'clients.last_visit': return 'Последний визит';
+			case 'clients.total_balance': return 'Общий счет';
+			case 'clients.book_appointment': return 'Записаться на прием';
+			case 'clients.contact': return 'Связаться';
+			case 'clients.history': return 'История';
+			case 'clients.edit': return 'Изменить';
+			case 'clients.delete_customer': return 'Удалить клиента';
+			case 'clients.customer_details': return 'Данные клиента';
+			case 'clients.select': return 'Выбрать';
 			default: return null;
 		}
 	}

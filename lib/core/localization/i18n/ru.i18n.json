@@ -52,7 +52,14 @@
     "table": "Расписание",
     "day": "День",
     "week": "Неделя",
-    "theNearestClient": "Ближайший клиент"
+    "theNearestClient": "Ближайший клиент",
+    "todays_statistics": "Сегодняшняя статистика",
+    "no_customers_added": "Клиенты еще не добавлены",
+    "add_customer": "Добавить клиента",
+    "client_did_not_come": "Клиент не пришел",
+    "in_progress": "В процессе",
+    "finished": "Завершено",
+    "finish_action": "Завершить"
   },
   "profile": {
     "profile": "Профиль",
@@ -76,6 +83,20 @@
     "recorded_name": "Вы добавили нового клиента по имени ${name} в список"
   },
   "clients": {
-    "numberOfVisits": "${count} посещений"
+    "numberOfVisits": "${count} посещений",
+    "customers": "Клиенты",
+    "customer_list": "Список клиентов",
+    "add_new_customer": "Добавить нового клиента",
+    "parameters": "Параметры",
+    "visit_count": "Количество визитов",
+    "last_visit": "Последний визит",
+    "total_balance": "Общий счет",
+    "book_appointment": "Записаться на прием",
+    "contact": "Связаться",
+    "history": "История",
+    "edit": "Изменить",
+    "delete_customer": "Удалить клиента",
+    "customer_details": "Данные клиента",
+    "select": "Выбрать"
   }
 }

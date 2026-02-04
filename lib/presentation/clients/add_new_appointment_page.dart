@@ -43,7 +43,7 @@ class _AddNewAppointmentPageState extends State<AddNewAppointmentPage> {
     final tr = Translations.of(context);
     return Scaffold(
       backgroundColor: AppColors.body,
-      appBar: AppBar(title: Text('Qabulga yozish', style: Typographies.regularBody), centerTitle: false),
+      appBar: AppBar(title: Text(tr.clients.book_appointment, style: Typographies.regularBody), centerTitle: false),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Container(
@@ -54,7 +54,7 @@ class _AddNewAppointmentPageState extends State<AddNewAppointmentPage> {
               key: _formKey,
               child: Column(
                 children: [
-                  Text('Parametrlar'),
+                  Text(tr.clients.parameters),
                   SizedBox(height: 16),
                   InputField.selectableInput(
                     hintText: '01/01/2025',

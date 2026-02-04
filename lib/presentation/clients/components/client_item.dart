@@ -85,19 +85,19 @@ class _ClientItemState extends State<ClientItem> with PhoneCallMixin {
                     ),
                     SizedBox(height: 20),
                     BottomSheetItem(
-                      title: 'Tashriflar soni',
+                      title: tr.clients.visit_count,
                       description: '${widget.data.visitCount}',
                       style: Typographies.regularBody2.copyWith(color: TextColor.secondary),
                     ),
                     SizedBox(height: 12),
                     BottomSheetItem(
-                      title: "So'ngi tashrifi",
+                      title: tr.clients.last_visit,
                       description: widget.data.lastVisitDate,
                       style: Typographies.regularBody2.copyWith(color: TextColor.secondary),
                     ),
                     SizedBox(height: 12),
                     BottomSheetItem(
-                      title: "Umumiy hisob",
+                      title: tr.clients.total_balance,
                       description: widget.data.price,
                       style: Typographies.regularBody2.copyWith(color: AppColors.primary),
                     ),
@@ -106,7 +106,7 @@ class _ClientItemState extends State<ClientItem> with PhoneCallMixin {
                       onTap: () {
                         context.push(AddNewAppointmentPage.tag, extra: widget.data);
                       },
-                      title: 'Qabulga yozish',
+                      title: tr.clients.book_appointment,
                       icon: Icon(Icons.add, color: Colors.white),
                     ),
                     SizedBox(height: 10),
@@ -114,17 +114,17 @@ class _ClientItemState extends State<ClientItem> with PhoneCallMixin {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         ClientInfoItem(
-                          title: "Bog'lanish",
+                          title: tr.clients.contact,
                           icon: AppIcons.icPhone,
                           onTap: () async => makePhoneCall(widget.data.clientNumber),
                         ),
-                        ClientInfoItem(title: "Tarix", icon: AppIcons.icPhone, onTap: () {}),
-                        ClientInfoItem(title: "O'zgartirish", icon: AppIcons.icPhone, onTap: () {}),
+                        ClientInfoItem(title: tr.clients.history, icon: AppIcons.icPhone, onTap: () {}),
+                        ClientInfoItem(title: tr.clients.edit, icon: AppIcons.icPhone, onTap: () {}),
                       ],
                     ),
                     SizedBox(height: 10),
                     MainButton.logout(
-                      title: "Mijozni o'chirish",
+                      title: tr.clients.delete_customer,
                       icon: Icon(Icons.delete, color: StateColor.error),
                       onTap: () {
                         // context.read<ClientsBloc>().add(DeleterClientEvent(record: widget.data.lastVisitDate)
@@ -132,7 +132,7 @@ class _ClientItemState extends State<ClientItem> with PhoneCallMixin {
                     ),
                   ],
                 ),
-                header: "Mijoz ma'lumotlari",
+                header: tr.clients.customer_details,
               );
             },
             child: Container(

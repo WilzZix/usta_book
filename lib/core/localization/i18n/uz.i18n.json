@@ -52,7 +52,14 @@
     "table": "Jadval",
     "day": "Kun",
     "week": "Hafta",
-    "theNearestClient": "Eng yaqin uchrashuv"
+    "theNearestClient": "Eng yaqin uchrashuv",
+    "todays_statistics": "Bugungi statistika",
+    "no_customers_added": "Hali mijoz qoʻshilmagan",
+    "add_customer": "Mijoz qoʻshish",
+    "client_did_not_come": "Mijoz kelmadi",
+    "in_progress": "Jarayonda",
+    "finished": "Tugadi",
+    "finish_action": "Tugatish"
   },
   "profile": {
     "profile": "Profil",
@@ -76,6 +83,20 @@
     "recorded_name": "Siz ${name} ismli yangi mijozni ro'yhatga qo'shdingiz"
   },
   "clients": {
-    "numberOfVisits": "${count} ta tashrif"
+    "numberOfVisits": "${count} ta tashrif",
+    "customers": "Mijozlar",
+    "customer_list": "Mijozlar roʻyxati",
+    "add_new_customer": "Yangi mijoz qoʻshish",
+    "parameters": "Parametrlar",
+    "visit_count": "Tashriflar soni",
+    "last_visit": "Soʻnggi tashrifi",
+    "total_balance": "Umumiy hisob",
+    "book_appointment": "Qabulga yozish",
+    "contact": "Bogʻlanish",
+    "history": "Tarix",
+    "edit": "Oʻzgartirish",
+    "delete_customer": "Mijozni oʻchirish",
+    "customer_details": "Mijoz maʼlumotlari",
+    "select": "Tanlash"
   }
 }

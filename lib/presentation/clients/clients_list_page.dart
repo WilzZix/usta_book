@@ -4,6 +4,7 @@ import 'package:usta_book/bloc/clients/clients_bloc.dart';
 import 'package:usta_book/core/ui_kit/components/button.dart';
 import 'package:usta_book/core/ui_kit/typography.dart';
 
+import '../../core/localization/i18n/strings.g.dart';
 import '../../core/ui_kit/app_theme_extension.dart';
 import '../../core/ui_kit/components/inputs/search_bar.dart';
 import 'components/client_item.dart';
@@ -29,13 +30,14 @@ class _ClientsListPageState extends State<ClientsListPage> {
   @override
   Widget build(BuildContext context) {
     final custom = Theme.of(context).extension<AppThemeExtension>()!;
+    final tr = Translations.of(context);
     return Scaffold(
       backgroundColor: custom.body,
       appBar: AppBar(
         backgroundColor: custom.body,
         title: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: Text('Mijozlar', style: Typographies.boldH1),
+          child: Text(tr.clients.customers, style: Typographies.boldH1),
         ),
         centerTitle: false,
         bottom: PreferredSize(
@@ -48,7 +50,7 @@ class _ClientsListPageState extends State<ClientsListPage> {
         child: CustomScrollView(
           slivers: [
             SliverToBoxAdapter(child: SizedBox(height: 24)),
-            SliverToBoxAdapter(child: Text("Mijozlar ro'yhati", style: Typographies.semiBoldH2)),
+            SliverToBoxAdapter(child: Text(tr.clients.customer_list, style: Typographies.semiBoldH2)),
             SliverToBoxAdapter(child: SizedBox(height: 12)),
             BlocBuilder<ClientsBloc, ClientsState>(
               builder: (context, state) {
@@ -71,7 +73,7 @@ class _ClientsListPageState extends State<ClientsListPage> {
             ),
             SliverToBoxAdapter(child: SizedBox(height: 12)),
             SliverToBoxAdapter(
-              child: MainButton.primary(title: 'Yangi mijoz qoshish', icon: Icon(Icons.add)),
+              child: MainButton.primary(title: tr.clients.add_new_customer, icon: Icon(Icons.add)),
             ),
           ],
         ),
