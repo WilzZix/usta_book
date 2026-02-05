@@ -1,10 +1,10 @@
 name: Flutter CI
 
 on:
- push:
-   branches:
-     - main
- pull_request:
+  push:
+    branches:
+      - main
+  pull_request:
     branches:
       - main
 
@@ -12,41 +12,27 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    env:
-      FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }} # Add your Firebase App ID as a secret
-      FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }} # Firebase token for authentication
-
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3 # Updated to v3 for better stability
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.35.2' # Replace with your desired Flutter version
+          flutter-version: '3.35.2'
+          channel: "stable"
 
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Setup Dart
-        uses: dart-lang/setup-dart@v1
-        with:
-          sdk: '3.9.0'
+      - name: Build APK
+        run: flutter build apk --release
 
-      - uses: subosito/flutter-action@v2
-        with:
-          channel: "stable"
-      - run: flutter pub get
-      - run: flutter build apk
-      - uses: actions/checkout@v1
-        with:
-          name: release-apk
-          path: build/app/outputs/apk/release/app-release.apk
-      - name: upload artifact to Firebase App Distribution
+      - name: Upload to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1
         with:
-          appId: ${{secrets.FIREBASE_APP_ID}}
-          token: ${{secrets.FIREBASE_TOKEN}}
+          appId: ${{ secrets.FIREBASE_APP_ID }}
+          token: ${{ secrets.FIREBASE_TOKEN }}
           groups: Local-group
           releaseNotes: "Firebase app distribution"
-          file: build/app/outputs/apk/release/app-release.apk
+          file: build/app/outputs/flutter-apk/app-release.apk
