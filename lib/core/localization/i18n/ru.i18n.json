@@ -64,8 +64,17 @@
   "profile": {
     "profile": "Профиль",
     "logout": "Выход",
-    "change_language": "Изменит язык",
-    "save": "Сохранить"
+    "save": "Сохранить",
+    "settings": "Настройки",
+    "working_hours": "Рабочее время",
+    "app_theme": "Тема приложения",
+    "night_mode": "Ночная",
+    "light_mode": "Дневная",
+    "change_app_theme": "Изменить тему приложения",
+    "notifications": "Уведомления",
+    "language": "Язык",
+    "change_language": "Изменить язык",
+    "configure": "Настроить"
   },
   "add_record": {
     "validation_text": "Это поле не должно быть пустым",

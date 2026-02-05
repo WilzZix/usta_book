@@ -264,11 +264,38 @@ class TranslationsProfileRu {
 	/// ru: 'Выход'
 	String get logout => 'Выход';
 
-	/// ru: 'Изменит язык'
-	String get change_language => 'Изменит язык';
-
 	/// ru: 'Сохранить'
 	String get save => 'Сохранить';
+
+	/// ru: 'Настройки'
+	String get settings => 'Настройки';
+
+	/// ru: 'Рабочее время'
+	String get working_hours => 'Рабочее время';
+
+	/// ru: 'Тема приложения'
+	String get app_theme => 'Тема приложения';
+
+	/// ru: 'Ночная'
+	String get night_mode => 'Ночная';
+
+	/// ru: 'Дневная'
+	String get light_mode => 'Дневная';
+
+	/// ru: 'Изменить тему приложения'
+	String get change_app_theme => 'Изменить тему приложения';
+
+	/// ru: 'Уведомления'
+	String get notifications => 'Уведомления';
+
+	/// ru: 'Язык'
+	String get language => 'Язык';
+
+	/// ru: 'Изменить язык'
+	String get change_language => 'Изменить язык';
+
+	/// ru: 'Настроить'
+	String get configure => 'Настроить';
 }
 
 // Path: add_record
@@ -435,8 +462,17 @@ extension on Translations {
 			case 'home.finish_action': return 'Завершить';
 			case 'profile.profile': return 'Профиль';
 			case 'profile.logout': return 'Выход';
-			case 'profile.change_language': return 'Изменит язык';
 			case 'profile.save': return 'Сохранить';
+			case 'profile.settings': return 'Настройки';
+			case 'profile.working_hours': return 'Рабочее время';
+			case 'profile.app_theme': return 'Тема приложения';
+			case 'profile.night_mode': return 'Ночная';
+			case 'profile.light_mode': return 'Дневная';
+			case 'profile.change_app_theme': return 'Изменить тему приложения';
+			case 'profile.notifications': return 'Уведомления';
+			case 'profile.language': return 'Язык';
+			case 'profile.change_language': return 'Изменить язык';
+			case 'profile.configure': return 'Настроить';
 			case 'add_record.validation_text': return 'Это поле не должно быть пустым';
 			case 'add_record.add_new_record': return 'Добавить нового клиента';
 			case 'add_record.name': return 'Имя клиента';

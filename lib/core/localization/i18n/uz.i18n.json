@@ -64,8 +64,17 @@
   "profile": {
     "profile": "Profil",
     "logout": "Chiqish",
-    "change_language": "Tilni o'zgartirish",
-    "save": "Saqlash"
+    "save": "Saqlash",
+    "settings": "Sozlamalar",
+    "working_hours": "Ish vaqti",
+    "app_theme": "Dastur mavzusi",
+    "night_mode": "Tungi",
+    "light_mode": "Kunduzgi",
+    "change_app_theme": "Dastur mavzusini oʻzgartirish",
+    "notifications": "Bildirishnomalar",
+    "language": "Til",
+    "change_language": "Tilni oʻzgartirish",
+    "configure": "Sozlash"
   },
   "add_record": {
     "validation_text": "Bu maydon bo'sh bo'lmasligi kerak",

@@ -154,8 +154,17 @@ class TranslationsProfileUz extends TranslationsProfileRu {
 	// Translations
 	@override String get profile => 'Profil';
 	@override String get logout => 'Chiqish';
-	@override String get change_language => 'Tilni o\'zgartirish';
 	@override String get save => 'Saqlash';
+	@override String get settings => 'Sozlamalar';
+	@override String get working_hours => 'Ish vaqti';
+	@override String get app_theme => 'Dastur mavzusi';
+	@override String get night_mode => 'Tungi';
+	@override String get light_mode => 'Kunduzgi';
+	@override String get change_app_theme => 'Dastur mavzusini oʻzgartirish';
+	@override String get notifications => 'Bildirishnomalar';
+	@override String get language => 'Til';
+	@override String get change_language => 'Tilni oʻzgartirish';
+	@override String get configure => 'Sozlash';
 }
 
 // Path: add_record
@@ -264,8 +273,17 @@ extension on TranslationsUz {
 			case 'home.finish_action': return 'Tugatish';
 			case 'profile.profile': return 'Profil';
 			case 'profile.logout': return 'Chiqish';
-			case 'profile.change_language': return 'Tilni o\'zgartirish';
 			case 'profile.save': return 'Saqlash';
+			case 'profile.settings': return 'Sozlamalar';
+			case 'profile.working_hours': return 'Ish vaqti';
+			case 'profile.app_theme': return 'Dastur mavzusi';
+			case 'profile.night_mode': return 'Tungi';
+			case 'profile.light_mode': return 'Kunduzgi';
+			case 'profile.change_app_theme': return 'Dastur mavzusini oʻzgartirish';
+			case 'profile.notifications': return 'Bildirishnomalar';
+			case 'profile.language': return 'Til';
+			case 'profile.change_language': return 'Tilni oʻzgartirish';
+			case 'profile.configure': return 'Sozlash';
 			case 'add_record.validation_text': return 'Bu maydon bo\'sh bo\'lmasligi kerak';
 			case 'add_record.add_new_record': return 'Yangi mijoz qo\'shish';
 			case 'add_record.name': return 'Mijoz ismi';

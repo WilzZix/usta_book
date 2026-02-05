@@ -35,13 +35,13 @@ class _ProfileSettingsState extends State<ProfileSettings> {
   TextEditingController beginTimeController = TextEditingController();
   TextEditingController endTimeController = TextEditingController();
   Map<String, String> workingHours = {
-    'fri': '09:00 - 18:00',
     'mon': '09:00 - 18:00',
-    'sat': '09:00 - 18:00',
-    'sun': '09:00 - 18:00',
-    'thurs': '09:00 - 18:00',
     'tue': '09:00 - 18:00',
     'wed': '09:00 - 18:00',
+    'thurs': '09:00 - 18:00',
+    'fri': '09:00 - 18:00',
+    'sat': '09:00 - 18:00',
+    'sun': '09:00 - 18:00',
   };
   TimeOfDay _selectedTimeBegin = TimeOfDay.now();
   TimeOfDay _selectedTimeEnd = TimeOfDay.now();
@@ -230,10 +230,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                       SizedBox(height: 16),
                       Row(
                         children: [
-                          Text(
-                            tr.sign_up.monday,
-                            style: Typographies.regularBody.copyWith(color: TextColor.secondary),
-                          ),
+                          Text(tr.sign_up.monday, style: Typographies.regularBody.copyWith(color: TextColor.secondary)),
                           Spacer(),
                           SizedBox(
                             height: 28,
@@ -366,10 +363,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                       SizedBox(height: 16),
                       Row(
                         children: [
-                          Text(
-                            tr.sign_up.friday,
-                            style: Typographies.regularBody.copyWith(color: TextColor.secondary),
-                          ),
+                          Text(tr.sign_up.friday, style: Typographies.regularBody.copyWith(color: TextColor.secondary)),
                           Spacer(),
                           SizedBox(
                             height: 28,
@@ -434,10 +428,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                       SizedBox(height: 16),
                       Row(
                         children: [
-                          Text(
-                            tr.sign_up.sunday,
-                            style: Typographies.regularBody.copyWith(color: TextColor.secondary),
-                          ),
+                          Text(tr.sign_up.sunday, style: Typographies.regularBody.copyWith(color: TextColor.secondary)),
                           Spacer(),
                           SizedBox(
                             height: 28,
