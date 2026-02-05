@@ -85,6 +85,7 @@ class _MainButtonState extends State<MainButton> {
   Widget build(BuildContext context) {
     return Material(
       child: InkWell(
+        borderRadius: BorderRadius.circular(10),
         statesController: _inkStateController,
         onTap: widget.isLoading ? null : widget.onTap,
         child: Ink(

@@ -27,7 +27,7 @@ class _State extends State<ProfilePage> {
   bool appThemeIsDark = false;
   bool isUzbek = false;
   int selectedLanguageItem = 0;
-  int selectedThemeItem = 0;
+  int selectedThemeItem = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -82,109 +82,109 @@ class _State extends State<ProfilePage> {
                 ),
               ),
               SizedBox(height: 24),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
-                    decoration: BoxDecoration(
-                      color: custom.body,
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: custom.border),
-                    ),
-                    child: Column(
-                      children: [
-                        Text('4,8', style: Typographies.regularH3),
-                        SizedBox(height: 8),
-                        Text('O’rtacha reyting', style: Typographies.regularBody2),
-                      ],
-                    ),
-                  ),
-
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
-                    decoration: BoxDecoration(
-                      color: custom.body,
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: custom.border),
-                    ),
-                    child: Column(
-                      children: [
-                        Text('92%', style: Typographies.regularH3),
-                        SizedBox(height: 8),
-                        Text('Mijozlar ishtiroki', style: Typographies.regularBody2),
-                      ],
-                    ),
-                  ),
-
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
-                    decoration: BoxDecoration(
-                      color: custom.body,
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: custom.border),
-                    ),
-                    child: Column(
-                      children: [
-                        Text('\$500', style: Typographies.regularH3),
-                        SizedBox(height: 8),
-                        Text("O'rtacha hisob", style: Typographies.regularBody2),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 24),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
-                decoration: BoxDecoration(
-                  color: custom.body,
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: custom.border),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Analitika', style: Typographies.regularH3),
-                    SizedBox(height: 16),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          children: [
-                            Text('50', style: Typographies.regularBody2),
-                            SizedBox(height: 8),
-                            Text(
-                              'Mijozlar ishtiroki',
-                              style: Typographies.regularOverlineLower.copyWith(color: TextColor.secondary),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            Text('\$500', style: Typographies.regularBody2),
-                            SizedBox(height: 8),
-                            Text(
-                              'Foyda',
-                              style: Typographies.regularOverlineLower.copyWith(color: TextColor.secondary),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            Text('Soch kesish', style: Typographies.regularBody2),
-                            SizedBox(height: 8),
-                            Text(
-                              'Mashhur servis',
-                              style: Typographies.regularOverlineLower.copyWith(color: TextColor.secondary),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   mainAxisSize: MainAxisSize.min,
+              //   children: [
+              //     Container(
+              //       padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+              //       decoration: BoxDecoration(
+              //         color: custom.secondary,
+              //         borderRadius: BorderRadius.circular(8),
+              //         border: Border.all(color: custom.border),
+              //       ),
+              //       child: Column(
+              //         children: [
+              //           Text('4,8', style: Typographies.regularH3),
+              //           SizedBox(height: 8),
+              //           Text('O’rtacha reyting', style: Typographies.regularBody2),
+              //         ],
+              //       ),
+              //     ),
+              //
+              //     Container(
+              //       padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+              //       decoration: BoxDecoration(
+              //         color: custom.secondary,
+              //         borderRadius: BorderRadius.circular(8),
+              //         border: Border.all(color: custom.border),
+              //       ),
+              //       child: Column(
+              //         children: [
+              //           Text('92%', style: Typographies.regularH3),
+              //           SizedBox(height: 8),
+              //           Text('Mijozlar ishtiroki', style: Typographies.regularBody2),
+              //         ],
+              //       ),
+              //     ),
+              //
+              //     Container(
+              //       padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+              //       decoration: BoxDecoration(
+              //         color: custom.secondary,
+              //         borderRadius: BorderRadius.circular(8),
+              //         border: Border.all(color: custom.border),
+              //       ),
+              //       child: Column(
+              //         children: [
+              //           Text('\$500', style: Typographies.regularH3),
+              //           SizedBox(height: 8),
+              //           Text("O'rtacha hisob", style: Typographies.regularBody2),
+              //         ],
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              // Container(
+              //   padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+              //   decoration: BoxDecoration(
+              //     color: custom.secondary,
+              //     borderRadius: BorderRadius.circular(8),
+              //     border: Border.all(color: custom.border),
+              //   ),
+              //   child: Column(
+              //     crossAxisAlignment: CrossAxisAlignment.start,
+              //     children: [
+              //       Text('Analitika', style: Typographies.regularH3),
+              //       SizedBox(height: 16),
+              //       Row(
+              //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //         children: [
+              //           Column(
+              //             children: [
+              //               Text('50', style: Typographies.regularBody2),
+              //               SizedBox(height: 8),
+              //               Text(
+              //                 'Mijozlar ishtiroki',
+              //                 style: Typographies.regularOverlineLower.copyWith(color: TextColor.secondary),
+              //               ),
+              //             ],
+              //           ),
+              //           Column(
+              //             children: [
+              //               Text('\$500', style: Typographies.regularBody2),
+              //               SizedBox(height: 8),
+              //               Text(
+              //                 'Foyda',
+              //                 style: Typographies.regularOverlineLower.copyWith(color: TextColor.secondary),
+              //               ),
+              //             ],
+              //           ),
+              //           Column(
+              //             children: [
+              //               Text('Soch kesish', style: Typographies.regularBody2),
+              //               SizedBox(height: 8),
+              //               Text(
+              //                 'Mashhur servis',
+              //                 style: Typographies.regularOverlineLower.copyWith(color: TextColor.secondary),
+              //               ),
+              //             ],
+              //           ),
+              //         ],
+              //       ),
+              //     ],
+              //   ),
+              // ),
               SizedBox(height: 24),
               Container(
                 padding: EdgeInsets.all(16),
@@ -285,8 +285,9 @@ class _State extends State<ProfilePage> {
                                   MainButton.primary(
                                     title: tr.profile.save,
                                     onTap: () {
-                                      context.read<ProfileCubit>().changeLocal(isUzbek ? AppLocale.ru : AppLocale.uz);
-                                      isUzbek = !isUzbek;
+                                      context.read<ProfileCubit>().changeLocal(
+                                        selectedLanguageItem == 1 ? AppLocale.ru : AppLocale.uz,
+                                      );
                                       context.pop();
                                     },
                                   ),
@@ -315,6 +316,7 @@ class _State extends State<ProfilePage> {
                   );
                 },
               ),
+              SizedBox(height: 24),
             ],
           ),
         ),
