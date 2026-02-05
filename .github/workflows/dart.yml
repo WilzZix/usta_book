@@ -21,6 +21,7 @@ jobs:
         with:
           flutter-version: '3.35.2'
           channel: "stable"
+          cache: true
 
       - name: Install dependencies
         run: flutter pub get
@@ -33,6 +34,6 @@ jobs:
         with:
           appId: ${{ secrets.FIREBASE_APP_ID }}
           token: ${{ secrets.FIREBASE_TOKEN }}
-          groups: Local-group
+          groups: testers
           releaseNotes: "Firebase app distribution"
           file: build/app/outputs/flutter-apk/app-release.apk
