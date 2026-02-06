@@ -41,6 +41,7 @@ class Assets {
   static const String imagesIcVerticalDivider = 'assets/images/ic_vertical_divider.svg';
   static const String imagesIcWatch = 'assets/images/ic_watch.svg';
   static const String imagesLogOut = 'assets/images/log-out.svg';
+  static const String imagesSelectionRec = 'assets/images/selection-rec.svg';
   static const String imagesSplashLogo = 'assets/images/splash_logo.png';
 
 }
