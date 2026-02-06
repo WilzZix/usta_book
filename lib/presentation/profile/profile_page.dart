@@ -15,6 +15,7 @@ import '../../bloc/profile/profile_cubit.dart';
 import '../../bloc/theme/theme_cubit.dart';
 import '../../core/localization/i18n/strings.g.dart';
 import '../../core/ui_kit/app_theme_extension.dart';
+import '../../core/ui_kit/components/checkbox.dart';
 import '../home/components/loading.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -145,9 +146,27 @@ class _State extends State<ProfilePage> {
                             onTap: () {
                               UstaBookBottomSheet.show(
                                 context: context,
-                                body: Column(children: [Row(children: [
-
-                                ])]),
+                                body: StatefulBuilder(
+                                  builder: (context, setState) {
+                                    final String currentLang = Localizations.localeOf(context).languageCode;
+                                    return Column(
+                                      children: state.profile!.workingHours.entries.map((entry) {
+                                        final String dayTitle = DayTranslator.translate(entry.key, currentLang);
+                                        return WorkingHoursCard(
+                                          title: dayTitle,
+                                          value: true,
+                                          onChanged: (newValue) {
+                                            setState(() {});
+                                          },
+                                          from: '${entry.value.split(" - ")[0]} AM',
+                                          to: '${entry.value.split(" - ")[1]} PM',
+                                          fromTapped: () {},
+                                          toTapped: () {},
+                                        );
+                                      }).toList(),
+                                    );
+                                  },
+                                ),
                                 header: tr.profile.working_hours,
                               );
                             },
