@@ -517,6 +517,8 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                                   workingHours: workingHours,
                                   profileCompleted: true,
                                   uid: '',
+                                  totalClients: 0,
+                                  totalEarning: '',
                                 ),
                               ),
                             );

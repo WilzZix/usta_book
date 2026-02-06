@@ -6,6 +6,8 @@ class MasterProfile {
   final String serviceType;
   final Map<String, String> workingHours; // {"mon": "09:00-18:00"}
   final String language;
+  final int totalClients;
+  final String totalEarning;
   final bool profileCompleted;
   final String uid; // The Master's User ID
   MasterProfile({
@@ -14,6 +16,8 @@ class MasterProfile {
     this.photoURL,
     required this.serviceType,
     required this.workingHours,
+    required this.totalClients,
+    required this.totalEarning,
     this.language = 'RU',
     required this.profileCompleted,
   });
@@ -25,6 +29,8 @@ class MasterProfile {
     String? serviceType,
     Map<String, String>? workingHours,
     String? language,
+    String? totalEarning,
+    int? totalClients,
     bool? profileCompleted,
   }) {
     return MasterProfile(
@@ -36,6 +42,8 @@ class MasterProfile {
       workingHours: workingHours ?? this.workingHours,
       language: language ?? this.language,
       profileCompleted: profileCompleted ?? this.profileCompleted,
+      totalClients: totalClients ?? this.totalClients,
+      totalEarning: totalEarning ?? this.totalEarning,
     );
   }
 
@@ -47,10 +55,7 @@ class MasterProfile {
 
     // Ensure all data types match your model
     final Map<String, String> workingHoursMap =
-        (data['workingHours'] as Map<String, dynamic>?)?.map(
-          (key, value) => MapEntry(key, value.toString()),
-        ) ??
-        {};
+        (data['workingHours'] as Map<String, dynamic>?)?.map((key, value) => MapEntry(key, value.toString())) ?? {};
 
     return MasterProfile(
       uid: doc.id,
@@ -59,6 +64,8 @@ class MasterProfile {
       serviceType: data['serviceType'] ?? '',
       workingHours: workingHoursMap,
       profileCompleted: data['profile_completed'],
+      totalClients: data['totalClients'],
+      totalEarning: data['totalEarning'],
       // ... map other fields
     );
   }

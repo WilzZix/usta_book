@@ -112,7 +112,7 @@ class _State extends State<ProfilePage> {
                               SizedBox(height: 4),
                               //TODO pastdagi ma'lumotlarni olish uchun function yozish
                               Text(
-                                "50 ta mijoz • \$1,500 oylik",
+                                "${state.profile!.totalClients} ta mijoz • ${state.profile!.totalEarning} oylik",
                                 style: Typographies.regularOverlineLower.copyWith(color: custom.primary),
                               ),
                             ],
