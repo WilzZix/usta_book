@@ -98,6 +98,9 @@ class TranslationsButtonsRu {
 
 	/// ru: 'Подтвердить и продолжить'
 	String get confirm_and_continue => 'Подтвердить и продолжить';
+
+	/// ru: 'Нет'
+	String get no => 'Нет';
 }
 
 // Path: input_field
@@ -419,6 +422,7 @@ extension on Translations {
 			case 'buttons.begin': return 'Начать';
 			case 'buttons.send_code_phone_number': return 'Отправить код подтверждения';
 			case 'buttons.confirm_and_continue': return 'Подтвердить и продолжить';
+			case 'buttons.no': return 'Нет';
 			case 'input_field.phone_field': return 'Номер телефона';
 			case 'input_field.email_field': return 'Электронная почта';
 			case 'input_field.password_field': return 'Пароль';

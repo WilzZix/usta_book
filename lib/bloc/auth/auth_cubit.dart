@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
 import 'dart:async';
 
@@ -57,12 +58,16 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   void setProfileComplete() {
-    // Мы знаем, что пользователь УЖЕ вошел,
-    // и его данные есть в текущем состоянии
-    if (state is AuthProfileIncomplete) {
-      final user = (state as AuthProfileIncomplete).firebaseUser;
-      // Обновляем статус на ПОЛНУЮ АВТОРИЗАЦИЮ
-      emit(AuthAuthenticated(firebaseUser: user));
+    try {
+      // Мы знаем, что пользователь УЖЕ вошел,
+      // и его данные есть в текущем состоянии
+      if (state is AuthProfileIncomplete) {
+        final user = (state as AuthProfileIncomplete).firebaseUser;
+        // Обновляем статус на ПОЛНУЮ АВТОРИЗАЦИЮ
+        emit(AuthAuthenticated(firebaseUser: user));
+      }
+    } catch (e) {
+      debugPrint(e.toString());
     }
   }
 

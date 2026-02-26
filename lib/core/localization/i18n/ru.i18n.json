@@ -12,7 +12,8 @@
     "allow": "Разрешить",
     "begin": "Начать",
     "send_code_phone_number": "Отправить код подтверждения",
-    "confirm_and_continue": "Подтвердить и продолжить"
+    "confirm_and_continue": "Подтвердить и продолжить",
+    "no": "Нет"
   },
   "input_field": {
     "phone_field": "Номер телефона",

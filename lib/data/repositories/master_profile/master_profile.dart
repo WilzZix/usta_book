@@ -8,28 +8,37 @@ import 'package:usta_book/domain/repositories/master_profile/i_master_profile.da
 @LazySingleton(as: IMasterProfile)
 class MasterProfileImpl extends IMasterProfile {
   @override
-  Future<void> updateMasterProfile(
-    String masterUID,
-    MasterProfile profile,
-  ) async {
+  Future<void> updateMasterProfile(String masterUID, MasterProfile profile) async {
     try {
       final FirebaseFirestore db = FirebaseFirestore.instance;
+      final WriteBatch batch = db.batch();
 
-      final DocumentReference newRecordRef = db
-          .collection('masters')
-          .doc(masterUID)
-          .collection('records')
-          .doc();
-      // 2. Формируем данные для записи и добавляем метку времени обновления
-      final Map<String, dynamic> data = profile.toFirestore();
-      data['updatedAt'] = FieldValue.serverTimestamp();
+      // 1. Ссылка на документ самого мастера
+      final DocumentReference masterRef = db.collection('masters').doc(masterUID);
 
-      // 3. Используем set() с merge: true, чтобы обновить только переданные поля,
-      // не перезаписывая весь документ.
-      await newRecordRef.update(data);
-    } on FirebaseException {
+      // Данные профиля мастера
+      final Map<String, dynamic> masterData = profile.toFirestore();
+      masterData['updatedAt'] = FieldValue.serverTimestamp();
+
+      // Добавляем в батч операцию создания/обновления мастера
+      // set с merge: true создаст документ, если его нет, или обновит существующий
+      batch.set(masterRef, masterData, SetOptions(merge: true));
+
+      // 2. Ссылка на НОВУЮ запись в подколлекции 'records'
+      // .doc() без параметров генерирует новый ID для записи
+      final DocumentReference newRecordRef = masterRef.collection('records').doc();
+
+      // Здесь должны быть данные ЗАПИСИ (например, время визита),
+      // но если вы хотите продублировать туда профиль:
+      batch.set(newRecordRef, masterData);
+
+      // 3. Выполняем обе операции одним запросом
+      await batch.commit();
+    } on FirebaseException catch (e) {
+      print("Ошибка Firebase: ${e.code}");
       rethrow;
     } catch (e) {
+      print("Общая ошибка: $e");
       rethrow;
     }
   }
@@ -69,10 +78,7 @@ class MasterProfileImpl extends IMasterProfile {
     try {
       final FirebaseFirestore db = FirebaseFirestore.instance;
       // 1. Get the reference to the specific 'records' subcollection
-      final CollectionReference recordsCollection = db
-          .collection('masters')
-          .doc(masterUID)
-          .collection('records');
+      final CollectionReference recordsCollection = db.collection('masters').doc(masterUID).collection('records');
 
       // 2. Формируем данные для записи и добавляем метку времени обновления
       final Map<String, dynamic> data = record.toJson();
@@ -92,10 +98,7 @@ class MasterProfileImpl extends IMasterProfile {
   Future<void> updateRecord(String masterUID, RecordModel record) async {
     try {
       final FirebaseFirestore db = FirebaseFirestore.instance;
-      final CollectionReference recordsCollection = db
-          .collection('masters')
-          .doc(masterUID)
-          .collection('records');
+      final CollectionReference recordsCollection = db.collection('masters').doc(masterUID).collection('records');
 
       final Map<String, dynamic> data = record.toJson();
       data['updatedAt'] = FieldValue.serverTimestamp();

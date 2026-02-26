@@ -75,6 +75,7 @@ class TranslationsButtonsUz extends TranslationsButtonsRu {
 	@override String get begin => 'Boshlash';
 	@override String get send_code_phone_number => 'Tasdiqlash kodi yuborish';
 	@override String get confirm_and_continue => 'Tasdiqlash va davom etish';
+	@override String get no => 'Yoq';
 }
 
 // Path: input_field
@@ -230,6 +231,7 @@ extension on TranslationsUz {
 			case 'buttons.begin': return 'Boshlash';
 			case 'buttons.send_code_phone_number': return 'Tasdiqlash kodi yuborish';
 			case 'buttons.confirm_and_continue': return 'Tasdiqlash va davom etish';
+			case 'buttons.no': return 'Yoq';
 			case 'input_field.phone_field': return 'Telefon raqam';
 			case 'input_field.email_field': return 'Elektron pochta';
 			case 'input_field.password_field': return 'Parol';

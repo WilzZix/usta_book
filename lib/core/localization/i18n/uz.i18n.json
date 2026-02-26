@@ -12,7 +12,8 @@
     "allow": "Ruhsat berish",
     "begin": "Boshlash",
     "send_code_phone_number": "Tasdiqlash kodi yuborish",
-    "confirm_and_continue": "Tasdiqlash va davom etish"
+    "confirm_and_continue": "Tasdiqlash va davom etish",
+    "no": "Yoq"
   },
   "input_field": {
     "phone_field": "Telefon raqam",
