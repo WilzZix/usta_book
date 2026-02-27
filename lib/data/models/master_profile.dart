@@ -6,8 +6,8 @@ class MasterProfile {
   final String serviceType;
   final Map<String, String> workingHours; // {"mon": "09:00-18:00"}
   final String language;
-  final int totalClients;
-  final String totalEarning;
+  final int? totalClients;
+  final String? totalEarning;
   final bool profileCompleted;
   final String uid; // The Master's User ID
   MasterProfile({

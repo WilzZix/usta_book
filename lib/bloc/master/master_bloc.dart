@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/cupertino.dart';
 
 import 'package:meta/meta.dart';
 import 'package:usta_book/data/models/master_profile.dart';
@@ -16,7 +17,7 @@ class MasterBloc extends Bloc<MasterEvent, MasterState> {
   final ShredPrefService shredPrefService;
 
   MasterBloc(this.masterProfileUseCase, this.shredPrefService)
-    : super(MasterInitial()) {
+      : super(MasterInitial()) {
     on<UpdateMasterProfile>(_masterProfileUpdate);
     on<GetMasterProfile>(_getMasterProfile);
     on<GetServiceTypes>(_getServiceTypes);
@@ -24,22 +25,22 @@ class MasterBloc extends Bloc<MasterEvent, MasterState> {
     on<UpdateRecordEvent>(updateRecord);
   }
 
-  Future<void> _masterProfileUpdate(
-    UpdateMasterProfile event,
-    Emitter<MasterState> emit,
-  ) async {
-    emit(MasterProfileUpdating());
-    await masterProfileUseCase.updateMasterProfile(
-      shredPrefService.getMasterUID()!,
-      event.masterProfile.copyWith(uid: shredPrefService.getMasterUID()),
-    );
-    emit(MasterProfileUpdated());
+  Future<void> _masterProfileUpdate(UpdateMasterProfile event,
+      Emitter<MasterState> emit,) async {
+    try {
+      emit(MasterProfileUpdating());
+      await masterProfileUseCase.updateMasterProfile(
+        shredPrefService.getMasterUID()!,
+        event.masterProfile.copyWith(uid: shredPrefService.getMasterUID()),
+      );
+      emit(MasterProfileUpdated());
+    } catch (e) {
+      debugPrint(e.toString());
+    }
   }
 
-  Future<void> _getMasterProfile(
-    GetMasterProfile event,
-    Emitter<MasterState> emit,
-  ) async {
+  Future<void> _getMasterProfile(GetMasterProfile event,
+      Emitter<MasterState> emit,) async {
     try {
       MasterProfile? profile = await masterProfileUseCase.getMasterProfile(
         shredPrefService.getMasterUID(),
@@ -50,10 +51,8 @@ class MasterBloc extends Bloc<MasterEvent, MasterState> {
     }
   }
 
-  Future<void> _getServiceTypes(
-    GetServiceTypes event,
-    Emitter<MasterState> emit,
-  ) async {
+  Future<void> _getServiceTypes(GetServiceTypes event,
+      Emitter<MasterState> emit,) async {
     try {
       List<ServiceModel> data = await masterProfileUseCase
           .getAvailableServices();
@@ -63,10 +62,8 @@ class MasterBloc extends Bloc<MasterEvent, MasterState> {
     }
   }
 
-  Future<void> _addRecord(
-    AddRecordEvent event,
-    Emitter<MasterState> emit,
-  ) async {
+  Future<void> _addRecord(AddRecordEvent event,
+      Emitter<MasterState> emit,) async {
     try {
       emit(AddingRecordState());
       await masterProfileUseCase.addRecord(
@@ -79,10 +76,8 @@ class MasterBloc extends Bloc<MasterEvent, MasterState> {
     }
   }
 
-  Future<void> updateRecord(
-    UpdateRecordEvent event,
-    Emitter<MasterState> emit,
-  ) async {
+  Future<void> updateRecord(UpdateRecordEvent event,
+      Emitter<MasterState> emit,) async {
     try {
       emit(UpdatingRecord());
       await masterProfileUseCase.updateRecord(

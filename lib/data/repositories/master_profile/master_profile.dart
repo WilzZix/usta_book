@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
+import 'package:usta_book/core/localization/i18n/strings.g.dart';
 import 'package:usta_book/data/models/master_profile.dart';
 import 'package:usta_book/data/models/record_model.dart';
 import 'package:usta_book/data/models/service_model.dart';
@@ -8,26 +9,17 @@ import 'package:usta_book/domain/repositories/master_profile/i_master_profile.da
 @LazySingleton(as: IMasterProfile)
 class MasterProfileImpl extends IMasterProfile {
   @override
-  Future<void> updateMasterProfile(
-    String masterUID,
-    MasterProfile profile,
-  ) async {
+  Future<void> updateMasterProfile(String masterUID, MasterProfile profile) async {
     try {
       final FirebaseFirestore db = FirebaseFirestore.instance;
 
-      final DocumentReference newRecordRef = db
-          .collection('masters')
-          .doc(masterUID)
-          .collection('records')
-          .doc();
-      // 2. Формируем данные для записи и добавляем метку времени обновления
+      final DocumentReference newRecordRef = db.collection('masters').doc(masterUID);
+
       final Map<String, dynamic> data = profile.toFirestore();
       data['updatedAt'] = FieldValue.serverTimestamp();
 
-      // 3. Используем set() с merge: true, чтобы обновить только переданные поля,
-      // не перезаписывая весь документ.
-      await newRecordRef.update(data);
-    } on FirebaseException {
+      await newRecordRef.set(data, SetOptions(merge: true));
+    } on FirebaseException catch (e) {
       rethrow;
     } catch (e) {
       rethrow;
@@ -60,8 +52,17 @@ class MasterProfileImpl extends IMasterProfile {
   @override
   Future<MasterProfile?> getMasterProfile(String masterUID) async {
     final FirebaseFirestore db = FirebaseFirestore.instance;
-    DocumentSnapshot doc = await db.collection('masters').doc(masterUID).get();
-    return MasterProfile.fromFirestore(doc);
+    try {
+      DocumentSnapshot doc = await db.collection('masters').doc(masterUID).get();
+
+      if (!doc.exists) {
+        return null;
+      }
+
+      return MasterProfile.fromFirestore(doc);
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override
@@ -69,10 +70,7 @@ class MasterProfileImpl extends IMasterProfile {
     try {
       final FirebaseFirestore db = FirebaseFirestore.instance;
       // 1. Get the reference to the specific 'records' subcollection
-      final CollectionReference recordsCollection = db
-          .collection('masters')
-          .doc(masterUID)
-          .collection('records');
+      final CollectionReference recordsCollection = db.collection('masters').doc(masterUID).collection('records');
 
       // 2. Формируем данные для записи и добавляем метку времени обновления
       final Map<String, dynamic> data = record.toJson();
@@ -92,10 +90,7 @@ class MasterProfileImpl extends IMasterProfile {
   Future<void> updateRecord(String masterUID, RecordModel record) async {
     try {
       final FirebaseFirestore db = FirebaseFirestore.instance;
-      final CollectionReference recordsCollection = db
-          .collection('masters')
-          .doc(masterUID)
-          .collection('records');
+      final CollectionReference recordsCollection = db.collection('masters').doc(masterUID).collection('records');
 
       final Map<String, dynamic> data = record.toJson();
       data['updatedAt'] = FieldValue.serverTimestamp();

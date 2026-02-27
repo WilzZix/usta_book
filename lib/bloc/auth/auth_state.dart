@@ -1,7 +1,7 @@
 part of 'auth_cubit.dart';
 
 // Состояния AuthCubit
-enum AuthStatus { unknown, authenticated, unauthenticated, authIncomplete }
+enum AuthStatus { unknown, authenticated, unauthenticated, authIncomplete, masterProfileNotFound }
 
 @immutable
 abstract class AuthState {

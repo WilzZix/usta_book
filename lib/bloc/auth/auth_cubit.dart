@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
 import 'dart:async';
 
@@ -24,45 +27,52 @@ class AuthCubit extends Cubit<AuthState> {
   void _handleAuthChange(User? user) async {
     if (user == null) {
       emit(const AuthUnauthenticated());
+      return;
     } else {
-      // 1. Пользователь вошел в Firebase. Теперь проверяем, завершен ли профиль.
-      final isComplete = await _isProfileComplete(user.uid);
+      ProfileStatus profileStatus = await _profileStatus(user.uid);
 
-      if (isComplete) {
-        // Профиль завершен -> ПОЛНАЯ АВТОРИЗАЦИЯ
-        emit(AuthAuthenticated(firebaseUser: user));
-      } else {
-        // Профиль НЕ завершен -> ОТПРАВЛЯЕМ на шаги регистрации (OTP/ProfileSettings)
-        emit(AuthProfileIncomplete(firebaseUser: user));
+      switch (profileStatus) {
+        case ProfileStatus.incomplete:
+          emit(AuthProfileIncomplete(firebaseUser: user));
+        case ProfileStatus.completed:
+          emit(AuthAuthenticated(firebaseUser: user));
+        case ProfileStatus.notFound:
+          emit(AuthProfileIncomplete(firebaseUser: user));
       }
     }
   }
 
-  Future<bool> _isProfileComplete(String uid) async {
+  Future<ProfileStatus> _profileStatus(String uid) async {
     try {
       MasterProfile? profile = await profileImpl.getMasterProfile(uid);
 
-      // Если профиль НЕ найден (null), он НЕ завершен.
+      // 1. Если документа нет в Firestore — возвращаем notFound
       if (profile == null) {
-        return false;
+        return ProfileStatus.notFound;
       }
 
-      // Если профиль найден, возвращаем статус завершенности.
-      return profile.profileCompleted;
+      // 2. Если документ есть, проверяем, завершен ли профиль
+      if (profile.profileCompleted) {
+        return ProfileStatus.completed;
+      } else {
+        return ProfileStatus.incomplete;
+      }
     } catch (e) {
-      // В случае ошибки (например, сбоя сети или проблем с Firestore)
-      // Лучше вернуть false или обработать ошибку в зависимости от логики приложения
-      return false;
+      return ProfileStatus.notFound;
     }
   }
 
   void setProfileComplete() {
-    // Мы знаем, что пользователь УЖЕ вошел,
-    // и его данные есть в текущем состоянии
-    if (state is AuthProfileIncomplete) {
-      final user = (state as AuthProfileIncomplete).firebaseUser;
-      // Обновляем статус на ПОЛНУЮ АВТОРИЗАЦИЮ
-      emit(AuthAuthenticated(firebaseUser: user));
+    try {
+      // Мы знаем, что пользователь УЖЕ вошел,
+      // и его данные есть в текущем состоянии
+      if (state is AuthProfileIncomplete) {
+        final user = (state as AuthProfileIncomplete).firebaseUser;
+        // Обновляем статус на ПОЛНУЮ АВТОРИЗАЦИЮ
+        emit(AuthAuthenticated(firebaseUser: user));
+      }
+    } catch (e) {
+      debugPrint(e.toString());
     }
   }
 
@@ -84,3 +94,5 @@ class AuthCubit extends Cubit<AuthState> {
     return super.close();
   }
 }
+
+enum ProfileStatus { incomplete, completed, notFound }
