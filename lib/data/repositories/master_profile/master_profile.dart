@@ -13,7 +13,7 @@ class MasterProfileImpl extends IMasterProfile {
     try {
       final FirebaseFirestore db = FirebaseFirestore.instance;
 
-      final DocumentReference newRecordRef = db.collection('masters').doc(masterUID).collection('records').doc();
+      final DocumentReference newRecordRef = db.collection('masters').doc(masterUID);
 
       final Map<String, dynamic> data = profile.toFirestore();
       data['updatedAt'] = FieldValue.serverTimestamp();
@@ -52,8 +52,17 @@ class MasterProfileImpl extends IMasterProfile {
   @override
   Future<MasterProfile?> getMasterProfile(String masterUID) async {
     final FirebaseFirestore db = FirebaseFirestore.instance;
-    DocumentSnapshot doc = await db.collection('masters').doc(masterUID).get();
-    return MasterProfile.fromFirestore(doc);
+    try {
+      DocumentSnapshot doc = await db.collection('masters').doc(masterUID).get();
+
+      if (!doc.exists) {
+        return null;
+      }
+
+      return MasterProfile.fromFirestore(doc);
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override
