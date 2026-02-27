@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
+import 'package:usta_book/core/localization/i18n/strings.g.dart';
 import 'package:usta_book/data/models/master_profile.dart';
 import 'package:usta_book/data/models/record_model.dart';
 import 'package:usta_book/data/models/service_model.dart';
@@ -11,34 +12,16 @@ class MasterProfileImpl extends IMasterProfile {
   Future<void> updateMasterProfile(String masterUID, MasterProfile profile) async {
     try {
       final FirebaseFirestore db = FirebaseFirestore.instance;
-      final WriteBatch batch = db.batch();
 
-      // 1. Ссылка на документ самого мастера
-      final DocumentReference masterRef = db.collection('masters').doc(masterUID);
+      final DocumentReference newRecordRef = db.collection('masters').doc(masterUID).collection('records').doc();
 
-      // Данные профиля мастера
-      final Map<String, dynamic> masterData = profile.toFirestore();
-      masterData['updatedAt'] = FieldValue.serverTimestamp();
+      final Map<String, dynamic> data = profile.toFirestore();
+      data['updatedAt'] = FieldValue.serverTimestamp();
 
-      // Добавляем в батч операцию создания/обновления мастера
-      // set с merge: true создаст документ, если его нет, или обновит существующий
-      batch.set(masterRef, masterData, SetOptions(merge: true));
-
-      // 2. Ссылка на НОВУЮ запись в подколлекции 'records'
-      // .doc() без параметров генерирует новый ID для записи
-      final DocumentReference newRecordRef = masterRef.collection('records').doc();
-
-      // Здесь должны быть данные ЗАПИСИ (например, время визита),
-      // но если вы хотите продублировать туда профиль:
-      batch.set(newRecordRef, masterData);
-
-      // 3. Выполняем обе операции одним запросом
-      await batch.commit();
+      await newRecordRef.set(data, SetOptions(merge: true));
     } on FirebaseException catch (e) {
-      print("Ошибка Firebase: ${e.code}");
       rethrow;
     } catch (e) {
-      print("Общая ошибка: $e");
       rethrow;
     }
   }
