@@ -16,3 +16,9 @@ final class EditClientEvent extends ClientsEvent {
 
   EditClientEvent({required this.record});
 }
+
+final class CreateClientEvent extends ClientsEvent {
+  final ClientModel clientModel;
+
+  CreateClientEvent({required this.clientModel});
+}

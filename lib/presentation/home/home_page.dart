@@ -57,62 +57,6 @@ class _HomePageState extends State<HomePage> {
           slivers: [
             SliverToBoxAdapter(child: TimeLinePicker()),
             SliverToBoxAdapter(child: SizedBox(height: 24)),
-            SliverToBoxAdapter(child: Text(tr.home.todays_statistics, style: Typographies.semiBoldH2)),
-            SliverToBoxAdapter(child: SizedBox(height: 12)),
-            SliverToBoxAdapter(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
-                    decoration: BoxDecoration(
-                      color: custom.body,
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: AppColors.border),
-                    ),
-                    child: Column(
-                      children: [
-                        Text('3', style: Typographies.regularH3),
-                        SizedBox(height: 8),
-                        Text('Zakazlar', style: Typographies.regularBody2),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
-                    decoration: BoxDecoration(
-                      color: custom.body,
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: AppColors.border),
-                    ),
-                    child: Column(
-                      children: [
-                        Text('120 000', style: Typographies.regularH3),
-                        SizedBox(height: 8),
-                        Text('Daromad', style: Typographies.regularBody2),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
-                    decoration: BoxDecoration(
-                      color: custom.body,
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: AppColors.border),
-                    ),
-                    child: Column(
-                      children: [
-                        Text('3 soat', style: Typographies.regularH3),
-                        SizedBox(height: 8),
-                        Text('Vaqt', style: Typographies.regularBody2),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-            SliverToBoxAdapter(child: SizedBox(height: 24)),
             SliverToBoxAdapter(
               child: BlocBuilder<ScheduleCubit, ScheduleState>(
                 builder: (context, state) {
@@ -130,7 +74,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                             SizedBox(height: 12),
                             MainButton.primary(
-                              title:tr.home.add_customer,
+                              title: tr.home.add_customer,
                               onTap: () {
                                 context.go(AddNewRecordPage.tag);
                               },
@@ -145,7 +89,7 @@ class _HomePageState extends State<HomePage> {
                           SizedBox(height: 12),
                           ClientStatusWidget(recordModel: state.data[0]),
                           SizedBox(height: 24),
-                          Text(tr.home.todays_statistics, style: Typographies.semiBoldH2),
+                          Text(tr.home.todays_clients, style: Typographies.semiBoldH2),
                           SizedBox(height: 12),
                           ListView.builder(
                             shrinkWrap: true,
@@ -195,6 +139,7 @@ class _HomePageState extends State<HomePage> {
                               );
                             },
                           ),
+                          SizedBox(height: 12),
                         ],
                       );
                     case TodayAppointmentLoadError():

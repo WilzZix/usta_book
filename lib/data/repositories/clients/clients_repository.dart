@@ -50,4 +50,34 @@ class ClientsRepository implements IClients {
       debugPrint(e.toString());
     }
   }
+
+  @override
+  Future<void> createClient(String masterUID, ClientModel record) async {
+    try {
+      final FirebaseFirestore db = FirebaseFirestore.instance;
+      final CollectionReference clientsCollection = db.collection('masters').doc(masterUID).collection('clients');
+
+      // 1. Query the collection for the specific phone number
+      final QuerySnapshot existingClient = await clientsCollection
+          .where('client_number', isEqualTo: record.clientNumber) // Assuming the field name is 'phone'
+          .limit(1) // Optimization: we only need to know if at least one exists
+          .get();
+
+      // 2. Only proceed if no document was found
+      if (existingClient.docs.isEmpty) {
+        final Map<String, dynamic> data = record.toJson();
+        data['clientNumber'] = record.clientNumber;
+        data['createdAt'] = FieldValue.serverTimestamp();
+        data['updatedAt'] = FieldValue.serverTimestamp();
+
+        await clientsCollection.add(data);
+        debugPrint('New client created successfully.');
+      } else {
+        // Optional: Update the existing client instead
+        debugPrint('Client with this number already exists.');
+      }
+    } catch (e) {
+      debugPrint('Error checking/creating client: ${e.toString()}');
+    }
+  }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:usta_book/bloc/clients/clients_bloc.dart';
 import 'package:usta_book/bloc/master/master_bloc.dart';
 import 'package:usta_book/core/localization/i18n/strings.g.dart';
 import 'package:usta_book/core/ui_kit/colors.dart';
@@ -11,6 +12,7 @@ import 'package:usta_book/data/models/record_model.dart';
 import 'package:usta_book/domain/enums/enums.dart';
 
 import '../../core/ui_kit/components/app_icons.dart';
+import '../../data/models/client_model.dart';
 import 'components/select_service_type_bottom_sheet.dart';
 
 class AddNewRecordPage extends StatefulWidget {
@@ -199,6 +201,18 @@ class _AddNewRecordPageState extends State<AddNewRecordPage> {
                         isLoading: state is AddingRecordState,
                         onTap: () {
                           if (_formKey.currentState!.validate()) {
+                            ///If user is not found in clients table we should add this user to this table
+                            context.read<ClientsBloc>().add(
+                              CreateClientEvent(
+                                clientModel: ClientModel(
+                                  clientName: nameController.text,
+                                  lastVisitDate: '',
+                                  price: priceController.text,
+                                  serviceType: serviceTypeController.text,
+                                  clientNumber: phoneController.text,
+                                ),
+                              ),
+                            );
                             context.read<MasterBloc>().add(
                               AddRecordEvent(
                                 record: RecordModel(

@@ -62,7 +62,8 @@
     "client_did_not_come": "Клиент не пришел",
     "in_progress": "В процессе",
     "finished": "Завершено",
-    "finish_action": "Завершить"
+    "finish_action": "Завершить",
+    "todays_clients": "Сегодняшние клиенты"
   },
   "profile": {
     "profile": "Профиль",

@@ -18,12 +18,12 @@ class ClientModel {
 
   factory ClientModel.fromJson(Map<String, dynamic> json) {
     return ClientModel(
-      clientName: json['clientName'],
+      clientName: json['client_name'],
       lastVisitDate: json['lastVisitDate'],
       price: json['price'],
-      serviceType: json['serviceType'],
-      clientNumber: json['clientNumber'],
-      visitCount: json['visitCount'],
+      serviceType: json['service_type'],
+      clientNumber: json['client_number'],
+      visitCount: json['visit_count'],
     );
   }
 

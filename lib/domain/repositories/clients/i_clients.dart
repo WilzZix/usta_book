@@ -6,4 +6,5 @@ abstract class IClients {
 
   Future<void> deleteClient(String masterUID, RecordModel record);
   Future<void> editClient(String masterUID, RecordModel record);
+  Future<void> createClient(String masterUID, ClientModel record);
 }

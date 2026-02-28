@@ -257,6 +257,9 @@ class TranslationsHomeRu {
 
 	/// ru: 'Завершить'
 	String get finish_action => 'Завершить';
+
+	/// ru: 'Сегодняшние клиенты'
+	String get todays_clients => 'Сегодняшние клиенты';
 }
 
 // Path: profile
@@ -472,6 +475,7 @@ extension on Translations {
 			case 'home.in_progress': return 'В процессе';
 			case 'home.finished': return 'Завершено';
 			case 'home.finish_action': return 'Завершить';
+			case 'home.todays_clients': return 'Сегодняшние клиенты';
 			case 'profile.profile': return 'Профиль';
 			case 'profile.logout': return 'Выход';
 			case 'profile.save': return 'Сохранить';

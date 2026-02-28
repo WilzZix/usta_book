@@ -47,4 +47,5 @@ class AppIcons {
   static final icBottomNavCalendarUnselected = _svgAsset("ic_bottom_nav_calendar_unselected.svg");
   static final icBottomNavCalendarSelected = _svgAsset("ic_bottom_nav_calendar_selected.svg");
   static final icSelectedRectangleSelected = _svgAsset("selection-rec.svg");
+  static final icPlus = _svgAsset("plus.svg");
 }
