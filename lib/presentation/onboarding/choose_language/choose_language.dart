@@ -21,7 +21,7 @@ class ChooseLanguage extends StatefulWidget {
 }
 
 class _ChooseLanguageState extends State<ChooseLanguage> {
-  int selectedItem = 0;
+  int selectedItem = 1;
   TextEditingController phoneController = TextEditingController();
   TextEditingController dateController = TextEditingController();
   TextEditingController timeController = TextEditingController();
@@ -40,17 +40,6 @@ class _ChooseLanguageState extends State<ChooseLanguage> {
             Text(tr.on_boarding.choose_lang_desc, style: Typographies.regularBody),
             SizedBox(height: 36),
             LanguageItem(
-              title: "O'zbekcha",
-              selected: selectedItem == 0,
-              onTap: () {
-                selectedItem = 0;
-                setState(() {});
-                context.read<ProfileCubit>().changeLocal(AppLocale.uz);
-              },
-              icon: AppIcons.icUzb,
-            ),
-            SizedBox(height: 16),
-            LanguageItem(
               title: "Русский",
               selected: selectedItem == 1,
               onTap: () {
@@ -60,6 +49,18 @@ class _ChooseLanguageState extends State<ChooseLanguage> {
               },
               icon: AppIcons.icRus,
             ),
+            SizedBox(height: 16),
+            LanguageItem(
+              title: "O'zbekcha",
+              selected: selectedItem == 0,
+              onTap: () {
+                selectedItem = 0;
+                setState(() {});
+                context.read<ProfileCubit>().changeLocal(AppLocale.uz);
+              },
+              icon: AppIcons.icUzb,
+            ),
+
             SizedBox(height: 32),
             Spacer(),
             Row(

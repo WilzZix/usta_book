@@ -124,6 +124,8 @@ class TranslationsSignUpUz extends TranslationsSignUpRu {
 	@override String get name => 'Ism';
 	@override String get choose_time => 'Tugash vaqti boshlanish vaqtidan keyin bo\'lishi kerak';
 	@override String get required_field => 'Bu sohani to\'ldirish shart';
+	@override String get user_not_found => 'Foydalanuvchi topilmadi';
+	@override String get do_you_want_sign_up_with_this_cred => 'Ushbu ma\'lumotlar bilan ro\'yxatdan o\'tishni xohlaysizmi?';
 }
 
 // Path: home
@@ -262,6 +264,8 @@ extension on TranslationsUz {
 			case 'sign_up.name': return 'Ism';
 			case 'sign_up.choose_time': return 'Tugash vaqti boshlanish vaqtidan keyin bo\'lishi kerak';
 			case 'sign_up.required_field': return 'Bu sohani to\'ldirish shart';
+			case 'sign_up.user_not_found': return 'Foydalanuvchi topilmadi';
+			case 'sign_up.do_you_want_sign_up_with_this_cred': return 'Ushbu ma\'lumotlar bilan ro\'yxatdan o\'tishni xohlaysizmi?';
 			case 'home.table': return 'Jadval';
 			case 'home.day': return 'Kun';
 			case 'home.week': return 'Hafta';

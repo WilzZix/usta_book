@@ -22,9 +22,12 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  bool isLoading = false;
 
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
+      isLoading = true;
+      setState(() {});
       BlocProvider.of<SignUpAndSingInBloc>(
         context,
       ).add(SignInWithEmailAndPasswordEvent(email: emailController.text, password: passwordController.text));
@@ -71,17 +74,25 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
               ),
               SizedBox(height: 36),
               BlocListener<SignUpAndSingInBloc, SignUpAndSingInState>(
-                child: MainButton.primary(title: tr.buttons.send_code_phone_number, onTap: _submitForm),
+                child: MainButton.primary(
+                  title: tr.buttons.send_code_phone_number,
+                  onTap: _submitForm,
+                  isLoading: isLoading,
+                ),
                 listener: (BuildContext context, SignUpAndSingInState state) {
                   if (state is SignedInFailureState) {
+                    isLoading = false;
+                    setState(() {});
                     if (state.msg.contains('User not found')) {
                       UstaBookBottomSheet.show(
                         context: context,
                         body: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('Хотите зарегится с этими кредами?', style: Typographies.regularBody2),
+                            Text(tr.sign_up.do_you_want_sign_up_with_this_cred, style: Typographies.regularBody),
                             SizedBox(height: 8),
                             Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 MainButton.secondary(
                                   title: tr.buttons.no,
@@ -104,7 +115,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
                             ),
                           ],
                         ),
-                        header: state.msg,
+                        header: tr.sign_up.user_not_found,
                       );
                     } else {
                       UstaBookBottomSheet.show(context: context, body: Text(state.msg), header: 'Sign in error');

@@ -209,6 +209,12 @@ class TranslationsSignUpRu {
 
 	/// ru: 'Это поле обязательно для заполнения'
 	String get required_field => 'Это поле обязательно для заполнения';
+
+	/// ru: 'Пользователь не найден'
+	String get user_not_found => 'Пользователь не найден';
+
+	/// ru: 'Хотите зарегится с этими кредами?'
+	String get do_you_want_sign_up_with_this_cred => 'Хотите зарегится с этими кредами?';
 }
 
 // Path: home
@@ -453,6 +459,8 @@ extension on Translations {
 			case 'sign_up.name': return 'Имя';
 			case 'sign_up.choose_time': return 'Время окончания должно быть позже времени начала';
 			case 'sign_up.required_field': return 'Это поле обязательно для заполнения';
+			case 'sign_up.user_not_found': return 'Пользователь не найден';
+			case 'sign_up.do_you_want_sign_up_with_this_cred': return 'Хотите зарегится с этими кредами?';
 			case 'home.table': return 'Расписание';
 			case 'home.day': return 'День';
 			case 'home.week': return 'Неделя';

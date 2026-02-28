@@ -47,7 +47,9 @@
     "complete_settings": "Sozlashni yakunlash",
     "name": "Ism",
     "choose_time": "Tugash vaqti boshlanish vaqtidan keyin bo'lishi kerak",
-    "required_field": "Bu sohani to'ldirish shart"
+    "required_field": "Bu sohani to'ldirish shart",
+    "user_not_found": "Foydalanuvchi topilmadi",
+    "do_you_want_sign_up_with_this_cred": "Ushbu ma'lumotlar bilan ro'yxatdan o'tishni xohlaysizmi?"
   },
   "home": {
     "table": "Jadval",
