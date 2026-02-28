@@ -146,6 +146,7 @@ class TranslationsHomeUz extends TranslationsHomeRu {
 	@override String get in_progress => 'Jarayonda';
 	@override String get finished => 'Tugadi';
 	@override String get finish_action => 'Tugatish';
+	@override String get todays_clients => 'Bugungi uchrashuvlar';
 }
 
 // Path: profile
@@ -277,6 +278,7 @@ extension on TranslationsUz {
 			case 'home.in_progress': return 'Jarayonda';
 			case 'home.finished': return 'Tugadi';
 			case 'home.finish_action': return 'Tugatish';
+			case 'home.todays_clients': return 'Bugungi uchrashuvlar';
 			case 'profile.profile': return 'Profil';
 			case 'profile.logout': return 'Chiqish';
 			case 'profile.save': return 'Saqlash';

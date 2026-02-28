@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:usta_book/bloc/clients/clients_bloc.dart';
+import 'package:usta_book/core/ui_kit/components/app_icons.dart';
 import 'package:usta_book/core/ui_kit/components/button.dart';
 import 'package:usta_book/core/ui_kit/typography.dart';
+import 'package:usta_book/presentation/add_new_record/add_new_record_page.dart';
+import 'package:usta_book/presentation/clients/add_new_appointment_page.dart';
 
 import '../../core/localization/i18n/strings.g.dart';
 import '../../core/ui_kit/app_theme_extension.dart';
@@ -73,7 +77,13 @@ class _ClientsListPageState extends State<ClientsListPage> {
             ),
             SliverToBoxAdapter(child: SizedBox(height: 12)),
             SliverToBoxAdapter(
-              child: MainButton.primary(title: tr.clients.add_new_customer, icon: Icon(Icons.add)),
+              child: MainButton.primary(
+                title: tr.clients.add_new_customer,
+                icon: AppIcons.icPlus,
+                onTap: () {
+                  context.push(AddNewRecordPage.tag);
+                },
+              ),
             ),
           ],
         ),

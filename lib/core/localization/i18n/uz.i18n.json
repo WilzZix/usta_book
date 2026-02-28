@@ -62,7 +62,8 @@
     "client_did_not_come": "Mijoz kelmadi",
     "in_progress": "Jarayonda",
     "finished": "Tugadi",
-    "finish_action": "Tugatish"
+    "finish_action": "Tugatish",
+    "todays_clients": "Bugungi uchrashuvlar"
   },
   "profile": {
     "profile": "Profil",
