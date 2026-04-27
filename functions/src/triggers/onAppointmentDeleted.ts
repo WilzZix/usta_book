@@ -6,17 +6,21 @@ export const onAppointmentDeleted = onDocumentDeleted(
   async (event) => {
     const { appointmentId } = event.params;
 
-    const snapshot = await admin
-      .firestore()
-      .collection('notification_queue')
-      .where('appointmentId', '==', appointmentId)
-      .where('status', '==', 'pending')
-      .get();
+    try {
+      const snapshot = await admin
+        .firestore()
+        .collection('notification_queue')
+        .where('appointmentId', '==', appointmentId)
+        .where('status', '==', 'pending')
+        .get();
 
-    if (snapshot.empty) return;
+      if (snapshot.empty) return;
 
-    const batch = admin.firestore().batch();
-    snapshot.docs.forEach((doc) => batch.delete(doc.ref));
-    await batch.commit();
+      const batch = admin.firestore().batch();
+      snapshot.docs.forEach((doc) => batch.delete(doc.ref));
+      await batch.commit();
+    } catch (err) {
+      console.error(`Failed to clean up notifications for appointment ${appointmentId}:`, err);
+    }
   }
 );
