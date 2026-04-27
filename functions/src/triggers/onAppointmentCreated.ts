@@ -38,12 +38,16 @@ export const onAppointmentCreated = onDocumentCreated(
 
     const { masterUID, appointmentId } = event.params;
 
-    const masterDoc = await admin.firestore().collection('masters').doc(masterUID).get();
-    const rawLanguage: string = masterDoc.data()?.language ?? 'RU';
+    try {
+      const masterDoc = await admin.firestore().collection('masters').doc(masterUID).get();
+      const rawLanguage: string = masterDoc.data()?.language ?? 'RU';
 
-    const notification = buildNotification(masterUID, appointmentId, data, rawLanguage);
-    if (!notification) return;
+      const notification = buildNotification(masterUID, appointmentId, data, rawLanguage);
+      if (!notification) return;
 
-    await admin.firestore().collection('notification_queue').add(notification);
+      await admin.firestore().collection('notification_queue').add(notification);
+    } catch (err) {
+      console.error(`Failed to queue notification for appointment ${appointmentId}:`, err);
+    }
   }
 );
