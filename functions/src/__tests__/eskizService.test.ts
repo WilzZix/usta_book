@@ -4,6 +4,8 @@ import { getEskizToken, sendSms } from '../services/eskizService';
 jest.mock('axios');
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 
+beforeEach(() => jest.clearAllMocks());
+
 describe('getEskizToken', () => {
   it('returns token from Eskiz response', async () => {
     mockedAxios.post.mockResolvedValueOnce({
@@ -13,6 +15,7 @@ describe('getEskizToken', () => {
     const token = await getEskizToken('user@test.com', 'secret');
 
     expect(token).toBe('abc123');
+    expect(mockedAxios.post).toHaveBeenCalledTimes(1);
     expect(mockedAxios.post).toHaveBeenCalledWith(
       'https://notify.eskiz.uz/api/auth/login',
       { email: 'user@test.com', password: 'secret' }
@@ -31,6 +34,7 @@ describe('sendSms', () => {
 
     await sendSms('my-token', '+998901234567', 'Hello');
 
+    expect(mockedAxios.post).toHaveBeenCalledTimes(1);
     expect(mockedAxios.post).toHaveBeenCalledWith(
       'https://notify.eskiz.uz/api/message/sms/send',
       { mobile_phone: '+998901234567', message: 'Hello', from: '4546' },
