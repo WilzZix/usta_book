@@ -45,7 +45,7 @@ export const onAppointmentCreated = onDocumentCreated(
       const notification = buildNotification(masterUID, appointmentId, data, rawLanguage);
       if (!notification) return;
 
-      await admin.firestore().collection('notification_queue').add(notification);
+      await admin.firestore().collection('notification_queue').doc(appointmentId).set(notification);
     } catch (err) {
       console.error(`Failed to queue notification for appointment ${appointmentId}:`, err);
     }

@@ -9,7 +9,8 @@ describe('buildNotification', () => {
   const language = 'uz';
 
   it('sets sendAt to 1 hour before appointment', () => {
-    const apptTime = new Date('2026-05-01T10:00:00Z');
+    const apptTime = new Date(Date.now() + 3 * 60 * 60 * 1000); // 3h from now
+    const expectedSendAt = new Date(apptTime.getTime() - 60 * 60 * 1000);
     const result = buildNotification(
       masterUID,
       appointmentId,
@@ -17,7 +18,6 @@ describe('buildNotification', () => {
       language
     );
 
-    const expectedSendAt = new Date('2026-05-01T09:00:00Z');
     expect(result!.sendAt.toDate().getTime()).toBe(expectedSendAt.getTime());
   });
 

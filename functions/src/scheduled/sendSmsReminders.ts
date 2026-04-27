@@ -1,4 +1,5 @@
 import * as admin from 'firebase-admin';
+import { Timestamp } from 'firebase-admin/firestore';
 import { onSchedule } from 'firebase-functions/v2/scheduler';
 import { getEskizToken, sendSms } from '../services/eskizService';
 import { Language, NotificationQueueDoc } from '../types';
@@ -16,7 +17,7 @@ export function buildSmsText(language: Language, clientName: string): string {
 export const sendSmsReminders = onSchedule(
   { schedule: '* * * * *', timeZone: 'Asia/Tashkent' },
   async () => {
-    const now = admin.firestore.Timestamp.now();
+    const now = Timestamp.now();
 
     const snapshot = await admin
       .firestore()
@@ -35,7 +36,13 @@ export const sendSmsReminders = onSchedule(
       return;
     }
 
-    const token = await getEskizToken(email, password);
+    let token: string;
+    try {
+      token = await getEskizToken(email, password);
+    } catch (err) {
+      console.error('Failed to get Eskiz token:', err);
+      return;
+    }
 
     for (const doc of snapshot.docs) {
       const data = doc.data() as NotificationQueueDoc;

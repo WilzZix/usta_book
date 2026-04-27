@@ -16,9 +16,13 @@ export const onAppointmentDeleted = onDocumentDeleted(
 
       if (snapshot.empty) return;
 
-      const batch = admin.firestore().batch();
-      snapshot.docs.forEach((doc) => batch.delete(doc.ref));
-      await batch.commit();
+      const BATCH_LIMIT = 500;
+      const docs = snapshot.docs;
+      for (let i = 0; i < docs.length; i += BATCH_LIMIT) {
+        const batch = admin.firestore().batch();
+        docs.slice(i, i + BATCH_LIMIT).forEach((doc) => batch.delete(doc.ref));
+        await batch.commit();
+      }
     } catch (err) {
       console.error(`Failed to clean up notifications for appointment ${appointmentId}:`, err);
     }
