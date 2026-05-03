@@ -1,4 +1,4 @@
-import { AppointmentData, FcmPayload, Language, PushKind } from '../types';
+import { AppointmentData, FcmPayload, Language, PushKind, PushPayloadKind } from '../types';
 
 const CHANNEL_ID = 'reminders';
 
@@ -11,7 +11,7 @@ export function pluralizeRu(n: number, [one, few, many]: [string, string, string
   return many;
 }
 
-function basePayload(title: string, body: string, kind: 'reminder_1h' | 'reminder_15m' | 'daily_summary', appointmentId: string): FcmPayload {
+function basePayload(title: string, body: string, kind: PushPayloadKind, appointmentId: string): FcmPayload {
   return {
     notification: { title, body },
     data: { kind, appointmentId },
@@ -66,8 +66,8 @@ export function buildDailySummaryPayload(
 
   if (n === 0) {
     const [title, body] = language === 'uz'
-      ? ["Bugun bo'sh kun", "Yozuvingiz yo'q — yaxshi dam oling"]
-      : ['Сегодня свободный день', 'Записей нет — хорошего отдыха'];
+      ? ["Bugun bo'sh kun", "Yozuvingiz yo'q — yaxshi dam oling 🌿"]
+      : ['Сегодня свободный день', 'Записей нет — хорошего отдыха 🌿'];
     return basePayload(title, body, 'daily_summary', '');
   }
 

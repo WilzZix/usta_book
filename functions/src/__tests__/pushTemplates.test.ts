@@ -41,12 +41,19 @@ describe('buildReminderPayload', () => {
     expect(p.notification.title).toBe('Осталось 15 минут');
     expect(p.notification.body).toContain('Ali');
   });
+
+  it('builds Uzbek 15m reminder', () => {
+    const p = buildReminderPayload('reminder_15m', 'uz', apt, 'apt-1');
+    expect(p.notification.title).toBe('15 daqiqa qoldi');
+    expect(p.notification.body).toBe('Ali bilan uchrashuvga 15 daqiqa qoldi');
+  });
 });
 
 describe('buildDailySummaryPayload', () => {
   it('returns free-day template when N=0 (uz)', () => {
     const p = buildDailySummaryPayload('uz', []);
     expect(p.notification.title).toBe("Bugun bo'sh kun");
+    expect(p.notification.body).toBe("Yozuvingiz yo'q — yaxshi dam oling 🌿");
     expect(p.data.kind).toBe('daily_summary');
     expect(p.data.appointmentId).toBe('');
   });
@@ -54,6 +61,7 @@ describe('buildDailySummaryPayload', () => {
   it('returns free-day template when N=0 (ru)', () => {
     const p = buildDailySummaryPayload('ru', []);
     expect(p.notification.title).toBe('Сегодня свободный день');
+    expect(p.notification.body).toBe('Записей нет — хорошего отдыха 🌿');
   });
 
   it('returns count + first appointment (uz)', () => {
