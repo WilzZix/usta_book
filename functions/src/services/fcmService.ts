@@ -1,5 +1,16 @@
 import * as admin from 'firebase-admin';
-import { FcmPayload } from '../types';
+import { FcmPayload, FcmToken } from '../types';
+
+const FCM_MAX_BATCH_SIZE = 500;
+
+export function chunk<T>(arr: T[], size: number): T[][] {
+  if (size <= 0) throw new Error('chunk size must be positive');
+  const out: T[][] = [];
+  for (let i = 0; i < arr.length; i += size) {
+    out.push(arr.slice(i, i + size));
+  }
+  return out;
+}
 
 export interface SendResult {
   successCount: number;
@@ -38,20 +49,30 @@ export async function sendPushToMaster(
   const tokenIds: string[] = [];
   const tokens: string[] = [];
   tokensSnap.docs.forEach((d) => {
+    const data = d.data() as FcmToken;
     tokenIds.push(d.id);
-    tokens.push(d.data().token as string);
+    tokens.push(data.token);
   });
 
-  const message: admin.messaging.MulticastMessage = {
-    tokens,
-    notification: payload.notification,
-    data: payload.data as Record<string, string>,
-    android: payload.android as admin.messaging.AndroidConfig,
-    apns: payload.apns as admin.messaging.ApnsConfig,
-  };
+  let successCount = 0;
+  let failureCount = 0;
+  const allResponses: admin.messaging.SendResponse[] = [];
 
-  const result = await admin.messaging().sendEachForMulticast(message);
-  const invalidIds = extractInvalidTokenIds(result.responses, tokenIds);
+  for (const chunkTokens of chunk(tokens, FCM_MAX_BATCH_SIZE)) {
+    const message: admin.messaging.MulticastMessage = {
+      tokens: chunkTokens,
+      notification: payload.notification,
+      data: payload.data as Record<string, string>,
+      android: payload.android as admin.messaging.AndroidConfig,
+      apns: payload.apns as admin.messaging.ApnsConfig,
+    };
+    const result = await admin.messaging().sendEachForMulticast(message);
+    successCount += result.successCount;
+    failureCount += result.failureCount;
+    allResponses.push(...result.responses);
+  }
+
+  const invalidIds = extractInvalidTokenIds(allResponses, tokenIds);
 
   if (invalidIds.length > 0) {
     const batch = admin.firestore().batch();
@@ -64,8 +85,8 @@ export async function sendPushToMaster(
   }
 
   return {
-    successCount: result.successCount,
-    failureCount: result.failureCount,
+    successCount,
+    failureCount,
     invalidatedTokens: invalidIds,
   };
 }

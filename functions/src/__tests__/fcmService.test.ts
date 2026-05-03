@@ -1,4 +1,19 @@
-import { extractInvalidTokenIds } from '../services/fcmService';
+import { chunk, extractInvalidTokenIds } from '../services/fcmService';
+
+describe('chunk', () => {
+  it('splits an array into batches of N', () => {
+    expect(chunk([1, 2, 3, 4, 5], 2)).toEqual([[1, 2], [3, 4], [5]]);
+  });
+  it('returns empty array for empty input', () => {
+    expect(chunk([], 100)).toEqual([]);
+  });
+  it('returns single chunk when input fits', () => {
+    expect(chunk([1, 2, 3], 5)).toEqual([[1, 2, 3]]);
+  });
+  it('throws when size <= 0', () => {
+    expect(() => chunk([1], 0)).toThrow();
+  });
+});
 
 describe('extractInvalidTokenIds', () => {
   it('returns ids of responses with not-registered errors', () => {
