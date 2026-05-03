@@ -3,16 +3,20 @@ import { Timestamp } from 'firebase-admin/firestore';
 import { onDocumentCreated } from 'firebase-functions/v2/firestore';
 import {
   AppointmentData,
-  DEFAULT_PUSH_SETTINGS,
   Language,
   NotificationQueueDoc,
   PushKind,
   PushQueueDoc,
   PushSettings,
 } from '../types';
+import { extractPushSettings } from '../services/pushSettings';
 
 const ONE_HOUR_MS = 60 * 60 * 1000;
 const FIFTEEN_MIN_MS = 15 * 60 * 1000;
+
+function normaliseLanguage(raw: string): Language {
+  return raw.toLowerCase() === 'uz' ? 'uz' : 'ru';
+}
 
 export function buildNotification(
   masterUID: string,
@@ -25,7 +29,7 @@ export function buildNotification(
 
   if (sendAtDate <= new Date()) return null;
 
-  const language: Language = rawLanguage.toLowerCase() === 'uz' ? 'uz' : 'ru';
+  const language = normaliseLanguage(rawLanguage);
 
   return {
     appointmentId,
@@ -50,7 +54,7 @@ export function buildPushQueueDocs(
   rawLanguage: string,
   settings: PushSettings
 ): PushQueueBuildResult[] {
-  const language: Language = rawLanguage.toLowerCase() === 'uz' ? 'uz' : 'ru';
+  const language = normaliseLanguage(rawLanguage);
   const apptMs = data.dateTime.toMillis();
   const now = Date.now();
   const out: PushQueueBuildResult[] = [];
@@ -77,18 +81,6 @@ export function buildPushQueueDocs(
   }
 
   return out;
-}
-
-function extractPushSettings(masterDoc: FirebaseFirestore.DocumentData | undefined): PushSettings {
-  const raw = masterDoc?.pushSettings;
-  if (!raw) return DEFAULT_PUSH_SETTINGS;
-  return {
-    reminderOneHour: raw.reminderOneHour ?? DEFAULT_PUSH_SETTINGS.reminderOneHour,
-    reminderFifteenMin: raw.reminderFifteenMin ?? DEFAULT_PUSH_SETTINGS.reminderFifteenMin,
-    dailySummary: raw.dailySummary ?? DEFAULT_PUSH_SETTINGS.dailySummary,
-    dailySummaryTime: raw.dailySummaryTime ?? DEFAULT_PUSH_SETTINGS.dailySummaryTime,
-    timezone: raw.timezone ?? DEFAULT_PUSH_SETTINGS.timezone,
-  };
 }
 
 export const onAppointmentCreated = onDocumentCreated(
@@ -118,7 +110,12 @@ export const onAppointmentCreated = onDocumentCreated(
         writes.push(db.collection('push_queue').doc(docId).set(payload));
       }
 
-      await Promise.all(writes);
+      const results = await Promise.allSettled(writes);
+      results.forEach((r, i) => {
+        if (r.status === 'rejected') {
+          console.error(`Write ${i} failed for appointment ${appointmentId}:`, r.reason);
+        }
+      });
     } catch (err) {
       console.error(`Failed to enqueue notifications for appointment ${appointmentId}:`, err);
     }
