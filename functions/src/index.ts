@@ -4,4 +4,7 @@ admin.initializeApp();
 
 export { onAppointmentCreated } from './triggers/onAppointmentCreated';
 export { onAppointmentDeleted } from './triggers/onAppointmentDeleted';
+export { onAppointmentUpdated } from './triggers/onAppointmentUpdated';
 export { sendSmsReminders } from './scheduled/sendSmsReminders';
+export { sendPushReminders } from './scheduled/sendPushReminders';
+export { sendDailySummaries } from './scheduled/sendDailySummaries';
