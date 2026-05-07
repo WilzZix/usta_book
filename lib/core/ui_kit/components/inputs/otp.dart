@@ -2,128 +2,108 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class OtpInput extends StatefulWidget {
-  const OtpInput({super.key});
+  final int length;
+  final ValueChanged<String> onChanged;
+
+  /// Increment to clear all fields (e.g. after invalid code).
+  final int clearSignal;
+
+  const OtpInput({
+    super.key,
+    this.length = 6,
+    required this.onChanged,
+    this.clearSignal = 0,
+  });
 
   @override
   State<OtpInput> createState() => _OtpInputState();
 }
 
 class _OtpInputState extends State<OtpInput> {
-  TextEditingController controller1 = TextEditingController();
-  TextEditingController controller2 = TextEditingController();
-  TextEditingController controller3 = TextEditingController();
-  TextEditingController controller4 = TextEditingController();
-  FocusNode focusNode1 = FocusNode();
-  FocusNode focusNode2 = FocusNode();
-  FocusNode focusNode3 = FocusNode();
-  FocusNode focusNode4 = FocusNode();
-  GlobalKey key = GlobalKey();
+  late final List<TextEditingController> _controllers;
+  late final List<FocusNode> _focusNodes;
+  bool _isClearing = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _controllers =
+        List.generate(widget.length, (_) => TextEditingController());
+    _focusNodes = List.generate(widget.length, (_) => FocusNode());
+  }
+
+  @override
+  void didUpdateWidget(covariant OtpInput old) {
+    super.didUpdateWidget(old);
+    if (old.clearSignal != widget.clearSignal) {
+      _isClearing = true;
+      for (final c in _controllers) {
+        c.clear();
+      }
+      _isClearing = false;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted) return;
+        _focusNodes.first.requestFocus();
+        widget.onChanged('');
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    for (final c in _controllers) {
+      c.dispose();
+    }
+    for (final f in _focusNodes) {
+      f.dispose();
+    }
+    super.dispose();
+  }
+
+  void _emit() {
+    widget.onChanged(_controllers.map((c) => c.text).join());
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: key,
-      child: Row(
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(right: 16.0),
-              child: SizedBox(
-                height: 76,
-                width: 76,
-                child: TextFormField(
-                  textAlign: TextAlign.center,
-                  focusNode: focusNode1,
-                  inputFormatters: [LengthLimitingTextInputFormatter(1)],
-                  keyboardType: TextInputType.number,
-                  textInputAction: TextInputAction.next,
-                  onFieldSubmitted: (value) {
-                    FocusScope.of(context).requestFocus(focusNode2);
-                  },
-                  onChanged: (value) {
-                    if (value.isNotEmpty) {
-                      FocusScope.of(context).requestFocus(focusNode2);
-                    }
-                  },
-                  controller: controller1,
-                ),
+    return Row(
+      children: List.generate(widget.length, (i) {
+        final isFirst = i == 0;
+        final isLast = i == widget.length - 1;
+        return Expanded(
+          child: Padding(
+            padding: EdgeInsets.only(
+              left: isFirst ? 0 : 6,
+              right: isLast ? 0 : 6,
+            ),
+            child: SizedBox(
+              height: 64,
+              child: TextFormField(
+                controller: _controllers[i],
+                focusNode: _focusNodes[i],
+                textAlign: TextAlign.center,
+                keyboardType: TextInputType.number,
+                textInputAction:
+                    isLast ? TextInputAction.done : TextInputAction.next,
+                enableSuggestions: false,
+                autocorrect: false,
+                inputFormatters: [LengthLimitingTextInputFormatter(1)],
+                onChanged: (value) {
+                  if (_isClearing) return;
+                  if (value.isNotEmpty && !isLast) {
+                    _focusNodes[i + 1].requestFocus();
+                  } else if (value.isEmpty && !isFirst) {
+                    _focusNodes[i - 1].requestFocus();
+                  } else if (value.isNotEmpty && isLast) {
+                    _focusNodes[i].unfocus();
+                  }
+                  _emit();
+                },
               ),
             ),
           ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: SizedBox(
-                height: 76,
-                width: 76,
-                child: TextFormField(
-                  textAlign: TextAlign.center,
-                  focusNode: focusNode2,
-                  keyboardType: TextInputType.number,
-                  inputFormatters: [LengthLimitingTextInputFormatter(1)],
-                  controller: controller2,
-                  textInputAction: TextInputAction.next,
-                  onFieldSubmitted: (value) {
-                    FocusScope.of(context).requestFocus(focusNode3);
-                  },
-                  onChanged: (value) {
-                    if (value.isNotEmpty) {
-                      FocusScope.of(context).requestFocus(focusNode3);
-                    }
-                  },
-                ),
-              ),
-            ),
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: SizedBox(
-                height: 76,
-                width: 76,
-                child: TextFormField(
-                  textAlign: TextAlign.center,
-                  focusNode: focusNode3,
-                  keyboardType: TextInputType.number,
-                  inputFormatters: [LengthLimitingTextInputFormatter(1)],
-                  controller: controller3,
-                  textInputAction: TextInputAction.next,
-                  onFieldSubmitted: (value) {
-                    FocusScope.of(context).requestFocus(focusNode4);
-                  },
-                  onChanged: (value) {
-                    if (value.isNotEmpty) {
-                      FocusScope.of(context).requestFocus(focusNode4);
-                    }
-                  },
-                ),
-              ),
-            ),
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 16.0),
-              child: SizedBox(
-                height: 76,
-                width: 76,
-                child: TextFormField(
-                  textAlign: TextAlign.center,
-                  focusNode: focusNode4,
-                  onChanged: (value) {
-                    if (value.isNotEmpty) {
-                      FocusScope.of(context).unfocus();
-                    }
-                  },
-                  inputFormatters: [LengthLimitingTextInputFormatter(1)],
-                  keyboardType: TextInputType.number,
-                  controller: controller4,
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
+        );
+      }),
     );
   }
 }
