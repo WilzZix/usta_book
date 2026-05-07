@@ -135,7 +135,8 @@ class AppRoute {
               // Путь здесь - это только 'otp-page', так как он вложен в /phone-registration-page
               path: OtpPage.tag.replaceAll('/', ''),
               name: OtpPage.tag,
-              builder: (_, __) => OtpPage(),
+              builder: (_, state) =>
+                  OtpPage(phone: state.extra as String? ?? ''),
             ),
           ],
         ),
