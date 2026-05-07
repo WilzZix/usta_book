@@ -1,7 +1,7 @@
 {
   "name": "usta-book-functions",
   "version": "1.0.0",
-  "engines": { "node": "18" },
+  "engines": { "node": "22" },
   "main": "lib/index.js",
   "scripts": {
     "build": "tsc",
