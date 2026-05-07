@@ -141,11 +141,16 @@ class TranslationsSignUpRu {
 	/// ru: 'Назад'
 	String get back => 'Назад';
 
-	/// ru: 'Введите 4-значный код, отправленный на номер $phone.'
-	String enter_otp_code({required Object phone}) => 'Введите 4-значный код, отправленный на номер ${phone}.';
+	/// ru: 'Введите 6-значный код, отправленный на номер $phone.'
+	String enter_otp_code({required Object phone}) => 'Введите 6-значный код, отправленный на номер ${phone}.';
 
 	/// ru: 'Попробуйте снова через $time секунд'
 	String timer({required Object time}) => 'Попробуйте снова через ${time} секунд';
+
+	/// ru: 'Отправить повторно'
+	String get resend => 'Отправить повторно';
+
+	late final TranslationsSignUpErrorsRu errors = TranslationsSignUpErrorsRu.internal(_root);
 
 	/// ru: 'Введите свои данные'
 	String get profile_settings_title => 'Введите свои данные';
@@ -415,6 +420,33 @@ class TranslationsClientsRu {
 	String get select => 'Выбрать';
 }
 
+// Path: sign_up.errors
+class TranslationsSignUpErrorsRu {
+	TranslationsSignUpErrorsRu.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// ru: 'Неверный номер'
+	String get invalid_phone => 'Неверный номер';
+
+	/// ru: 'Слишком много попыток, попробуйте позже'
+	String get too_many_requests => 'Слишком много попыток, попробуйте позже';
+
+	/// ru: 'Неверный код'
+	String get invalid_code => 'Неверный код';
+
+	/// ru: 'Срок действия кода истёк'
+	String get code_expired => 'Срок действия кода истёк';
+
+	/// ru: 'Нет подключения к интернету'
+	String get network => 'Нет подключения к интернету';
+
+	/// ru: 'Произошла ошибка'
+	String get unknown => 'Произошла ошибка';
+}
+
 /// Flat map(s) containing all translations.
 /// Only for edge cases! For simple maps, use the map function of this library.
 extension on Translations {
@@ -439,8 +471,15 @@ extension on Translations {
 			case 'sign_up.welcome_desc': return 'Введите свой номер телефона, чтобы начать.';
 			case 'sign_up.user_privacy': return 'Ваши данные в безопасности, и мы никогда не будем ими делиться.';
 			case 'sign_up.back': return 'Назад';
-			case 'sign_up.enter_otp_code': return ({required Object phone}) => 'Введите 4-значный код, отправленный на номер ${phone}.';
+			case 'sign_up.enter_otp_code': return ({required Object phone}) => 'Введите 6-значный код, отправленный на номер ${phone}.';
 			case 'sign_up.timer': return ({required Object time}) => 'Попробуйте снова через ${time} секунд';
+			case 'sign_up.resend': return 'Отправить повторно';
+			case 'sign_up.errors.invalid_phone': return 'Неверный номер';
+			case 'sign_up.errors.too_many_requests': return 'Слишком много попыток, попробуйте позже';
+			case 'sign_up.errors.invalid_code': return 'Неверный код';
+			case 'sign_up.errors.code_expired': return 'Срок действия кода истёк';
+			case 'sign_up.errors.network': return 'Нет подключения к интернету';
+			case 'sign_up.errors.unknown': return 'Произошла ошибка';
 			case 'sign_up.profile_settings_title': return 'Введите свои данные';
 			case 'sign_up.profile_settings_title_desc': return 'Настройте свой профиль, чтобы начать управлять клиентами.';
 			case 'sign_up.upload_photo': return 'Загрузите фото';

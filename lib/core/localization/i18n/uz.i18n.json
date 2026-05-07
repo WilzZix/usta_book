@@ -25,8 +25,17 @@
     "welcome_desc": "Boshlash uchun telefon raqamingizni kiriting.",
     "user_privacy": "Sizning ma'lumotlaringiz xavfsiz va biz sizning ma'lumotlaringizni hech qachon baham ko'rmaymiz",
     "back": "Ortga qaytish",
-    "enter_otp_code": "$phone raqamiga yuborilgan 4 xonali kodni kiriting.",
+    "enter_otp_code": "$phone raqamiga yuborilgan 6 xonali kodni kiriting.",
     "timer": "$time soniyadan keyin qayta urinib ko'ring",
+    "resend": "Qayta yuborish",
+    "errors": {
+      "invalid_phone": "Telefon raqami noto'g'ri",
+      "too_many_requests": "Juda ko'p urinish, keyinroq qayta urining",
+      "invalid_code": "Kod noto'g'ri",
+      "code_expired": "Kod muddati tugagan",
+      "network": "Internet ulanishi yo'q",
+      "unknown": "Xatolik yuz berdi"
+    },
     "profile_settings_title": "O'zingizning ma'lumotlaringizni kiriting",
     "profile_settings_title_desc": "Mijozlarni boshqarishni boshlash uchun profilingizni sozlang.",
     "upload_photo": "Rasm yuklang",

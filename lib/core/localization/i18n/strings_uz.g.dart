@@ -101,8 +101,10 @@ class TranslationsSignUpUz extends TranslationsSignUpRu {
 	@override String get welcome_desc => 'Boshlash uchun telefon raqamingizni kiriting.';
 	@override String get user_privacy => 'Sizning ma\'lumotlaringiz xavfsiz va biz sizning ma\'lumotlaringizni hech qachon baham ko\'rmaymiz';
 	@override String get back => 'Ortga qaytish';
-	@override String enter_otp_code({required Object phone}) => '${phone} raqamiga yuborilgan 4 xonali kodni kiriting.';
+	@override String enter_otp_code({required Object phone}) => '${phone} raqamiga yuborilgan 6 xonali kodni kiriting.';
 	@override String timer({required Object time}) => '${time} soniyadan keyin qayta urinib ko\'ring';
+	@override String get resend => 'Qayta yuborish';
+	@override late final TranslationsSignUpErrorsUz errors = TranslationsSignUpErrorsUz._(_root);
 	@override String get profile_settings_title => 'O\'zingizning ma\'lumotlaringizni kiriting';
 	@override String get profile_settings_title_desc => 'Mijozlarni boshqarishni boshlash uchun profilingizni sozlang.';
 	@override String get upload_photo => 'Rasm yuklang';
@@ -218,6 +220,21 @@ class TranslationsClientsUz extends TranslationsClientsRu {
 	@override String get select => 'Tanlash';
 }
 
+// Path: sign_up.errors
+class TranslationsSignUpErrorsUz extends TranslationsSignUpErrorsRu {
+	TranslationsSignUpErrorsUz._(TranslationsUz root) : this._root = root, super.internal(root);
+
+	final TranslationsUz _root; // ignore: unused_field
+
+	// Translations
+	@override String get invalid_phone => 'Telefon raqami noto\'g\'ri';
+	@override String get too_many_requests => 'Juda ko\'p urinish, keyinroq qayta urining';
+	@override String get invalid_code => 'Kod noto\'g\'ri';
+	@override String get code_expired => 'Kod muddati tugagan';
+	@override String get network => 'Internet ulanishi yo\'q';
+	@override String get unknown => 'Xatolik yuz berdi';
+}
+
 /// Flat map(s) containing all translations.
 /// Only for edge cases! For simple maps, use the map function of this library.
 extension on TranslationsUz {
@@ -242,8 +259,15 @@ extension on TranslationsUz {
 			case 'sign_up.welcome_desc': return 'Boshlash uchun telefon raqamingizni kiriting.';
 			case 'sign_up.user_privacy': return 'Sizning ma\'lumotlaringiz xavfsiz va biz sizning ma\'lumotlaringizni hech qachon baham ko\'rmaymiz';
 			case 'sign_up.back': return 'Ortga qaytish';
-			case 'sign_up.enter_otp_code': return ({required Object phone}) => '${phone} raqamiga yuborilgan 4 xonali kodni kiriting.';
+			case 'sign_up.enter_otp_code': return ({required Object phone}) => '${phone} raqamiga yuborilgan 6 xonali kodni kiriting.';
 			case 'sign_up.timer': return ({required Object time}) => '${time} soniyadan keyin qayta urinib ko\'ring';
+			case 'sign_up.resend': return 'Qayta yuborish';
+			case 'sign_up.errors.invalid_phone': return 'Telefon raqami noto\'g\'ri';
+			case 'sign_up.errors.too_many_requests': return 'Juda ko\'p urinish, keyinroq qayta urining';
+			case 'sign_up.errors.invalid_code': return 'Kod noto\'g\'ri';
+			case 'sign_up.errors.code_expired': return 'Kod muddati tugagan';
+			case 'sign_up.errors.network': return 'Internet ulanishi yo\'q';
+			case 'sign_up.errors.unknown': return 'Xatolik yuz berdi';
 			case 'sign_up.profile_settings_title': return 'O\'zingizning ma\'lumotlaringizni kiriting';
 			case 'sign_up.profile_settings_title_desc': return 'Mijozlarni boshqarishni boshlash uchun profilingizni sozlang.';
 			case 'sign_up.upload_photo': return 'Rasm yuklang';
