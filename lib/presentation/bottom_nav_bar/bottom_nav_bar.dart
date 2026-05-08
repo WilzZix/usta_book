@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:usta_book/bloc/badges/badges_cubit.dart';
 import 'package:usta_book/bloc/master/master_bloc.dart';
 import 'package:usta_book/bloc/schedule/schedule_cubit.dart';
 import 'package:usta_book/core/ui_kit/components/app_icons.dart';
@@ -52,6 +53,7 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
     super.initState();
     context.read<MasterBloc>().add(GetMasterProfile());
     context.read<ScheduleCubit>().getTodayAppointments(date: DateTime.now());
+    context.read<AppointmentBadgesCubit>().refresh();
     _arrivalTimer = Timer.periodic(
       const Duration(seconds: 30),
       (_) => _checkArrivals(),
@@ -106,6 +108,7 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
     if (!mounted || _sheetOpen) return;
     final state = context.read<ScheduleCubit>().state;
     if (state is! TodayAppointmentLoaded) return;
+    if (!_isToday(state.selectedDate)) return;
     final now = DateTime.now();
     for (final r in state.data) {
       if (r.status != ClientStatus.waiting) continue;
@@ -142,13 +145,27 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
     if (mounted) _sheetOpen = false;
   }
 
+  bool _isToday(DateTime d) {
+    final now = DateTime.now();
+    return d.year == now.year && d.month == now.month && d.day == now.day;
+  }
+
   void _onItemTapped(int index) {
     if (index == 2) {
-      final state = context.read<MasterBloc>().state;
-      if (state is MasterProfileLoaded &&
-          state.profile != null &&
-          state.profile!.subscriptionStatus == SubscriptionStatus.expired) {
+      final masterState = context.read<MasterBloc>().state;
+      if (masterState is MasterProfileLoaded &&
+          masterState.profile != null &&
+          masterState.profile!.subscriptionStatus == SubscriptionStatus.expired) {
         context.pushNamed(PaywallPage.tag);
+        return;
+      }
+      final scheduleState = context.read<ScheduleCubit>().state;
+      if (scheduleState is TodayAppointmentLoaded && scheduleState.isPast) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(Translations.of(context).home.cant_add_to_past),
+          ),
+        );
         return;
       }
     }
@@ -160,13 +177,25 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocListener<ScheduleCubit, ScheduleState>(
-        listener: (context, state) {
-          if (state is TodayAppointmentLoaded) {
-            _scheduleAll(state.data);
-            _checkArrivals();
-          }
-        },
+      body: MultiBlocListener(
+        listeners: [
+          BlocListener<ScheduleCubit, ScheduleState>(
+            listener: (context, state) {
+              if (state is TodayAppointmentLoaded &&
+                  _isToday(state.selectedDate)) {
+                _scheduleAll(state.data);
+                _checkArrivals();
+              }
+            },
+          ),
+          BlocListener<MasterBloc, MasterState>(
+            listener: (context, state) {
+              if (state is RecordAddedState || state is RecordUpdated) {
+                context.read<AppointmentBadgesCubit>().refresh();
+              }
+            },
+          ),
+        ],
         child: Column(
           children: [
             const TrialBanner(),

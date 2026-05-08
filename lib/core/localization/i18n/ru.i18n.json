@@ -75,7 +75,9 @@
     "todays_clients": "Сегодняшние клиенты",
     "arrival_check_title": "Клиент пришёл?",
     "arrival_check_came": "Пришёл",
-    "arrival_check_dismiss": "Позже"
+    "arrival_check_dismiss": "Позже",
+    "no_clients_on_day": "В этот день клиентов не было",
+    "cant_add_to_past": "Нельзя добавить запись на прошедший день"
   },
   "profile": {
     "profile": "Профиль",

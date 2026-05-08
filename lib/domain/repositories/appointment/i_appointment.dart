@@ -9,4 +9,9 @@ abstract class IAppointment {
     DateTime date,
     String? masterUID,
   );
+
+  Future<List<RecordModel>> getRangeAppointments(
+    List<DateTime> dates,
+    String? masterUID,
+  );
 }

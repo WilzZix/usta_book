@@ -36,6 +36,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
 
   final nameController = TextEditingController();
   final serviceTypeController = TextEditingController();
+  final priceController = TextEditingController();
   final beginTimeController = TextEditingController(text: '09:00');
   final endTimeController = TextEditingController(text: '18:00');
 
@@ -57,6 +58,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
     _profileLoaded = true;
     nameController.text = profile.name;
     serviceTypeController.text = profile.serviceType;
+    priceController.text = profile.defaultPrice ?? '';
     _existingPhotoURL = profile.photoURL;
     if (profile.workingHours.isNotEmpty) {
       for (final k in _dayKeys) {
@@ -86,6 +88,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
   void dispose() {
     nameController.dispose();
     serviceTypeController.dispose();
+    priceController.dispose();
     beginTimeController.dispose();
     endTimeController.dispose();
     super.dispose();
@@ -194,6 +197,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
 
   void _submit() {
     if (_formKey.currentState!.validate() != true) return;
+    final priceText = priceController.text.trim();
     BlocProvider.of<MasterBloc>(context).add(
       UpdateMasterProfile(
         photoFile: _photoFile,
@@ -202,6 +206,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
           serviceType: serviceTypeController.text,
           workingHours: _buildWorkingHours(),
           profileCompleted: true,
+          defaultPrice: priceText.isEmpty ? null : priceText,
         ),
       ),
     );
@@ -266,6 +271,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                     tr: tr,
                     nameController: nameController,
                     serviceTypeController: serviceTypeController,
+                    priceController: priceController,
                     onServiceTap: () =>
                         BlocProvider.of<MasterBloc>(context).add(GetServiceTypes()),
                   ),
@@ -365,6 +371,7 @@ class _BasicInfoCard extends StatelessWidget {
     required this.tr,
     required this.nameController,
     required this.serviceTypeController,
+    required this.priceController,
     required this.onServiceTap,
   });
 
@@ -372,6 +379,7 @@ class _BasicInfoCard extends StatelessWidget {
   final Translations tr;
   final TextEditingController nameController;
   final TextEditingController serviceTypeController;
+  final TextEditingController priceController;
   final VoidCallback onServiceTap;
 
   @override
@@ -400,6 +408,12 @@ class _BasicInfoCard extends StatelessWidget {
             controller: serviceTypeController,
             suffixIcon: const Icon(Icons.keyboard_arrow_down_rounded),
             onTap: onServiceTap,
+          ),
+          const SizedBox(height: 16),
+          InputField.text(
+            hintText: tr.add_record.price_hint,
+            fieldTitle: tr.add_record.price,
+            controller: priceController,
           ),
         ],
       ),

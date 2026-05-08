@@ -12,6 +12,7 @@
 import 'package:firebase_auth/firebase_auth.dart' as _i59;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
+import 'package:usta_book/bloc/badges/badges_cubit.dart' as _i904;
 import 'package:usta_book/core/di/firebase_module.dart' as _i335;
 import 'package:usta_book/data/repositories/appointment/appointment_repository.dart'
     as _i623;
@@ -59,6 +60,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i227.IAppointment>(() => _i623.AppointmentRepo());
     gh.singleton<_i215.IPhoneAuth>(
       () => _i920.FirebasePhoneAuthRepository(gh<_i59.FirebaseAuth>()),
+    );
+    gh.factory<_i904.AppointmentBadgesCubit>(
+      () => _i904.AppointmentBadgesCubit(
+        gh<_i227.IAppointment>(),
+        gh<_i858.ShredPrefService>(),
+      ),
     );
     gh.factory<_i755.SignInUseCase>(
       () => _i755.SignInUseCase(iSignIn: gh<_i465.ISignIn>()),

@@ -154,6 +154,8 @@ class TranslationsHomeUz extends TranslationsHomeRu {
 	@override String get arrival_check_title => 'Mijoz keldimi?';
 	@override String get arrival_check_came => 'Keldi';
 	@override String get arrival_check_dismiss => 'Keyinroq';
+	@override String get no_clients_on_day => 'Bu kunda mijozlaringiz yo\'q edi';
+	@override String get cant_add_to_past => 'O\'tgan kunga zapis qo\'shib bo\'lmaydi';
 }
 
 // Path: profile
@@ -370,6 +372,8 @@ extension on TranslationsUz {
 			case 'home.arrival_check_title': return 'Mijoz keldimi?';
 			case 'home.arrival_check_came': return 'Keldi';
 			case 'home.arrival_check_dismiss': return 'Keyinroq';
+			case 'home.no_clients_on_day': return 'Bu kunda mijozlaringiz yo\'q edi';
+			case 'home.cant_add_to_past': return 'O\'tgan kunga zapis qo\'shib bo\'lmaydi';
 			case 'profile.profile': return 'Profil';
 			case 'profile.logout': return 'Chiqish';
 			case 'profile.save': return 'Saqlash';

@@ -12,6 +12,7 @@ class MasterProfile {
   final String uid;
   final DateTime? trialStartedAt;
   final DateTime? paidUntil;
+  final String? defaultPrice;
 
   MasterProfile({
     this.uid = '',
@@ -25,6 +26,7 @@ class MasterProfile {
     required this.profileCompleted,
     this.trialStartedAt,
     this.paidUntil,
+    this.defaultPrice,
   });
 
   MasterProfile copyWith({
@@ -39,6 +41,7 @@ class MasterProfile {
     bool? profileCompleted,
     DateTime? trialStartedAt,
     DateTime? paidUntil,
+    String? defaultPrice,
   }) {
     return MasterProfile(
       uid: uid ?? this.uid,
@@ -52,6 +55,7 @@ class MasterProfile {
       totalEarning: totalEarning ?? this.totalEarning,
       trialStartedAt: trialStartedAt ?? this.trialStartedAt,
       paidUntil: paidUntil ?? this.paidUntil,
+      defaultPrice: defaultPrice ?? this.defaultPrice,
     );
   }
 
@@ -76,6 +80,7 @@ class MasterProfile {
       totalEarning: data['totalEarning'] as String?,
       trialStartedAt: (data['trialStartedAt'] as Timestamp?)?.toDate(),
       paidUntil: (data['paidUntil'] as Timestamp?)?.toDate(),
+      defaultPrice: data['defaultPrice'] as String?,
     );
   }
 
@@ -87,6 +92,7 @@ class MasterProfile {
       'workingHours': workingHours,
       'language': language,
       'profile_completed': profileCompleted,
+      'defaultPrice': defaultPrice,
     };
   }
 

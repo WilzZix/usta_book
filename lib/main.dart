@@ -11,6 +11,7 @@ import 'package:usta_book/bloc/profile/profile_cubit.dart';
 import 'package:usta_book/core/di/di.dart';
 import 'package:usta_book/core/di/inject.dart';
 
+import 'bloc/badges/badges_cubit.dart';
 import 'bloc/clients/clients_bloc.dart';
 import 'bloc/master/master_bloc.dart';
 import 'bloc/schedule/schedule_cubit.dart';
@@ -86,6 +87,9 @@ class _MyAppState extends State<MyApp> {
           BlocProvider(create: (context) => ScheduleCubit(inject(), inject())),
           BlocProvider(create: (context) => ClientsBloc(inject(), inject())..add(GetClientsEvent())),
           BlocProvider<StatsCubit>(create: (context) => StatsCubit(inject(), inject())),
+          BlocProvider<AppointmentBadgesCubit>(
+            create: (context) => AppointmentBadgesCubit(inject(), inject()),
+          ),
           BlocProvider<ThemeCubit>(create: (context) => ThemeCubit()),
           BlocProvider<ProfileCubit>(create: (context) => ProfileCubit()),
         ],

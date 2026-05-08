@@ -34,6 +34,20 @@ class _AddNewRecordPageState extends State<AddNewRecordPage> {
   TextEditingController serviceTypeController = TextEditingController();
   TextEditingController priceController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  bool _prefilled = false;
+
+  void _prefillFromProfile(MasterProfile profile) {
+    if (_prefilled) return;
+    _prefilled = true;
+    if (serviceTypeController.text.isEmpty && profile.serviceType.isNotEmpty) {
+      serviceTypeController.text = profile.serviceType;
+    }
+    if (priceController.text.isEmpty &&
+        profile.defaultPrice != null &&
+        profile.defaultPrice!.isNotEmpty) {
+      priceController.text = profile.defaultPrice!;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +58,9 @@ class _AddNewRecordPageState extends State<AddNewRecordPage> {
         masterState.profile != null &&
         masterState.profile!.subscriptionStatus == SubscriptionStatus.expired) {
       return const PaywallPage();
+    }
+    if (masterState is MasterProfileLoaded && masterState.profile != null) {
+      _prefillFromProfile(masterState.profile!);
     }
     return Scaffold(
       appBar: canPop

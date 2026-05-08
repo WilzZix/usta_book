@@ -32,108 +32,124 @@ class _Body extends StatelessWidget {
 
   void _update(BuildContext context, ClientStatus status) {
     context.read<MasterBloc>().add(
-          UpdateRecordEvent(record: record.copyWith(status: status)),
-        );
-    context.read<ScheduleCubit>().getTodayAppointments(date: DateTime.now());
-    Navigator.of(context).pop();
+      UpdateRecordEvent(record: record.copyWith(status: status)),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     final tr = Translations.of(context);
     final custom = Theme.of(context).extension<AppThemeExtension>()!;
-    return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 16, 20, 20),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Center(
-              child: Container(
-                width: 40,
-                height: 4,
-                margin: const EdgeInsets.only(bottom: 12),
-                decoration: BoxDecoration(
-                  color: custom.border,
-                  borderRadius: BorderRadius.circular(2),
+    return BlocListener<MasterBloc, MasterState>(
+      listener: (context, state) {
+        if (state is RecordUpdated) {
+          context.read<ScheduleCubit>().getTodayAppointments(
+            date: DateTime.now(),
+          );
+          Navigator.of(context).pop();
+        } else if (state is UpdatingRecordError) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(state.msg), backgroundColor: Colors.red),
+          );
+        }
+      },
+      child: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(20, 16, 20, 20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Container(
+                  width: 40,
+                  height: 4,
+                  margin: const EdgeInsets.only(bottom: 12),
+                  decoration: BoxDecoration(
+                    color: custom.border,
+                    borderRadius: BorderRadius.circular(2),
+                  ),
                 ),
               ),
-            ),
-            Text(tr.home.arrival_check_title, style: Typographies.regularH3),
-            const SizedBox(height: 16),
-            Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: custom.secondary,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Row(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: custom.body,
+              Text(tr.home.arrival_check_title, style: Typographies.regularH3),
+              const SizedBox(height: 16),
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: custom.secondary,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: custom.body,
+                      ),
+                      child: AppIcons.icPerson,
                     ),
-                    child: AppIcons.icPerson,
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            record.clientName,
+                            style: Typographies.regularBody,
+                          ),
+                          const SizedBox(height: 2),
+                          Text(
+                            '${record.time} · ${record.serviceType}',
+                            style: Typographies.regularOverlineLower,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 16),
+              Row(
+                children: [
+                  Expanded(
+                    child: OutlinedButton(
+                      onPressed: () => _update(context, ClientStatus.rejected),
+                      style: OutlinedButton.styleFrom(
+                        foregroundColor: StateColor.error,
+                        side: BorderSide(color: StateColor.error),
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      child: Text(tr.home.client_did_not_come),
+                    ),
                   ),
                   const SizedBox(width: 12),
                   Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(record.clientName, style: Typographies.regularBody),
-                        const SizedBox(height: 2),
-                        Text(
-                          '${record.time} · ${record.serviceType}',
-                          style: Typographies.regularOverlineLower,
+                    child: FilledButton(
+                      onPressed: () =>
+                          _update(context, ClientStatus.inProgress),
+                      style: FilledButton.styleFrom(
+                        backgroundColor: custom.primary,
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
                         ),
-                      ],
+                      ),
+                      child: Text(tr.home.arrival_check_came),
                     ),
                   ),
                 ],
               ),
-            ),
-            const SizedBox(height: 16),
-            Row(
-              children: [
-                Expanded(
-                  child: OutlinedButton(
-                    onPressed: () => _update(context, ClientStatus.rejected),
-                    style: OutlinedButton.styleFrom(
-                      foregroundColor: StateColor.error,
-                      side: BorderSide(color: StateColor.error),
-                      padding: const EdgeInsets.symmetric(vertical: 14),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    child: Text(tr.home.client_did_not_come),
-                  ),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: FilledButton(
-                    onPressed: () => _update(context, ClientStatus.inProgress),
-                    style: FilledButton.styleFrom(
-                      backgroundColor: custom.primary,
-                      padding: const EdgeInsets.symmetric(vertical: 14),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    child: Text(tr.home.arrival_check_came),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 8),
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: Text(tr.home.arrival_check_dismiss),
-            ),
-          ],
+              const SizedBox(height: 8),
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: Text(tr.home.arrival_check_dismiss),
+              ),
+            ],
+          ),
         ),
       ),
     );

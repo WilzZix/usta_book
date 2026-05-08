@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:usta_book/core/ui_kit/components/app_icons.dart';
 
+import '../../../bloc/badges/badges_cubit.dart';
 import '../../../bloc/schedule/schedule_cubit.dart';
 import '../../../core/localization/i18n/strings.g.dart';
 import '../../../core/ui_kit/colors.dart';
@@ -17,16 +18,31 @@ class TimeLinePicker extends StatefulWidget {
 }
 
 class _TimeLinePickerState extends State<TimeLinePicker> {
-  bool dayIsSelected = true;
   EasyDatePickerController controller = EasyDatePickerController();
-  DateTime selectedDate = DateTime.now();
+  late DateTime _today;
+  late DateTime _selectedDate;
+
+  @override
+  void initState() {
+    super.initState();
+    _today = _stripTime(DateTime.now());
+    _selectedDate = _today;
+  }
+
+  DateTime _stripTime(DateTime d) => DateTime(d.year, d.month, d.day);
+
+  bool _sameDay(DateTime a, DateTime b) =>
+      a.year == b.year && a.month == b.month && a.day == b.day;
 
   void _handleDateSelection(DateTime date) {
-    selectedDate = date;
-    context.read<ScheduleCubit>().getTodayAppointments(date: selectedDate);
+    setState(() => _selectedDate = _stripTime(date));
+    final cubit = context.read<ScheduleCubit>();
+    if (cubit.mode == ScheduleMode.week) {
+      cubit.loadWeek(_selectedDate);
+    } else {
+      cubit.loadDay(_selectedDate);
+    }
     controller.jumpToFocusDate();
-
-    setState(() {});
   }
 
   @override
@@ -56,7 +72,7 @@ class _TimeLinePickerState extends State<TimeLinePicker> {
           );
         },
       ),
-      focusedDate: selectedDate,
+      focusedDate: _today,
       firstDate: DateTime(2024),
       lastDate: DateTime(2100),
       onDateChange: (DateTime date) {
@@ -73,11 +89,12 @@ class _TimeLinePickerState extends State<TimeLinePicker> {
             bool isToday,
             void Function() onTap,
           ) {
+            final isHighlighted = _sameDay(date, _selectedDate);
             Color? containerColor;
             Color dayTextColor;
             Color dateTextColor;
 
-            if (isSelected) {
+            if (isHighlighted) {
               containerColor = AppColors.primary;
               dayTextColor = AppColors.body; // or white
               dateTextColor = AppColors.body; // or white
@@ -98,41 +115,65 @@ class _TimeLinePickerState extends State<TimeLinePicker> {
               onTap: () {
                 _handleDateSelection(date);
               },
-              child: Container(
-                height: 54,
-                width: 50,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: containerColor,
-                ),
-                child: Column(
-                  children: [
-                    SizedBox(height: 4),
-                    Text(
-                      DateFormat(
-                        'E',
-                        LocaleSettings.currentLocale.languageCode,
-                      ).format(date),
-                      style: Typographies.regularBody2.copyWith(
-                        color: dayTextColor,
+              child: BlocBuilder<AppointmentBadgesCubit, Set<DateTime>>(
+                builder: (context, badges) {
+                  final hasBadge =
+                      badges.any((d) => _sameDay(d, date)) && !isHighlighted;
+                  return Stack(
+                    clipBehavior: Clip.none,
+                    children: [
+                      Container(
+                        height: 54,
+                        width: 50,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: containerColor,
+                        ),
+                        child: Column(
+                          children: [
+                            SizedBox(height: 4),
+                            Text(
+                              DateFormat(
+                                'E',
+                                LocaleSettings.currentLocale.languageCode,
+                              ).format(date),
+                              style: Typographies.regularBody2.copyWith(
+                                color: dayTextColor,
+                              ),
+                            ),
+                            SizedBox(height: 6),
+                            Text(
+                              DateFormat(
+                                'd',
+                                LocaleSettings.currentLocale.languageCode,
+                              ).format(date),
+                              style: Typographies.regularBody.copyWith(
+                                color: dateTextColor,
+                              ),
+                            ),
+                            SizedBox(height: 4),
+                          ],
+                        ),
                       ),
-                    ),
-                    SizedBox(height: 6),
-                    Text(
-                      DateFormat(
-                        'd',
-                        LocaleSettings.currentLocale.languageCode,
-                      ).format(date),
-                      style: Typographies.regularBody.copyWith(
-                        color: dateTextColor,
-                      ),
-                    ),
-                    SizedBox(height: 4),
-                  ],
-                ),
+                      if (hasBadge)
+                        Positioned(
+                          top: 4,
+                          right: 4,
+                          child: Container(
+                            width: 8,
+                            height: 8,
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.red,
+                            ),
+                          ),
+                        ),
+                    ],
+                  );
+                },
               ),
             );
-          }, // Arabic locale
+          },
     );
   }
 }

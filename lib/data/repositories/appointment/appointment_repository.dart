@@ -70,4 +70,16 @@ class AppointmentRepo extends IAppointment {
         .map((doc) => RecordModel.fromJson(doc.data()))
         .toList();
   }
+
+  @override
+  Future<List<RecordModel>> getRangeAppointments(
+    List<DateTime> dates,
+    String? masterUID,
+  ) async {
+    if (dates.isEmpty) return [];
+    final results = await Future.wait(
+      dates.map((d) => getTodayAppointment(d, masterUID)),
+    );
+    return results.expand((list) => list).toList();
+  }
 }

@@ -75,7 +75,9 @@
     "todays_clients": "Bugungi uchrashuvlar",
     "arrival_check_title": "Mijoz keldimi?",
     "arrival_check_came": "Keldi",
-    "arrival_check_dismiss": "Keyinroq"
+    "arrival_check_dismiss": "Keyinroq",
+    "no_clients_on_day": "Bu kunda mijozlaringiz yo'q edi",
+    "cant_add_to_past": "O'tgan kunga zapis qo'shib bo'lmaydi"
   },
   "profile": {
     "profile": "Profil",

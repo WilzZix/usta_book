@@ -2,6 +2,7 @@ import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import 'package:usta_book/core/localization/i18n/strings.g.dart';
 import 'package:usta_book/core/ui_kit/colors.dart';
 import 'package:usta_book/core/ui_kit/components/app_icons.dart';
@@ -45,6 +46,93 @@ class _HomePageState extends State<HomePage> {
     context.read<ScheduleCubit>().getTodayAppointments(date: DateTime.now());
   }
 
+  RecordModel? _pickNextUpcoming(List<RecordModel> records) {
+    final now = DateTime.now();
+    RecordModel? best;
+    int bestDelta = 1 << 62;
+    for (final r in records) {
+      final at = _parseAt(r.date, r.time);
+      if (at == null) continue;
+      final delta = at.millisecondsSinceEpoch - now.millisecondsSinceEpoch;
+      if (delta < 0) continue; // skip past
+      if (delta < bestDelta) {
+        bestDelta = delta;
+        best = r;
+      }
+    }
+    return best;
+  }
+
+  static DateTime? _parseAt(String date, String time) {
+    final d = date.split('/');
+    final t = time.split(':');
+    if (d.length != 3 || t.length != 2) return null;
+    final yy = int.tryParse(d[2]);
+    final mm = int.tryParse(d[1]);
+    final dd = int.tryParse(d[0]);
+    final h = int.tryParse(t[0]);
+    final mi = int.tryParse(t[1]);
+    if ([yy, mm, dd, h, mi].any((v) => v == null)) return null;
+    return DateTime(yy!, mm!, dd!, h!, mi!);
+  }
+
+  static bool _isSameDay(DateTime a, DateTime b) =>
+      a.year == b.year && a.month == b.month && a.day == b.day;
+
+  static DateTime? _parseDateOnly(String dateStr) {
+    final p = dateStr.split('/');
+    if (p.length != 3) return null;
+    final dd = int.tryParse(p[0]);
+    final mm = int.tryParse(p[1]);
+    final yy = int.tryParse(p[2]);
+    if (dd == null || mm == null || yy == null) return null;
+    return DateTime(yy, mm, dd);
+  }
+
+  Widget _buildWeekView(
+    BuildContext context,
+    List<RecordModel> records,
+    AppThemeExtension custom,
+  ) {
+    final groups = <String, List<RecordModel>>{};
+    for (final r in records) {
+      groups.putIfAbsent(r.date, () => []).add(r);
+    }
+    final dateKeys = groups.keys.toList()
+      ..sort((a, b) {
+        final da = _parseDateOnly(a);
+        final db = _parseDateOnly(b);
+        if (da == null && db == null) return 0;
+        if (da == null) return 1;
+        if (db == null) return -1;
+        return da.compareTo(db);
+      });
+
+    final locale = LocaleSettings.currentLocale.languageCode;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        for (final dateKey in dateKeys) ...[
+          Text(
+            _formatDateHeader(dateKey, locale),
+            style: Typographies.semiBoldH2,
+          ),
+          const SizedBox(height: 12),
+          for (final r in groups[dateKey]!)
+            _RecordCard(record: r, custom: custom),
+          const SizedBox(height: 20),
+        ],
+      ],
+    );
+  }
+
+  static String _formatDateHeader(String dateKey, String locale) {
+    final d = _parseDateOnly(dateKey);
+    if (d == null) return dateKey;
+    return DateFormat('EEEE, d MMMM', locale).format(d);
+  }
+
   @override
   Widget build(BuildContext context) {
     final tr = Translations.of(context);
@@ -64,31 +152,45 @@ class _HomePageState extends State<HomePage> {
                     case TodayAppointmentsLoading():
                       return HomeShimmerLoading();
                     case TodayAppointmentLoaded():
+                      final isPast = state.isPast;
+                      final isWeek = state.mode == ScheduleMode.week;
                       if (state.data.isEmpty) {
                         return Column(
                           children: [
                             AppIcons.icEmptyList,
                             Text(
-                              tr.home.no_customers_added,
+                              isPast || isWeek
+                                  ? tr.home.no_clients_on_day
+                                  : tr.home.no_customers_added,
                               style: Typographies.regularBody2.copyWith(color: Color(0xFF6C757D)),
                             ),
-                            SizedBox(height: 12),
-                            MainButton.primary(
-                              title: tr.home.add_customer,
-                              onTap: () {
-                                context.push(AddNewRecordPage.tag);
-                              },
-                            ),
+                            if (!isPast && !isWeek) ...[
+                              SizedBox(height: 12),
+                              MainButton.primary(
+                                title: tr.home.add_customer,
+                                onTap: () {
+                                  context.push(AddNewRecordPage.tag);
+                                },
+                              ),
+                            ],
                           ],
                         );
                       }
+                      if (isWeek) {
+                        return _buildWeekView(context, state.data, custom);
+                      }
+                      final isToday = _isSameDay(state.selectedDate, DateTime.now());
+                      final nearest =
+                          isToday ? _pickNextUpcoming(state.data) : null;
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(tr.home.theNearestClient, style: Typographies.semiBoldH2),
-                          SizedBox(height: 12),
-                          ClientStatusWidget(recordModel: state.data[0]),
-                          SizedBox(height: 24),
+                          if (nearest != null) ...[
+                            Text(tr.home.theNearestClient, style: Typographies.semiBoldH2),
+                            SizedBox(height: 12),
+                            ClientStatusWidget(recordModel: nearest),
+                            SizedBox(height: 24),
+                          ],
                           Text(tr.home.todays_clients, style: Typographies.semiBoldH2),
                           SizedBox(height: 12),
                           ListView.builder(
@@ -96,46 +198,9 @@ class _HomePageState extends State<HomePage> {
                             padding: EdgeInsets.symmetric(vertical: 4),
                             itemCount: state.data.length,
                             itemBuilder: (context, index) {
-                              return Container(
-                                margin: EdgeInsets.symmetric(vertical: 4),
-                                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
-                                decoration: BoxDecoration(
-                                  color: custom.body,
-                                  borderRadius: BorderRadius.circular(8),
-                                  border: Border.all(color: AppColors.border),
-                                ),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    AppIcons.icPerson,
-                                    SizedBox(width: 8),
-                                    Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          state.data[index].clientName,
-                                          style: Typographies.regularBody.copyWith(color: TextColor.primary),
-                                        ),
-                                        SizedBox(height: 8),
-                                        Text(
-                                          '${state.data[index].time} • ${state.data[index].serviceType}',
-                                          style: Typographies.regularBody2.copyWith(color: TextColor.secondary),
-                                        ),
-                                      ],
-                                    ),
-                                    Spacer(),
-                                    Column(
-                                      crossAxisAlignment: CrossAxisAlignment.end,
-                                      children: [
-                                        Text(
-                                          state.data[index].price.strToUzbSum(),
-                                          style: Typographies.regularH3.copyWith(),
-                                        ),
-                                        SizedBox(height: 8),
-                                      ],
-                                    ),
-                                  ],
-                                ),
+                              return _RecordCard(
+                                record: state.data[index],
+                                custom: custom,
                               );
                             },
                           ),
@@ -286,6 +351,52 @@ class _ClientStatusWidgetState extends State<ClientStatusWidget> {
             },
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _RecordCard extends StatelessWidget {
+  const _RecordCard({required this.record, required this.custom});
+
+  final RecordModel record;
+  final AppThemeExtension custom;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+      decoration: BoxDecoration(
+        color: custom.body,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: AppColors.border),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          AppIcons.icPerson,
+          const SizedBox(width: 8),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(record.clientName, style: Typographies.regularBody),
+                const SizedBox(height: 8),
+                Text(
+                  '${record.time} • ${record.serviceType}',
+                  style: Typographies.regularBody2.copyWith(
+                    color: TextColor.secondary,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Text(
+            record.price.strToUzbSum(),
+            style: Typographies.regularH3,
+          ),
+        ],
       ),
     );
   }

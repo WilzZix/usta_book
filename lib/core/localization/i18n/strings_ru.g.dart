@@ -276,6 +276,12 @@ class TranslationsHomeRu {
 
 	/// ru: 'Позже'
 	String get arrival_check_dismiss => 'Позже';
+
+	/// ru: 'В этот день клиентов не было'
+	String get no_clients_on_day => 'В этот день клиентов не было';
+
+	/// ru: 'Нельзя добавить запись на прошедший день'
+	String get cant_add_to_past => 'Нельзя добавить запись на прошедший день';
 }
 
 // Path: profile
@@ -670,6 +676,8 @@ extension on Translations {
 			case 'home.arrival_check_title': return 'Клиент пришёл?';
 			case 'home.arrival_check_came': return 'Пришёл';
 			case 'home.arrival_check_dismiss': return 'Позже';
+			case 'home.no_clients_on_day': return 'В этот день клиентов не было';
+			case 'home.cant_add_to_past': return 'Нельзя добавить запись на прошедший день';
 			case 'profile.profile': return 'Профиль';
 			case 'profile.logout': return 'Выход';
 			case 'profile.save': return 'Сохранить';
