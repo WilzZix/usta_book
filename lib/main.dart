@@ -14,8 +14,9 @@ import 'package:usta_book/core/di/inject.dart';
 import 'bloc/clients/clients_bloc.dart';
 import 'bloc/master/master_bloc.dart';
 import 'bloc/schedule/schedule_cubit.dart';
+import 'bloc/stats/stats_cubit.dart';
 
-import 'bloc/sign_up_and_sing_in/sign_up_and_sing_in_bloc.dart';
+import 'bloc/phone_auth/phone_auth_bloc.dart';
 import 'bloc/theme/theme_cubit.dart';
 import 'core/localization/i18n/strings.g.dart';
 import 'core/ui_kit/app_themes.dart';
@@ -78,10 +79,11 @@ class _MyAppState extends State<MyApp> {
       },
       child: MultiBlocProvider(
         providers: [
-          BlocProvider(create: (context) => SignUpAndSingInBloc(inject(), inject())),
+          BlocProvider(create: (context) => PhoneAuthBloc(inject(), inject())),
           BlocProvider(create: (context) => MasterBloc(inject(), inject())),
           BlocProvider(create: (context) => ScheduleCubit(inject(), inject())),
           BlocProvider(create: (context) => ClientsBloc(inject(), inject())..add(GetClientsEvent())),
+          BlocProvider<StatsCubit>(create: (context) => StatsCubit(inject(), inject())),
           BlocProvider<ThemeCubit>(create: (context) => ThemeCubit()),
           BlocProvider<ProfileCubit>(create: (context) => ProfileCubit()),
         ],

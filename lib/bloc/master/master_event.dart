@@ -5,8 +5,9 @@ sealed class MasterEvent {}
 
 class UpdateMasterProfile extends MasterEvent {
   final MasterProfile masterProfile;
+  final File? photoFile;
 
-  UpdateMasterProfile({required this.masterProfile});
+  UpdateMasterProfile({required this.masterProfile, this.photoFile});
 }
 
 class GetMasterProfile extends MasterEvent {}

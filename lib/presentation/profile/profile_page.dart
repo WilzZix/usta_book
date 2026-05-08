@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:shimmer/shimmer.dart';
 import 'package:usta_book/bloc/auth/auth_cubit.dart';
 import 'package:usta_book/bloc/master/master_bloc.dart';
 import 'package:usta_book/core/ui_kit/colors.dart';
@@ -10,12 +9,12 @@ import 'package:usta_book/core/ui_kit/components/bottom_sheet.dart';
 import 'package:usta_book/core/ui_kit/components/button.dart';
 import 'package:usta_book/core/ui_kit/typography.dart';
 import 'package:usta_book/presentation/onboarding/choose_language/components/language_item.dart';
+import 'package:usta_book/presentation/sign_up/profile_settings/profile_settings.dart';
 
 import '../../bloc/profile/profile_cubit.dart';
 import '../../bloc/theme/theme_cubit.dart';
 import '../../core/localization/i18n/strings.g.dart';
 import '../../core/ui_kit/app_theme_extension.dart';
-import '../../core/ui_kit/components/checkbox.dart';
 import '../home/components/loading.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -28,15 +27,15 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _State extends State<ProfilePage> {
-  bool appThemeIsDark = false;
-  bool isUzbek = false;
-  int selectedLanguageItem = 0;
-  int selectedThemeItem = 1;
+  late int selectedLanguageItem;
+  late int selectedThemeItem;
 
   @override
   void initState() {
-    context.read<MasterBloc>().add(GetMasterProfile());
     super.initState();
+    context.read<MasterBloc>().add(GetMasterProfile());
+    selectedLanguageItem = LocaleSettings.currentLocale == AppLocale.ru ? 1 : 0;
+    selectedThemeItem = context.read<ThemeCubit>().state == ThemeMode.dark ? 0 : 1;
   }
 
   String formatScheduleWithContext(BuildContext context, Map<String, String> hours) {
@@ -97,35 +96,37 @@ class _State extends State<ProfilePage> {
                       ),
                       child: Row(
                         children: [
-                          Container(
-                            padding: EdgeInsets.all(16),
-                            decoration: BoxDecoration(shape: BoxShape.circle, color: custom.body),
-                            child: AppIcons.icPerson,
+                          _ProfileAvatar(
+                            photoURL: state.profile?.photoURL,
+                            placeholderBg: custom.body,
                           ),
                           SizedBox(width: 16),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(state.profile?.name ?? '', style: Typographies.regularBody),
-                              SizedBox(height: 4),
-                              Text(state.profile?.serviceType ?? '', style: Typographies.regularBody2),
-                              SizedBox(height: 4),
-                              //TODO pastdagi ma'lumotlarni olish uchun function yozish
-                              Text(
-                                "${state.profile!.totalClients} ta mijoz • ${state.profile!.totalEarning} oylik",
-                                style: Typographies.regularOverlineLower.copyWith(color: custom.primary),
-                              ),
-                            ],
-                          ),
-                          Spacer(),
-                          Container(
-                            padding: EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                              color: custom.body,
-                              borderRadius: BorderRadius.circular(8),
-                              border: Border.all(color: custom.border),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(state.profile?.name ?? '', style: Typographies.regularBody),
+                                SizedBox(height: 4),
+                                Text(state.profile?.serviceType ?? '', style: Typographies.regularBody2),
+                                SizedBox(height: 4),
+                                Text(
+                                  '${state.profile?.totalClients ?? 0} ta mijoz · ${state.profile?.totalEarning ?? '-'} oylik',
+                                  style: Typographies.regularOverlineLower.copyWith(color: custom.primary),
+                                ),
+                              ],
                             ),
-                            child: AppIcons.icEdit,
+                          ),
+                          GestureDetector(
+                            onTap: () => context.pushNamed(ProfileSettings.tag),
+                            child: Container(
+                              padding: EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                color: custom.body,
+                                borderRadius: BorderRadius.circular(8),
+                                border: Border.all(color: custom.border),
+                              ),
+                              child: AppIcons.icEdit,
+                            ),
                           ),
                         ],
                       ),
@@ -143,33 +144,7 @@ class _State extends State<ProfilePage> {
                             icon: AppIcons.icCalendarEvent,
                             title: tr.profile.working_hours,
                             description: formatScheduleWithContext(context, state.profile?.workingHours ?? {}),
-                            onTap: () {
-                              UstaBookBottomSheet.show(
-                                context: context,
-                                body: StatefulBuilder(
-                                  builder: (context, setState) {
-                                    final String currentLang = Localizations.localeOf(context).languageCode;
-                                    return Column(
-                                      children: state.profile!.workingHours.entries.map((entry) {
-                                        final String dayTitle = DayTranslator.translate(entry.key, currentLang);
-                                        return WorkingHoursCard(
-                                          title: dayTitle,
-                                          value: true,
-                                          onChanged: (newValue) {
-                                            setState(() {});
-                                          },
-                                          from: '${entry.value.split(" - ")[0]} AM',
-                                          to: '${entry.value.split(" - ")[1]} PM',
-                                          fromTapped: () {},
-                                          toTapped: () {},
-                                        );
-                                      }).toList(),
-                                    );
-                                  },
-                                ),
-                                header: tr.profile.working_hours,
-                              );
-                            },
+                            onTap: () => context.pushNamed(ProfileSettings.tag),
                           ),
                           SizedBox(height: 8),
                           ProfileItem(
@@ -188,8 +163,7 @@ class _State extends State<ProfilePage> {
                                           selected: selectedThemeItem == 0,
                                           onTap: () {
                                             selectedThemeItem = 0;
-                                            appThemeIsDark = true;
-                                            BlocProvider.of<ThemeCubit>(context).toggleTheme(appThemeIsDark);
+                                            BlocProvider.of<ThemeCubit>(context).toggleTheme(true);
                                             state(() {});
                                           },
                                           icon: Icon(Icons.dark_mode),
@@ -200,8 +174,7 @@ class _State extends State<ProfilePage> {
                                           selected: selectedThemeItem == 1,
                                           onTap: () {
                                             selectedThemeItem = 1;
-                                            appThemeIsDark = false;
-                                            BlocProvider.of<ThemeCubit>(context).toggleTheme(appThemeIsDark);
+                                            BlocProvider.of<ThemeCubit>(context).toggleTheme(false);
                                             state(() {});
                                           },
                                           icon: Icon(Icons.light_mode),
@@ -225,7 +198,7 @@ class _State extends State<ProfilePage> {
                           ProfileItem(
                             icon: AppIcons.icCalendarEvent,
                             title: tr.profile.language,
-                            description: 'Uzbek',
+                            description: selectedLanguageItem == 1 ? 'Русский' : "O'zbekcha",
                             onTap: () {
                               UstaBookBottomSheet.show(
                                 context: context,
@@ -349,6 +322,31 @@ class _ProfileItemState extends State<ProfileItem> {
           ],
         ),
       ),
+    );
+  }
+}
+
+
+class _ProfileAvatar extends StatelessWidget {
+  const _ProfileAvatar({required this.photoURL, required this.placeholderBg});
+
+  final String? photoURL;
+  final Color placeholderBg;
+
+  @override
+  Widget build(BuildContext context) {
+    final hasImage = photoURL != null && photoURL!.isNotEmpty;
+    if (hasImage) {
+      return CircleAvatar(
+        radius: 28,
+        backgroundColor: placeholderBg,
+        backgroundImage: NetworkImage(photoURL!),
+      );
+    }
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(shape: BoxShape.circle, color: placeholderBg),
+      child: AppIcons.icPerson,
     );
   }
 }

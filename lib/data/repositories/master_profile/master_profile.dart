@@ -1,6 +1,8 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:injectable/injectable.dart';
-import 'package:usta_book/core/localization/i18n/strings.g.dart';
 import 'package:usta_book/data/models/master_profile.dart';
 import 'package:usta_book/data/models/record_model.dart';
 import 'package:usta_book/data/models/service_model.dart';
@@ -19,7 +21,7 @@ class MasterProfileImpl extends IMasterProfile {
       data['updatedAt'] = FieldValue.serverTimestamp();
 
       await newRecordRef.set(data, SetOptions(merge: true));
-    } on FirebaseException catch (e) {
+    } on FirebaseException {
       rethrow;
     } catch (e) {
       rethrow;
@@ -47,6 +49,13 @@ class MasterProfileImpl extends IMasterProfile {
       // Return an empty list on failure
       return [];
     }
+  }
+
+  @override
+  Future<String> uploadProfilePhoto(String masterUID, File file) async {
+    final ref = FirebaseStorage.instance.ref('masters/$masterUID/profile.jpg');
+    await ref.putFile(file, SettableMetadata(contentType: 'image/jpeg'));
+    return ref.getDownloadURL();
   }
 
   @override

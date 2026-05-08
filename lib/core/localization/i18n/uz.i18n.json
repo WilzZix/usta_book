@@ -121,5 +121,26 @@
     "delete_customer": "Mijozni oʻchirish",
     "customer_details": "Mijoz maʼlumotlari",
     "select": "Tanlash"
+  },
+  "statistics": {
+    "title": "Statistika",
+    "monthly_orders": "Oylik zakazlar",
+    "monthly_revenue": "Oylik daromad",
+    "avg_bill": "O'rtacha hisob",
+    "retention": "Mijozlar ishtiroki",
+    "top_clients": "Top mijozlar",
+    "popular_service": "Eng mashhur servis",
+    "client_details": "Mijoz ma'lumotlari",
+    "visits_count": "Tashriflar soni",
+    "last_visit": "So'nggi tashrifi",
+    "total_spent": "Umumiy hisob",
+    "visits_suffix": "ta tashrif",
+    "times_suffix": "marotaba",
+    "schedule": "Qabulga yozish",
+    "contact": "Bog'lanish",
+    "history": "Tarix",
+    "edit": "O'zgartirish",
+    "delete_client": "Mijozni o'chirish",
+    "no_data": "Hali ma'lumot yo'q"
   }
 }

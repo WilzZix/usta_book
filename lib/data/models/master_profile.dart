@@ -11,13 +11,13 @@ class MasterProfile {
   final bool profileCompleted;
   final String uid; // The Master's User ID
   MasterProfile({
-    required this.uid,
+    this.uid = '',
     required this.name,
     this.photoURL,
     required this.serviceType,
     required this.workingHours,
-    required this.totalClients,
-    required this.totalEarning,
+    this.totalClients,
+    this.totalEarning,
     this.language = 'RU',
     required this.profileCompleted,
   });
@@ -59,14 +59,14 @@ class MasterProfile {
 
     return MasterProfile(
       uid: doc.id,
-      // UID is typically the Document ID in a user-centric collection
       name: data['name'] ?? '',
+      photoURL: data['photoURL'] as String?,
       serviceType: data['serviceType'] ?? '',
       workingHours: workingHoursMap,
-      profileCompleted: data['profile_completed'],
-      totalClients: data['totalClients'],
-      totalEarning: data['totalEarning'],
-      // ... map other fields
+      language: data['language'] as String? ?? 'RU',
+      profileCompleted: data['profile_completed'] ?? false,
+      totalClients: data['totalClients'] as int?,
+      totalEarning: data['totalEarning'] as String?,
     );
   }
 

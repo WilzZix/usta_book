@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -29,13 +31,22 @@ class MasterBloc extends Bloc<MasterEvent, MasterState> {
       Emitter<MasterState> emit,) async {
     try {
       emit(MasterProfileUpdating());
+      final uid = shredPrefService.getMasterUID()!;
+      String? photoURL = event.masterProfile.photoURL;
+      if (event.photoFile != null) {
+        photoURL = await masterProfileUseCase.uploadProfilePhoto(
+          uid,
+          event.photoFile!,
+        );
+      }
       await masterProfileUseCase.updateMasterProfile(
-        shredPrefService.getMasterUID()!,
-        event.masterProfile.copyWith(uid: shredPrefService.getMasterUID()),
+        uid,
+        event.masterProfile.copyWith(uid: uid, photoURL: photoURL),
       );
       emit(MasterProfileUpdated());
     } catch (e) {
       debugPrint(e.toString());
+      emit(MasterProfileUpdateError(msg: e.toString()));
     }
   }
 

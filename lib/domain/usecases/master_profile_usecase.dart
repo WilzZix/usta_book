@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:injectable/injectable.dart';
 import 'package:usta_book/data/models/master_profile.dart';
 import 'package:usta_book/data/models/record_model.dart';
@@ -24,6 +26,10 @@ class MasterProfileUseCase {
 
   Future<List<ServiceModel>> getAvailableServices() async {
     return masterProfile.getAvailableServices();
+  }
+
+  Future<String> uploadProfilePhoto(String masterUID, File file) {
+    return masterProfile.uploadProfilePhoto(masterUID, file);
   }
 
   Future<void> addRecord(String masterUID, RecordModel record) async {

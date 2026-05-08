@@ -6,7 +6,6 @@ import 'package:usta_book/core/ui_kit/components/app_icons.dart';
 import 'package:usta_book/core/ui_kit/components/button.dart';
 import 'package:usta_book/core/ui_kit/typography.dart';
 import 'package:usta_book/presentation/add_new_record/add_new_record_page.dart';
-import 'package:usta_book/presentation/clients/add_new_appointment_page.dart';
 
 import '../../core/localization/i18n/strings.g.dart';
 import '../../core/ui_kit/app_theme_extension.dart';

@@ -47,6 +47,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	late final TranslationsProfileRu profile = TranslationsProfileRu.internal(_root);
 	late final TranslationsAddRecordRu add_record = TranslationsAddRecordRu.internal(_root);
 	late final TranslationsClientsRu clients = TranslationsClientsRu.internal(_root);
+	late final TranslationsStatisticsRu statistics = TranslationsStatisticsRu.internal(_root);
 }
 
 // Path: on_boarding
@@ -420,6 +421,72 @@ class TranslationsClientsRu {
 	String get select => 'Выбрать';
 }
 
+// Path: statistics
+class TranslationsStatisticsRu {
+	TranslationsStatisticsRu.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// ru: 'Статистика'
+	String get title => 'Статистика';
+
+	/// ru: 'Заказы за месяц'
+	String get monthly_orders => 'Заказы за месяц';
+
+	/// ru: 'Доход за месяц'
+	String get monthly_revenue => 'Доход за месяц';
+
+	/// ru: 'Средний чек'
+	String get avg_bill => 'Средний чек';
+
+	/// ru: 'Удержание клиентов'
+	String get retention => 'Удержание клиентов';
+
+	/// ru: 'Топ клиентов'
+	String get top_clients => 'Топ клиентов';
+
+	/// ru: 'Самая популярная услуга'
+	String get popular_service => 'Самая популярная услуга';
+
+	/// ru: 'Информация о клиенте'
+	String get client_details => 'Информация о клиенте';
+
+	/// ru: 'Количество визитов'
+	String get visits_count => 'Количество визитов';
+
+	/// ru: 'Последний визит'
+	String get last_visit => 'Последний визит';
+
+	/// ru: 'Общий счет'
+	String get total_spent => 'Общий счет';
+
+	/// ru: 'визитов'
+	String get visits_suffix => 'визитов';
+
+	/// ru: 'раз'
+	String get times_suffix => 'раз';
+
+	/// ru: 'Записать'
+	String get schedule => 'Записать';
+
+	/// ru: 'Связаться'
+	String get contact => 'Связаться';
+
+	/// ru: 'История'
+	String get history => 'История';
+
+	/// ru: 'Изменить'
+	String get edit => 'Изменить';
+
+	/// ru: 'Удалить клиента'
+	String get delete_client => 'Удалить клиента';
+
+	/// ru: 'Пока нет данных'
+	String get no_data => 'Пока нет данных';
+}
+
 // Path: sign_up.errors
 class TranslationsSignUpErrorsRu {
 	TranslationsSignUpErrorsRu.internal(this._root);
@@ -557,6 +624,25 @@ extension on Translations {
 			case 'clients.delete_customer': return 'Удалить клиента';
 			case 'clients.customer_details': return 'Данные клиента';
 			case 'clients.select': return 'Выбрать';
+			case 'statistics.title': return 'Статистика';
+			case 'statistics.monthly_orders': return 'Заказы за месяц';
+			case 'statistics.monthly_revenue': return 'Доход за месяц';
+			case 'statistics.avg_bill': return 'Средний чек';
+			case 'statistics.retention': return 'Удержание клиентов';
+			case 'statistics.top_clients': return 'Топ клиентов';
+			case 'statistics.popular_service': return 'Самая популярная услуга';
+			case 'statistics.client_details': return 'Информация о клиенте';
+			case 'statistics.visits_count': return 'Количество визитов';
+			case 'statistics.last_visit': return 'Последний визит';
+			case 'statistics.total_spent': return 'Общий счет';
+			case 'statistics.visits_suffix': return 'визитов';
+			case 'statistics.times_suffix': return 'раз';
+			case 'statistics.schedule': return 'Записать';
+			case 'statistics.contact': return 'Связаться';
+			case 'statistics.history': return 'История';
+			case 'statistics.edit': return 'Изменить';
+			case 'statistics.delete_client': return 'Удалить клиента';
+			case 'statistics.no_data': return 'Пока нет данных';
 			default: return null;
 		}
 	}

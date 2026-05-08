@@ -46,6 +46,7 @@ class TranslationsUz extends Translations {
 	@override late final TranslationsProfileUz profile = TranslationsProfileUz._(_root);
 	@override late final TranslationsAddRecordUz add_record = TranslationsAddRecordUz._(_root);
 	@override late final TranslationsClientsUz clients = TranslationsClientsUz._(_root);
+	@override late final TranslationsStatisticsUz statistics = TranslationsStatisticsUz._(_root);
 }
 
 // Path: on_boarding
@@ -220,6 +221,34 @@ class TranslationsClientsUz extends TranslationsClientsRu {
 	@override String get select => 'Tanlash';
 }
 
+// Path: statistics
+class TranslationsStatisticsUz extends TranslationsStatisticsRu {
+	TranslationsStatisticsUz._(TranslationsUz root) : this._root = root, super.internal(root);
+
+	final TranslationsUz _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Statistika';
+	@override String get monthly_orders => 'Oylik zakazlar';
+	@override String get monthly_revenue => 'Oylik daromad';
+	@override String get avg_bill => 'O\'rtacha hisob';
+	@override String get retention => 'Mijozlar ishtiroki';
+	@override String get top_clients => 'Top mijozlar';
+	@override String get popular_service => 'Eng mashhur servis';
+	@override String get client_details => 'Mijoz ma\'lumotlari';
+	@override String get visits_count => 'Tashriflar soni';
+	@override String get last_visit => 'So\'nggi tashrifi';
+	@override String get total_spent => 'Umumiy hisob';
+	@override String get visits_suffix => 'ta tashrif';
+	@override String get times_suffix => 'marotaba';
+	@override String get schedule => 'Qabulga yozish';
+	@override String get contact => 'Bog\'lanish';
+	@override String get history => 'Tarix';
+	@override String get edit => 'O\'zgartirish';
+	@override String get delete_client => 'Mijozni o\'chirish';
+	@override String get no_data => 'Hali ma\'lumot yo\'q';
+}
+
 // Path: sign_up.errors
 class TranslationsSignUpErrorsUz extends TranslationsSignUpErrorsRu {
 	TranslationsSignUpErrorsUz._(TranslationsUz root) : this._root = root, super.internal(root);
@@ -345,6 +374,25 @@ extension on TranslationsUz {
 			case 'clients.delete_customer': return 'Mijozni oʻchirish';
 			case 'clients.customer_details': return 'Mijoz maʼlumotlari';
 			case 'clients.select': return 'Tanlash';
+			case 'statistics.title': return 'Statistika';
+			case 'statistics.monthly_orders': return 'Oylik zakazlar';
+			case 'statistics.monthly_revenue': return 'Oylik daromad';
+			case 'statistics.avg_bill': return 'O\'rtacha hisob';
+			case 'statistics.retention': return 'Mijozlar ishtiroki';
+			case 'statistics.top_clients': return 'Top mijozlar';
+			case 'statistics.popular_service': return 'Eng mashhur servis';
+			case 'statistics.client_details': return 'Mijoz ma\'lumotlari';
+			case 'statistics.visits_count': return 'Tashriflar soni';
+			case 'statistics.last_visit': return 'So\'nggi tashrifi';
+			case 'statistics.total_spent': return 'Umumiy hisob';
+			case 'statistics.visits_suffix': return 'ta tashrif';
+			case 'statistics.times_suffix': return 'marotaba';
+			case 'statistics.schedule': return 'Qabulga yozish';
+			case 'statistics.contact': return 'Bog\'lanish';
+			case 'statistics.history': return 'Tarix';
+			case 'statistics.edit': return 'O\'zgartirish';
+			case 'statistics.delete_client': return 'Mijozni o\'chirish';
+			case 'statistics.no_data': return 'Hali ma\'lumot yo\'q';
 			default: return null;
 		}
 	}

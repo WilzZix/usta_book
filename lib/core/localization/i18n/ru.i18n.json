@@ -121,5 +121,26 @@
     "delete_customer": "Удалить клиента",
     "customer_details": "Данные клиента",
     "select": "Выбрать"
+  },
+  "statistics": {
+    "title": "Статистика",
+    "monthly_orders": "Заказы за месяц",
+    "monthly_revenue": "Доход за месяц",
+    "avg_bill": "Средний чек",
+    "retention": "Удержание клиентов",
+    "top_clients": "Топ клиентов",
+    "popular_service": "Самая популярная услуга",
+    "client_details": "Информация о клиенте",
+    "visits_count": "Количество визитов",
+    "last_visit": "Последний визит",
+    "total_spent": "Общий счет",
+    "visits_suffix": "визитов",
+    "times_suffix": "раз",
+    "schedule": "Записать",
+    "contact": "Связаться",
+    "history": "История",
+    "edit": "Изменить",
+    "delete_client": "Удалить клиента",
+    "no_data": "Пока нет данных"
   }
 }

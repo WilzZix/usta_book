@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:usta_book/data/models/master_profile.dart';
 import 'package:usta_book/data/models/record_model.dart';
 import 'package:usta_book/data/models/service_model.dart';
@@ -8,6 +10,8 @@ abstract class IMasterProfile {
   Future<MasterProfile?> getMasterProfile(String masterUID);
 
   Future<List<ServiceModel>> getAvailableServices();
+
+  Future<String> uploadProfilePhoto(String masterUID, File file);
 
   Future<void> addRecord(String masterUID, RecordModel record);
   Future<void> updateRecord(String masterUID, RecordModel record);

@@ -7,6 +7,11 @@ final class MasterInitial extends MasterState {}
 
 class MasterProfileUpdated extends MasterState {}
 class MasterProfileUpdating extends MasterState {}
+class MasterProfileUpdateError extends MasterState {
+  final String msg;
+
+  MasterProfileUpdateError({required this.msg});
+}
 class MasterProfileLoaded extends MasterState {
   final MasterProfile? profile;
 
