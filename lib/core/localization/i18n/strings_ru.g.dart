@@ -48,6 +48,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	late final TranslationsAddRecordRu add_record = TranslationsAddRecordRu.internal(_root);
 	late final TranslationsClientsRu clients = TranslationsClientsRu.internal(_root);
 	late final TranslationsStatisticsRu statistics = TranslationsStatisticsRu.internal(_root);
+	late final TranslationsSubscriptionRu subscription = TranslationsSubscriptionRu.internal(_root);
 }
 
 // Path: on_boarding
@@ -490,6 +491,78 @@ class TranslationsStatisticsRu {
 	String get currency_suffix => 'сум';
 }
 
+// Path: subscription
+class TranslationsSubscriptionRu {
+	TranslationsSubscriptionRu.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// ru: 'Тарифный план'
+	String get title => 'Тарифный план';
+
+	/// ru: 'Ваш пробный период активен'
+	String get subtitle_trial => 'Ваш пробный период активен';
+
+	/// ru: 'Пробный период истёк. Оформите подписку для продолжения'
+	String get subtitle_expired => 'Пробный период истёк. Оформите подписку для продолжения';
+
+	/// ru: 'Пробный: {days} дн. осталось'
+	String get trial_remaining => 'Пробный: {days} дн. осталось';
+
+	/// ru: 'Пробный истёк'
+	String get trial_expired_short => 'Пробный истёк';
+
+	/// ru: 'Месячный'
+	String get tariff_monthly_label => 'Месячный';
+
+	/// ru: 'Годовой'
+	String get tariff_yearly_label => 'Годовой';
+
+	/// ru: 'сум / мес'
+	String get tariff_per_month => 'сум / мес';
+
+	/// ru: 'сум / год'
+	String get tariff_per_year => 'сум / год';
+
+	/// ru: '2 месяца бесплатно'
+	String get save_badge => '2 месяца бесплатно';
+
+	/// ru: 'Выберите способ оплаты'
+	String get select_payment_method => 'Выберите способ оплаты';
+
+	/// ru: 'Скоро будет подключено'
+	String get soon => 'Скоро будет подключено';
+
+	/// ru: 'Неограниченные клиенты и записи'
+	String get feature_unlimited_records => 'Неограниченные клиенты и записи';
+
+	/// ru: 'Полная статистика и аналитика'
+	String get feature_stats => 'Полная статистика и аналитика';
+
+	/// ru: 'SMS и push-напоминания'
+	String get feature_reminders => 'SMS и push-напоминания';
+
+	/// ru: 'Приоритетная поддержка'
+	String get feature_support => 'Приоритетная поддержка';
+
+	/// ru: 'Оформить подписку'
+	String get upgrade_button => 'Оформить подписку';
+
+	/// ru: 'Обновить'
+	String get upgrade_short => 'Обновить';
+
+	/// ru: 'Тарифный план'
+	String get tariff_item_title => 'Тарифный план';
+
+	/// ru: 'Активная подписка'
+	String get status_paid => 'Активная подписка';
+
+	/// ru: 'Доступен пробный период'
+	String get status_not_started => 'Доступен пробный период';
+}
+
 // Path: sign_up.errors
 class TranslationsSignUpErrorsRu {
 	TranslationsSignUpErrorsRu.internal(this._root);
@@ -647,6 +720,27 @@ extension on Translations {
 			case 'statistics.delete_client': return 'Удалить клиента';
 			case 'statistics.no_data': return 'Пока нет данных';
 			case 'statistics.currency_suffix': return 'сум';
+			case 'subscription.title': return 'Тарифный план';
+			case 'subscription.subtitle_trial': return 'Ваш пробный период активен';
+			case 'subscription.subtitle_expired': return 'Пробный период истёк. Оформите подписку для продолжения';
+			case 'subscription.trial_remaining': return 'Пробный: {days} дн. осталось';
+			case 'subscription.trial_expired_short': return 'Пробный истёк';
+			case 'subscription.tariff_monthly_label': return 'Месячный';
+			case 'subscription.tariff_yearly_label': return 'Годовой';
+			case 'subscription.tariff_per_month': return 'сум / мес';
+			case 'subscription.tariff_per_year': return 'сум / год';
+			case 'subscription.save_badge': return '2 месяца бесплатно';
+			case 'subscription.select_payment_method': return 'Выберите способ оплаты';
+			case 'subscription.soon': return 'Скоро будет подключено';
+			case 'subscription.feature_unlimited_records': return 'Неограниченные клиенты и записи';
+			case 'subscription.feature_stats': return 'Полная статистика и аналитика';
+			case 'subscription.feature_reminders': return 'SMS и push-напоминания';
+			case 'subscription.feature_support': return 'Приоритетная поддержка';
+			case 'subscription.upgrade_button': return 'Оформить подписку';
+			case 'subscription.upgrade_short': return 'Обновить';
+			case 'subscription.tariff_item_title': return 'Тарифный план';
+			case 'subscription.status_paid': return 'Активная подписка';
+			case 'subscription.status_not_started': return 'Доступен пробный период';
 			default: return null;
 		}
 	}

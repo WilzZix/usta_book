@@ -8,7 +8,9 @@ import 'package:usta_book/core/ui_kit/components/app_icons.dart';
 import 'package:usta_book/core/ui_kit/components/bottom_sheet.dart';
 import 'package:usta_book/core/ui_kit/components/button.dart';
 import 'package:usta_book/core/ui_kit/typography.dart';
+import 'package:usta_book/data/models/master_profile.dart';
 import 'package:usta_book/presentation/onboarding/choose_language/components/language_item.dart';
+import 'package:usta_book/presentation/paywall/paywall_page.dart';
 import 'package:usta_book/presentation/sign_up/profile_settings/profile_settings.dart';
 
 import '../../bloc/profile/profile_cubit.dart';
@@ -36,6 +38,21 @@ class _State extends State<ProfilePage> {
     context.read<MasterBloc>().add(GetMasterProfile());
     selectedLanguageItem = LocaleSettings.currentLocale == AppLocale.ru ? 1 : 0;
     selectedThemeItem = context.read<ThemeCubit>().state == ThemeMode.dark ? 0 : 1;
+  }
+
+  String _subscriptionDescription(Translations tr, MasterProfile? profile) {
+    if (profile == null) return '';
+    switch (profile.subscriptionStatus) {
+      case SubscriptionStatus.paid:
+        return tr.subscription.status_paid;
+      case SubscriptionStatus.trial:
+        return tr.subscription.trial_remaining
+            .replaceAll('{days}', '${profile.trialDaysRemaining}');
+      case SubscriptionStatus.expired:
+        return tr.subscription.trial_expired_short;
+      case SubscriptionStatus.notStarted:
+        return tr.subscription.status_not_started;
+    }
   }
 
   String formatScheduleWithContext(BuildContext context, Map<String, String> hours) {
@@ -145,6 +162,13 @@ class _State extends State<ProfilePage> {
                             title: tr.profile.working_hours,
                             description: formatScheduleWithContext(context, state.profile?.workingHours ?? {}),
                             onTap: () => context.pushNamed(ProfileSettings.tag),
+                          ),
+                          SizedBox(height: 8),
+                          ProfileItem(
+                            icon: Icon(Icons.workspace_premium_outlined, color: custom.primary),
+                            title: tr.subscription.tariff_item_title,
+                            description: _subscriptionDescription(tr, state.profile),
+                            onTap: () => context.pushNamed(PaywallPage.tag),
                           ),
                           SizedBox(height: 8),
                           ProfileItem(

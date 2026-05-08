@@ -9,7 +9,10 @@ class MasterProfile {
   final int? totalClients;
   final String? totalEarning;
   final bool profileCompleted;
-  final String uid; // The Master's User ID
+  final String uid;
+  final DateTime? trialStartedAt;
+  final DateTime? paidUntil;
+
   MasterProfile({
     this.uid = '',
     required this.name,
@@ -20,6 +23,8 @@ class MasterProfile {
     this.totalEarning,
     this.language = 'RU',
     required this.profileCompleted,
+    this.trialStartedAt,
+    this.paidUntil,
   });
 
   MasterProfile copyWith({
@@ -32,11 +37,12 @@ class MasterProfile {
     String? totalEarning,
     int? totalClients,
     bool? profileCompleted,
+    DateTime? trialStartedAt,
+    DateTime? paidUntil,
   }) {
     return MasterProfile(
       uid: uid ?? this.uid,
       name: name ?? this.name,
-      // Use photoURL != null ? photoURL : this.photoURL for nullable fields
       photoURL: photoURL ?? this.photoURL,
       serviceType: serviceType ?? this.serviceType,
       workingHours: workingHours ?? this.workingHours,
@@ -44,6 +50,8 @@ class MasterProfile {
       profileCompleted: profileCompleted ?? this.profileCompleted,
       totalClients: totalClients ?? this.totalClients,
       totalEarning: totalEarning ?? this.totalEarning,
+      trialStartedAt: trialStartedAt ?? this.trialStartedAt,
+      paidUntil: paidUntil ?? this.paidUntil,
     );
   }
 
@@ -53,7 +61,6 @@ class MasterProfile {
       throw Exception("Document data is null");
     }
 
-    // Ensure all data types match your model
     final Map<String, String> workingHoursMap =
         (data['workingHours'] as Map<String, dynamic>?)?.map((key, value) => MapEntry(key, value.toString())) ?? {};
 
@@ -67,6 +74,8 @@ class MasterProfile {
       profileCompleted: data['profile_completed'] ?? false,
       totalClients: data['totalClients'] as int?,
       totalEarning: data['totalEarning'] as String?,
+      trialStartedAt: (data['trialStartedAt'] as Timestamp?)?.toDate(),
+      paidUntil: (data['paidUntil'] as Timestamp?)?.toDate(),
     );
   }
 
@@ -80,4 +89,32 @@ class MasterProfile {
       'profile_completed': profileCompleted,
     };
   }
+
+  static const trialDurationDays = 10;
+
+  SubscriptionStatus get subscriptionStatus {
+    final now = DateTime.now();
+    if (paidUntil != null && paidUntil!.isAfter(now)) return SubscriptionStatus.paid;
+    if (trialStartedAt == null) return SubscriptionStatus.notStarted;
+    final daysSinceStart = now.difference(trialStartedAt!).inDays;
+    return daysSinceStart < trialDurationDays
+        ? SubscriptionStatus.trial
+        : SubscriptionStatus.expired;
+  }
+
+  int get trialDaysRemaining {
+    if (trialStartedAt == null) return trialDurationDays;
+    final daysSinceStart = DateTime.now().difference(trialStartedAt!).inDays;
+    final remaining = trialDurationDays - daysSinceStart;
+    return remaining < 0 ? 0 : remaining;
+  }
+
+  bool get canCreateRecords {
+    final s = subscriptionStatus;
+    return s == SubscriptionStatus.trial ||
+        s == SubscriptionStatus.paid ||
+        s == SubscriptionStatus.notStarted;
+  }
 }
+
+enum SubscriptionStatus { notStarted, trial, expired, paid }

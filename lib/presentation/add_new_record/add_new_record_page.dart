@@ -8,8 +8,10 @@ import 'package:usta_book/core/ui_kit/colors.dart';
 import 'package:usta_book/core/ui_kit/components/button.dart';
 import 'package:usta_book/core/ui_kit/components/inputs/inputs.dart';
 import 'package:usta_book/core/ui_kit/typography.dart';
+import 'package:usta_book/data/models/master_profile.dart';
 import 'package:usta_book/data/models/record_model.dart';
 import 'package:usta_book/domain/enums/enums.dart';
+import 'package:usta_book/presentation/paywall/paywall_page.dart';
 
 import '../../core/ui_kit/components/app_icons.dart';
 import '../../data/models/client_model.dart';
@@ -37,6 +39,12 @@ class _AddNewRecordPageState extends State<AddNewRecordPage> {
   Widget build(BuildContext context) {
     final tr = Translations.of(context);
     final canPop = Navigator.of(context).canPop();
+    final masterState = context.watch<MasterBloc>().state;
+    if (masterState is MasterProfileLoaded &&
+        masterState.profile != null &&
+        masterState.profile!.subscriptionStatus == SubscriptionStatus.expired) {
+      return const PaywallPage();
+    }
     return Scaffold(
       appBar: canPop
           ? AppBar(backgroundColor: Colors.transparent, elevation: 0)

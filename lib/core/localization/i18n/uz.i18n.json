@@ -143,5 +143,28 @@
     "delete_client": "Mijozni o'chirish",
     "no_data": "Hali ma'lumot yo'q",
     "currency_suffix": "so'm"
+  },
+  "subscription": {
+    "title": "Tarif rejasi",
+    "subtitle_trial": "Sinov muddatingiz davom etmoqda",
+    "subtitle_expired": "Sinov muddati tugadi. Davom etish uchun obuna oling",
+    "trial_remaining": "Trial: {days} kun qoldi",
+    "trial_expired_short": "Sinov tugadi",
+    "tariff_monthly_label": "Oylik",
+    "tariff_yearly_label": "Yillik",
+    "tariff_per_month": "so'm / oy",
+    "tariff_per_year": "so'm / yil",
+    "save_badge": "2 oy bepul",
+    "select_payment_method": "To'lov usulini tanlang",
+    "soon": "Tez orada ulanadi",
+    "feature_unlimited_records": "Cheksiz mijoz va yozuvlar",
+    "feature_stats": "To'liq statistika va analitika",
+    "feature_reminders": "SMS va push bildirishnomalar",
+    "feature_support": "Tezkor qo'llab-quvvatlash",
+    "upgrade_button": "Obuna olish",
+    "upgrade_short": "Yangilash",
+    "tariff_item_title": "Tarif rejasi",
+    "status_paid": "Faol obuna",
+    "status_not_started": "Sinov mavjud"
   }
 }

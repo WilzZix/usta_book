@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:usta_book/bloc/master/master_bloc.dart';
 import 'package:usta_book/core/ui_kit/components/app_icons.dart';
+import 'package:usta_book/data/models/master_profile.dart';
 import 'package:usta_book/presentation/clients/clients_list_page.dart';
 import 'package:usta_book/presentation/home/home_page.dart';
+import 'package:usta_book/presentation/paywall/paywall_page.dart';
+import 'package:usta_book/presentation/paywall/trial_banner.dart';
 import 'package:usta_book/presentation/profile/profile_page.dart';
 import 'package:usta_book/presentation/statistics/statistics_page.dart';
 
@@ -28,7 +34,22 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
     const ProfilePage(),
   ];
 
+  @override
+  void initState() {
+    super.initState();
+    context.read<MasterBloc>().add(GetMasterProfile());
+  }
+
   void _onItemTapped(int index) {
+    if (index == 2) {
+      final state = context.read<MasterBloc>().state;
+      if (state is MasterProfileLoaded &&
+          state.profile != null &&
+          state.profile!.subscriptionStatus == SubscriptionStatus.expired) {
+        context.pushNamed(PaywallPage.tag);
+        return;
+      }
+    }
     setState(() {
       _selectedIndex = index;
     });
@@ -37,7 +58,12 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: widgetOptions.elementAt(_selectedIndex),
+      body: Column(
+        children: [
+          const TrialBanner(),
+          Expanded(child: widgetOptions.elementAt(_selectedIndex)),
+        ],
+      ),
       bottomNavigationBar: _CustomBottomNavBar(
         items: [
           _NavItem(

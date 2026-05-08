@@ -47,6 +47,7 @@ class TranslationsUz extends Translations {
 	@override late final TranslationsAddRecordUz add_record = TranslationsAddRecordUz._(_root);
 	@override late final TranslationsClientsUz clients = TranslationsClientsUz._(_root);
 	@override late final TranslationsStatisticsUz statistics = TranslationsStatisticsUz._(_root);
+	@override late final TranslationsSubscriptionUz subscription = TranslationsSubscriptionUz._(_root);
 }
 
 // Path: on_boarding
@@ -250,6 +251,36 @@ class TranslationsStatisticsUz extends TranslationsStatisticsRu {
 	@override String get currency_suffix => 'so\'m';
 }
 
+// Path: subscription
+class TranslationsSubscriptionUz extends TranslationsSubscriptionRu {
+	TranslationsSubscriptionUz._(TranslationsUz root) : this._root = root, super.internal(root);
+
+	final TranslationsUz _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Tarif rejasi';
+	@override String get subtitle_trial => 'Sinov muddatingiz davom etmoqda';
+	@override String get subtitle_expired => 'Sinov muddati tugadi. Davom etish uchun obuna oling';
+	@override String get trial_remaining => 'Trial: {days} kun qoldi';
+	@override String get trial_expired_short => 'Sinov tugadi';
+	@override String get tariff_monthly_label => 'Oylik';
+	@override String get tariff_yearly_label => 'Yillik';
+	@override String get tariff_per_month => 'so\'m / oy';
+	@override String get tariff_per_year => 'so\'m / yil';
+	@override String get save_badge => '2 oy bepul';
+	@override String get select_payment_method => 'To\'lov usulini tanlang';
+	@override String get soon => 'Tez orada ulanadi';
+	@override String get feature_unlimited_records => 'Cheksiz mijoz va yozuvlar';
+	@override String get feature_stats => 'To\'liq statistika va analitika';
+	@override String get feature_reminders => 'SMS va push bildirishnomalar';
+	@override String get feature_support => 'Tezkor qo\'llab-quvvatlash';
+	@override String get upgrade_button => 'Obuna olish';
+	@override String get upgrade_short => 'Yangilash';
+	@override String get tariff_item_title => 'Tarif rejasi';
+	@override String get status_paid => 'Faol obuna';
+	@override String get status_not_started => 'Sinov mavjud';
+}
+
 // Path: sign_up.errors
 class TranslationsSignUpErrorsUz extends TranslationsSignUpErrorsRu {
 	TranslationsSignUpErrorsUz._(TranslationsUz root) : this._root = root, super.internal(root);
@@ -395,6 +426,27 @@ extension on TranslationsUz {
 			case 'statistics.delete_client': return 'Mijozni o\'chirish';
 			case 'statistics.no_data': return 'Hali ma\'lumot yo\'q';
 			case 'statistics.currency_suffix': return 'so\'m';
+			case 'subscription.title': return 'Tarif rejasi';
+			case 'subscription.subtitle_trial': return 'Sinov muddatingiz davom etmoqda';
+			case 'subscription.subtitle_expired': return 'Sinov muddati tugadi. Davom etish uchun obuna oling';
+			case 'subscription.trial_remaining': return 'Trial: {days} kun qoldi';
+			case 'subscription.trial_expired_short': return 'Sinov tugadi';
+			case 'subscription.tariff_monthly_label': return 'Oylik';
+			case 'subscription.tariff_yearly_label': return 'Yillik';
+			case 'subscription.tariff_per_month': return 'so\'m / oy';
+			case 'subscription.tariff_per_year': return 'so\'m / yil';
+			case 'subscription.save_badge': return '2 oy bepul';
+			case 'subscription.select_payment_method': return 'To\'lov usulini tanlang';
+			case 'subscription.soon': return 'Tez orada ulanadi';
+			case 'subscription.feature_unlimited_records': return 'Cheksiz mijoz va yozuvlar';
+			case 'subscription.feature_stats': return 'To\'liq statistika va analitika';
+			case 'subscription.feature_reminders': return 'SMS va push bildirishnomalar';
+			case 'subscription.feature_support': return 'Tezkor qo\'llab-quvvatlash';
+			case 'subscription.upgrade_button': return 'Obuna olish';
+			case 'subscription.upgrade_short': return 'Yangilash';
+			case 'subscription.tariff_item_title': return 'Tarif rejasi';
+			case 'subscription.status_paid': return 'Faol obuna';
+			case 'subscription.status_not_started': return 'Sinov mavjud';
 			default: return null;
 		}
 	}

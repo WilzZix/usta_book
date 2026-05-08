@@ -143,5 +143,28 @@
     "delete_client": "Удалить клиента",
     "no_data": "Пока нет данных",
     "currency_suffix": "сум"
+  },
+  "subscription": {
+    "title": "Тарифный план",
+    "subtitle_trial": "Ваш пробный период активен",
+    "subtitle_expired": "Пробный период истёк. Оформите подписку для продолжения",
+    "trial_remaining": "Пробный: {days} дн. осталось",
+    "trial_expired_short": "Пробный истёк",
+    "tariff_monthly_label": "Месячный",
+    "tariff_yearly_label": "Годовой",
+    "tariff_per_month": "сум / мес",
+    "tariff_per_year": "сум / год",
+    "save_badge": "2 месяца бесплатно",
+    "select_payment_method": "Выберите способ оплаты",
+    "soon": "Скоро будет подключено",
+    "feature_unlimited_records": "Неограниченные клиенты и записи",
+    "feature_stats": "Полная статистика и аналитика",
+    "feature_reminders": "SMS и push-напоминания",
+    "feature_support": "Приоритетная поддержка",
+    "upgrade_button": "Оформить подписку",
+    "upgrade_short": "Обновить",
+    "tariff_item_title": "Тарифный план",
+    "status_paid": "Активная подписка",
+    "status_not_started": "Доступен пробный период"
   }
 }

@@ -9,6 +9,7 @@ import 'package:usta_book/presentation/add_new_record/add_new_record_page.dart';
 import 'package:usta_book/presentation/clients/clients_list_page.dart';
 import 'package:usta_book/presentation/home/home_page.dart';
 import 'package:usta_book/presentation/onboarding/choose_language/choose_language.dart';
+import 'package:usta_book/presentation/paywall/paywall_page.dart';
 import 'package:usta_book/presentation/sign_up/otp/otp_page.dart';
 import 'package:usta_book/presentation/sign_up/phone_registration/phone_registration_page.dart';
 import 'package:usta_book/presentation/sign_up/profile_settings/profile_settings.dart';
@@ -102,6 +103,7 @@ class AppRoute {
           builder: (_, __) => CompleteOnboardingPage(),
         ),
         GoRoute(path: ProfileSettings.tag, name: ProfileSettings.tag, builder: (_, __) => ProfileSettings()),
+        GoRoute(path: PaywallPage.tag, name: PaywallPage.tag, builder: (_, __) => const PaywallPage()),
         GoRoute(
           path: PhoneRegistrationPage.tag,
           name: PhoneRegistrationPage.tag,
