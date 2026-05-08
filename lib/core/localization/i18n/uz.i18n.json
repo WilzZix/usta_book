@@ -72,7 +72,10 @@
     "in_progress": "Jarayonda",
     "finished": "Tugadi",
     "finish_action": "Tugatish",
-    "todays_clients": "Bugungi uchrashuvlar"
+    "todays_clients": "Bugungi uchrashuvlar",
+    "arrival_check_title": "Mijoz keldimi?",
+    "arrival_check_came": "Keldi",
+    "arrival_check_dismiss": "Keyinroq"
   },
   "profile": {
     "profile": "Profil",

@@ -20,6 +20,7 @@ import 'bloc/phone_auth/phone_auth_bloc.dart';
 import 'bloc/theme/theme_cubit.dart';
 import 'core/localization/i18n/strings.g.dart';
 import 'core/ui_kit/app_themes.dart';
+import 'data/services/notifications/notification_service.dart';
 import 'data/sources/firebase/firebase_service.dart';
 import 'data/sources/local/shared_pref.dart';
 import 'firebase_options.dart';
@@ -31,6 +32,7 @@ void main() async {
   await initDi();
   final prefService = ShredPrefService();
   await prefService.init();
+  await NotificationService.instance.init();
 
   final savedLanguage = prefService.getLanguage();
   if (savedLanguage != null) {

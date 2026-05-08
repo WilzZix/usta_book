@@ -151,6 +151,9 @@ class TranslationsHomeUz extends TranslationsHomeRu {
 	@override String get finished => 'Tugadi';
 	@override String get finish_action => 'Tugatish';
 	@override String get todays_clients => 'Bugungi uchrashuvlar';
+	@override String get arrival_check_title => 'Mijoz keldimi?';
+	@override String get arrival_check_came => 'Keldi';
+	@override String get arrival_check_dismiss => 'Keyinroq';
 }
 
 // Path: profile
@@ -364,6 +367,9 @@ extension on TranslationsUz {
 			case 'home.finished': return 'Tugadi';
 			case 'home.finish_action': return 'Tugatish';
 			case 'home.todays_clients': return 'Bugungi uchrashuvlar';
+			case 'home.arrival_check_title': return 'Mijoz keldimi?';
+			case 'home.arrival_check_came': return 'Keldi';
+			case 'home.arrival_check_dismiss': return 'Keyinroq';
 			case 'profile.profile': return 'Profil';
 			case 'profile.logout': return 'Chiqish';
 			case 'profile.save': return 'Saqlash';

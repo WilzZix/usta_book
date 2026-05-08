@@ -267,6 +267,15 @@ class TranslationsHomeRu {
 
 	/// ru: 'Сегодняшние клиенты'
 	String get todays_clients => 'Сегодняшние клиенты';
+
+	/// ru: 'Клиент пришёл?'
+	String get arrival_check_title => 'Клиент пришёл?';
+
+	/// ru: 'Пришёл'
+	String get arrival_check_came => 'Пришёл';
+
+	/// ru: 'Позже'
+	String get arrival_check_dismiss => 'Позже';
 }
 
 // Path: profile
@@ -658,6 +667,9 @@ extension on Translations {
 			case 'home.finished': return 'Завершено';
 			case 'home.finish_action': return 'Завершить';
 			case 'home.todays_clients': return 'Сегодняшние клиенты';
+			case 'home.arrival_check_title': return 'Клиент пришёл?';
+			case 'home.arrival_check_came': return 'Пришёл';
+			case 'home.arrival_check_dismiss': return 'Позже';
 			case 'profile.profile': return 'Профиль';
 			case 'profile.logout': return 'Выход';
 			case 'profile.save': return 'Сохранить';

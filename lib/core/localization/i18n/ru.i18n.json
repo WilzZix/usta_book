@@ -72,7 +72,10 @@
     "in_progress": "В процессе",
     "finished": "Завершено",
     "finish_action": "Завершить",
-    "todays_clients": "Сегодняшние клиенты"
+    "todays_clients": "Сегодняшние клиенты",
+    "arrival_check_title": "Клиент пришёл?",
+    "arrival_check_came": "Пришёл",
+    "arrival_check_dismiss": "Позже"
   },
   "profile": {
     "profile": "Профиль",
