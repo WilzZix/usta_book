@@ -36,7 +36,11 @@ class _AddNewRecordPageState extends State<AddNewRecordPage> {
   @override
   Widget build(BuildContext context) {
     final tr = Translations.of(context);
+    final canPop = Navigator.of(context).canPop();
     return Scaffold(
+      appBar: canPop
+          ? AppBar(backgroundColor: Colors.transparent, elevation: 0)
+          : null,
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -91,7 +95,7 @@ class _AddNewRecordPageState extends State<AddNewRecordPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: MediaQuery.of(context).padding.top),
+                  SizedBox(height: canPop ? 8 : MediaQuery.of(context).padding.top),
                   Text(tr.add_record.add_new_record, style: Typographies.boldH1),
                   SizedBox(height: 24),
                   InputField.text(
@@ -209,7 +213,7 @@ class _AddNewRecordPageState extends State<AddNewRecordPage> {
                                   lastVisitDate: '',
                                   price: priceController.text,
                                   serviceType: serviceTypeController.text,
-                                  clientNumber: phoneController.text,
+                                  clientNumber: '+998 ${phoneController.text}',
                                 ),
                               ),
                             );
@@ -220,7 +224,7 @@ class _AddNewRecordPageState extends State<AddNewRecordPage> {
                                   date: dateController.text,
                                   price: priceController.text,
                                   serviceType: serviceTypeController.text,
-                                  clientNumber: phoneController.text,
+                                  clientNumber: '+998 ${phoneController.text}',
                                   time: timeController.text,
                                   status: ClientStatus.waiting,
                                 ),

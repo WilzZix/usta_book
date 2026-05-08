@@ -35,7 +35,7 @@ class _ClientDetailsBody extends StatelessWidget {
     final tr = Translations.of(context);
     final custom = Theme.of(context).extension<AppThemeExtension>()!;
     final dateFmt = DateFormat('dd.MM.yyyy');
-    final moneyFmt = NumberFormat.decimalPattern('en_US');
+    final moneyFmt = NumberFormat('#,##0');
 
     return SafeArea(
       child: Padding(
@@ -106,7 +106,7 @@ class _ClientDetailsBody extends StatelessWidget {
             const SizedBox(height: 8),
             _DetailRow(
               label: tr.statistics.total_spent,
-              value: '\$${moneyFmt.format(client.totalSpent)}',
+              value: '${moneyFmt.format(client.totalSpent)} ${tr.statistics.currency_suffix}',
               valueColor: custom.primary,
             ),
             const SizedBox(height: 16),
@@ -247,9 +247,9 @@ class _DetailRow extends StatelessWidget {
         Text(label, style: Typographies.regularBody2),
         Text(
           value,
-          style: Typographies.regularBody2.copyWith(
-            color: valueColor ?? TextColor.primary,
-          ),
+          style: valueColor != null
+              ? Typographies.regularBody2.copyWith(color: valueColor)
+              : Typographies.regularBody2,
         ),
       ],
     );

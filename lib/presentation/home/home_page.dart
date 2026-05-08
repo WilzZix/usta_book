@@ -76,7 +76,7 @@ class _HomePageState extends State<HomePage> {
                             MainButton.primary(
                               title: tr.home.add_customer,
                               onTap: () {
-                                context.go(AddNewRecordPage.tag);
+                                context.push(AddNewRecordPage.tag);
                               },
                             ),
                           ],

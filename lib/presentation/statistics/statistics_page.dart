@@ -4,7 +4,6 @@ import 'package:intl/intl.dart';
 import 'package:usta_book/bloc/stats/stats_cubit.dart';
 import 'package:usta_book/core/localization/i18n/strings.g.dart';
 import 'package:usta_book/core/ui_kit/app_theme_extension.dart';
-import 'package:usta_book/core/ui_kit/colors.dart';
 import 'package:usta_book/core/ui_kit/components/app_icons.dart';
 import 'package:usta_book/core/ui_kit/typography.dart';
 import 'package:usta_book/data/models/stats_summary.dart';
@@ -67,7 +66,7 @@ class _StatisticsPageState extends State<StatisticsPage> {
                     Expanded(
                       child: _BigStatCard(
                         icon: Icons.account_balance_wallet_outlined,
-                        value: _formatMoney(summary.monthlyRevenue),
+                        value: _formatMoney(summary.monthlyRevenue, tr.statistics.currency_suffix),
                         label: tr.statistics.monthly_revenue,
                         custom: custom,
                       ),
@@ -87,7 +86,7 @@ class _StatisticsPageState extends State<StatisticsPage> {
                     const SizedBox(width: 12),
                     Expanded(
                       child: _SmallStatCard(
-                        value: _formatMoney(summary.avgBill),
+                        value: _formatMoney(summary.avgBill, tr.statistics.currency_suffix),
                         label: tr.statistics.avg_bill,
                         custom: custom,
                       ),
@@ -130,9 +129,9 @@ class _StatisticsPageState extends State<StatisticsPage> {
   }
 }
 
-String _formatMoney(num value) {
-  final f = NumberFormat.decimalPattern('en_US');
-  return '\$${f.format(value)}';
+String _formatMoney(num value, String suffix) {
+  final f = NumberFormat('#,##0');
+  return '${f.format(value)} $suffix';
 }
 
 class _BigStatCard extends StatelessWidget {
@@ -164,10 +163,7 @@ class _BigStatCard extends StatelessWidget {
             children: [
               Icon(icon, size: 18, color: custom.primary),
               const SizedBox(width: 6),
-              Text(
-                value,
-                style: Typographies.semiBoldH2.copyWith(color: TextColor.primary),
-              ),
+              Text(value, style: Typographies.semiBoldH2),
             ],
           ),
           const SizedBox(height: 4),
@@ -199,7 +195,7 @@ class _SmallStatCard extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Text(value, style: Typographies.regularH3.copyWith(color: TextColor.primary)),
+          Text(value, style: Typographies.regularH3),
           const SizedBox(height: 2),
           Text(
             label,

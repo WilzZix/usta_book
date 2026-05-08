@@ -247,6 +247,7 @@ class TranslationsStatisticsUz extends TranslationsStatisticsRu {
 	@override String get edit => 'O\'zgartirish';
 	@override String get delete_client => 'Mijozni o\'chirish';
 	@override String get no_data => 'Hali ma\'lumot yo\'q';
+	@override String get currency_suffix => 'so\'m';
 }
 
 // Path: sign_up.errors
@@ -393,6 +394,7 @@ extension on TranslationsUz {
 			case 'statistics.edit': return 'O\'zgartirish';
 			case 'statistics.delete_client': return 'Mijozni o\'chirish';
 			case 'statistics.no_data': return 'Hali ma\'lumot yo\'q';
+			case 'statistics.currency_suffix': return 'so\'m';
 			default: return null;
 		}
 	}

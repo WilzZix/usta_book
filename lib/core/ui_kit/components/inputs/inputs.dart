@@ -24,6 +24,7 @@ class InputField extends StatefulWidget {
     this.suffixIcon,
     this.readOnly = false,
     this.hintText,
+    this.prefixText,
     required this.controller,
     required this.textInputType,
     this.onTap,
@@ -45,7 +46,8 @@ class InputField extends StatefulWidget {
          textInputType: TextInputType.phone,
          key: key,
          fieldTitle: fieldTitle,
-         hintText: '+998 (00) 123 45 67',
+         hintText: '(00) 000 00 00',
+         prefixText: '+998 ',
          inputFormatter: [phoneMaskFormatter],
        );
 
@@ -166,6 +168,7 @@ class InputField extends StatefulWidget {
   final Widget? suffixIcon;
   final bool? readOnly;
   final String? hintText;
+  final String? prefixText;
   final TextEditingController controller;
   final TextInputType? textInputType;
   final VoidCallback? onTap;
@@ -179,6 +182,7 @@ class InputField extends StatefulWidget {
 class _InputFieldState extends State<InputField> {
   @override
   Widget build(BuildContext context) {
+    final readOnly = widget.readOnly ?? false;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -194,16 +198,32 @@ class _InputFieldState extends State<InputField> {
           validator: widget.validator,
           controller: widget.controller,
           onTap: widget.onTap,
-          readOnly: widget.readOnly ?? false,
+          readOnly: readOnly,
+          enableInteractiveSelection: !readOnly,
+          showCursor: !readOnly,
           inputFormatters: widget.inputFormatter,
           keyboardType: widget.textInputType,
           obscureText: widget.obscureText ?? false,
           decoration: InputDecoration(
             fillColor: AppColors.body,
-            suffixIcon: Padding(
-              padding: const EdgeInsets.only(top: 16.0, bottom: 16, right: 16),
-              child: widget.suffixIcon,
-            ),
+            suffixIcon: widget.suffixIcon != null
+                ? Padding(
+                    padding: const EdgeInsets.only(top: 16.0, bottom: 16, right: 16),
+                    child: widget.suffixIcon,
+                  )
+                : null,
+            prefixIcon: widget.prefixText != null
+                ? Padding(
+                    padding: const EdgeInsets.only(left: 16, right: 4),
+                    child: Text(
+                      widget.prefixText!,
+                      style: Typographies.regularInput,
+                    ),
+                  )
+                : null,
+            prefixIconConstraints: widget.prefixText != null
+                ? const BoxConstraints(minWidth: 0, minHeight: 0)
+                : null,
             hintText: widget.hintText,
           ),
         ),
@@ -213,9 +233,9 @@ class _InputFieldState extends State<InputField> {
 }
 
 var phoneMaskFormatter = MaskTextInputFormatter(
-  mask: '+### (##) ###-##-##',
+  mask: '(##) ### ## ##',
   filter: {"#": RegExp(r'[0-9]')},
-  type: MaskAutoCompletionType.lazy, // or .eager
+  type: MaskAutoCompletionType.lazy,
 );
 final emailMaskFormatter = MaskTextInputFormatter(
   // A very basic example, adjust as needed

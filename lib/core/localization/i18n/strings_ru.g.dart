@@ -485,6 +485,9 @@ class TranslationsStatisticsRu {
 
 	/// ru: 'Пока нет данных'
 	String get no_data => 'Пока нет данных';
+
+	/// ru: 'сум'
+	String get currency_suffix => 'сум';
 }
 
 // Path: sign_up.errors
@@ -643,6 +646,7 @@ extension on Translations {
 			case 'statistics.edit': return 'Изменить';
 			case 'statistics.delete_client': return 'Удалить клиента';
 			case 'statistics.no_data': return 'Пока нет данных';
+			case 'statistics.currency_suffix': return 'сум';
 			default: return null;
 		}
 	}

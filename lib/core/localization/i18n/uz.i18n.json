@@ -141,6 +141,7 @@
     "history": "Tarix",
     "edit": "O'zgartirish",
     "delete_client": "Mijozni o'chirish",
-    "no_data": "Hali ma'lumot yo'q"
+    "no_data": "Hali ma'lumot yo'q",
+    "currency_suffix": "so'm"
   }
 }

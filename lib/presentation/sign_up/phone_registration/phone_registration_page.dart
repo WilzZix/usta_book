@@ -23,12 +23,12 @@ class _PhoneRegistrationPageState extends State<PhoneRegistrationPage> {
 
   String _toE164(String masked) {
     final digits = masked.replaceAll(RegExp(r'[^0-9]'), '');
-    return '+$digits';
+    return '+998$digits';
   }
 
   bool _isComplete(String masked) {
-    // Mask is "+### (##) ###-##-##" → 12 digits when fully entered.
-    return masked.replaceAll(RegExp(r'[^0-9]'), '').length == 12;
+    // Mask is "(##) ### ## ##" → 9 digits (after the locked +998 prefix).
+    return masked.replaceAll(RegExp(r'[^0-9]'), '').length == 9;
   }
 
   void _submit() {
