@@ -10,6 +10,7 @@ import '../../../core/ui_kit/components/bottom_sheet.dart';
 import '../../../core/ui_kit/typography.dart';
 import '../../../data/models/client_model.dart';
 import '../../../shared/mixins/phone_call_mixin.dart';
+import '../../chat/chat_page.dart';
 import '../add_new_appointment_page.dart';
 
 class ClientItem extends StatefulWidget {
@@ -39,20 +40,33 @@ class _ClientItemState extends State<ClientItem> with PhoneCallMixin {
         children: [
           Container(
             padding: EdgeInsets.all(8),
-            decoration: BoxDecoration(color: custom.body, borderRadius: BorderRadius.circular(8)),
+            decoration: BoxDecoration(
+              color: custom.body,
+              borderRadius: BorderRadius.circular(8),
+            ),
             child: AppIcons.icPerson,
           ),
           SizedBox(width: 8),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(widget.data.clientName, style: Typographies.regularBody.copyWith(color: custom.primary)),
+              Text(
+                widget.data.clientName,
+                style: Typographies.regularBody.copyWith(color: custom.primary),
+              ),
               SizedBox(height: 8),
-              Text(widget.data.clientNumber, style: Typographies.regularBody2.copyWith(color: TextColor.secondary)),
+              Text(
+                widget.data.clientNumber,
+                style: Typographies.regularBody2.copyWith(
+                  color: TextColor.secondary,
+                ),
+              ),
               SizedBox(height: 8),
               Text(
                 tr.clients.numberOfVisits(count: widget.data.visitCount ?? 0),
-                style: Typographies.regularBody2.copyWith(color: TextColor.secondary),
+                style: Typographies.regularBody2.copyWith(
+                  color: TextColor.secondary,
+                ),
               ),
             ],
           ),
@@ -72,12 +86,16 @@ class _ClientItemState extends State<ClientItem> with PhoneCallMixin {
                           children: [
                             Text(
                               widget.data.clientName,
-                              style: Typographies.regularBody.copyWith(color: TextColor.primary),
+                              style: Typographies.regularBody.copyWith(
+                                color: TextColor.primary,
+                              ),
                             ),
                             SizedBox(height: 8),
                             Text(
                               widget.data.clientNumber,
-                              style: Typographies.regularBody2.copyWith(color: TextColor.secondary),
+                              style: Typographies.regularBody2.copyWith(
+                                color: TextColor.secondary,
+                              ),
                             ),
                           ],
                         ),
@@ -87,24 +105,33 @@ class _ClientItemState extends State<ClientItem> with PhoneCallMixin {
                     BottomSheetItem(
                       title: tr.clients.visit_count,
                       description: '${widget.data.visitCount}',
-                      style: Typographies.regularBody2.copyWith(color: TextColor.secondary),
+                      style: Typographies.regularBody2.copyWith(
+                        color: TextColor.secondary,
+                      ),
                     ),
                     SizedBox(height: 12),
                     BottomSheetItem(
                       title: tr.clients.last_visit,
                       description: widget.data.lastVisitDate,
-                      style: Typographies.regularBody2.copyWith(color: TextColor.secondary),
+                      style: Typographies.regularBody2.copyWith(
+                        color: TextColor.secondary,
+                      ),
                     ),
                     SizedBox(height: 12),
                     BottomSheetItem(
                       title: tr.clients.total_balance,
                       description: widget.data.price,
-                      style: Typographies.regularBody2.copyWith(color: AppColors.primary),
+                      style: Typographies.regularBody2.copyWith(
+                        color: AppColors.primary,
+                      ),
                     ),
                     SizedBox(height: 20),
                     MainButton.primary(
                       onTap: () {
-                        context.push(AddNewAppointmentPage.tag, extra: widget.data);
+                        context.push(
+                          AddNewAppointmentPage.tag,
+                          extra: widget.data,
+                        );
                       },
                       title: tr.clients.book_appointment,
                       icon: Icon(Icons.add, color: Colors.white),
@@ -116,10 +143,20 @@ class _ClientItemState extends State<ClientItem> with PhoneCallMixin {
                         ClientInfoItem(
                           title: tr.clients.contact,
                           icon: AppIcons.icPhone,
-                          onTap: () async => makePhoneCall(widget.data.clientNumber),
+                          onTap: () async =>
+                              makePhoneCall(widget.data.clientNumber),
                         ),
-                        ClientInfoItem(title: tr.clients.history, icon: AppIcons.icPhone, onTap: () {}),
-                        ClientInfoItem(title: tr.clients.edit, icon: AppIcons.icPhone, onTap: () {}),
+                        ClientInfoItem(
+                          title: tr.clients.history,
+                          icon: AppIcons.icPhone,
+                          onTap: () {},
+                        ),
+                        //ClientInfoItem(title: tr.clients.edit, icon: AppIcons.icPhone, onTap: () {}),
+                        ClientInfoItem(
+                          title: 'Chat',
+                          icon: AppIcons.icPhone,
+                          onTap: () => context.pushNamed(ChatPage.tag),
+                        ),
                       ],
                     ),
                     SizedBox(height: 10),
@@ -137,7 +174,10 @@ class _ClientItemState extends State<ClientItem> with PhoneCallMixin {
             },
             child: Container(
               padding: EdgeInsets.all(8),
-              decoration: BoxDecoration(color: custom.body, borderRadius: BorderRadius.circular(8)),
+              decoration: BoxDecoration(
+                color: custom.body,
+                borderRadius: BorderRadius.circular(8),
+              ),
               child: AppIcons.icMenu,
             ),
           ),
@@ -148,7 +188,12 @@ class _ClientItemState extends State<ClientItem> with PhoneCallMixin {
 }
 
 class BottomSheetItem extends StatelessWidget {
-  const BottomSheetItem({super.key, required this.title, required this.description, this.style});
+  const BottomSheetItem({
+    super.key,
+    required this.title,
+    required this.description,
+    this.style,
+  });
 
   final String title;
   final String description;
@@ -168,7 +213,12 @@ class BottomSheetItem extends StatelessWidget {
 }
 
 class ClientInfoItem extends StatelessWidget {
-  const ClientInfoItem({super.key, required this.title, required this.icon, required this.onTap});
+  const ClientInfoItem({
+    super.key,
+    required this.title,
+    required this.icon,
+    required this.onTap,
+  });
 
   final String title;
   final Widget icon;
@@ -181,14 +231,22 @@ class ClientInfoItem extends StatelessWidget {
       onTap: onTap,
       child: Container(
         padding: EdgeInsets.all(8),
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: custom.body),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          color: custom.body,
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,
           children: [
             icon,
             SizedBox(width: 8),
-            Text(title, style: Typographies.regularBody2.copyWith(color: TextColor.secondary)),
+            Text(
+              title,
+              style: Typographies.regularBody2.copyWith(
+                color: TextColor.secondary,
+              ),
+            ),
           ],
         ),
       ),
