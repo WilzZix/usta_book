@@ -18,6 +18,7 @@ import '../add_new_record/add_new_record_page.dart';
 import 'components/app_bar.dart';
 import 'components/loading.dart';
 import 'components/time_line_picker.dart';
+import 'components/today_stats.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -66,18 +67,27 @@ class _HomePageState extends State<HomePage> {
                     case TodayAppointmentLoaded():
                       if (state.data.isEmpty) {
                         return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            AppIcons.icEmptyList,
-                            Text(
-                              tr.home.no_customers_added,
-                              style: Typographies.regularBody2.copyWith(color: Color(0xFF6C757D)),
-                            ),
-                            SizedBox(height: 12),
-                            MainButton.primary(
-                              title: tr.home.add_customer,
-                              onTap: () {
-                                context.go(AddNewRecordPage.tag);
-                              },
+                            TodayStats(records: state.data),
+                            SizedBox(height: 24),
+                            Center(
+                              child: Column(
+                                children: [
+                                  AppIcons.icEmptyList,
+                                  Text(
+                                    tr.home.no_customers_added,
+                                    style: Typographies.regularBody2.copyWith(color: Color(0xFF6C757D)),
+                                  ),
+                                  SizedBox(height: 12),
+                                  MainButton.primary(
+                                    title: tr.home.add_customer,
+                                    onTap: () {
+                                      context.go(AddNewRecordPage.tag);
+                                    },
+                                  ),
+                                ],
+                              ),
                             ),
                           ],
                         );
@@ -88,6 +98,8 @@ class _HomePageState extends State<HomePage> {
                           Text(tr.home.theNearestClient, style: Typographies.semiBoldH2),
                           SizedBox(height: 12),
                           ClientStatusWidget(recordModel: state.data[0]),
+                          SizedBox(height: 24),
+                          TodayStats(records: state.data),
                           SizedBox(height: 24),
                           Text(tr.home.todays_clients, style: Typographies.semiBoldH2),
                           SizedBox(height: 12),

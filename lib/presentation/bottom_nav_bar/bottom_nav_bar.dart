@@ -3,6 +3,7 @@ import 'package:usta_book/core/ui_kit/components/app_icons.dart';
 import 'package:usta_book/presentation/clients/clients_list_page.dart';
 import 'package:usta_book/presentation/home/home_page.dart';
 import 'package:usta_book/presentation/profile/profile_page.dart';
+import 'package:usta_book/presentation/statistics/statistics_page.dart';
 
 import '../../core/ui_kit/app_theme_extension.dart';
 import '../add_new_record/add_new_record_page.dart';
@@ -23,7 +24,7 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
     const HomePage(),
     const ClientsListPage(),
     AddNewRecordPage(),
-    const HomePage(),
+    const StatisticsPage(),
     const ProfilePage(),
   ];
 

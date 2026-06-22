@@ -63,7 +63,11 @@
     "in_progress": "В процессе",
     "finished": "Завершено",
     "finish_action": "Завершить",
-    "todays_clients": "Сегодняшние клиенты"
+    "todays_clients": "Сегодняшние клиенты",
+    "stat_orders": "Заказы",
+    "stat_income": "Доход",
+    "stat_time": "Время",
+    "hours_short": "ч"
   },
   "profile": {
     "profile": "Профиль",
@@ -95,6 +99,28 @@
     "save": "Сохранить",
     "record_added_success_txt": "Новый клиент добавлен в список",
     "recorded_name": "Вы добавили нового клиента по имени ${name} в список"
+  },
+  "statistics": {
+    "title": "Статистика",
+    "today": "Сегодня",
+    "week": "Неделя",
+    "month": "Месяц",
+    "orders": "Заказы",
+    "income": "Доход",
+    "done": "Выполнено",
+    "rejected": "Отменено",
+    "top_services": "Топ услуги",
+    "no_data": "Нет данных за период",
+    "income_chart": "График дохода",
+    "no_appointments": "Нет записей за выбранный период",
+    "mon": "Пн",
+    "tue": "Вт",
+    "wed": "Ср",
+    "thu": "Чт",
+    "fri": "Пт",
+    "sat": "Сб",
+    "sun": "Вс",
+    "week_short": "Нед"
   },
   "clients": {
     "numberOfVisits": "${count} посещений",

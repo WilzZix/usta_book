@@ -45,6 +45,7 @@ class TranslationsUz extends Translations {
 	@override late final TranslationsHomeUz home = TranslationsHomeUz._(_root);
 	@override late final TranslationsProfileUz profile = TranslationsProfileUz._(_root);
 	@override late final TranslationsAddRecordUz add_record = TranslationsAddRecordUz._(_root);
+	@override late final TranslationsStatisticsUz statistics = TranslationsStatisticsUz._(_root);
 	@override late final TranslationsClientsUz clients = TranslationsClientsUz._(_root);
 }
 
@@ -147,6 +148,10 @@ class TranslationsHomeUz extends TranslationsHomeRu {
 	@override String get finished => 'Tugadi';
 	@override String get finish_action => 'Tugatish';
 	@override String get todays_clients => 'Bugungi uchrashuvlar';
+	@override String get stat_orders => 'Zakazlar';
+	@override String get stat_income => 'Daromad';
+	@override String get stat_time => 'Vaqt';
+	@override String get hours_short => 'soat';
 }
 
 // Path: profile
@@ -192,6 +197,35 @@ class TranslationsAddRecordUz extends TranslationsAddRecordRu {
 	@override String get save => 'Saqlash';
 	@override String get record_added_success_txt => 'Yangi mijoz ro\'yhatga qo\'shildi';
 	@override String recorded_name({required Object name}) => 'Siz ${name} ismli yangi mijozni ro\'yhatga qo\'shdingiz';
+}
+
+// Path: statistics
+class TranslationsStatisticsUz extends TranslationsStatisticsRu {
+	TranslationsStatisticsUz._(TranslationsUz root) : this._root = root, super.internal(root);
+
+	final TranslationsUz _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Statistika';
+	@override String get today => 'Bugun';
+	@override String get week => 'Hafta';
+	@override String get month => 'Oy';
+	@override String get orders => 'Zakazlar';
+	@override String get income => 'Daromad';
+	@override String get done => 'Bajarildi';
+	@override String get rejected => 'Bekor qilindi';
+	@override String get top_services => 'Eng ko\'p xizmatlar';
+	@override String get no_data => 'Bu davr uchun ma\'lumot yo\'q';
+	@override String get income_chart => 'Daromad grafigi';
+	@override String get no_appointments => 'Tanlangan davr uchun yozuvlar yo\'q';
+	@override String get mon => 'Du';
+	@override String get tue => 'Se';
+	@override String get wed => 'Ch';
+	@override String get thu => 'Pa';
+	@override String get fri => 'Ju';
+	@override String get sat => 'Sh';
+	@override String get sun => 'Ya';
+	@override String get week_short => 'Haf';
 }
 
 // Path: clients
@@ -279,6 +313,10 @@ extension on TranslationsUz {
 			case 'home.finished': return 'Tugadi';
 			case 'home.finish_action': return 'Tugatish';
 			case 'home.todays_clients': return 'Bugungi uchrashuvlar';
+			case 'home.stat_orders': return 'Zakazlar';
+			case 'home.stat_income': return 'Daromad';
+			case 'home.stat_time': return 'Vaqt';
+			case 'home.hours_short': return 'soat';
 			case 'profile.profile': return 'Profil';
 			case 'profile.logout': return 'Chiqish';
 			case 'profile.save': return 'Saqlash';
@@ -306,6 +344,26 @@ extension on TranslationsUz {
 			case 'add_record.save': return 'Saqlash';
 			case 'add_record.record_added_success_txt': return 'Yangi mijoz ro\'yhatga qo\'shildi';
 			case 'add_record.recorded_name': return ({required Object name}) => 'Siz ${name} ismli yangi mijozni ro\'yhatga qo\'shdingiz';
+			case 'statistics.title': return 'Statistika';
+			case 'statistics.today': return 'Bugun';
+			case 'statistics.week': return 'Hafta';
+			case 'statistics.month': return 'Oy';
+			case 'statistics.orders': return 'Zakazlar';
+			case 'statistics.income': return 'Daromad';
+			case 'statistics.done': return 'Bajarildi';
+			case 'statistics.rejected': return 'Bekor qilindi';
+			case 'statistics.top_services': return 'Eng ko\'p xizmatlar';
+			case 'statistics.no_data': return 'Bu davr uchun ma\'lumot yo\'q';
+			case 'statistics.income_chart': return 'Daromad grafigi';
+			case 'statistics.no_appointments': return 'Tanlangan davr uchun yozuvlar yo\'q';
+			case 'statistics.mon': return 'Du';
+			case 'statistics.tue': return 'Se';
+			case 'statistics.wed': return 'Ch';
+			case 'statistics.thu': return 'Pa';
+			case 'statistics.fri': return 'Ju';
+			case 'statistics.sat': return 'Sh';
+			case 'statistics.sun': return 'Ya';
+			case 'statistics.week_short': return 'Haf';
 			case 'clients.numberOfVisits': return ({required Object count}) => '${count} ta tashrif';
 			case 'clients.customers': return 'Mijozlar';
 			case 'clients.customer_list': return 'Mijozlar roʻyxati';

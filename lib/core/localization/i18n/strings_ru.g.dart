@@ -46,6 +46,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	late final TranslationsHomeRu home = TranslationsHomeRu.internal(_root);
 	late final TranslationsProfileRu profile = TranslationsProfileRu.internal(_root);
 	late final TranslationsAddRecordRu add_record = TranslationsAddRecordRu.internal(_root);
+	late final TranslationsStatisticsRu statistics = TranslationsStatisticsRu.internal(_root);
 	late final TranslationsClientsRu clients = TranslationsClientsRu.internal(_root);
 }
 
@@ -260,6 +261,18 @@ class TranslationsHomeRu {
 
 	/// ru: 'Сегодняшние клиенты'
 	String get todays_clients => 'Сегодняшние клиенты';
+
+	/// ru: 'Заказы'
+	String get stat_orders => 'Заказы';
+
+	/// ru: 'Доход'
+	String get stat_income => 'Доход';
+
+	/// ru: 'Время'
+	String get stat_time => 'Время';
+
+	/// ru: 'ч'
+	String get hours_short => 'ч';
 }
 
 // Path: profile
@@ -359,6 +372,75 @@ class TranslationsAddRecordRu {
 
 	/// ru: 'Вы добавили нового клиента по имени ${name} в список'
 	String recorded_name({required Object name}) => 'Вы добавили нового клиента по имени ${name} в список';
+}
+
+// Path: statistics
+class TranslationsStatisticsRu {
+	TranslationsStatisticsRu.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// ru: 'Статистика'
+	String get title => 'Статистика';
+
+	/// ru: 'Сегодня'
+	String get today => 'Сегодня';
+
+	/// ru: 'Неделя'
+	String get week => 'Неделя';
+
+	/// ru: 'Месяц'
+	String get month => 'Месяц';
+
+	/// ru: 'Заказы'
+	String get orders => 'Заказы';
+
+	/// ru: 'Доход'
+	String get income => 'Доход';
+
+	/// ru: 'Выполнено'
+	String get done => 'Выполнено';
+
+	/// ru: 'Отменено'
+	String get rejected => 'Отменено';
+
+	/// ru: 'Топ услуги'
+	String get top_services => 'Топ услуги';
+
+	/// ru: 'Нет данных за период'
+	String get no_data => 'Нет данных за период';
+
+	/// ru: 'График дохода'
+	String get income_chart => 'График дохода';
+
+	/// ru: 'Нет записей за выбранный период'
+	String get no_appointments => 'Нет записей за выбранный период';
+
+	/// ru: 'Пн'
+	String get mon => 'Пн';
+
+	/// ru: 'Вт'
+	String get tue => 'Вт';
+
+	/// ru: 'Ср'
+	String get wed => 'Ср';
+
+	/// ru: 'Чт'
+	String get thu => 'Чт';
+
+	/// ru: 'Пт'
+	String get fri => 'Пт';
+
+	/// ru: 'Сб'
+	String get sat => 'Сб';
+
+	/// ru: 'Вс'
+	String get sun => 'Вс';
+
+	/// ru: 'Нед'
+	String get week_short => 'Нед';
 }
 
 // Path: clients
@@ -476,6 +558,10 @@ extension on Translations {
 			case 'home.finished': return 'Завершено';
 			case 'home.finish_action': return 'Завершить';
 			case 'home.todays_clients': return 'Сегодняшние клиенты';
+			case 'home.stat_orders': return 'Заказы';
+			case 'home.stat_income': return 'Доход';
+			case 'home.stat_time': return 'Время';
+			case 'home.hours_short': return 'ч';
 			case 'profile.profile': return 'Профиль';
 			case 'profile.logout': return 'Выход';
 			case 'profile.save': return 'Сохранить';
@@ -503,6 +589,26 @@ extension on Translations {
 			case 'add_record.save': return 'Сохранить';
 			case 'add_record.record_added_success_txt': return 'Новый клиент добавлен в список';
 			case 'add_record.recorded_name': return ({required Object name}) => 'Вы добавили нового клиента по имени ${name} в список';
+			case 'statistics.title': return 'Статистика';
+			case 'statistics.today': return 'Сегодня';
+			case 'statistics.week': return 'Неделя';
+			case 'statistics.month': return 'Месяц';
+			case 'statistics.orders': return 'Заказы';
+			case 'statistics.income': return 'Доход';
+			case 'statistics.done': return 'Выполнено';
+			case 'statistics.rejected': return 'Отменено';
+			case 'statistics.top_services': return 'Топ услуги';
+			case 'statistics.no_data': return 'Нет данных за период';
+			case 'statistics.income_chart': return 'График дохода';
+			case 'statistics.no_appointments': return 'Нет записей за выбранный период';
+			case 'statistics.mon': return 'Пн';
+			case 'statistics.tue': return 'Вт';
+			case 'statistics.wed': return 'Ср';
+			case 'statistics.thu': return 'Чт';
+			case 'statistics.fri': return 'Пт';
+			case 'statistics.sat': return 'Сб';
+			case 'statistics.sun': return 'Вс';
+			case 'statistics.week_short': return 'Нед';
 			case 'clients.numberOfVisits': return ({required Object count}) => '${count} посещений';
 			case 'clients.customers': return 'Клиенты';
 			case 'clients.customer_list': return 'Список клиентов';

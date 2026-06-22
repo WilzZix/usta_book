@@ -49,6 +49,19 @@ class AppointmentRepo extends IAppointment {
   }
 
   @override
+  Future<List<RecordModel>> getAllRecords(String? masterUID) async {
+    final snapshot = await FirebaseFirestore.instance
+        .collection('masters')
+        .doc(masterUID)
+        .collection('records')
+        .get();
+
+    return snapshot.docs
+        .map((doc) => RecordModel.fromJson(doc.data()))
+        .toList();
+  }
+
+  @override
   Future<List<RecordModel>> getTodayAppointment(
     DateTime date,
     String? masterUID,

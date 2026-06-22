@@ -14,6 +14,7 @@ import 'package:usta_book/core/di/inject.dart';
 import 'bloc/clients/clients_bloc.dart';
 import 'bloc/master/master_bloc.dart';
 import 'bloc/schedule/schedule_cubit.dart';
+import 'bloc/statistics/statistics_cubit.dart';
 
 import 'bloc/sign_up_and_sing_in/sign_up_and_sing_in_bloc.dart';
 import 'bloc/theme/theme_cubit.dart';
@@ -81,6 +82,7 @@ class _MyAppState extends State<MyApp> {
           BlocProvider(create: (context) => SignUpAndSingInBloc(inject(), inject())),
           BlocProvider(create: (context) => MasterBloc(inject(), inject())),
           BlocProvider(create: (context) => ScheduleCubit(inject(), inject())),
+          BlocProvider(create: (context) => StatisticsCubit(inject(), inject())),
           BlocProvider(create: (context) => ClientsBloc(inject(), inject())..add(GetClientsEvent())),
           BlocProvider<ThemeCubit>(create: (context) => ThemeCubit()),
           BlocProvider<ProfileCubit>(create: (context) => ProfileCubit()),

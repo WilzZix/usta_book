@@ -63,7 +63,11 @@
     "in_progress": "Jarayonda",
     "finished": "Tugadi",
     "finish_action": "Tugatish",
-    "todays_clients": "Bugungi uchrashuvlar"
+    "todays_clients": "Bugungi uchrashuvlar",
+    "stat_orders": "Zakazlar",
+    "stat_income": "Daromad",
+    "stat_time": "Vaqt",
+    "hours_short": "soat"
   },
   "profile": {
     "profile": "Profil",
@@ -95,6 +99,28 @@
     "save": "Saqlash",
     "record_added_success_txt": "Yangi mijoz ro'yhatga qo'shildi",
     "recorded_name": "Siz ${name} ismli yangi mijozni ro'yhatga qo'shdingiz"
+  },
+  "statistics": {
+    "title": "Statistika",
+    "today": "Bugun",
+    "week": "Hafta",
+    "month": "Oy",
+    "orders": "Zakazlar",
+    "income": "Daromad",
+    "done": "Bajarildi",
+    "rejected": "Bekor qilindi",
+    "top_services": "Eng ko'p xizmatlar",
+    "no_data": "Bu davr uchun ma'lumot yo'q",
+    "income_chart": "Daromad grafigi",
+    "no_appointments": "Tanlangan davr uchun yozuvlar yo'q",
+    "mon": "Du",
+    "tue": "Se",
+    "wed": "Ch",
+    "thu": "Pa",
+    "fri": "Ju",
+    "sat": "Sh",
+    "sun": "Ya",
+    "week_short": "Haf"
   },
   "clients": {
     "numberOfVisits": "${count} ta tashrif",
